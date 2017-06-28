@@ -57,6 +57,7 @@
         android:layout_marginTop="30dp"
         android:text="付款方式"
         android:textColor="#8b8989"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQian" />
 
@@ -77,6 +78,7 @@
         android:layout_marginTop="16dp"
         android:text="转账说明"
         android:textColor="#8b8989"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi" />
 
@@ -87,6 +89,169 @@
         android:layout_marginTop="16dp"
         android:text="转账"
         android:textColor="#8b8989"
+        android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvChuli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="处理进度"
+        android:textColor="#8b8989"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fuKuanConstraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming">
+
+
+        <android.support.v7.widget.AppCompatImageView
+
+            android:id="@+id/ic_ok"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@mipmap/ic_ok" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvFukuanOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="付款成功"
+
+
+            android:textColor="#2490d4"
+            app:layout_constraintLeft_toRightOf="@+id/ic_ok"
+
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvFukuanOkTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="06-08 11:30"
+        android:textColor="#8b8989"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvLine1"
+        android:layout_width="2.5px"
+        android:layout_height="82dp"
+        android:layout_marginLeft="7dp"
+android:layout_marginTop="30dp"
+        android:background="#2490d4"
+        app:layout_constraintLeft_toLeftOf="@+id/fuKuanConstraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bankHandleConstraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fuKuanConstraintLayout">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ic_ok2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:src="@mipmap/ic_ok"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.AppCompatTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="银行处理中"
+            android:textColor="#2490d4"
+            app:layout_constraintLeft_toRightOf="@+id/ic_ok2"
+
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvbankHandleTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="06-08 11:30"
+        android:textColor="#8b8989"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fuKuanConstraintLayout" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvLine2"
+        android:layout_width="2.5px"
+        android:layout_height="30dp"
+        android:layout_marginLeft="7dp"
+
+        android:background="#2490d4"
+        app:layout_constraintLeft_toLeftOf="@+id/fuKuanConstraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bankHandleOkConstraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLine2">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ic_ok3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_ok"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.AppCompatTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="到账成功"
+            android:textColor="#2490d4"
+            app:layout_constraintLeft_toRightOf="@+id/ic_ok3"
+
+            />
+
+    </android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvbankHandleOkTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="06-08 11:30"
+        android:textColor="#8b8989"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLine2" />
 </android.support.constraint.ConstraintLayout>
