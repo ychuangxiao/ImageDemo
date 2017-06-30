@@ -9,6 +9,6 @@
     tools:context="demo.banditcat.com.imagedemo.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <include layout="@layout/view_alipay_bank_list"></include>
+    <include layout="@layout/google_view_alipay_bank_list"></include>
 
 </android.support.constraint.ConstraintLayout>
