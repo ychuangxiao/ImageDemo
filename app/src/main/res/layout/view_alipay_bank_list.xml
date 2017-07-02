@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -8,6 +9,14 @@
 
     >
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/topConstraintLayout2"
@@ -27,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
 
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvMobileName"
@@ -35,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="中国移动"
             android:textColor="@color/colorBlack"
-            app:layout_constraintLeft_toRightOf="@+id/signal" />
+            app:layout_constraintLeft_toRightOf="@+id/signal"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvWifi"
@@ -44,7 +53,7 @@
             android:src="@mipmap/ic_ios_top_network_wifi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tvMobileName"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -57,7 +66,7 @@
             app:layout_constraintRight_toLeftOf="@+id/bateryType"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -70,7 +79,7 @@
 
             app:layout_constraintRight_toLeftOf="@+id/tvBluetooth"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvBluetooth"
@@ -81,7 +90,7 @@
 
             app:layout_constraintRight_toLeftOf="@+id/bateryType"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/bateryType"
@@ -95,7 +104,7 @@
             app:layout_constraintRight_toLeftOf="@+id/batery"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/batery"
@@ -106,7 +115,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -122,7 +131,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
 
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 
@@ -146,7 +155,7 @@
             android:src="@mipmap/ic_nav_back_w"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topBack"
@@ -158,7 +167,7 @@
             android:textSize="@dimen/top_title_font_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/back"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topTitle"
@@ -171,7 +180,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -179,7 +188,7 @@
             android:src="@mipmap/ic_alipay_nva_more"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </android.support.constraint.ConstraintLayout>
@@ -188,22 +197,21 @@
         android:id="@+id/topLine"
         android:layout_width="0dp"
         android:layout_height="0.5dp"
-        android:background="#d5d3d3"
+        android:background="@color/colorHandle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolConstraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/toolConstraintLayout"/>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topLine"
-        app:layout_constraintTop_toTopOf="@+id/topLine">
+
+        >
 
 
         <android.support.constraint.ConstraintLayout
@@ -219,7 +227,7 @@
                 android:id="@+id/tvBankImage"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@mipmap/bank_pufa" />
+                android:src="@mipmap/bank_pufa"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvBankUserName"
@@ -232,7 +240,7 @@
                 android:textColor="#000000"
                 android:textSize="10sp"
                 app:layout_constraintLeft_toRightOf="@+id/tvBankImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -247,7 +255,7 @@
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout"/>
 
 
         <RelativeLayout
@@ -265,7 +273,7 @@
                 android:hint="输入金额"
                 android:inputType="numberDecimal"
                 android:maxLength="12"
-                android:textSize="@dimen/google_font_size" />
+                android:textSize="@dimen/google_font_size"/>
 
         </RelativeLayout>
 
@@ -282,7 +290,7 @@
             android:textSize="10sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMoney" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMoney"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -294,7 +302,7 @@
             android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvFukuanfangshi"
@@ -302,7 +310,7 @@
             android:layout_marginTop="30dp"
             android:text="付款方式"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHandleType" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHandleType"/>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/etPaymentType"
@@ -329,7 +337,7 @@
             android:paddingBottom="@dimen/padding_medium"
             android:text="中国工商银行(5288)"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHandleType" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHandleType"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvZhuanzhangshuoming"
@@ -339,7 +347,7 @@
             android:text="转账说明"
 
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"/>
 
 
         <android.support.v7.widget.AppCompatEditText
@@ -354,7 +362,7 @@
             android:visibility="gone"
             app:layout_constraintLeft_toRightOf="@+id/tvZhuanzhangshuoming"
             app:layout_constraintRight_toLeftOf="@+id/tvHandleType"
-            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvRemark"
@@ -364,7 +372,7 @@
             android:paddingLeft="@dimen/padding_large"
             android:text="转账"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -373,14 +381,14 @@
             android:layout_marginTop="16dp"
             android:text="处理进度"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming" />
+            app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming"/>
 
         <android.support.constraint.ConstraintLayout
-            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
             android:id="@+id/paymentConstraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginRight="10dp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
 
             app:layout_constraintTop_toTopOf="@+id/tvCLJD">
 
@@ -399,17 +407,17 @@
                 android:background="#249dd9"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot2" />
+                app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot2"/>
 
         </android.support.constraint.ConstraintLayout>
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/tvAcceptTime2"
             style="@style/Google.TextView.Left"
+            android:layout_marginLeft="10dp"
             android:text="付款成功"
             app:layout_constraintLeft_toRightOf="@+id/paymentConstraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/tvCLJD" />
+            app:layout_constraintTop_toTopOf="@+id/tvCLJD"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -421,22 +429,22 @@
             android:textColor="#b3b1b1"
             android:textSize="10sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvCLJD" />
+            app:layout_constraintTop_toTopOf="@+id/tvCLJD"/>
 
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/tvbankHandAcceptTime"
             style="@style/Google.TextView.Left"
+            android:layout_marginLeft="10dp"
             android:text="银行处理中"
             app:layout_constraintLeft_toRightOf="@+id/bankHandleConstraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/paymentConstraintLayout"></android.support.v7.widget.AppCompatTextView>
 
         <android.support.constraint.ConstraintLayout
-            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
             android:id="@+id/bankHandleConstraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
 
 
             app:layout_constraintTop_toBottomOf="@+id/paymentConstraintLayout">
@@ -447,7 +455,7 @@
                 android:layout_height="14dp"
                 android:background="@mipmap/ic_bank_ok"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvUnHandleLine"
@@ -456,7 +464,7 @@
                 android:background="#249dd9"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot" />
+                app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvUnHandleLine2"
@@ -465,7 +473,7 @@
                 android:background="#b2b3b3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUnHandleLine" />
+                app:layout_constraintTop_toBottomOf="@+id/tvUnHandleLine"/>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -478,26 +486,26 @@
             android:textColor="#b3b1b1"
             android:textSize="10sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvbankHandAcceptTime" />
+            app:layout_constraintTop_toTopOf="@+id/tvbankHandAcceptTime"/>
 
         <android.support.v7.widget.AppCompatTextView
-            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
             android:id="@+id/tvBankHandleOverDot"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginRight="10dp"
             android:background="@mipmap/ic_ali_tx_jd_more"
+            app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
 
             app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
-            app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvbankHandleOverAcceptTime"
             style="@style/Google.TextView.Left"
+            android:layout_marginLeft="10dp"
             android:text="到账成功"
-android:layout_marginLeft="10dp"
             app:layout_constraintLeft_toRightOf="@+id/tvBankHandleOverDot"
-            app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvBankHandleOverTime"
@@ -509,7 +517,7 @@ android:layout_marginLeft="10dp"
             android:textColor="#b3b1b1"
             android:textSize="10sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvbankHandleOverAcceptTime" />
+            app:layout_constraintTop_toTopOf="@+id/tvbankHandleOverAcceptTime"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -520,7 +528,7 @@ android:layout_marginLeft="10dp"
 
 
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBankHandleOverDot" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBankHandleOverDot"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -534,7 +542,7 @@ android:layout_marginLeft="10dp"
 
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvWXTS" />
+            app:layout_constraintTop_toTopOf="@+id/tvWXTS"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -545,7 +553,7 @@ android:layout_marginLeft="10dp"
             android:text="通知对方"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvWXTS"
-            app:layout_goneMarginTop="16dp" />
+            app:layout_goneMarginTop="16dp"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvTZDFTime"
@@ -556,7 +564,7 @@ android:layout_marginLeft="10dp"
             android:textSize="@dimen/google_title_font_size"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTZDF" />
+            app:layout_constraintTop_toTopOf="@+id/tvTZDF"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -566,7 +574,7 @@ android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:text="转账到"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTZDF" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTZDF"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvReceiptUserInfo"
@@ -574,7 +582,7 @@ android:layout_marginLeft="10dp"
             android:tag="%s（%s）%s"
             android:text="招商银行（5077）张三"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvZZD" />
+            app:layout_constraintTop_toTopOf="@+id/tvZZD"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvDZSJ"
@@ -583,7 +591,7 @@ android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:text="到账时间"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvZZD" />
+            app:layout_constraintTop_toBottomOf="@+id/tvZZD"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvDZSJ2"
@@ -591,7 +599,7 @@ android:layout_marginLeft="10dp"
             android:text="2小时内到账"
 
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvDZSJ" />
+            app:layout_constraintTop_toTopOf="@+id/tvDZSJ"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topLine2"
@@ -601,7 +609,7 @@ android:layout_marginLeft="10dp"
             android:background="#b3b1b1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDZSJ" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDZSJ"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvCreateTime"
@@ -609,7 +617,7 @@ android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:text="创建时间"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topLine2" />
+            app:layout_constraintTop_toBottomOf="@+id/topLine2"/>
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -618,7 +626,7 @@ android:layout_marginLeft="10dp"
             style="@style/Google.TextView.Right"
             android:text="2017-06-28 15:42"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvCreateTime" />
+            app:layout_constraintTop_toTopOf="@+id/tvCreateTime"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvOrderNo"
@@ -626,7 +634,7 @@ android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:text="创建时间"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCreateTime" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCreateTime"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvOrderNo2"
@@ -634,18 +642,9 @@ android:layout_marginLeft="10dp"
             style="@style/Google.TextView.Right"
             android:text="20170611200040011100430042976330"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvOrderNo" />
+            app:layout_constraintTop_toTopOf="@+id/tvOrderNo"/>
 
     </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
