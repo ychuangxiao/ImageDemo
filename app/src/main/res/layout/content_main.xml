@@ -21,7 +21,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/google_view_alipay_bank_list"></include>
+        <include layout="@layout/view_alipay_bank_list"></include>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.v7.widget.AppCompatTextView

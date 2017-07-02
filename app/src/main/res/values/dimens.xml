@@ -3,7 +3,7 @@
     <dimen name="google_font_size">11sp</dimen>
     <dimen name="font_size">10sp</dimen>
     <dimen name="google_title_font_size">12sp</dimen>
-
+    <dimen name="ios_title_font_size">16sp</dimen>
     <dimen name="top_title_font_size">14sp</dimen>
 
     <dimen name="circular_size_medium">32dp</dimen>

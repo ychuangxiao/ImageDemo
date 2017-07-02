@@ -11,4 +11,6 @@
     <color name="colorHandle">#b3b1b1</color>
     <color name="colorHandleLine">#249dd9</color>
     <color name="colorUnHandleLine">@color/colorHandle</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
 </resources>
