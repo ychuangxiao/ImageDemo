@@ -1,47 +1,154 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
 
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.configuration.compileSdkVersion
+    buildToolsVersion globalConfiguration.configuration.buildToolsVersion
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
     defaultConfig {
-        applicationId "demo.banditcat.com.imagedemo"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        resConfigs "zh"//保留中文
+        applicationId globalConfiguration.configuration.applicationId
+        minSdkVersion globalConfiguration.configuration.minSdkVersion
+        targetSdkVersion globalConfiguration.configuration.targetSdkVersion
+        versionCode globalConfiguration.configuration.versionCode
+        versionName globalConfiguration.configuration.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        vectorDrawables.useSupportLibrary = true
     }
 
+
+    buildTypes {
+        release {
+
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+
+                if (variant.buildType.name.equals('release')) {
+                    variant.outputs.each { output ->
+                        def outputFile = output.outputFile
+                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+
+
+                            def fileName = "DiaoTuTu_${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
+                                    "(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
+
+
+                            output.outputFile = new File(outputFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}", fileName)
+                        }
+
+                        if (variant.getBuildType().isMinifyEnabled()) {
+                            variant.assemble.doLast {
+                                copy {
+                                    from variant.mappingFile
+                                    into output.outputFile.parent + "/mapping"
+                                    rename { String fileName ->
+                                        "mapping-${variant.name}.txt"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        debug {
+
+
+            applicationVariants.all { variant ->
+                if (variant.buildType.name.equals('debug')) {
+                    variant.outputs.each { output ->
+                        def outputFile = output.outputFile
+                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+
+
+                            def fileName = "DiaoTuTu_${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("debug", "")}(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
+
+                            output.outputFile = new File(outputFile.parent, fileName)
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
     packagingOptions {
-        exclude 'META-INF/NOTICE' // will not include NOTICE file
-        exclude 'META-INF/LICENSE' // will not include LICENSE file
-        // as noted by @Vishnuvathsan you may also need to include
-        // variations on the file name. It depends on your dependencies.
-        // Some other common variations on notice and license file names
-        exclude 'META-INF/notice'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/license'
+        exclude '.readme'
+
+        exclude 'META-INF/rxjava.properties'
         exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude "lib/armeabi/librealm-jni.so"
+        exclude "lib/arm64-v8a/librealm-jni.so"
+        exclude "lib/mips/librealm-jni.so"
+        exclude "lib/x86/librealm-jni.so"
+        exclude "lib/x86_64/librealm-jni.so"
+    }
+
+    /*splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'
+        }
+    }*/
+
+
+    lintOptions {
+        abortOnError false
     }
 }
 
 dependencies {
+
+    def appDependencies = rootProject.ext.appDependencies
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
+
     compile project(':common')
+
+    compile appDependencies.butterKnife
+    //视图注解
+    compile appDependencies.annotationProcessor
+    //butterKnife注解处理器
+    compile appDependencies.materialdatetimepicker
+
+    compile appDependencies.design
+    //
+    compile appDependencies.cardview
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
 }

@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">ImageDemo</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_main">账单详情</string>
+
+    <!--操作提示-->
+    <string name="alert_handle">数据处理中,请耐心等待...</string>
+    <string name="alert_loading">数据加载中,请耐心等待...</string>
+    <string name="alert_login">登录中...</string>
+    <string name="alert_station_move_success">库存调整成功...</string>
+    <string name="title_setting_confirm">您确认退出账号吗?</string>
+    <string name="title_setting_exit">退出账号</string>
+    <string name="title_activity_demo">测试</string>
+    <string name="title_activity_change_receipt">更改收款人信息</string>
+    <string name="title_activity_bank">银行列表</string>
+
+
 </resources>

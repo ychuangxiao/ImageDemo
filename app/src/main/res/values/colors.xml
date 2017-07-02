@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorLeftTitle">#686666</color>
+    <color name="colorRightTitle">#7b7878</color>
+
+    <color name="colorUnHandle">#ed8c04</color>
+    <color name="colorHandle">#b3b1b1</color>
+    <color name="colorHandleLine">#249dd9</color>
+    <color name="colorUnHandleLine">@color/colorHandle</color>
 </resources>

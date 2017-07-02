@@ -124,39 +124,32 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_more('\ue61f'),
 
+        icon_iconset0252('\ue697'),
+
+        icon_tubiaomangedianchi('\ue825'),
+
         icon_arrow_left('\ue603'),
 
         icon_line_vertical('\ue682'),
 
-        icon_minsheng_bank('\ue62a'),
+        icon_xinhao('\ue614'),
 
-        icon_zhongxin_bank('\ue73c'),
+        icon_iosdianchi('\ue625'),
+
+        icon_date('\ue616'),
+
+        icon_gengduo('\ue6c4'),
 
         icon_duihao('\ue61c'),
 
-        icon_guangda_bank('\ue69b'),
+        icon__jingyin('\ue659'),
 
-        icon_pufa_bank('\ue63e'),
-
-        icon_hangzhou_bank('\ue600'),
-
-        icon_jiaotong_bank('\ue601'),
+        icon_time('\ue674'),
 
         icon_right('\ue60d'),
 
-        icon_gongshang_bank('\ue666'),
+        icon_wifi('\ue76b');
 
-        icon_jianshe_bank('\ue668'),
-
-        icon_zhaoshang_bank('\ue66a'),
-
-        icon_nanjing_bank('\ue604'),
-
-        icon_nongye_bank('\ue630'),
-
-        icon_xingye_bank('\ue608'),
-
-        icon_huaxia_bank('\ue602');
 
         char character;
 

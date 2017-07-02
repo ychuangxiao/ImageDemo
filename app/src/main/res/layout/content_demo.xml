@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="demo.banditcat.com.imagedemo.activitys.DemoActivity"
+    tools:showIn="@layout/activity_demo">
+
+    <include layout="@layout/view_ios7_"></include>
+
+</android.support.constraint.ConstraintLayout>

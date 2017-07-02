@@ -69,8 +69,10 @@ public  class SimpleUtils {
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT);
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT);
             }
         }
         return result;

@@ -4,15 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="demo.banditcat.com.imagedemo.activitys.DemoActivity">
 
-    tools:context="demo.banditcat.com.imagedemo.MainActivity">
+    　 <include layout="@layout/content_toolbar" />
 
-
-    <include layout="@layout/content_toolbar" />
-
-    <include layout="@layout/content_main" />
-
-
+    <include layout="@layout/content_demo" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
