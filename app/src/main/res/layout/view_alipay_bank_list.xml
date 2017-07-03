@@ -33,7 +33,7 @@
             android:id="@+id/signal"
             android:layout_width="24dp"
             android:layout_height="@dimen/ios_top_content_height"
-            android:src="@mipmap/ic_ios_top_signal5"
+            android:src="@mipmap/ic_ios_top_signal3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
 
@@ -74,9 +74,9 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvLockScreen"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ios_top_content_height"
+            android:layout_height="wrap_content"
 
-            android:src="@mipmap/ic_ios_top_lock_screen"
+            android:src="@mipmap/ic_ios_rotation_cock"
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintRight_toLeftOf="@+id/tvBluetooth"
@@ -215,7 +215,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topLine"
 
-        >
+        android:layout_marginTop="-1dp"
+        app:layout_constraintHorizontal_bias="0.0">
 
 
         <android.support.constraint.ConstraintLayout
@@ -229,14 +230,14 @@
             <android.support.v7.widget.AppCompatImageView
 
                 android:id="@+id/tvBankImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@mipmap/bank_pufa"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvBankUserName"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="32dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
@@ -392,14 +393,15 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
             app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
 
             app:layout_constraintTop_toTopOf="@+id/tvCLJD">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvbankHandDot2"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
 
                 android:background="@mipmap/ic_bank_ok"
 
@@ -455,8 +457,8 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvbankHandDot"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:background="@mipmap/ic_bank_ok"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
@@ -494,8 +496,8 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvBankHandleOverDot"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_marginRight="10dp"
             android:background="@mipmap/ic_ali_tx_jd_more"
             app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
