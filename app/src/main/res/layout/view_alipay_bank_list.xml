@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
+    android:id="@+id/alipayConstraintLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
 
     >
 
@@ -31,7 +32,7 @@
 
             android:id="@+id/signal"
             android:layout_width="24dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:src="@mipmap/ic_ios_top_signal5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -41,15 +42,16 @@
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvMobileName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:text="中国移动"
+            android:textSize="@dimen/ios_title_font_size_small"
             android:textColor="@color/colorBlack"
             app:layout_constraintLeft_toRightOf="@+id/signal"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvWifi"
             android:layout_width="24dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:src="@mipmap/ic_ios_top_network_wifi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tvMobileName"
@@ -59,7 +61,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvUnSound"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:src="@mipmap/ic_google_no_sound"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -72,7 +74,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvLockScreen"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
 
             android:src="@mipmap/ic_ios_top_lock_screen"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +86,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/tvBluetooth"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:src="@mipmap/ic_ios_top_bluetooth"
             app:layout_constraintBottom_toBottomOf="parent"
 
@@ -95,11 +97,11 @@
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/bateryType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:text="100%"
 
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/google_title_font_size"
+            android:textSize="@dimen/ios_title_font_size_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/batery"
 
@@ -109,7 +111,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/batery"
             android:layout_width="48dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
 
             android:src="@mipmap/ic_ios_top_batery"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +123,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topDateTime"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ios_top_content_height"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="21:52"
@@ -203,8 +205,10 @@
         app:layout_constraintTop_toBottomOf="@+id/toolConstraintLayout"/>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/paymentAllConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_medium"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -632,7 +636,7 @@
             android:id="@+id/tvOrderNo"
             style="@style/Google.TextView.Left"
             android:layout_marginTop="16dp"
-            android:text="创建时间"
+            android:text="订单号"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCreateTime"/>
 
@@ -646,5 +650,20 @@
 
     </android.support.constraint.ConstraintLayout>
 
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorBackgroundForIos"
+        android:gravity="center"
+        android:padding="@dimen/padding_small"
+        android:text="对此订单有疑问 | 投诉"
+        android:textColor="@color/colorHandleLine"
+        android:textSize="@dimen/google_font_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/paymentAllConstraintLayout"/>
 
 </android.support.constraint.ConstraintLayout>

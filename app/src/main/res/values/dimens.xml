@@ -1,9 +1,15 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="google_font_size">11sp</dimen>
+    <dimen name="google_font_size">14sp</dimen>
+
+    <dimen name="google_time_font_size">12sp</dimen>
+
+
     <dimen name="font_size">10sp</dimen>
     <dimen name="google_title_font_size">12sp</dimen>
     <dimen name="ios_title_font_size">16sp</dimen>
+    <dimen name="ios_title_font_size_small">12sp</dimen>
+
     <dimen name="top_title_font_size">14sp</dimen>
 
     <dimen name="circular_size_medium">32dp</dimen>
@@ -44,6 +50,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="ios_top_content_height">14dp</dimen>
 
 
 </resources>
