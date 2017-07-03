@@ -1,0 +1,281 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentMenuFragment">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvMoney"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="金额"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvMoney"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="输入金额"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvReceiptUserName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="银行户名"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etReceiptUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvReceiptUserName"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="输入银行户名"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvBankNo"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="银行卡号"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etBankNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvBankNo"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="输入银行卡后四位"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvRemark"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="说明"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etRemark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvRemark"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="输入说明"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvCreateDate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="创建日期"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCreateDate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvCreateDate"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="选择创建日期"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvCreateTime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="创建时间"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCreateTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvCreateTime"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="选择创建日期"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvPaymentType"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="交易状态"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/ckType"
+                android:text="是否完成"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

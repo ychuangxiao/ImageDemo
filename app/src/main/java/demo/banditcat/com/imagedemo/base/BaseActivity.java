@@ -98,6 +98,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getContentViewId();
 
 
+    /**
+     * Adds a {@link Fragment} to this activity's layout.
+     *
+     * @param containerViewId The container view to where add the fragment.
+     * @param fragment        The fragment to be added.
+     */
+    protected void addFragment(int containerViewId, Fragment fragment,String tag) {
+        getSupportFragmentManager().beginTransaction().add(containerViewId, fragment,tag).commit();
+    }
+
+    protected void hideFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().hide(fragment).commit();
+    }
+
+    protected void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().show(fragment).commit();
+    }
+
     //返回键返回事件
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

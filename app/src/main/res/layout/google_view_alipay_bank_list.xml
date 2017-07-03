@@ -5,8 +5,9 @@
                                              android:id="@+id/alipayConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@color/colorWhite"
     >
+
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,8 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/topConstraintLayout2"
         android:layout_width="0dp"
@@ -108,7 +108,7 @@
         android:id="@+id/toolConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:background="#ffffff"
+
         android:padding="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -170,7 +170,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="@dimen/padding_medium"
@@ -178,7 +178,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topLine"
-  >
+        >
 
 
         <android.support.constraint.ConstraintLayout
@@ -192,14 +192,14 @@
             <android.support.v7.widget.AppCompatImageView
 
                 android:id="@+id/tvBankImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@mipmap/bank_pufa" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvBankUserName"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="32dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
@@ -291,7 +291,7 @@
             app:layout_constraintLeft_toRightOf="@+id/tvFukuanfangshi"
             app:layout_constraintTop_toTopOf="@+id/tvFukuanfangshi"
             android:textSize="@dimen/google_font_size"
-             app:layout_constraintBottom_toBottomOf="@+id/tvFukuanfangshi"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFukuanfangshi"
             app:layout_constraintRight_toLeftOf="@+id/tvHandleType"
 
             />
@@ -330,7 +330,7 @@
             app:layout_constraintLeft_toRightOf="@+id/tvZhuanzhangshuoming"
             app:layout_constraintRight_toLeftOf="@+id/tvHandleType"
             app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"
-              />
+            />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvRemark"
@@ -353,24 +353,21 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/paymentConstraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginRight="10dp"
+
+            style="@style/PaymentLine"
+
             app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
             app:layout_constraintTop_toTopOf="@+id/tvCLJD">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvbankHandDot2"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-
+                style="@style/PaymentLineCircle"
                 android:background="@mipmap/ic_bank_ok"
-
                 />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="2dp"
-                android:layout_height="36dp"
+                android:layout_height="38dp"
                 android:background="#249dd9"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -407,24 +404,24 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/bankHandleConstraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginRight="10dp"
+            style="@style/PaymentLine"
+
             app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
             app:layout_constraintTop_toBottomOf="@+id/paymentConstraintLayout">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvbankHandDot"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+
+                style="@style/PaymentLineCircle"
                 android:background="@mipmap/ic_bank_ok"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+
+
+              />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvUnHandleLine"
                 android:layout_width="2dp"
-                android:layout_height="18dp"
+                android:layout_height="19dp"
                 android:background="#249dd9"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -433,7 +430,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tvUnHandleLine2"
                 android:layout_width="2dp"
-                android:layout_height="18dp"
+                android:layout_height="19dp"
                 android:background="#b2b3b3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -455,8 +452,8 @@
         <android.support.v7.widget.AppCompatTextView
 
             android:id="@+id/tvBankHandleOverDot"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
             android:background="@mipmap/ic_ali_tx_jd_more"
 

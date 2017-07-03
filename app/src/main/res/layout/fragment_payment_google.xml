@@ -1,0 +1,640 @@
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentGoogleFragment">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+
+            android:id="@+id/alipayConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_shui"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/topConstraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:background="#c2c2c2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/tvWifi"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_wifi"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/signal"
+
+
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatImageView
+
+                    android:id="@+id/signal"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_signal_5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/tvUnSound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_google_no_sound"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/bateryType"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/bateryType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/google_title_font_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/batery"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/batery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:src="@mipmap/ic_google_top_batery"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/topDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="21:52"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/google_title_font_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+
+                android:id="@+id/toolConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+
+                android:padding="6dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout2">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/back"
+                    android:layout_width="14dp"
+
+                    android:layout_height="14dp"
+                    android:layout_marginLeft="6dp"
+                    android:src="@mipmap/ali_chat_back_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/line4"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#c2c2c2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/back"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/topTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="账单详情"
+                    android:textColor="#272727"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/line4"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/ic_alipay_nva_vertical_more"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/topLine"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:background="#d5d3d3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolConstraintLayout"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/paymentAllConstraintLayout"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLine"
+                >
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/topConstraintLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_medium"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <android.support.v7.widget.AppCompatImageView
+
+                        android:id="@+id/tvBankImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@mipmap/bank_pufa"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvBankUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:text="张帆"
+                        android:textColor="#000000"
+                        android:textSize="10sp"
+                        app:layout_constraintLeft_toRightOf="@+id/tvBankImage"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="8,595.78"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/moneyRelativeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toRightOf="@+id/tvMoney"
+                    app:layout_constraintTop_toTopOf="@+id/tvMoney">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etMoney"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:hint="输入金额"
+                        android:inputType="numberDecimal"
+                        android:maxLength="12"
+                        android:textSize="@dimen/google_font_size"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvHandleType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:padding="16dp"
+
+                    android:tag="0"
+                    android:text="处理中"
+                    android:textColor="#ed8c04"
+                    android:textSize="@dimen/google_font_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMoney"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvTempHandleType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="交易完成"
+                    android:textColor="#ed8c04"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvFukuanfangshi"
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="30dp"
+                    android:text="付款方式"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHandleType"/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etPaymentType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:hint="输入付款方式"
+                    android:inputType="text"
+                    android:maxLength="32"
+                    android:textSize="@dimen/google_font_size"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvFukuanfangshi"
+                    app:layout_constraintLeft_toRightOf="@+id/tvFukuanfangshi"
+                    app:layout_constraintRight_toLeftOf="@+id/tvHandleType"
+                    app:layout_constraintTop_toTopOf="@+id/tvFukuanfangshi"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvPaymentType"
+                    style="@style/Google.TextView.Right"
+                    android:layout_marginTop="30dp"
+                    android:drawablePadding="5dp"
+                    android:paddingBottom="@dimen/padding_medium"
+                    android:text="中国工商银行(5288)"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHandleType"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvZhuanzhangshuoming"
+                    style="@style/Google.TextView.Left"
+
+                    android:layout_marginTop="16dp"
+                    android:text="转账说明"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"/>
+
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etRemark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:hint="输入转账说明"
+                    android:inputType="text"
+                    android:maxLength="32"
+                    android:textSize="@dimen/google_font_size"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toRightOf="@+id/tvZhuanzhangshuoming"
+                    app:layout_constraintRight_toLeftOf="@+id/tvHandleType"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvRemark"
+                    style="@style/Google.TextView.Right"
+                    android:layout_marginTop="16dp"
+                    android:paddingBottom="@dimen/padding_small"
+                    android:paddingLeft="@dimen/padding_large"
+                    android:text="转账"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFukuanfangshi"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvCLJD"
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="16dp"
+                    android:text="处理进度"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvZhuanzhangshuoming"/>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/paymentConstraintLayout"
+
+                    style="@style/PaymentLine"
+
+                    app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
+                    app:layout_constraintTop_toTopOf="@+id/tvCLJD">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvbankHandDot2"
+                        style="@style/PaymentLineCircle"
+                        android:background="@mipmap/ic_bank_ok"
+                        />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="2dp"
+                        android:layout_height="38dp"
+                        android:background="#249dd9"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot2"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvAcceptTime2"
+                    style="@style/Google.TextView.Left"
+                    android:text="付款成功"
+                    app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
+                    app:layout_constraintTop_toTopOf="@+id/tvCLJD"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvPaymentTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:text="06-11 22:03"
+                    android:textColor="#b3b1b1"
+                    android:textSize="@dimen/google_time_font_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCLJD"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvbankHandAcceptTime"
+                    style="@style/Google.TextView.Left"
+                    android:text="银行处理中"
+                    app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentConstraintLayout"></android.support.v7.widget.AppCompatTextView>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/bankHandleConstraintLayout"
+                    style="@style/PaymentLine"
+
+                    app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentConstraintLayout">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvbankHandDot"
+
+                        style="@style/PaymentLineCircle"
+                        android:background="@mipmap/ic_bank_ok"
+
+
+                        />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvUnHandleLine"
+                        android:layout_width="2dp"
+                        android:layout_height="19dp"
+                        android:background="#249dd9"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvbankHandDot"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvUnHandleLine2"
+                        android:layout_width="2dp"
+                        android:layout_height="19dp"
+                        android:background="#b2b3b3"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvUnHandleLine"/>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvBankHandleTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#b3b1b1"
+                    android:textSize="@dimen/google_time_font_size"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvbankHandAcceptTime"/>
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvBankHandleOverDot"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/ic_ali_tx_jd_more"
+
+                    app:layout_constraintRight_toLeftOf="@+id/tvAcceptTime2"
+                    app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvbankHandleOverAcceptTime"
+                    style="@style/Google.TextView.Left"
+                    android:text="到账成功"
+
+                    app:layout_constraintLeft_toLeftOf="@+id/tvTempHandleType"
+                    app:layout_constraintTop_toBottomOf="@+id/bankHandleConstraintLayout"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvBankHandleOverTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:tag="预计%s前"
+                    android:text="预计06-11 23:03前"
+                    android:textColor="#b3b1b1"
+                    android:textSize="@dimen/google_time_font_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvbankHandleOverAcceptTime"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvWXTS"
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="25dp"
+                    android:text="温馨提示"
+
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBankHandleOverDot"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvWXTSMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="本页不作为转账成功凭据，实际以银行\n入账为准。如最终入账失败，资金原路\n退回"
+                    android:textColor="#ed8c04"
+                    android:textSize="@dimen/google_font_size"
+
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvWXTS"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvTZDF"
+
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="40dp"
+                    android:text="通知对方"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWXTS"
+                    app:layout_goneMarginTop="16dp"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvTZDFTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="给收款人发送转账信息"
+                    android:textColor="#249dd9"
+                    android:textSize="@dimen/google_font_size"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvTZDF"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvZZD"
+
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="16dp"
+                    android:text="转账到"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTZDF"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvReceiptUserInfo"
+                    style="@style/Google.TextView.Right"
+                    android:tag="%s（%s）%s"
+                    android:text="招商银行（5077）张三"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvZZD"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvDZSJ"
+
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="16dp"
+                    android:text="到账时间"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvZZD"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvDZSJ2"
+                    style="@style/Google.TextView.Right"
+                    android:text="2小时内到账"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvDZSJ"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/topLine2"
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#b3b1b1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDZSJ"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvCreateTime"
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="16dp"
+                    android:text="创建时间"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topLine2"/>
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvCreateTime2"
+
+                    style="@style/Google.TextView.Right"
+                    android:text="2017-06-28 15:42"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCreateTime"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvOrderNo"
+                    style="@style/Google.TextView.Left"
+                    android:layout_marginTop="16dp"
+                    android:text="创建时间"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreateTime"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvOrderNo2"
+
+                    style="@style/Google.TextView.Right"
+                    android:text="20170611200040011100430042976330"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvOrderNo"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorBackgroundForIos"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="对此订单有疑问 | 投诉"
+                android:textColor="@color/colorHandleLine"
+                android:textSize="@dimen/google_font_size"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/paymentAllConstraintLayout"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</FrameLayout>

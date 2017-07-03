@@ -17,6 +17,8 @@ public class AliPaymentModel implements Serializable {
 
     private BankModel mBankModel;
 
+    private Boolean finish;
+
     private String mRemark;//转账说明
 
     private String paymentType;//付款方式
@@ -104,5 +106,13 @@ public class AliPaymentModel implements Serializable {
 
     public void setRemark(String remark) {
         mRemark = remark;
+    }
+
+    public Boolean getFinish() {
+        return finish;
+    }
+
+    public void setFinish(Boolean finish) {
+        this.finish = finish;
     }
 }

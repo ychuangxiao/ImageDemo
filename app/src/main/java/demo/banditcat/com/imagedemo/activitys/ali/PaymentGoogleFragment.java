@@ -1,57 +1,59 @@
-package demo.banditcat.com.imagedemo;
+package demo.banditcat.com.imagedemo.activitys.ali;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.OnTextChanged;
-import demo.banditcat.com.imagedemo.activitys.DemoActivity;
-import demo.banditcat.com.imagedemo.activitys.ali.AliMainActivity;
-import demo.banditcat.com.imagedemo.activitys.ali.PaymentActivity;
+import demo.banditcat.com.imagedemo.R;
 import demo.banditcat.com.imagedemo.activitys.google.ChangeReceiptActivity;
-import demo.banditcat.com.imagedemo.base.BaseActivity;
+import demo.banditcat.com.imagedemo.base.BaseFragment;
 import demo.banditcat.com.imagedemo.constant.AppConstant;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
-import demo.banditcat.com.imagedemo.model.BankModel;
 import demo.banditcat.com.imagedemo.utils.SimpleUtils;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 import demo.banditcat.com.imagedemo.utils.ViewUtils;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
 
-public class MainActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * to handle interaction events.
+ * Use the {@link PaymentGoogleFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class PaymentGoogleFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
 
     @BindView(R.id.alipayConstraintLayout)
     ConstraintLayout alipayConstraintLayout;
@@ -63,8 +65,6 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
     @BindView(R.id.etPaymentType)
     AppCompatEditText etPaymentType;
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
 
     @BindView(R.id.tvOrderNo2)
     AppCompatTextView tvOrderNo2;
@@ -134,42 +134,106 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
 
     int handleIndex = 10;//10 toptime 20 hadnleTIme 30 lastTime 40 createTime
 
-    @Override
-    public void initView() {
 
-        setToolTitle(getString(R.string.title_activity_main)).setToolTitleGravity(Gravity.CENTER);
+    public AliPaymentModel getAliPaymentModel() {
+        return mAliPaymentModel;
+    }
 
-        ViewUtils.setCompoundRightDrawables(this, tvPaymentType, BaseFontAwesome.Icon.icon_right, getResources().getColor(R.color.colorRightTitle), 4f);
+    Context mContext;
 
-        mAliPaymentModel = new AliPaymentModel();
+    public void setContext(Context context) {
+        mContext = context;
+    }
 
-        BankModel bankModel = new BankModel("浦发银行", 120);
-
-        mAliPaymentModel.setBankModel(bankModel);
-        mAliPaymentModel.setBankNo("8888");
-        mAliPaymentModel.setReceiptUserName("张三");
-        mAliPaymentModel.setPaymentType("中国工商银行(6666)");
-        mAliPaymentModel.setReceiptMoney(BigDecimal.valueOf(8888888.00));
-        mAliPaymentModel.setCreateTime(System.currentTimeMillis());
-        mAliPaymentModel.setPaymentTime(mAliPaymentModel.getCreateTime());
-        mAliPaymentModel.setTopTime(mAliPaymentModel.getCreateTime());
-        mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, mAliPaymentModel.getCreateTime()));
-
-
-        setTimeInfo(mAliPaymentModel.getPaymentTime());
-
-        initViewInfo();
+    public PaymentGoogleFragment() {
 
     }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment PaymentGoogleFragment.
+     */
+    public static PaymentGoogleFragment newInstance(AliPaymentModel aliPaymentModel) {
+
+        PaymentGoogleFragment fragment = new PaymentGoogleFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PARAM1, aliPaymentModel);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @Override
+    protected void DestroyView() {
+
+    }
+
+    /**
+     * 初始化视图，工具条等信息
+     */
+    @Override
+    public void initView() {
+        if (getArguments() == null) {
+            return;
+        }
+
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon.icon_right, getResources().getColor(R.color.colorRightTitle), 4f);
+
+
+        loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
+
+
+    }
+
+    public void loadViewData(AliPaymentModel model) {
+
+        mAliPaymentModel = model;
+
+
+        initViewInfo();
+
+
+        if (mAliPaymentModel.getFinish()) {
+
+            tvHandleType.setTag(1);
+
+             showHandleLine();
+        } else {
+            tvHandleType.setTag(0);
+            hideHandleLine();
+        }
+    }
+
+
+    /*
+    * 初始化view信息
+    * */
+    void initViewInfo() {
+        ViewUtils.initBankInfo(tvBankImage, mAliPaymentModel.getBankModel().getType());
+        tvBankUserName.setText(mAliPaymentModel.getReceiptUserName());
+        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(), mAliPaymentModel.getBankModel().getBankName()
+                , mAliPaymentModel.getBankNo()
+                , mAliPaymentModel.getReceiptUserName()
+        ));
+        tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
+        tvPaymentType.setText(mAliPaymentModel.getPaymentType());
+
+        tvRemark.setText(mAliPaymentModel.getRemark());
+    }
+
+
+    /*
+    * 设置时间信息
+    * */
     private void setTimeInfo(long time) {
 
         mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, time));
         topDateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getLastTime(), TimeUtils.DEFAULT_PATTERN_4));
 
         tvOrderNo2.setText(randomOrderNo(time));
-
-
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
 
         tvBankHandleTime.setText(tvPaymentTime.getText());
@@ -179,50 +243,24 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
             tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.addHour(2, time)));
         } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
             tvBankHandleOverTime.setText(TimeUtils.addHour(2, time));
+
+
         }
 
 
         tvCreateTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_2));
     }
 
+    /**
+     * 获得布局视图ID
+     *
+     * @return 视图ID
+     */
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.fragment_payment_google;
     }
 
-    @OnClick(R.id.fab)
-    void onFabClick() {
-
-
- /*       Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout);
-        SimpleUtils.saveBitmapToSdCard(MainActivity.this, cacheBitmapFromView, "styleOne");
-*/
-        navigateActivity(new Intent(this, PaymentActivity.class));
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @OnClick(R.id.tvPaymentTime)
     void paymentTimeClick() {
@@ -230,7 +268,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
         handleIndex = 20;
 
         if (mDatePickerDialog != null) {
-            mDatePickerDialog.show(getFragmentManager(), "Datepickerdialog");
+            mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
         } else {
             Calendar calendar = Calendar.getInstance();
 
@@ -240,7 +278,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
             mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
                     (Calendar.DAY_OF_MONTH));
 
-            mDatePickerDialog.show(getFragmentManager(), "Datepickerdialog");
+            mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
         }
 
 
@@ -257,7 +295,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
         mDatePickerDialog30 = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
                 (Calendar.DAY_OF_MONTH));
 
-        mDatePickerDialog30.show(getFragmentManager(), "DatePickerDialog30");
+        mDatePickerDialog30.show(getActivity().getFragmentManager(), "DatePickerDialog30");
     }
 
 
@@ -268,7 +306,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
         mTimePickerDialog30 = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-        mTimePickerDialog30.show(getFragmentManager(), "mTimePickerDialog30");
+        mTimePickerDialog30.show(getActivity().getFragmentManager(), "mTimePickerDialog30");
 
         return true;
     }
@@ -279,13 +317,13 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
         handleIndex = 10;
 
         if (mTimePickerDialog2 != null) {
-            mTimePickerDialog2.show(getFragmentManager(), "TimePickerDialog2");
+            mTimePickerDialog2.show(getActivity().getFragmentManager(), "TimePickerDialog2");
         } else {
             Calendar calendar = Calendar.getInstance();
 
             calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
             mTimePickerDialog2 = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-            mTimePickerDialog2.show(getFragmentManager(), "TimePickerDialog2");
+            mTimePickerDialog2.show(getActivity().getFragmentManager(), "TimePickerDialog2");
         }
 
 
@@ -304,7 +342,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
 
         mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
-        mTimePickerDialog.show(getFragmentManager(), "TimePickerDialog");
+        mTimePickerDialog.show(getActivity().getFragmentManager(), "TimePickerDialog");
 
         return true;
     }
@@ -351,7 +389,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
                     }
 
                 } else {
-                    Toast.makeText(this, "到账成功时间至少比付款成功时间晚2小时！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT).show();
 
                     return;
                 }
@@ -390,7 +428,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
                     }
 
                 } else {
-                    Toast.makeText(this, "到账成功时间至少比付款成功时间晚2小时！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT).show();
 
                     return;
                 }
@@ -405,26 +443,41 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
     void onHandleTypeClick() {
         //说明是处理中，更改为交易完成
         if (tvHandleType.getTag().toString().compareTo("0") == 0) {
+            showHandleLine();
 
-            //处理页面逻辑
-            tvHandleType.setTag("1");
-            //文本改为交易完成
-            tvHandleType.setText("交易完成");
-            tvHandleType.setTextColor(getResources().getColor(R.color.colorHandle));
-            tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorHandleLine));
-            tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_bank_ok));
+            mAliPaymentModel.setFinish(true);
 
-            tvWXTSMessage.setVisibility(View.GONE);
-            tvWXTS.setVisibility(View.GONE);
         } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-            tvHandleType.setTag("0");
-            tvHandleType.setText("处理中");
-            tvHandleType.setTextColor(getResources().getColor(R.color.colorUnHandle));
-            tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorUnHandleLine));
-            tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_ali_tx_jd_more));
-            tvWXTSMessage.setVisibility(View.VISIBLE);
-            tvWXTS.setVisibility(View.VISIBLE);
+            hideHandleLine();
+            mAliPaymentModel.setFinish(false);
         }
+
+
+    }
+
+    private void hideHandleLine() {
+        tvHandleType.setTag("0");
+        tvHandleType.setText("处理中");
+        tvHandleType.setTextColor(getResources().getColor(R.color.colorUnHandle));
+        tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorUnHandleLine));
+        tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_ali_tx_jd_more));
+        tvWXTSMessage.setVisibility(View.VISIBLE);
+        tvWXTS.setVisibility(View.VISIBLE);
+
+        setTimeInfo(mAliPaymentModel.getPaymentTime());
+    }
+
+    private void showHandleLine() {
+        //处理页面逻辑
+        tvHandleType.setTag("1");
+        //文本改为交易完成
+        tvHandleType.setText("交易完成");
+        tvHandleType.setTextColor(getResources().getColor(R.color.colorHandle));
+        tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorHandleLine));
+        tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_bank_ok));
+
+        tvWXTSMessage.setVisibility(View.GONE);
+        tvWXTS.setVisibility(View.GONE);
 
         setTimeInfo(mAliPaymentModel.getPaymentTime());
     }
@@ -509,7 +562,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
     @OnClick(R.id.topConstraintLayout)
     void onChangeBankClick() {
 
-        Intent intent = new Intent(this, ChangeReceiptActivity.class);
+        Intent intent = new Intent(getActivity(), ChangeReceiptActivity.class);
 
 
         intent.putExtra(AppConstant.EXTRA_NO, mAliPaymentModel);
@@ -517,36 +570,9 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
         navigateActivity(intent, 2000);
     }
 
-    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void storageNeedPer() {
-        // 那些权限涉及到存储权限的，写在这里
-
-    }
-
-    @OnShowRationale({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void storageNeedShowRat(final PermissionRequest request) {
-        // 解释为什么需要这个权限
-        showRationaleDialog("存储权限是本程序必不可少的权限，请开启", request);
-    }
-
-    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void storageDenied() {
-        // 如果用户不授予某权限时调用的方法
-        openAppSetting("您拒绝了存储权限，请授权");
-
-    }
-
-    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void storageAsk() {
-        //如果用户选择了让设备“不再询问”，而调用的方法
-        // 如果用户不授予某权限时调用的方法
-        openAppSetting("您拒绝了存储权限，请授权");
-    }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         switch (resultCode) {
             case 2000: /* 取得数据，并显示于画面上 */
@@ -558,24 +584,14 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
             default:
                 break;
         }
-
     }
 
-    /*
-    * 初始化view信息
-    * */
-    void initViewInfo() {
 
+    public void createImage() {
 
-        ViewUtils.initBankInfo(tvBankImage, mAliPaymentModel.getBankModel().getType());
-        tvBankUserName.setText(mAliPaymentModel.getReceiptUserName());
-
-        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(), mAliPaymentModel.getBankModel().getBankName()
-                , mAliPaymentModel.getBankNo()
-                , mAliPaymentModel.getReceiptUserName()
-        ));
-
-        tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
-        tvPaymentType.setText(mAliPaymentModel.getPaymentType());
+        Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout);
+        SimpleUtils.saveBitmapToSdCard(getActivity(), cacheBitmapFromView, "styleOne");
     }
+
+
 }

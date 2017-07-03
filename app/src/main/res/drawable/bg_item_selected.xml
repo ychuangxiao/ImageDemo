@@ -6,6 +6,12 @@
        android:insetTop="0.0px">
 
     <selector>
+
+        <item>
+            <shape>
+                <solid android:color="@color/colorHandle" />
+            </shape>
+        </item>
         <item android:state_pressed="true">
             <shape>
                 <gradient
