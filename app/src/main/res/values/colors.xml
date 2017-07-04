@@ -14,6 +14,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="colorBackgroundForIos">#e9e2e2</color>
+    <color name="colorBackgroundForIos">#ededed</color>
 
 </resources>

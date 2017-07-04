@@ -113,15 +113,16 @@
                 android:id="@+id/etBankNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/tvBankNo"
                 android:background="@null"
                 android:gravity="right"
                 android:hint="输入银行卡后四位"
-                android:inputType="numberDecimal"
-                android:maxLength="12"
+                android:inputType="number"
+                android:maxLength="4"
                 android:padding="@dimen/padding_small"
-                android:textSize="@dimen/google_font_size"/>
+                android:textSize="@dimen/google_font_size"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
 
 
         </RelativeLayout>
@@ -158,7 +159,7 @@
                 android:gravity="right"
                 android:hint="输入说明"
                 android:inputType="numberDecimal"
-                android:maxLength="12"
+                android:maxLength="20"
                 android:padding="@dimen/padding_small"
                 android:textSize="@dimen/google_font_size"/>
 

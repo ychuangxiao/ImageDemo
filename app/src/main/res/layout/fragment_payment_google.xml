@@ -1,9 +1,12 @@
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentGoogleFragment">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundForIos"
+
+    tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentGoogleFragment">
 
 
     <android.support.v4.widget.NestedScrollView
@@ -27,147 +30,11 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/topConstraintLayout2"
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:background="#c2c2c2"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
 
+            <include layout="@layout/google_primary_dark"></include>
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/tvWifi"
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_wifi"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/signal"
+            <include layout="@layout/google_primary"></include>
 
-
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatImageView
-
-                    android:id="@+id/signal"
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_signal_5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/tvUnSound"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_google_no_sound"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/bateryType"
-
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/bateryType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100%"
-
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/google_title_font_size"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/batery"
-
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/batery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:src="@mipmap/ic_google_top_batery"
-                    app:layout_constraintBottom_toBottomOf="parent"
-
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/topDateTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="21:52"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/google_title_font_size"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-
-                android:id="@+id/toolConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-
-                android:padding="6dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout2">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/back"
-                    android:layout_width="14dp"
-
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="6dp"
-                    android:src="@mipmap/ali_chat_back_img"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/line4"
-                    android:layout_width="1dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="#c2c2c2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/back"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/topTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="账单详情"
-                    android:textColor="#272727"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/line4"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:src="@mipmap/ic_alipay_nva_vertical_more"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-
-            </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/topLine"
@@ -176,7 +43,7 @@
                 android:background="#d5d3d3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolConstraintLayout"/>
+                app:layout_constraintTop_toBottomOf="@+id/primaryConstraintLayout"/>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/paymentAllConstraintLayout"

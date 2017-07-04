@@ -1,0 +1,46 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This is the main color -->
+    <item>
+        <shape>
+            <solid android:color="@color/colorHandle" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <gradient
+                android:angle="270.0"
+                android:endColor="@color/colorPrimaryDark"
+                android:centerColor="@color/colorPrimaryDark"
+                android:startColor="@color/colorPrimaryDark"
+
+                />
+
+            <corners
+                android:radius="0.0dip"
+                />
+        </shape>
+    </item>
+
+    <!-- This is the line -->
+    <item android:bottom="0.5dp">
+        <shape>
+            <stroke
+                android:width="0.0px"
+                />
+
+            <gradient
+                android:angle="270.0"
+                android:endColor="@color/colorPrimary"
+                android:centerColor="@color/colorPrimary"
+                android:startColor="@color/colorPrimary"
+                />
+
+            <corners
+
+                android:radius="0.0dip"
+                />
+        </shape>
+    </item>
+</layer-list>
+

@@ -1,0 +1,216 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundForIos"
+
+    tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentGoogleFragment">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline_2"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftTopStyle"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:duplicateParentState="false"
+                    android:padding="@dimen/padding_small"
+                    android:text="顶部样式"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/google_font_size"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvtvTopStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tvLeftTopStyle"
+                    android:gravity="right"
+                    android:hint="选择顶部样式"
+                    android:padding="@dimen/padding_small"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/google_font_size"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvMobileType"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:duplicateParentState="false"
+                    android:padding="@dimen/padding_small"
+                    android:text="手机型号"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/google_font_size"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/etMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tvMobileType"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="选择手机型号"
+                    android:padding="@dimen/padding_small"
+                    android:textSize="@dimen/google_font_size"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftSignal"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:duplicateParentState="false"
+                    android:padding="@dimen/padding_small"
+                    android:text="信号强度"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/google_font_size"
+                    />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etReceiptUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tvLeftSignal"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="选择信号强度"
+                    android:inputType="numberDecimal"
+                    android:maxLength="12"
+                    android:padding="@dimen/padding_small"
+                    android:textSize="@dimen/google_font_size"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftNetwork"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:duplicateParentState="false"
+                    android:padding="@dimen/padding_small"
+                    android:text="网络信号"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/google_font_size"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvNetwork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tvLeftNetwork"
+
+                    android:gravity="right"
+                    android:hint="选择网络信号"
+                    android:padding="@dimen/padding_small"
+                    android:textSize="@dimen/google_font_size"/>
+
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvCreateTime"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:duplicateParentState="false"
+                    android:padding="@dimen/padding_small"
+                    android:text="手机时间"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/google_font_size"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvCreateTime2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/tvCreateTime"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="选择手机时间"
+                    android:inputType="numberDecimal"
+                    android:maxLength="12"
+                    android:padding="@dimen/padding_small"
+                    android:textSize="@dimen/google_font_size"/>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</FrameLayout>

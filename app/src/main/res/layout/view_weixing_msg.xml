@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
-            android:src="@mipmap/stat_sys_battery_charge_anim15"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/dateTime"
             app:layout_constraintRight_toRightOf="parent"
