@@ -6,36 +6,29 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.OnTextChanged;
-import demo.banditcat.com.imagedemo.activitys.DemoActivity;
-import demo.banditcat.com.imagedemo.activitys.ali.AliMainActivity;
 import demo.banditcat.com.imagedemo.activitys.ali.PaymentActivity;
 import demo.banditcat.com.imagedemo.activitys.google.ChangeReceiptActivity;
 import demo.banditcat.com.imagedemo.base.BaseActivity;
@@ -194,10 +187,9 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
     void onFabClick() {
 
 
- /*       Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout);
+        Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout);
         SimpleUtils.saveBitmapToSdCard(MainActivity.this, cacheBitmapFromView, "styleOne");
-*/
-        navigateActivity(new Intent(this, PaymentActivity.class));
+
 
 
     }
@@ -218,6 +210,7 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            navigateActivity(new Intent(this, PaymentActivity.class));
             return true;
         }
 

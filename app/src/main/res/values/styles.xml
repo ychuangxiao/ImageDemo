@@ -53,4 +53,29 @@
     </style>
 
 
+
+    <style name="LeftTitle">
+        <item name="android:layout_width">@dimen/widthLeftTitle</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/google_font_size</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:duplicateParentState">false</item>
+        <item name="android:clickable">true</item>
+
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="RightTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/google_font_size</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:duplicateParentState">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
 </resources>

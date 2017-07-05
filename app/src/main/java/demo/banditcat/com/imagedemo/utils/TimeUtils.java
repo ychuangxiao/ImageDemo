@@ -180,6 +180,8 @@ public class TimeUtils {
     public static final String DEFAULT_PATTERN_3 = "MM-dd HH:mm";
     public static final String DEFAULT_PATTERN_4 = "HH:mm";
 
+    public static final String DEFAULT_PATTERN_4_1 = "hh:mm";
+
     public static final String DEFAULT_PATTERN_5 = "yyyy-MM-dd";
 
     /**

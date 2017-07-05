@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.util.LruCache;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ListAdapter;
@@ -36,6 +38,14 @@ public  class SimpleUtils {
      * @return
      */
     public static boolean saveBitmapToSdCard(Context context, Bitmap mybitmap, String name){
+
+
+        if (mybitmap == null)
+        {
+            Toast.makeText(context, "图片生成失败", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         boolean result = false;
         //创建位图保存目录
         String path = Environment.getExternalStorageDirectory() + "/1000ttt/";
@@ -112,7 +122,7 @@ public  class SimpleUtils {
      * @return
      */
     public static Bitmap getCacheBitmapFromView(View view) {
-        final boolean drawingCacheEnabled = true;
+       /* final boolean drawingCacheEnabled = true;
         view.setDrawingCacheEnabled(drawingCacheEnabled);
         view.buildDrawingCache(drawingCacheEnabled);
         final Bitmap drawingCache = view.getDrawingCache();
@@ -123,7 +133,27 @@ public  class SimpleUtils {
         } else {
             bitmap = null;
         }
+        return bitmap;*/
+
+
+        view.setDrawingCacheEnabled(true);
+
+// this is the important code :)
+// Without it the view will have a dimension of 0,0 and the bitmap will be null
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+
+
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+
+        view.buildDrawingCache(true);
+
+
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false); // clear drawing cache
+
         return bitmap;
+
     }
 
     /**
@@ -138,10 +168,26 @@ public  class SimpleUtils {
             h += scrollView.getChildAt(i).getHeight();
             scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
         }
+
+        h = 1280;
         bitmap = Bitmap.createBitmap(scrollView.getWidth(), h, Bitmap.Config.RGB_565);
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
         return bitmap;
+    }
+
+    public static Bitmap getViewImage(NestedScrollView nestedScrollView,Point point)
+    {
+
+        Bitmap bitmap = null;
+
+
+        bitmap = Bitmap.createBitmap(point.x, point.y, Bitmap.Config.ARGB_8888);
+          Canvas canvas = new Canvas(bitmap);
+        nestedScrollView.draw(canvas);
+        return bitmap;
+
+
     }
 
 

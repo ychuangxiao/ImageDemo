@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 public class AliPaymentModel implements Serializable {
 
 
+    private Integer networkType;//网络类型
+
     private String receiptUserName;
     private String bankNo;
 
@@ -26,6 +28,8 @@ public class AliPaymentModel implements Serializable {
     private Long topTime;//顶部时间
     private Long paymentTime;//付款成功时间
     private Long lastTime;//到账时间
+
+    private Boolean dateTimeStyle=false;//是否24小时
     private Long createTime;//创建时间
 
     public String getReceiptUserName() {
@@ -114,5 +118,21 @@ public class AliPaymentModel implements Serializable {
 
     public void setFinish(Boolean finish) {
         this.finish = finish;
+    }
+
+    public Boolean getDateTimeStyle() {
+        return dateTimeStyle;
+    }
+
+    public void setDateTimeStyle(Boolean dateTimeStyle) {
+        this.dateTimeStyle = dateTimeStyle;
+    }
+
+    public Integer getNetworkType() {
+        return networkType;
+    }
+
+    public void setNetworkType(Integer networkType) {
+        this.networkType = networkType;
     }
 }

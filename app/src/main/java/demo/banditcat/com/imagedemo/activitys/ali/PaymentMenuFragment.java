@@ -1,45 +1,31 @@
 package demo.banditcat.com.imagedemo.activitys.ali;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 import butterknife.OnTextChanged;
 import demo.banditcat.com.imagedemo.R;
-import demo.banditcat.com.imagedemo.adapters.BankAdapter;
-import demo.banditcat.com.imagedemo.adapters.base.PaymentMenuAdapter;
 import demo.banditcat.com.imagedemo.base.BaseFragment;
+import demo.banditcat.com.imagedemo.listeners.MobileChangeListener;
 import demo.banditcat.com.imagedemo.listeners.RecyclerClickListener;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.model.MenuModel;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
-import demo.banditcat.com.imagedemo.utils.ViewUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -184,7 +170,10 @@ public class PaymentMenuFragment extends BaseFragment implements RecyclerClickLi
         calendar.set(year, monthOfYear, dayOfMonth);
 
         mAliPaymentModel.setPaymentTime(calendar.getTimeInMillis());
+        if (mModelMobileChangeListener != null) {
 
+            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+        }
 
         tvCreateDate.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_5));
     }
@@ -205,6 +194,13 @@ public class PaymentMenuFragment extends BaseFragment implements RecyclerClickLi
 
         mAliPaymentModel.setPaymentTime(calendar.getTimeInMillis());
 
+        if (mModelMobileChangeListener != null) {
+
+            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+        }
+
+
+
         tvCreateTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4));
     }
 
@@ -212,20 +208,15 @@ public class PaymentMenuFragment extends BaseFragment implements RecyclerClickLi
     void paymentTimeClick() {
 
 
-        if (mDatePickerDialog != null) {
-            mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
-        } else {
-            Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 
-            calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
+        calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
 
 
-            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                    (Calendar.DAY_OF_MONTH));
+        mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
+                (Calendar.DAY_OF_MONTH));
 
-            mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
-        }
-
+        mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
 
     }
 
@@ -282,5 +273,12 @@ public class PaymentMenuFragment extends BaseFragment implements RecyclerClickLi
     @OnCheckedChanged(R.id.ckType)
     void onChecked(boolean checked) {
         mAliPaymentModel.setFinish(checked);
+    }
+
+
+    MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
+
+    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel> modelMobileChangeListener) {
+        this.mModelMobileChangeListener = modelMobileChangeListener;
     }
 }

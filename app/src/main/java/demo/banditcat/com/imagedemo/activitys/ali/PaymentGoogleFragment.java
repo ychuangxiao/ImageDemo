@@ -3,22 +3,17 @@ package demo.banditcat.com.imagedemo.activitys.ali;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -37,6 +32,7 @@ import demo.banditcat.com.imagedemo.R;
 import demo.banditcat.com.imagedemo.activitys.google.ChangeReceiptActivity;
 import demo.banditcat.com.imagedemo.base.BaseFragment;
 import demo.banditcat.com.imagedemo.constant.AppConstant;
+import demo.banditcat.com.imagedemo.listeners.MobileChangeListener;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.utils.SimpleUtils;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
@@ -55,8 +51,17 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     private static final String ARG_PARAM2 = "param2";
 
 
+    //手机外观
+
+    @BindView(R.id.tvWifi)
+    AppCompatImageView tvWifi;//网络信号
+
     @BindView(R.id.alipayConstraintLayout)
     ConstraintLayout alipayConstraintLayout;
+
+    @BindView(R.id.alipayNestedScrollView)
+    NestedScrollView aliNestedScrollView;
+
 
     @BindView(R.id.tvPaymentType)
     AppCompatTextView tvPaymentType;
@@ -180,7 +185,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
         }
 
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon.icon_right, getResources().getColor(R.color.colorRightTitle), 4f);
+        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon.icon_right, getResources().getColor(R.color
+                .colorRightTitle), 4f);
 
 
         loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
@@ -200,7 +206,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
             tvHandleType.setTag(1);
 
-             showHandleLine();
+            showHandleLine();
         } else {
             tvHandleType.setTag(0);
             hideHandleLine();
@@ -212,12 +218,22 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     * 初始化view信息
     * */
     void initViewInfo() {
+
+
+
+        //手机样式
+
+        switch (mAliPaymentModel.getNetworkType()){
+            case 10:
+                tvWifi.setImageResource(R.mipmap.a_top_network_4g);
+                break;
+
+        }
+
         ViewUtils.initBankInfo(tvBankImage, mAliPaymentModel.getBankModel().getType());
         tvBankUserName.setText(mAliPaymentModel.getReceiptUserName());
-        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(), mAliPaymentModel.getBankModel().getBankName()
-                , mAliPaymentModel.getBankNo()
-                , mAliPaymentModel.getReceiptUserName()
-        ));
+        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(), mAliPaymentModel.getBankModel().getBankName(),
+                mAliPaymentModel.getBankNo(), mAliPaymentModel.getReceiptUserName()));
         tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
         tvPaymentType.setText(mAliPaymentModel.getPaymentType());
 
@@ -231,8 +247,25 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     private void setTimeInfo(long time) {
 
         mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, time));
-        topDateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getLastTime(), TimeUtils.DEFAULT_PATTERN_4));
 
+
+        if (mAliPaymentModel.getDateTimeStyle()) {
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(mAliPaymentModel.getTopTime());
+            int apm = mCalendar.get(Calendar.AM_PM);
+
+
+            if (apm == 1) {
+                topDateTime.setText("下午 " + TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4_1));
+
+            } else {
+                topDateTime.setText("上午 " + TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4_1));
+            }
+        }
+        else
+        {
+            topDateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
+        }
         tvOrderNo2.setText(randomOrderNo(time));
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
 
@@ -275,8 +308,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
             calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
 
 
-            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                    (Calendar.DAY_OF_MONTH));
+            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar
+                    .DAY_OF_MONTH));
 
             mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
         }
@@ -292,8 +325,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
         calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
 
-        mDatePickerDialog30 = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                (Calendar.DAY_OF_MONTH));
+        mDatePickerDialog30 = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar
+                .DAY_OF_MONTH));
 
         mDatePickerDialog30.show(getActivity().getFragmentManager(), "DatePickerDialog30");
     }
@@ -356,17 +389,29 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
             case 10:
 
                 calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                        (Calendar.DAY_OF_MONTH), hourOfDay, minute, second);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                        second);
 
+                mAliPaymentModel.setTopTime(calendar.getTimeInMillis());
+                if (mModelMobileChangeListener != null) {
+
+                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                }
                 topDateTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4));
                 break;
             case 20:
 
                 calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                        (Calendar.DAY_OF_MONTH), hourOfDay, minute, second);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                        second);
+
                 mAliPaymentModel.setPaymentTime(calendar.getTimeInMillis());
+                if (mModelMobileChangeListener != null) {
+
+                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                }
+
+
                 setTimeInfo(mAliPaymentModel.getPaymentTime());
                 break;
             case 30:
@@ -374,8 +419,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
                 //判断下 时间不能早于付款成功时间
 
                 calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
-                        (Calendar.DAY_OF_MONTH), hourOfDay, minute, second);
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                        second);
 
                 if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis())) {
 
@@ -383,7 +428,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
                     mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
 
                     if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
+                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar
+                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
                     } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
                         tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
                     }
@@ -422,7 +468,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
                     mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
                     if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
+                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar
+                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
                     } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
                         tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
                     }
@@ -589,9 +636,20 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
     public void createImage() {
 
-        Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout);
+
+        Point point = new Point();
+        getActivity().getWindowManager().getDefaultDisplay().getSize(point);
+
+
+        //Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout,point);
+        Bitmap cacheBitmapFromView = SimpleUtils.getViewImage(aliNestedScrollView, point);
         SimpleUtils.saveBitmapToSdCard(getActivity(), cacheBitmapFromView, "styleOne");
     }
 
 
+    MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
+
+    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel> modelMobileChangeListener) {
+        this.mModelMobileChangeListener = modelMobileChangeListener;
+    }
 }

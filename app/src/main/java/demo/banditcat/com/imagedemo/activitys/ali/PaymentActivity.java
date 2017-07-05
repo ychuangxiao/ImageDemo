@@ -1,13 +1,11 @@
 package demo.banditcat.com.imagedemo.activitys.ali;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -16,11 +14,12 @@ import java.math.BigDecimal;
 import butterknife.BindView;
 import demo.banditcat.com.imagedemo.R;
 import demo.banditcat.com.imagedemo.base.BaseActivity;
+import demo.banditcat.com.imagedemo.listeners.MobileChangeListener;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.model.BankModel;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 
-public class PaymentActivity extends BaseActivity {
+public class PaymentActivity extends BaseActivity implements MobileChangeListener<AliPaymentModel> {
 
     @BindView(R.id.content)
     FrameLayout content;
@@ -37,9 +36,13 @@ public class PaymentActivity extends BaseActivity {
     PaymentMenuFragment mPaymentMenuFragment;
     String paymentMenuTag = "PaymentMenuFragment";
 
+    PaymentMobileStyleFragment mPaymentMobileStyleFragment;
+    String mobileStyleTag = "PaymentMobileStyleFragment";
+
+
     AliPaymentModel aliPaymentModel;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+            .OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -48,13 +51,24 @@ public class PaymentActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
+
+                    fragment = getSupportFragmentManager().findFragmentByTag(mobileStyleTag);
+
+                    if (fragment != null) {
+                        mPaymentMobileStyleFragment = (PaymentMobileStyleFragment) fragment;
+                        showFragment(mPaymentMobileStyleFragment);
+                        mPaymentMobileStyleFragment.loadViewData(aliPaymentModel);
+                    } else {
+
+                        mPaymentMobileStyleFragment = PaymentMobileStyleFragment.newInstance(aliPaymentModel);
+                        addFragment(R.id.content, mPaymentMobileStyleFragment, mobileStyleTag);
+                        mPaymentMobileStyleFragment.setMobileChangeListener(PaymentActivity.this);
+
+                    }
                     return true;
                 case R.id.navigation_dashboard:
 
 
-                    if (mPaymentGoogleFragment != null) {
-                        aliPaymentModel = mPaymentGoogleFragment.getAliPaymentModel();
-                    }
 
                     fragment = getSupportFragmentManager().findFragmentByTag(paymentMenuTag);
 
@@ -66,15 +80,13 @@ public class PaymentActivity extends BaseActivity {
 
                         mPaymentMenuFragment = PaymentMenuFragment.newInstance(aliPaymentModel);
                         addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
+                        mPaymentMenuFragment.setMobileChangeListener(PaymentActivity.this);
                     }
 
                     return true;
                 case R.id.navigation_notifications:
 
 
-                    if (mPaymentMenuFragment != null) {
-                        aliPaymentModel = mPaymentMenuFragment.getAliPaymentModel();
-                    }
 
 
                     fragment = getSupportFragmentManager().findFragmentByTag(paymentTag);
@@ -84,6 +96,8 @@ public class PaymentActivity extends BaseActivity {
 
                         showFragment(mPaymentGoogleFragment);
                         mPaymentGoogleFragment.loadViewData(aliPaymentModel);
+
+                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
 
                     } else {
 
@@ -100,6 +114,16 @@ public class PaymentActivity extends BaseActivity {
 
 
     void hideFragment() {
+
+        fragment = getSupportFragmentManager().findFragmentByTag(mobileStyleTag);
+
+        if (fragment != null) {
+            mPaymentMobileStyleFragment = (PaymentMobileStyleFragment) fragment;
+
+            hideFragment(mPaymentMobileStyleFragment);
+        }
+
+
         fragment = getSupportFragmentManager().findFragmentByTag(paymentTag);
 
         if (fragment != null) {
@@ -178,13 +202,17 @@ public class PaymentActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-
+            mToolbar.setVisibility(View.GONE);
             mPaymentGoogleFragment.createImage();
-
+            mToolbar.setVisibility(View.VISIBLE);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onItemClickListener(AliPaymentModel model) {
+        aliPaymentModel = model;
+    }
 }
