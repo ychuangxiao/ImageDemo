@@ -158,6 +158,11 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         BankModel bankModel = new BankModel("浦发银行", 120);
 
         aliPaymentModel.setBankModel(bankModel);
+
+
+        aliPaymentModel.setMobileType(20);
+        aliPaymentModel.setNetworkSignal(10);
+        aliPaymentModel.setNetworkType(10);
         aliPaymentModel.setFinish(false);
         aliPaymentModel.setRemark("转账");
         aliPaymentModel.setBankNo("8888");
@@ -170,7 +175,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         aliPaymentModel.setLastTime(TimeUtils.addHour2(2, aliPaymentModel.getCreateTime()));
 
 
-        navigation.setSelectedItemId(R.id.navigation_notifications);
+        navigation.setSelectedItemId(R.id.navigation_home);
 
 
     }

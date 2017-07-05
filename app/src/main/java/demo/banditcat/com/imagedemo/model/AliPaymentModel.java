@@ -9,8 +9,9 @@ import java.math.BigDecimal;
 
 public class AliPaymentModel implements Serializable {
 
-
+    private Integer mobileType;//网络类型
     private Integer networkType;//网络类型
+    private Integer networkSignal;//信号强度
 
     private String receiptUserName;
     private String bankNo;
@@ -134,5 +135,21 @@ public class AliPaymentModel implements Serializable {
 
     public void setNetworkType(Integer networkType) {
         this.networkType = networkType;
+    }
+
+    public Integer getNetworkSignal() {
+        return networkSignal;
+    }
+
+    public void setNetworkSignal(Integer networkSignal) {
+        this.networkSignal = networkSignal;
+    }
+
+    public Integer getMobileType() {
+        return mobileType;
+    }
+
+    public void setMobileType(Integer mobileType) {
+        this.mobileType = mobileType;
     }
 }

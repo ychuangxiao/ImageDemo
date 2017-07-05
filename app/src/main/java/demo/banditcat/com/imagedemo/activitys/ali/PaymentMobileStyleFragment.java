@@ -54,6 +54,10 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
     PopupMenu mNetworkPopupMenu;//网络信号弹出框
 
+    PopupMenu mSignalPopupMenu;//网络信号强度弹出框
+
+    PopupMenu mMobileTypePopupMenu;//手机型号弹出框
+
 
     TimePickerDialog mTimePickerDialog;
 
@@ -120,6 +124,56 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
         tvCreateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
 
+
+
+        switch (getAliPaymentModel().getMobileType())
+        {
+            case 10:
+                tvMobileType.setText("苹果");
+                break;
+            case 20:
+                tvMobileType.setText("谷歌");
+                break;
+        }
+
+        switch (getAliPaymentModel().getNetworkSignal())
+        {
+            case 10:
+                tvSignal.setText("1格");
+                break;
+            case 20:
+                tvSignal.setText("2格");
+                break;
+            case 30:
+                tvSignal.setText("3格");
+                break;
+            case 40:
+                tvSignal.setText("4格");
+                break;
+            case 50:
+                tvSignal.setText("5格");
+                break;
+        }
+
+        switch (getAliPaymentModel().getNetworkType())
+        {
+            case 10:
+                tvNetwork.setText("Wifi");
+                break;
+            case 20:
+                tvNetwork.setText("G");
+                break;
+            case 30:
+                tvNetwork.setText("E");
+                break;
+            case 40:
+                tvNetwork.setText("3G");
+                break;
+            case 50:
+                tvNetwork.setText("4G");
+                break;
+        }
+
     }
 
 
@@ -183,6 +237,94 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
 
     }
+
+
+
+
+    @OnClick(R.id.tvMobileType)
+    void onMobileTypeClick() {
+
+
+        if (null == mMobileTypePopupMenu) {
+            mMobileTypePopupMenu = new PopupMenu(getActivity(), tvMobileType);
+            mMobileTypePopupMenu.getMenu().setGroupCheckable(0, true, true);
+
+            int menuIndex = 0;
+
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, "苹果").setTitleCondensed("10");
+            menuIndex++;
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, "谷歌").setTitleCondensed("20");
+
+
+            mMobileTypePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+
+                    mAliPaymentModel.setMobileType(Integer.parseInt(item.getTitleCondensed().toString()));
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+                    tvMobileType.setText(item.getTitle());
+
+                    return false;
+                }
+            });
+
+
+        }
+
+        mMobileTypePopupMenu.show();
+    }
+
+    @OnClick(R.id.tvSignal)
+    void onSignalClick() {
+
+
+        if (null == mSignalPopupMenu) {
+            mSignalPopupMenu = new PopupMenu(getActivity(), tvSignal);
+            mSignalPopupMenu.getMenu().setGroupCheckable(0, true, true);
+
+            int menuIndex = 0;
+
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "1格").setTitleCondensed("10");
+            menuIndex++;
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "2格").setTitleCondensed("20");
+            menuIndex++;
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "3格").setTitleCondensed("30");
+            menuIndex++;
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "4格").setTitleCondensed("40");
+            menuIndex++;
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "5格").setTitleCondensed("50");
+
+
+            mSignalPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+
+                    mAliPaymentModel.setNetworkSignal(Integer.parseInt(item.getTitleCondensed().toString()));
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+                    tvSignal.setText(item.getTitle());
+
+                    return false;
+                }
+            });
+
+
+        }
+
+        mSignalPopupMenu.show();
+    }
+
 
     @OnClick(R.id.tvNetwork)
     void onNetworkClick() {
