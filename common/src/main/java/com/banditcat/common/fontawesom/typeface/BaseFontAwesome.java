@@ -122,6 +122,10 @@ public class BaseFontAwesome implements ITypeface {
 
     public enum Icon implements IIcon {
 
+
+        icon_weixin('\ue623'),
+
+        icon_ali('\ue67c'),
         icon_more('\ue61f'),
 
         icon_iconset0252('\ue697'),

@@ -78,4 +78,224 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+
+    <style name="transparentFrameWindowStyle" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <!-- 设置自定义布局的背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置window背景透明，也就是去边框 -->
+    </style>
+
+    <style name="ImageView">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:layout_gravity">center</item>
+
+    </style>
+
+    <style name="ImageView.w32" parent="ImageView">
+
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+    </style>
+
+
+    <style name="ImageView.Micro" parent="ImageView">
+
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+    <style name="ImageView.Small" parent="ImageView">
+
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+    <style name="ImageView.Medium" parent="ImageView">
+
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
+    <style name="ImageView.MatchParent" parent="ImageView">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
+
+    <style name="TextView.White" parent="@style/TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.Green" parent="@style/TextView">
+        <item name="android:textColor">@color/appleGreen</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.OceanBlue" parent="@style/TextView">
+        <item name="android:textColor">@color/oceanBlue</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+
+    <style name="TextView.Orange" parent="@style/TextView">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.Orange.Small" parent="@style/TextView.Orange">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.Orange.Medium" parent="@style/TextView.Orange">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+    <style name="TextView.Orange.Large" parent="@style/TextView.Orange">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.White.Medium" parent="@style/TextView.White">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+    <style name="TextView.White.Micro" parent="@style/TextView.White">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+
+
+    <style name="TextView.White.Small" parent="@style/TextView.White">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+
+
+    <style name="TextView.White.XLarge" parent="@style/TextView.White">
+        <item name="android:textSize">@dimen/font_size_Xlarge</item>
+    </style>
+
+    <style name="TextView.Green.Medium" parent="@style/TextView.Green">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+
+    <style name="TextView.Green.Small" parent="@style/TextView.Green">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+
+    <style name="TextView.Green.Large" parent="@style/TextView.Green">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.Green.XLarge" parent="@style/TextView.Green">
+        <item name="android:textSize">@dimen/font_size_Xlarge</item>
+    </style>
+
+    <style name="TextView.Green.Micro" parent="@style/TextView.Green">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+
+    <style name="TextView.Large" parent="@style/TextView">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.Medium" parent="@style/TextView">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+    <style name="TextView.Small" parent="@style/TextView">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.Micro" parent="@style/TextView">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+
+    <style name="TextView.OceanBlue.Medium" parent="@style/TextView.OceanBlue">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+
+    <style name="TextView.OceanBlue.Small" parent="@style/TextView.OceanBlue">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.OceanBlue.Large" parent="@style/TextView.OceanBlue">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.OceanBlue.XLarge" parent="@style/TextView.OceanBlue">
+        <item name="android:textSize">@dimen/font_size_Xlarge</item>
+    </style>
+
+    <style name="TextView.OceanBlue.Micro" parent="@style/TextView.OceanBlue">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+
+
+
+    <style name="TextView.Red" parent="@style/TextView">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.Red.Small" parent="@style/TextView.Red">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.Red.Large" parent="@style/TextView.Red">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.Red.Medium" parent="@style/TextView.Red">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+    <style name="TextView.Red.Micro" parent="@style/TextView.Red">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+    <style name="TextView.Silver" parent="@style/TextView">
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.Silver.Small" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.Silver.Micro" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+    </style>
+
+    <style name="TextView.Silver.Large" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.Silver.Medium" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+
+
+
+    <style name="TextView.Blue.Small" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_small</item>
+    </style>
+
+    <style name="TextView.Blue.Large" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="TextView.Blue.Medium" parent="@style/TextView.Silver">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
 </resources>

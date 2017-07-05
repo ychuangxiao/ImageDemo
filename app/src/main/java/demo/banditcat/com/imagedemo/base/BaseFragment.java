@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,7 +16,6 @@ import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import demo.banditcat.com.imagedemo.R;
 
 /**
  * Created by banditcat-pc on 2017/7/3.
@@ -104,6 +102,11 @@ public abstract class BaseFragment extends Fragment {
      */
     public void navigateActivity(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
+        // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+    }
+
+    public void navigateActivity(Intent intent ) {
+        startActivity(intent);
         // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 

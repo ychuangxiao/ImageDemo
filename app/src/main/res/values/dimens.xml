@@ -59,6 +59,12 @@
 
     <dimen name="widthLeftTitle">120dp</dimen>
 
-
+    <dimen name="font_size_micro">12.0sp</dimen>
+    <dimen name="font_size_small">14.0sp</dimen>
+    <dimen name="font_size_medium">18.0sp</dimen>
+    <dimen name="font_size_large">22.0sp</dimen>
+    <dimen name="font_size_Xlarge">30.0sp</dimen>
+    <dimen name="font_size_XXlarge">40.0sp</dimen>
+    <dimen name="font_size_XXXlarge">55.0sp</dimen>
 
 </resources>
