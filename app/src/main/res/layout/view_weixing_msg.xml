@@ -31,7 +31,7 @@
             android:id="@+id/signal"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_signal_5"
+            android:src="@mipmap/ic_top_signal2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/batery"
             app:layout_constraintRight_toRightOf="parent"

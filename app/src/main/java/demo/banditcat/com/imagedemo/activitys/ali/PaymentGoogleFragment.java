@@ -37,6 +37,7 @@ import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.utils.SimpleUtils;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 import demo.banditcat.com.imagedemo.utils.ViewUtils;
+import demo.banditcat.com.imagedemo.viewgroup.PrimaryDarkView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,8 +54,9 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
     //手机外观
 
-    @BindView(R.id.tvWifi)
-    AppCompatImageView tvWifi;//网络信号
+
+    @BindView(R.id.primaryDarkConstraintLayout)
+    ConstraintLayout primaryDarkConstraintLayout;
 
     @BindView(R.id.alipayConstraintLayout)
     ConstraintLayout alipayConstraintLayout;
@@ -96,8 +98,6 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     @BindView(R.id.tvWXTS)
     AppCompatTextView tvWXTS;
 
-    @BindView(R.id.topDateTime)
-    AppCompatTextView topDateTime;
 
     @BindView(R.id.tvMoney)
     AppCompatTextView tvMoney;//金额
@@ -139,12 +139,10 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
     int handleIndex = 10;//10 toptime 20 hadnleTIme 30 lastTime 40 createTime
 
-
-    public AliPaymentModel getAliPaymentModel() {
-        return mAliPaymentModel;
-    }
+    PrimaryDarkView mPrimaryDarkView;//顶部标题栏
 
     Context mContext;
+
 
     public void setContext(Context context) {
         mContext = context;
@@ -196,7 +194,22 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
     public void loadViewData(AliPaymentModel model) {
 
+
         mAliPaymentModel = model;
+
+        //添加view
+        mPrimaryDarkView = PrimaryDarkView.build(getActivity());
+
+        primaryDarkConstraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onTopDateTimeClick();
+            }
+        });
+
+        primaryDarkConstraintLayout.removeAllViews();
+
+        primaryDarkConstraintLayout.addView(mPrimaryDarkView);
 
 
         initViewInfo();
@@ -220,15 +233,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     void initViewInfo() {
 
 
-
         //手机样式
 
-        switch (mAliPaymentModel.getNetworkType()){
-            case 10:
-                tvWifi.setImageResource(R.mipmap.a_top_network_4g);
-                break;
-
-        }
 
         ViewUtils.initBankInfo(tvBankImage, mAliPaymentModel.getBankModel().getType());
         tvBankUserName.setText(mAliPaymentModel.getReceiptUserName());
@@ -247,25 +253,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     private void setTimeInfo(long time) {
 
         mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, time));
+        mPrimaryDarkView.binder(mAliPaymentModel);
 
-
-        if (mAliPaymentModel.getDateTimeStyle()) {
-            Calendar mCalendar = Calendar.getInstance();
-            mCalendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-            int apm = mCalendar.get(Calendar.AM_PM);
-
-
-            if (apm == 1) {
-                topDateTime.setText("下午 " + TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4_1));
-
-            } else {
-                topDateTime.setText("上午 " + TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4_1));
-            }
-        }
-        else
-        {
-            topDateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
-        }
         tvOrderNo2.setText(randomOrderNo(time));
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
 
@@ -345,8 +334,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     }
 
 
-    @OnClick(R.id.topDateTime)
-    void onTopDateTime() {
+    void onTopDateTimeClick() {
         handleIndex = 10;
 
         if (mTimePickerDialog2 != null) {
@@ -397,7 +385,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
                     mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
                 }
-                topDateTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4));
+
+                mPrimaryDarkView.binder(mAliPaymentModel);
                 break;
             case 20:
 

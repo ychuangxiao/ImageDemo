@@ -97,12 +97,13 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                         showFragment(mPaymentGoogleFragment);
                         mPaymentGoogleFragment.loadViewData(aliPaymentModel);
 
-                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
+
 
                     } else {
 
                         mPaymentGoogleFragment = PaymentGoogleFragment.newInstance(aliPaymentModel);
                         addFragment(R.id.content, mPaymentGoogleFragment, paymentTag);
+                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
                     }
 
                     return true;

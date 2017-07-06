@@ -32,7 +32,13 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
 
-            <include layout="@layout/google_primary_dark"></include>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/primaryDarkConstraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </android.support.constraint.ConstraintLayout>
+
 
             <include layout="@layout/google_primary"></include>
 

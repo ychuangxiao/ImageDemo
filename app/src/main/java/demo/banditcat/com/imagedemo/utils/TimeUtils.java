@@ -184,6 +184,8 @@ public class TimeUtils {
 
     public static final String DEFAULT_PATTERN_5 = "yyyy-MM-dd";
 
+    public static final String DEFAULT_PATTERN_6 = "yyyy-MM-dd hh:mm:ss";
+
     /**
      * 将时间戳转为时间字符串
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>
@@ -205,6 +207,13 @@ public class TimeUtils {
      */
     public static String millis2String(long millis, String pattern) {
         return new SimpleDateFormat(pattern, Locale.getDefault()).format(new Date(millis));
+    }
+
+    public static long millis2millis(long millis,String pattern)
+    {
+        String value = millis2String(millis);
+
+        return string2Millis(value,pattern);
     }
 
 
