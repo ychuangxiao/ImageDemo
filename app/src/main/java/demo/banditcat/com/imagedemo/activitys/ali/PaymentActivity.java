@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
+
 import java.math.BigDecimal;
 
 import butterknife.BindView;
 import demo.banditcat.com.imagedemo.R;
 import demo.banditcat.com.imagedemo.base.BaseActivity;
+import demo.banditcat.com.imagedemo.constant.AppConstant;
 import demo.banditcat.com.imagedemo.listeners.MobileChangeListener;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.model.BankModel;
@@ -160,10 +163,10 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
         aliPaymentModel.setBankModel(bankModel);
 
-
-        aliPaymentModel.setMobileType(20);
-        aliPaymentModel.setNetworkSignal(10);
-        aliPaymentModel.setNetworkType(10);
+        aliPaymentModel.setTopToolStyle(AppConstant.ACTION_10);
+        aliPaymentModel.setMobileType(AppConstant.ACTION_20);
+        aliPaymentModel.setNetworkSignal(AppConstant.ACTION_10);
+        aliPaymentModel.setNetworkType(AppConstant.ACTION_10);
         aliPaymentModel.setFinish(false);
         aliPaymentModel.setRemark("转账");
         aliPaymentModel.setBankNo("8888");
@@ -179,7 +182,36 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         navigation.setSelectedItemId(R.id.navigation_home);
 
 
+        setLeftMenu();
+
     }
+
+
+    /**
+     * 设置抽屉菜单
+     */
+    void setLeftMenu() {
+
+        Float size = 10F;
+        int color = getResources().getColor(R.color.white);
+
+        //用户
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
+
+
+        //业务管理
+        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_content, size);
+
+        //资金账户
+        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
+
+
+
+    }
+    
 
     /**
      * 获得布局视图ID

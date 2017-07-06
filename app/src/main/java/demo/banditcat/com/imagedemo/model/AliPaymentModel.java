@@ -9,7 +9,9 @@ import java.math.BigDecimal;
 
 public class AliPaymentModel implements Serializable {
 
-    private Integer mobileType;//网络类型
+
+    private Integer topToolStyle;//工具栏样式
+    private Integer mobileType;//手机类型
     private Integer networkType;//网络类型
     private Integer networkSignal;//信号强度
 
@@ -151,5 +153,13 @@ public class AliPaymentModel implements Serializable {
 
     public void setMobileType(Integer mobileType) {
         this.mobileType = mobileType;
+    }
+
+    public Integer getTopToolStyle() {
+        return topToolStyle;
+    }
+
+    public void setTopToolStyle(Integer topToolStyle) {
+        this.topToolStyle = topToolStyle;
     }
 }

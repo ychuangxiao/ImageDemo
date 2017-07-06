@@ -15,9 +15,9 @@ import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 
 /**
- * 文件名称：{@link PrimaryDarkView}
+ * 文件名称：{@link PrimaryDarkIosView}
  * <br/>
- * 功能描述：顶部标题栏视图
+ * 功能描述：顶部标题栏视图(IOS)
  * <br/>
  * 创建作者：banditcat
  * <br/>
@@ -29,7 +29,7 @@ import demo.banditcat.com.imagedemo.utils.TimeUtils;
  * <br/>
  * 修改备注：
  */
-public class PrimaryDarkView extends RelativeLayout {
+public class PrimaryDarkIosView extends RelativeLayout {
 
 
     Context mContext;//上下文
@@ -53,13 +53,13 @@ public class PrimaryDarkView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static PrimaryDarkView build(Context context) {
-        PrimaryDarkView instance = new PrimaryDarkView(context);
+    public static PrimaryDarkIosView build(Context context) {
+        PrimaryDarkIosView instance = new PrimaryDarkIosView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public PrimaryDarkView(Context context) {
+    public PrimaryDarkIosView(Context context) {
         super(context);
         mContext = context;
     }
@@ -110,19 +110,19 @@ public class PrimaryDarkView extends RelativeLayout {
         switch (aliPaymentModel.getNetworkType())
         {
             case 10:
-                tvWifi.setImageResource(R.mipmap.ic_top_network_wifi);
+                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
                 break;
             case 20:
-                tvWifi.setImageResource(R.mipmap.ic_top_network_g);
+                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
                 break;
             case 30:
-                tvWifi.setImageResource(R.mipmap.ic_top_network_e);
+                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
                 break;
             case 40:
-                tvWifi.setImageResource(R.mipmap.ic_top_network_3g);
+                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
                 break;
             case 50:
-                tvWifi.setImageResource(R.mipmap.ic_top_network_4g);
+                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
                 break;
         }
 
@@ -131,19 +131,19 @@ public class PrimaryDarkView extends RelativeLayout {
         switch (aliPaymentModel.getNetworkSignal())
         {
             case 10:
-                signal.setImageResource(R.mipmap.ic_top_signal1);
+                signal.setImageResource(R.mipmap.ic_ios_top_signal1);
                 break;
             case 20:
-                signal.setImageResource(R.mipmap.ic_top_signal2);
+                signal.setImageResource(R.mipmap.ic_ios_top_signal2);
                 break;
             case 30:
-                signal.setImageResource(R.mipmap.ic_top_signal3);
+                signal.setImageResource(R.mipmap.ic_ios_top_signal3);
                 break;
             case 40:
-                signal.setImageResource(R.mipmap.ic_top_signal4);
+                signal.setImageResource(R.mipmap.ic_ios_top_signal4);
                 break;
             case 50:
-                signal.setImageResource(R.mipmap.ic_top_signal5);
+                signal.setImageResource(R.mipmap.ic_ios_top_signal5);
                 break;
         }
 
@@ -160,7 +160,7 @@ public class PrimaryDarkView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.google_primary_dark, this);
+            inflate(getContext(), R.layout.ios_primary_dark, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();

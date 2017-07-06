@@ -6,6 +6,9 @@
 
 
     <dimen name="font_size">10sp</dimen>
+
+    <dimen name="ios_top_title_font_size">10sp</dimen>
+
     <dimen name="google_title_font_size">14sp</dimen>
     <dimen name="ios_title_font_size">16sp</dimen>
     <dimen name="ios_title_font_size_small">12sp</dimen>
@@ -52,9 +55,12 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
-       <dimen name="ios_top_content_height">14dp</dimen>
+    <dimen name="ios_top_content_height">14dp</dimen>
 
 
+
+    <dimen name="heightPrimarykIos">36dp</dimen>
+    <dimen name="heightPrimaryDarkIos">20dp</dimen>
     <dimen name="heightPrimaryDark">23dp</dimen>
 
     <dimen name="widthLeftTitle">120dp</dimen>

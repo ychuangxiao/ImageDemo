@@ -4,8 +4,11 @@ package demo.banditcat.com.imagedemo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 
 import butterknife.BindView;
 import demo.banditcat.com.imagedemo.base.BaseActivity;
@@ -30,11 +33,44 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
 
+
+        setToolTitle(getString(R.string.title_activity_main)).setToolTitleGravity(Gravity.CENTER);
+
+
+
+        setLeftMenu();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         navigation.setSelectedItemId(R.id.navigation_home);
 
     }
+
+
+    /**
+     * 设置抽屉菜单
+     */
+    void setLeftMenu() {
+
+        Float size = 10F;
+
+
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_home, size);
+
+
+
+        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_me, size);
+
+
+        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_nav_more, size);
+
+
+
+    }
+
+
 
     /**
      * 获得布局视图ID

@@ -16,10 +16,15 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import demo.banditcat.com.imagedemo.R;
 import demo.banditcat.com.imagedemo.base.BaseFragment;
+import demo.banditcat.com.imagedemo.constant.AppConstant;
 import demo.banditcat.com.imagedemo.listeners.MobileChangeListener;
 import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 import demo.banditcat.com.imagedemo.utils.ViewUtils;
+
+import static demo.banditcat.com.imagedemo.constant.AppConstant.MOBILE_ANDROID;
+import static demo.banditcat.com.imagedemo.constant.AppConstant.MOBILE_IOS;
+import static demo.banditcat.com.imagedemo.constant.AppConstant.TOOL_STYLE_CUSTOM;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +54,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     @BindView(R.id.tvNetwork)
     AppCompatTextView tvNetwork;
 
+    @BindView(R.id.tvTopStyle)
+    AppCompatTextView tvTopStyle;
 
     //菜单
 
@@ -57,6 +64,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     PopupMenu mSignalPopupMenu;//网络信号强度弹出框
 
     PopupMenu mMobileTypePopupMenu;//手机型号弹出框
+
+    PopupMenu mToolStylePopupMenu;//顶部工具栏样式
 
 
     TimePickerDialog mTimePickerDialog;
@@ -126,60 +135,63 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
 
 
-        switch (getAliPaymentModel().getMobileType())
+        switch (mAliPaymentModel.getTopToolStyle())
         {
-            case 10:
-                tvMobileType.setText("苹果");
-                break;
-            case 20:
-                tvMobileType.setText("谷歌");
+            case AppConstant.ACTION_10:
+                tvTopStyle.setText(AppConstant.TOOL_STYLE_CUSTOM);
                 break;
         }
 
-        switch (getAliPaymentModel().getNetworkSignal())
-        {
-            case 10:
-                tvSignal.setText("1格");
+
+        switch (mAliPaymentModel.getMobileType()) {
+            case AppConstant.ACTION_10:
+                tvMobileType.setText(MOBILE_IOS);
                 break;
-            case 20:
-                tvSignal.setText("2格");
-                break;
-            case 30:
-                tvSignal.setText("3格");
-                break;
-            case 40:
-                tvSignal.setText("4格");
-                break;
-            case 50:
-                tvSignal.setText("5格");
+            case AppConstant.ACTION_20:
+                tvMobileType.setText(MOBILE_ANDROID);
                 break;
         }
 
-        switch (getAliPaymentModel().getNetworkType())
-        {
-            case 10:
-                tvNetwork.setText("Wifi");
+        switch (mAliPaymentModel.getNetworkSignal()) {
+            case AppConstant.ACTION_10:
+                tvSignal.setText(AppConstant.NETWORK_SIGNAL_1);
                 break;
-            case 20:
-                tvNetwork.setText("G");
+            case AppConstant.ACTION_20:
+                tvSignal.setText(AppConstant.NETWORK_SIGNAL_2);
                 break;
-            case 30:
-                tvNetwork.setText("E");
+            case AppConstant.ACTION_30:
+                tvSignal.setText(AppConstant.NETWORK_SIGNAL_3);
                 break;
-            case 40:
-                tvNetwork.setText("3G");
+            case AppConstant.ACTION_40:
+                tvSignal.setText(AppConstant.NETWORK_SIGNAL_4);
                 break;
-            case 50:
-                tvNetwork.setText("4G");
+            case AppConstant.ACTION_50:
+                tvSignal.setText(AppConstant.NETWORK_SIGNAL_5);
+                break;
+        }
+
+        switch (mAliPaymentModel.getNetworkType()) {
+            case AppConstant.ACTION_10:
+                tvNetwork.setText(AppConstant.NETWORK_WIFI);
+                break;
+            case AppConstant.ACTION_20:
+                tvNetwork.setText(AppConstant.NETWORK_G);
+                break;
+            case AppConstant.ACTION_30:
+                tvNetwork.setText(AppConstant.NETWORK_E);
+                break;
+            case AppConstant.ACTION_40:
+                tvNetwork.setText(AppConstant.NETWORK_3G);
+                break;
+            case AppConstant.ACTION_50:
+                tvNetwork.setText(AppConstant.NETWORK_4G);
                 break;
         }
 
     }
 
 
-    public AliPaymentModel getAliPaymentModel() {
-        return mAliPaymentModel;
-    }
+
 
     /**
      * 获得布局视图ID
@@ -239,6 +251,39 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     }
 
 
+    @OnClick(R.id.tvTopStyle)
+    void onTopStyleClick() {
+        if (null == mToolStylePopupMenu) {
+            mToolStylePopupMenu = new PopupMenu(getActivity(), tvTopStyle);
+            mToolStylePopupMenu.getMenu().setGroupCheckable(0, true, true);
+
+            int menuIndex = 0;
+
+            mToolStylePopupMenu.getMenu().add(0, menuIndex, 0, TOOL_STYLE_CUSTOM).setTitleCondensed(String.valueOf(AppConstant.ACTION_10));
+
+
+            mToolStylePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+
+                    mAliPaymentModel.setTopToolStyle(Integer.parseInt(item.getTitleCondensed().toString()));
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+                    tvTopStyle.setText(item.getTitle());
+
+                    return false;
+                }
+            });
+
+
+        }
+        mToolStylePopupMenu.show();
+    }
 
 
     @OnClick(R.id.tvMobileType)
@@ -251,9 +296,9 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, "苹果").setTitleCondensed("10");
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_IOS).setTitleCondensed(String.valueOf(AppConstant.ACTION_10));
             menuIndex++;
-            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, "谷歌").setTitleCondensed("20");
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_ANDROID).setTitleCondensed(String.valueOf(AppConstant.ACTION_20));
 
 
             mMobileTypePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -290,15 +335,15 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "1格").setTitleCondensed("10");
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_1).setTitleCondensed(String.valueOf(AppConstant.ACTION_10));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "2格").setTitleCondensed("20");
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_2).setTitleCondensed(String.valueOf(AppConstant.ACTION_20));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "3格").setTitleCondensed("30");
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_3).setTitleCondensed(String.valueOf(AppConstant.ACTION_30));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "4格").setTitleCondensed("40");
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_4).setTitleCondensed(String.valueOf(AppConstant.ACTION_40));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, "5格").setTitleCondensed("50");
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_5).setTitleCondensed(String.valueOf(AppConstant.ACTION_50));
 
 
             mSignalPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -334,15 +379,15 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, "Wifi").setTitleCondensed("10");
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_WIFI).setTitleCondensed(String.valueOf(AppConstant.ACTION_10));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, "G").setTitleCondensed("20");
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_G).setTitleCondensed(String.valueOf(AppConstant.ACTION_20));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, "E").setTitleCondensed("30");
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_E).setTitleCondensed(String.valueOf(AppConstant.ACTION_30));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, "3G").setTitleCondensed("40");
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_3G).setTitleCondensed(String.valueOf(AppConstant.ACTION_40));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, "4G").setTitleCondensed("50");
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_4G).setTitleCondensed(String.valueOf(AppConstant.ACTION_50));
 
 
             mNetworkPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

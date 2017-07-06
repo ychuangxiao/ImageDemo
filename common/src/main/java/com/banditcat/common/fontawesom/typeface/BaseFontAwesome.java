@@ -123,6 +123,13 @@ public class BaseFontAwesome implements ITypeface {
     public enum Icon implements IIcon {
 
 
+        //nva-home
+        icon_nva_home('\ue600'),
+        icon_nav_more('\ue63b'),
+        icon_nva_me('\ue6b3'),
+        icon_mobile('\ue64e'),
+        icon_brow('\ue6a8'),
+        icon_content('\ue65d'),
         icon_weixin('\ue623'),
 
         icon_ali('\ue67c'),
@@ -146,7 +153,7 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_duihao('\ue61c'),
 
-        icon__jingyin('\ue659'),
+        icon_jingyin('\ue659'),
 
         icon_time('\ue674'),
 

@@ -37,7 +37,10 @@ import demo.banditcat.com.imagedemo.model.AliPaymentModel;
 import demo.banditcat.com.imagedemo.utils.SimpleUtils;
 import demo.banditcat.com.imagedemo.utils.TimeUtils;
 import demo.banditcat.com.imagedemo.utils.ViewUtils;
+import demo.banditcat.com.imagedemo.viewgroup.PrimaryDarkIosView;
 import demo.banditcat.com.imagedemo.viewgroup.PrimaryDarkView;
+import demo.banditcat.com.imagedemo.viewgroup.PrimaryTopTitleIosView;
+import demo.banditcat.com.imagedemo.viewgroup.PrimaryTopTitleView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +60,11 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
     @BindView(R.id.primaryDarkConstraintLayout)
     ConstraintLayout primaryDarkConstraintLayout;
+
+
+    @BindView(R.id.primaryConstraintLayout)
+    ConstraintLayout primaryConstraintLayout;
+
 
     @BindView(R.id.alipayConstraintLayout)
     ConstraintLayout alipayConstraintLayout;
@@ -140,6 +148,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     int handleIndex = 10;//10 toptime 20 hadnleTIme 30 lastTime 40 createTime
 
     PrimaryDarkView mPrimaryDarkView;//顶部标题栏
+    PrimaryDarkIosView mPrimaryDarkIosView;
 
     Context mContext;
 
@@ -197,19 +206,59 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
         mAliPaymentModel = model;
 
-        //添加view
-        mPrimaryDarkView = PrimaryDarkView.build(getActivity());
+        //判断手机类型
 
-        primaryDarkConstraintLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onTopDateTimeClick();
-            }
-        });
+        if (mAliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
+            //
 
-        primaryDarkConstraintLayout.removeAllViews();
+            //添加顶部标题栏
+            mPrimaryDarkView = PrimaryDarkView.build(getActivity());
 
-        primaryDarkConstraintLayout.addView(mPrimaryDarkView);
+            primaryDarkConstraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onTopDateTimeClick();
+                }
+            });
+
+            primaryDarkConstraintLayout.removeAllViews();
+
+            primaryDarkConstraintLayout.addView(mPrimaryDarkView);
+
+            //添加工具栏
+
+
+            PrimaryTopTitleView primaryTopTitleView = new PrimaryTopTitleView(getActivity());
+
+
+            primaryConstraintLayout.removeAllViews();
+
+
+            primaryConstraintLayout.addView(primaryTopTitleView);
+        } else {
+
+
+            mPrimaryDarkIosView = PrimaryDarkIosView.build(getActivity());
+            mPrimaryDarkIosView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onTopDateTimeClick();
+                }
+            });
+
+            primaryDarkConstraintLayout.removeAllViews();
+
+            primaryDarkConstraintLayout.addView(mPrimaryDarkIosView);
+
+
+            PrimaryTopTitleIosView primaryTopTitleIosView = PrimaryTopTitleIosView.build(getActivity());
+
+            primaryConstraintLayout.removeAllViews();
+
+
+            primaryConstraintLayout.addView(primaryTopTitleIosView);
+
+        }
 
 
         initViewInfo();
@@ -253,7 +302,14 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     private void setTimeInfo(long time) {
 
         mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, time));
-        mPrimaryDarkView.binder(mAliPaymentModel);
+
+
+        if (mAliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
+            mPrimaryDarkView.binder(mAliPaymentModel);
+        } else {
+            mPrimaryDarkIosView.binder(mAliPaymentModel);
+        }
+
 
         tvOrderNo2.setText(randomOrderNo(time));
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
@@ -386,7 +442,17 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
                     mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
                 }
 
-                mPrimaryDarkView.binder(mAliPaymentModel);
+
+                if (mAliPaymentModel.getMobileType()==AppConstant.ACTION_20)
+                {
+                    mPrimaryDarkView.binder(mAliPaymentModel);
+                }
+                else
+                {
+                    mPrimaryDarkIosView.binder(mAliPaymentModel);
+                }
+
+
                 break;
             case 20:
 
