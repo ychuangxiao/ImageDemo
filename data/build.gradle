@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+
+    compileSdkVersion globalConfiguration.configuration.compileSdkVersion
+    buildToolsVersion globalConfiguration.configuration.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion globalConfiguration.configuration.minSdkVersion
+        targetSdkVersion globalConfiguration.configuration.targetSdkVersion
+        versionCode globalConfiguration.configuration.versionCode
+        versionName globalConfiguration.configuration.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile appTestDependencies.junit
+    testCompile appTestDependencies.assertj
+    testCompile appTestDependencies.mockito
+    testCompile appTestDependencies.robolectric
+
+
+    compile appDependencies.dagger
+    compile appDependencies.retrofit
+    compile appDependencies.converterGson
+    compile appDependencies.adapterxjava2
+    compile appDependencies.okHttp
+    compile appDependencies.gson
+    compile appDependencies.rxJava2
+    compile appDependencies.rxAndroid2
+    compile appDependencies.okhttpLogInterceptor
+
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+}

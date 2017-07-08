@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+
 
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -10,10 +12,22 @@ android {
 
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
+    signingConfigs {
+        rf_release_config {
+            storeFile file(ILOGIE_RELEASE_STORE_FILE)
+            storePassword ILOGIE_RELEASE_STORE_PASSWORD
+            keyAlias ILOGIE_RELEASE_KEY_ALIAS
+            keyPassword ILOGIE_RELEASE_KEY_PASSWORD
+        }
+    }
+
     compileSdkVersion globalConfiguration.configuration.compileSdkVersion
     buildToolsVersion globalConfiguration.configuration.buildToolsVersion
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
     defaultConfig {
         resConfigs "zh"//保留中文
         applicationId globalConfiguration.configuration.applicationId
@@ -21,6 +35,7 @@ android {
         targetSdkVersion globalConfiguration.configuration.targetSdkVersion
         versionCode globalConfiguration.configuration.versionCode
         versionName globalConfiguration.configuration.versionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -28,7 +43,7 @@ android {
 
     buildTypes {
         release {
-
+            signingConfig signingConfigs.rf_release_config
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
@@ -40,14 +55,10 @@ android {
                         def outputFile = output.outputFile
                         if (outputFile != null && outputFile.name.endsWith('.apk')) {
 
-
-                            def fileName = "DiaoTuTu_${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
+                            def fileName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
                                     "(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
-
-
                             output.outputFile = new File(outputFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}", fileName)
                         }
-
                         if (variant.getBuildType().isMinifyEnabled()) {
                             variant.assemble.doLast {
                                 copy {
@@ -67,7 +78,7 @@ android {
 
         debug {
 
-
+            signingConfig signingConfigs.rf_release_config
             applicationVariants.all { variant ->
                 if (variant.buildType.name.equals('debug')) {
                     variant.outputs.each { output ->
@@ -75,7 +86,7 @@ android {
                         if (outputFile != null && outputFile.name.endsWith('.apk')) {
 
 
-                            def fileName = "DiaoTuTu_${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("debug", "")}(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
+                            def fileName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("debug", "")}(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
 
                             output.outputFile = new File(outputFile.parent, fileName)
                         }
@@ -86,8 +97,6 @@ android {
 
 
     }
-
-
     packagingOptions {
         exclude '.readme'
 
@@ -113,45 +122,82 @@ android {
         exclude "lib/x86_64/librealm-jni.so"
     }
 
-    /*splits {
+    splits {
         abi {
             enable true
             reset()
             include 'armeabi-v7a'
         }
-    }*/
+    }
 
 
     lintOptions {
         abortOnError false
     }
+
+    productFlavors {
+
+
+        tutu_it
+                {
+                    resValue "string", "app_name", "银鲨截图(测试)"
+                    manifestPlaceholders = [
+                            icon: "@mipmap/ic_launcher"
+                    ]
+                    applicationId globalConfiguration.configuration.applicationId + ".tutuit"
+
+                    buildConfigField 'String', 'API_BASE_URL', '"http://www.ilogie.com/index.asp/"'
+                    minSdkVersion globalConfiguration.configuration.minSdkVersion
+                }
+
+
+    }
 }
-
 dependencies {
-
     def appDependencies = rootProject.ext.appDependencies
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    def appTestDependencies = rootProject.ext.appTestDependencies
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    apt appDependencies.guava
+    apt appDependencies.daggerCompiler
+    apt fileTree(dir: 'compile-libs', include: ['*.jar'])
+    testCompile appTestDependencies.junit
+    compile(name: 'ilogie-android-library-release', ext: 'aar')
+    //ilogie library
+    compile appDependencies.appcompat
+    //
+    compile appDependencies.design
+    compile appDependencies.vectorDrawable
 
-    compile project(':common')
-
+    //
+    compile appDependencies.cardview
+    //
+    compile appDependencies.rxAndroid2
+    //
+    compile appDependencies.rxJava2
+    //
+    compile appDependencies.dagger
+    //
+    compile appDependencies.retrofit
+    //
+    compile appDependencies.converterGson
+    //
+    compile appDependencies.adapterxjava2
+    //
     compile appDependencies.butterKnife
     //视图注解
     compile appDependencies.annotationProcessor
     //butterKnife注解处理器
+
     compile appDependencies.materialdatetimepicker
 
-    compile appDependencies.design
-    //
-    compile appDependencies.cardview
+    compile project(':domain')
+    compile project(':common')
 
-    compile 'com.github.hotchemi:permissionsdispatcher:2.3.1'
+    // 大神写的这个库可以支持到rxjava2.X
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-vector-drawable:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
-    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
 }

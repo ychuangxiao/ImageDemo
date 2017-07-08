@@ -40,11 +40,15 @@
             </android.support.constraint.ConstraintLayout>
 
 
+
             <android.support.constraint.ConstraintLayout
+
                 app:layout_constraintTop_toBottomOf="@+id/primaryDarkConstraintLayout"
                 android:id="@+id/primaryConstraintLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+
 
             </android.support.constraint.ConstraintLayout>
 

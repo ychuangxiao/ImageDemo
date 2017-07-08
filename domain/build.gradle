@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+
+    compileSdkVersion globalConfiguration.configuration.compileSdkVersion
+    buildToolsVersion globalConfiguration.configuration.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion globalConfiguration.configuration.minSdkVersion
+        targetSdkVersion globalConfiguration.configuration.targetSdkVersion
+        versionCode globalConfiguration.configuration.versionCode
+        versionName globalConfiguration.configuration.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+}
+
+dependencies {
+    def appTestDependencies = rootProject.ext.appTestDependencies
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile appTestDependencies.junit
+    compile project(':data')
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    //
+    compile appDependencies.rxAndroid2
+    //
+    compile appDependencies.rxJava2
+}
