@@ -21,31 +21,15 @@ import com.banditcat.data.entitys.rep.base.BaseReqEntity;
 public class LogonEntity extends BaseReqEntity {
 
 
-    private String corp;//账套号
-    private String username;//登录名
-    private String password;//登录密码
-    private DeviceEntity deviceInfo;//设备信息
+    private String username;//用户名
+    private String password;//密码
 
-    public LogonEntity(String corp, String username, String password) {
-        this.corp = corp;
+    public LogonEntity() {
+    }
+
+    public LogonEntity(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public LogonEntity(String corp, String username, String password, DeviceEntity deviceInfo) {
-        this.corp = corp;
-        this.username = username;
-        this.password = password;
-        this.deviceInfo = deviceInfo;
-    }
-
-
-    public DeviceEntity getDeviceInfo() {
-        return deviceInfo;
-    }
-
-    public void setDeviceInfo(DeviceEntity deviceInfo) {
-        this.deviceInfo = deviceInfo;
     }
 
     public String getUsername() {
@@ -62,13 +46,5 @@ public class LogonEntity extends BaseReqEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCorp() {
-        return corp;
-    }
-
-    public void setCorp(String corp) {
-        this.corp = corp;
     }
 }

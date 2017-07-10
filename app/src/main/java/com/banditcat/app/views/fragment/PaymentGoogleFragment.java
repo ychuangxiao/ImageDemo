@@ -1,4 +1,4 @@
-package com.banditcat.app.views.activitys.ali;
+package com.banditcat.app.views.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.banditcat.app.R;
+import com.banditcat.app.constant.AppConstant;
+import com.banditcat.app.model.AliPaymentModel;
+import com.banditcat.app.utils.SimpleUtils;
+import com.banditcat.app.utils.TimeUtils;
+import com.banditcat.app.utils.ViewUtils;
+import com.banditcat.app.views.activitys.google.ChangeReceiptActivity;
+import com.banditcat.app.views.base.BaseFragment;
+import com.banditcat.app.views.listeners.MobileChangeListener;
+import com.banditcat.app.views.viewgroup.PrimaryDarkIosView;
+import com.banditcat.app.views.viewgroup.PrimaryDarkView;
+import com.banditcat.app.views.viewgroup.PrimaryTopTitleIosView;
+import com.banditcat.app.views.viewgroup.PrimaryTopTitleView;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -28,19 +41,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.OnTextChanged;
-import com.banditcat.app.R;
-import com.banditcat.app.views.activitys.google.ChangeReceiptActivity;
-import com.banditcat.app.views.base.BaseFragment;
-import com.banditcat.app.constant.AppConstant;
-import com.banditcat.app.views.listeners.MobileChangeListener;
-import com.banditcat.app.model.AliPaymentModel;
-import com.banditcat.app.utils.SimpleUtils;
-import com.banditcat.app.utils.TimeUtils;
-import com.banditcat.app.utils.ViewUtils;
-import com.banditcat.app.views.viewgroup.PrimaryDarkIosView;
-import com.banditcat.app.views.viewgroup.PrimaryDarkView;
-import com.banditcat.app.views.viewgroup.PrimaryTopTitleIosView;
-import com.banditcat.app.views.viewgroup.PrimaryTopTitleView;
 
 /**
  * A simple {@link Fragment} subclass.

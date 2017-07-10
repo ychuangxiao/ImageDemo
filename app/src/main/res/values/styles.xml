@@ -22,9 +22,20 @@
         <item name="android:textColor">@color/colorLeftTitle</item>
     </style>
 
+    <style name="Google.TextView.Left.800.400" parent="Google.TextView.Left">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+        <item name="android:textColor">@color/colorLeftTitle</item>
+    </style>
+
+
     <style name="Google.TextView.Right" parent="TextView">
         <item name="android:textSize">@dimen/google_font_size</item>
         <item name="android:textColor">@color/colorRightTitle</item>
+    </style>
+
+    <style name="Google.TextView.Right.800.400" parent="Google.TextView.Right">
+        <item name="android:textSize">@dimen/font_size_micro</item>
+
     </style>
 
     <style name="TextView">

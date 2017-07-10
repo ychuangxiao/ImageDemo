@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.banditcat.app.di.HasComponent;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -158,5 +161,24 @@ public abstract class BaseFragment extends Fragment {
         // 设置item动画
         mBaseRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return this.mBaseRecyclerView;
+    }
+
+
+    /**
+     * Shows a {@link android.widget.Toast} message.
+     *
+     * @param message An string representing a message to be shown.
+     */
+    protected void showToastMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * Gets a component for dependency injection by its type.
+     */
+    @SuppressWarnings("unchecked")
+    protected <C> C getComponent(Class<C> componentType) {
+        return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
     }
 }

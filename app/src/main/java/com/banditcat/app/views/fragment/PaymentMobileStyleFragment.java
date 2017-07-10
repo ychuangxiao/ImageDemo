@@ -1,4 +1,4 @@
-package com.banditcat.app.views.activitys.ali;
+package com.banditcat.app.views.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

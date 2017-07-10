@@ -8,18 +8,21 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.banditcat.app.R;
+import com.banditcat.app.constant.AppConstant;
+import com.banditcat.app.model.AliPaymentModel;
+import com.banditcat.app.model.BankModel;
+import com.banditcat.app.utils.TimeUtils;
+import com.banditcat.app.views.base.BaseActivity;
+import com.banditcat.app.views.fragment.PaymentGoogleFragment;
+import com.banditcat.app.views.fragment.PaymentMenuFragment;
+import com.banditcat.app.views.fragment.PaymentMobileStyleFragment;
+import com.banditcat.app.views.listeners.MobileChangeListener;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 
 import java.math.BigDecimal;
 
 import butterknife.BindView;
-import com.banditcat.app.R;
-import com.banditcat.app.views.base.BaseActivity;
-import com.banditcat.app.constant.AppConstant;
-import com.banditcat.app.views.listeners.MobileChangeListener;
-import com.banditcat.app.model.AliPaymentModel;
-import com.banditcat.app.model.BankModel;
-import com.banditcat.app.utils.TimeUtils;
 
 public class PaymentActivity extends BaseActivity implements MobileChangeListener<AliPaymentModel> {
 

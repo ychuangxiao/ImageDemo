@@ -21,7 +21,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.banditcat.app.AndroidApplication;
 import com.banditcat.app.R;
+import com.banditcat.app.di.components.ApplicationComponent;
+import com.banditcat.app.di.modules.ActivityModule;
 import com.banditcat.app.model.BankModel;
 import com.banditcat.common.fontawesom.IconicsDrawable;
 import com.banditcat.common.fontawesom.typeface.IIcon;
@@ -83,6 +86,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         mProgressDialog.setMessage(getString(R.string.alert_handle));
         setSupportActionBar(mToolbar);
         initView();
+
+        this.getApplicationComponent().context().addActivity(this);
+        this.getApplicationComponent().inject(this);
 
     }
 
@@ -370,4 +376,22 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         return bankModels;
     }
+
+
+    /**
+     * Get the Main Application component for dependency injection.
+     */
+    protected ApplicationComponent getApplicationComponent() {
+        return ((AndroidApplication) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Get an Activity module for dependency injection.
+     */
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
+    }
+
+
+
 }

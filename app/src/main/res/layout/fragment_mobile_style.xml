@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundForIos"
 
-    tools:context="demo.banditcat.com.imagedemo.activitys.ali.PaymentGoogleFragment">
+   >
 
 
     <android.support.v4.widget.NestedScrollView

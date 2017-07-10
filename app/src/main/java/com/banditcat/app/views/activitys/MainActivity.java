@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.banditcat.app.R;
 import com.banditcat.app.views.base.BaseActivity;
 import com.banditcat.app.views.fragment.MainFragment;
+import com.banditcat.app.views.fragment.MoreFragment;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 
 import butterknife.BindView;
@@ -20,6 +21,11 @@ public class MainActivity extends BaseActivity {
 
     MainFragment mMainFragment;
     String mainFragmentTag = "MainFragment";
+
+
+    MoreFragment mMoreFragment;
+    String moreFragmentTag = "MoreFragment";
+
     Fragment fragment;
     @BindView(R.id.content)
     FrameLayout content;
@@ -37,7 +43,6 @@ public class MainActivity extends BaseActivity {
 
 
         setToolTitle(getString(R.string.title_activity_main)).setToolTitleGravity(Gravity.CENTER);
-
 
 
         setLeftMenu();
@@ -60,7 +65,6 @@ public class MainActivity extends BaseActivity {
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_home, size);
 
 
-
         menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_me, size);
 
@@ -69,9 +73,7 @@ public class MainActivity extends BaseActivity {
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nav_more, size);
 
 
-
     }
-
 
 
     /**
@@ -84,13 +86,37 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+
+    void hideFragment() {
+
+        fragment = getSupportFragmentManager().findFragmentByTag(mainFragmentTag);
+
+        if (fragment != null) {
+            mMainFragment = (MainFragment) fragment;
+
+            hideFragment(mMainFragment);
+        }
+
+
+        fragment = getSupportFragmentManager().findFragmentByTag(moreFragmentTag);
+
+        if (fragment != null) {
+            mMoreFragment = (MoreFragment) fragment;
+
+            hideFragment(mMoreFragment);
+        }
+
+
+    }
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
             .OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
+            hideFragment();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
@@ -111,19 +137,22 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_dashboard:
 
 
-
-
-
-
-
-
                     return true;
                 case R.id.navigation_notifications:
 
 
+                    fragment = getSupportFragmentManager().findFragmentByTag(moreFragmentTag);
 
+                    if (fragment != null) {
+                        mMoreFragment = (MoreFragment) fragment;
+                        showFragment(mMoreFragment);
 
+                    } else {
 
+                        mMoreFragment = MoreFragment.newInstance();
+                        addFragment(R.id.content, mMoreFragment, moreFragmentTag);
+
+                    }
 
 
                     return true;

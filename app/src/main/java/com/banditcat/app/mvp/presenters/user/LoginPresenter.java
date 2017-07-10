@@ -108,7 +108,7 @@ public class LoginPresenter implements Presenter<LoginView> {
         deviceEntity.setImei(imei);
         deviceEntity.setModel(android.os.Build.MODEL);
         deviceEntity.setOsVer(android.os.Build.VERSION.RELEASE);
-        LogonEntity logonEntity = new LogonEntity(account, userName, password,deviceEntity);
+        LogonEntity logonEntity = new LogonEntity(userName, password);
         logonEntity.setUrl(mAndroidApplication.sharedpreferences.ApkAddress().get());
 
         mUserLoginUseCase.setLogonEntity(logonEntity);
@@ -118,11 +118,9 @@ public class LoginPresenter implements Presenter<LoginView> {
             @Override
             public void accept(LoginResEntity loginResEntity) throws Exception {
                 mAndroidApplication.sharedpreferences.Authorization().put(loginResEntity.getAuthCode());//设置授权码
-                mAndroidApplication.sharedpreferences.Station().put(loginResEntity.getWare());//设置棋点(调整)//发布的时候需要清空Token
-                mAndroidApplication.sharedpreferences.StationNick().put(loginResEntity.getWareText());//设置棋点昵称
 
                 mAndroidApplication.sharedpreferences.UserId().put(loginResEntity.getUserCode());//用户代码
-                mAndroidApplication.sharedpreferences.UserNick().put(loginResEntity.getUserNick());
+
                 mLoginView.hideLoading();
                 mLoginView.navigateToHome();
             }

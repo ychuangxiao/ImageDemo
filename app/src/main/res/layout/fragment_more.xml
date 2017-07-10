@@ -1,0 +1,155 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+android:background="@color/colorWhite"
+             tools:context="com.banditcat.app.views.fragment.MoreFragment">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/topLogoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingTop="@dimen/padding_medium"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCurrentVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:text="当前版本 V1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLogoImage"/>
+
+
+            <RelativeLayout
+                android:id="@+id/suggestRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:clickable="true"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftSuggest"
+                    style="@style/LeftTitle"
+
+                    android:text="意见反馈"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvSuggest"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftSuggest"
+
+                    android:hint="请您提供宝贵的意见"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/customerServicesRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:clickable="true"
+                android:padding="@dimen/padding_small"
+                app:layout_constraintTop_toBottomOf="@+id/suggestRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftQQ"
+                    style="@style/LeftTitle"
+
+                    android:text="客服1 QQ"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvQQ"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftQQ"
+                    android:hint="88888888"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/protocolRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/bg_item_selected_underline"
+                android:clickable="true"
+
+                android:padding="@dimen/padding_small"
+                app:layout_constraintTop_toBottomOf="@+id/customerServicesRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftProtocol"
+                    style="@style/LeftTitle"
+
+                    android:layout_width="match_parent"
+
+                    android:text="用户协议"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/cacheRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/bg_item_selected_underline"
+                android:clickable="true"
+
+                android:padding="@dimen/padding_small"
+                app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftCache"
+                    style="@style/LeftTitle"
+                    android:layout_width="match_parent"
+                    android:text="清除缓存"
+                    />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</FrameLayout>
