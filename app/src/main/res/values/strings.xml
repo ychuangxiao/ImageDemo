@@ -13,6 +13,9 @@
     <string name="alert_login">登录中...</string>
     <string name="alert_station_move_success">库存调整成功...</string>
     <string name="title_setting_confirm">您确认退出账号吗?</string>
+    <string name="title_setting_confirm_yes">是</string>
+    <string name="title_setting_confirm_no">否</string>
+
     <string name="title_setting_exit">退出账号</string>
     <string name="title_activity_demo">测试</string>
     <string name="title_activity_change_receipt">更改收款人信息</string>
@@ -24,6 +27,7 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_protocol_web_view">用户协议</string>
 
 
 </resources>

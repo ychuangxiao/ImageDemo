@@ -223,6 +223,8 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
             primaryDarkConstraintLayout.removeAllViews();
 
+
+
             primaryDarkConstraintLayout.addView(mPrimaryDarkView);
 
             //添加工具栏
@@ -247,7 +249,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
             });
 
             primaryDarkConstraintLayout.removeAllViews();
-
+            mPrimaryDarkIosView.binder(mAliPaymentModel);
             primaryDarkConstraintLayout.addView(mPrimaryDarkIosView);
 
 

@@ -1,5 +1,7 @@
 package com.banditcat.app.views.base;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.banditcat.app.AndroidApplication;
+import com.banditcat.app.R;
 import com.banditcat.app.di.HasComponent;
+import com.banditcat.app.di.components.ApplicationComponent;
+import com.ilogie.android.library.common.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +33,8 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
 
     protected abstract void DestroyView();
+
+    protected ProgressDialog mProgressDialog;
 
 
     Unbinder mUnbinder;
@@ -61,6 +69,10 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.alert_handle));
+
 
         initView();
     }
@@ -170,6 +182,11 @@ public abstract class BaseFragment extends Fragment {
      * @param message An string representing a message to be shown.
      */
     protected void showToastMessage(String message) {
+
+        if (StringUtils.isEmpty(message))
+        {
+            return;
+        }
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
@@ -181,4 +198,14 @@ public abstract class BaseFragment extends Fragment {
     protected <C> C getComponent(Class<C> componentType) {
         return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
     }
+
+
+    /**
+     * Get the Main Application component for dependency injection.
+     */
+    protected ApplicationComponent getApplicationComponent(Context context) {
+        return ((AndroidApplication) context).getApplicationComponent();
+    }
+
+
 }

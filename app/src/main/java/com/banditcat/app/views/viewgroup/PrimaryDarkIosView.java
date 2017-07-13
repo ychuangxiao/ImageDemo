@@ -4,15 +4,17 @@ package com.banditcat.app.views.viewgroup;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.banditcat.app.R;
+import com.banditcat.app.model.AliPaymentModel;
+import com.banditcat.app.utils.TimeUtils;
 
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.banditcat.app.R;
-import com.banditcat.app.model.AliPaymentModel;
-import com.banditcat.app.utils.TimeUtils;
 
 /**
  * 文件名称：{@link PrimaryDarkIosView}
@@ -45,6 +47,16 @@ public class PrimaryDarkIosView extends RelativeLayout {
     AppCompatImageView signal;
 
 
+    @BindView(R.id.tvLocation)
+    AppCompatImageView tvLocation;
+
+
+
+    @BindView(R.id.tvDir)
+    AppCompatImageView tvDir;
+
+    @BindView(R.id.tvBlueTeeth)
+    AppCompatImageView tvBlueTeeth;
 
 
     /**
@@ -107,25 +119,31 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
 
 
-        switch (aliPaymentModel.getNetworkType())
+
+        if (aliPaymentModel.getDir())
         {
-            case 10:
-                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
-                break;
-            case 20:
-                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
-                break;
-            case 30:
-                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
-                break;
-            case 40:
-                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
-                break;
-            case 50:
-                tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
-                break;
+            tvDir.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvDir.setVisibility(View.GONE);
         }
 
+        if (aliPaymentModel.getLocation())
+        {
+            tvLocation.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvLocation.setVisibility(View.GONE);
+        }
+
+
+        if (aliPaymentModel.getBlueTeeth())
+        {
+            tvBlueTeeth.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvBlueTeeth.setVisibility(View.GONE);
+        }
 
 
         switch (aliPaymentModel.getNetworkSignal())

@@ -1,10 +1,21 @@
 package com.banditcat.app.views.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatTextView;
 
+import com.banditcat.app.BuildConfig;
 import com.banditcat.app.R;
+import com.banditcat.app.constant.AppConstant;
+import com.banditcat.app.utils.ViewUtils;
 import com.banditcat.app.views.base.BaseFragment;
+import com.banditcat.app.views.webview.ProtocolWebViewActivity;
+import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
@@ -15,6 +26,38 @@ import com.banditcat.app.views.base.BaseFragment;
  * create an instance of this fragment.
  */
 public class MoreFragment extends BaseFragment {
+
+
+    @BindView(R.id.tvCurrentVersion)
+    AppCompatTextView tvCurrentVersion;
+
+
+    @BindView(R.id.tvSuggest)
+    AppCompatTextView tvSuggest;
+
+
+    @BindView(R.id.tvQQ)
+    AppCompatTextView tvQQ;
+
+    @BindView(R.id.tvQQ2)
+    AppCompatTextView tvQQ2;
+
+    @BindView(R.id.tvQQ3)
+    AppCompatTextView tvQQ3;
+
+    @BindView(R.id.tvProtocol)
+    AppCompatTextView tvProtocol;
+
+    @BindView(R.id.tvCache)
+    AppCompatTextView tvCache;
+
+    @BindView(R.id.tvYouHui)
+    AppCompatTextView tvYouHui;
+
+    @BindView(R.id.tvYouHui2)
+    AppCompatTextView tvYouHui2;
+
+
 
     public MoreFragment() {
         // Required empty public constructor
@@ -47,7 +90,29 @@ public class MoreFragment extends BaseFragment {
      */
     @Override
     public void initView() {
+        ViewUtils.setCompoundRightDrawables(getContext(), tvSuggest, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
+        ViewUtils.setCompoundRightDrawables(getContext(), tvQQ, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
 
+        ViewUtils.setCompoundRightDrawables(getContext(), tvQQ2, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tvQQ3, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
+        ViewUtils.setCompoundRightDrawables(getContext(), tvProtocol, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
+        ViewUtils.setCompoundRightDrawables(getContext(), tvCache, BaseFontAwesome.Icon.icon_right, getResources()
+                .getColor(R.color
+                        .colorRightTitle), 4f);
+
+
+        tvCurrentVersion.setText(String.format(tvCurrentVersion.getTag().toString(), BuildConfig.VERSION_NAME));
     }
 
     /**
@@ -61,5 +126,54 @@ public class MoreFragment extends BaseFragment {
     }
 
 
+    @OnClick(R.id.tvProtocol)
+    void onProtocolClick() {
+        Intent intent = new Intent(getActivity(), ProtocolWebViewActivity.class);
+        intent.putExtra(AppConstant.EXTRA_NO, "http://ssss.cxylm.net/service/");
+        navigateActivity(intent);
+    }
 
+    @OnClick(R.id.tvQQ)
+    void onQQClick() {
+
+        String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ.getText().toString()
+                .trim());
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
+    }
+
+    @OnClick(R.id.tvQQ2)
+    void onQQ2Click() {
+
+        String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ2.getText().toString()
+                .trim());
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
+    }
+
+    @OnClick(R.id.tvQQ3)
+    void onQQ3Click() {
+
+        String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ3.getText().toString()
+                .trim());
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
+    }
+
+    @OnClick(R.id.tvYouHui)
+    void onYouHui()
+    {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(tvYouHui.getTag().toString());
+        intent.setData(content_url);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tvYouHui2)
+    void onYouHui2()
+    {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(tvYouHui2.getTag().toString());
+        intent.setData(content_url);
+        startActivity(intent);
+    }
 }

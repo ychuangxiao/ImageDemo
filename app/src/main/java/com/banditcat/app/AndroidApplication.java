@@ -121,6 +121,18 @@ public class AndroidApplication extends Application {
             activities.clear();
 
         }
+
+
+    }
+
+    public void clearShared()
+    {
+        if (sharedpreferences == null)
+        {
+            return;
+        }
+
+        sharedpreferences.clear();
     }
 
     /**

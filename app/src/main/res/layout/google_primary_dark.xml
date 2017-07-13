@@ -16,7 +16,7 @@
         android:layout_marginRight="@dimen/margin_small"
         android:src="@mipmap/a_top_network_4g"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/batery"
+        app:layout_constraintRight_toLeftOf="@+id/tvBattery"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.v7.widget.AppCompatImageView
@@ -27,12 +27,12 @@
         android:layout_marginRight="@dimen/margin_tiny"
         android:src="@mipmap/ic_top_signal1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/batery"
+        app:layout_constraintRight_toLeftOf="@+id/tvBattery"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/batery"
+        android:id="@+id/tvBattery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_tiny"

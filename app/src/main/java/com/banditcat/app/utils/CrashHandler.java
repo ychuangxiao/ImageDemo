@@ -185,7 +185,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler, BaseHandle
      * Get a {@link Context}.
      */
     @Override
-    public Context getContext() {
-        return null;
+    public Context context() {
+        return mContext;
     }
+
+
 }

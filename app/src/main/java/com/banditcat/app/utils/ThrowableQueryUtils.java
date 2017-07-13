@@ -68,7 +68,7 @@ public class ThrowableQueryUtils implements Consumer<Throwable> {
                     bundle.putString(TextConstant.UPDATE_APP_ADDRESS_EXTRA, throwable.getMessage());
                     //intent.setClass(mBaseView.getContext(), DownApkActivity.class);
                     intent.putExtras(bundle);
-                    mBaseView.getContext().startActivity(intent);
+                    mBaseView.context().startActivity(intent);
                     break;
                 default:
                     mBaseView.noticeQueryError(baseErrorException.getMessage());

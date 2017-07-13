@@ -32,7 +32,16 @@ public class AliPaymentModel implements Serializable {
     private Long paymentTime;//付款成功时间
     private Long lastTime;//到账时间
 
-    private Boolean dateTimeStyle=false;//是否24小时
+    private Boolean dateTimeStyle = false;//是否24小时
+    private Boolean isLocation = false;//是否显示定位
+    private Boolean isBlueTeeth = false;//是否显示蓝牙
+    private Boolean isBatteryNum = false;//是否显示百分比
+    private Boolean isBatteryAdd = false;//是否充电中
+    private Boolean isDir = false;//是否旋转
+
+    private Integer batteryNumBar = 80;
+
+
     private Long createTime;//创建时间
 
     public String getReceiptUserName() {
@@ -161,5 +170,54 @@ public class AliPaymentModel implements Serializable {
 
     public void setTopToolStyle(Integer topToolStyle) {
         this.topToolStyle = topToolStyle;
+    }
+
+    public Boolean getLocation() {
+        return isLocation;
+    }
+
+    public void setLocation(Boolean location) {
+        isLocation = location;
+    }
+
+    public Boolean getBlueTeeth() {
+        return isBlueTeeth;
+    }
+
+    public void setBlueTeeth(Boolean blueTeeth) {
+        isBlueTeeth = blueTeeth;
+    }
+
+    public Boolean getBatteryNum() {
+        return isBatteryNum;
+    }
+
+    public void setBatteryNum(Boolean batteryNum) {
+        isBatteryNum = batteryNum;
+    }
+
+    public Boolean getBatteryAdd() {
+        return isBatteryAdd;
+    }
+
+    public void setBatteryAdd(Boolean batteryAdd) {
+        isBatteryAdd = batteryAdd;
+    }
+
+    public Boolean getDir() {
+        return isDir;
+    }
+
+    public void setDir(Boolean dir) {
+        isDir = dir;
+    }
+
+
+    public Integer getBatteryNumBar() {
+        return batteryNumBar;
+    }
+
+    public void setBatteryNumBar(Integer batteryNumBar) {
+        this.batteryNumBar = batteryNumBar;
     }
 }

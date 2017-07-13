@@ -9,7 +9,11 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.banditcat.app.R;
+import com.banditcat.app.di.HasComponent;
+import com.banditcat.app.di.components.BizComponent;
+import com.banditcat.app.di.components.DaggerBizComponent;
 import com.banditcat.app.views.base.BaseActivity;
+import com.banditcat.app.views.fragment.LoginFragment;
 import com.banditcat.app.views.fragment.MainFragment;
 import com.banditcat.app.views.fragment.MoreFragment;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
@@ -17,7 +21,7 @@ import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import butterknife.BindView;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements HasComponent<BizComponent> {
 
     MainFragment mMainFragment;
     String mainFragmentTag = "MainFragment";
@@ -25,6 +29,9 @@ public class MainActivity extends BaseActivity {
 
     MoreFragment mMoreFragment;
     String moreFragmentTag = "MoreFragment";
+
+    LoginFragment mLoginFragment;
+    String loginFragmentTag = "LoginFragment";
 
     Fragment fragment;
     @BindView(R.id.content)
@@ -40,7 +47,7 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     public void initView() {
-
+        this.initializeInjector();
 
         setToolTitle(getString(R.string.title_activity_main)).setToolTitleGravity(Gravity.CENTER);
 
@@ -107,59 +114,86 @@ public class MainActivity extends BaseActivity {
         }
 
 
+        fragment = getSupportFragmentManager().findFragmentByTag(loginFragmentTag);
+
+        if (fragment != null) {
+            mLoginFragment = (LoginFragment) fragment;
+            hideFragment(mLoginFragment);
+        }
+
+
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
-            .OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new
+            BottomNavigationView
+                    .OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            hideFragment();
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
+                    hideFragment();
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
 
-                    fragment = getSupportFragmentManager().findFragmentByTag(mainFragmentTag);
 
-                    if (fragment != null) {
-                        mMainFragment = (MainFragment) fragment;
-                        showFragment(mMainFragment);
+                            if (mMainFragment != null) {
 
-                    } else {
+                                showFragment(mMainFragment);
 
-                        mMainFragment = MainFragment.newInstance();
-                        addFragment(R.id.content, mMainFragment, mainFragmentTag);
+                            } else {
 
+                                mMainFragment = MainFragment.newInstance();
+                                addFragment(R.id.content, mMainFragment, mainFragmentTag);
+
+                            }
+
+                            return true;
+                        case R.id.navigation_dashboard:
+
+
+                            if (mLoginFragment != null) {
+
+                                showFragment(mLoginFragment);
+                            } else {
+                                mLoginFragment = LoginFragment.newInstance();
+                                addFragment(R.id.content, mLoginFragment, loginFragmentTag);
+                            }
+
+                            return true;
+                        case R.id.navigation_notifications:
+
+
+                            if (mMoreFragment != null) {
+
+                                showFragment(mMoreFragment);
+
+                            } else {
+
+                                mMoreFragment = MoreFragment.newInstance();
+                                addFragment(R.id.content, mMoreFragment, moreFragmentTag);
+
+                            }
+
+
+                            return true;
                     }
+                    return false;
+                }
 
-                    return true;
-                case R.id.navigation_dashboard:
+            };
 
+    @Override
+    public BizComponent getComponent() {
+        return mBizComponent;
+    }
 
-                    return true;
-                case R.id.navigation_notifications:
+    BizComponent mBizComponent;
 
-
-                    fragment = getSupportFragmentManager().findFragmentByTag(moreFragmentTag);
-
-                    if (fragment != null) {
-                        mMoreFragment = (MoreFragment) fragment;
-                        showFragment(mMoreFragment);
-
-                    } else {
-
-                        mMoreFragment = MoreFragment.newInstance();
-                        addFragment(R.id.content, mMoreFragment, moreFragmentTag);
-
-                    }
-
-
-                    return true;
-            }
-            return false;
-        }
-
-    };
-
+    private void initializeInjector() {
+        this.mBizComponent = DaggerBizComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
 }

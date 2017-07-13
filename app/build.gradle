@@ -146,7 +146,7 @@ android {
                     ]
                     applicationId globalConfiguration.configuration.applicationId + ".tutuit"
 
-                    buildConfigField 'String', 'API_BASE_URL', '"http://www.ilogie.com/index.asp/"'
+                    buildConfigField 'String', 'API_BASE_URL', '"http://122.114.97.223:8083/333333/api/"'
                     minSdkVersion globalConfiguration.configuration.minSdkVersion
                 }
 

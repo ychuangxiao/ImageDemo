@@ -119,41 +119,52 @@ public class BaseFontAwesome implements ITypeface {
     }
 
 
-
     public enum Icon implements IIcon {
 
 
-        //nva-home
-        icon_nva_home('\ue600'),
-        icon_nav_more('\ue63b'),
-        icon_nva_me('\ue6b3'),
-        icon_mobile('\ue64e'),
-        icon_brow('\ue6a8'),
-        icon_content('\ue65d'),
-        icon_weixin('\ue623'),
+        icon_delete('\ue605'),
+
+        icon_setting('\ue601'),
+
+        icon_save('\ue684'),
 
         icon_ali('\ue67c'),
+
+        icon_nva_home('\ue600'),
+
         icon_more('\ue61f'),
 
-        icon_iconset0252('\ue697'),
+        icon_batery_white('\ue697'),
 
-        icon_tubiaomangedianchi('\ue825'),
+        icon_batery_full('\ue825'),
 
-        icon_arrow_left('\ue603'),
+        icon_repeat('\ue68b'),
 
-        icon_line_vertical('\ue682'),
+        icon_checked('\ue65b'),
+
+        icon_mobile('\ue64e'),
+
+        icon_brow('\ue6a8'),
+
+        icon_content('\ue65d'),
+
+        icon_weixin('\ue623'),
+
+        icon_nav_more('\ue63b'),
 
         icon_xinhao('\ue614'),
 
-        icon_iosdianchi('\ue625'),
+        icon_user('\ue75c'),
+
+        icon_nva_me('\ue6b3'),
 
         icon_date('\ue616'),
+
+        icon_key('\ue688'),
 
         icon_gengduo('\ue6c4'),
 
         icon_duihao('\ue61c'),
-
-        icon_jingyin('\ue659'),
 
         icon_time('\ue674'),
 

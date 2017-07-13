@@ -19,7 +19,7 @@ public class BaseRespEntity<T> {
 
     private T data;//数据
     private boolean success = false;//成功状态
-    private String err;//api接口业务调用错误，返回错误枚举值，便于app业务处理
+    private String errorCode;//api接口业务调用错误，返回错误枚举值，便于app业务处理
 
     private String msg;//api接口业务调用失败，返回经过梳理的提示语
 
@@ -48,11 +48,11 @@ public class BaseRespEntity<T> {
     }
 
     public String getErr() {
-        return err;
+        return errorCode;
     }
 
     public void setErr(String err) {
-        this.err = err;
+        this.errorCode = err;
     }
 
     public String getMsg() {

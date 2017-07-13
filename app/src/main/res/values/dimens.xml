@@ -58,7 +58,6 @@
     <dimen name="ios_top_content_height">14dp</dimen>
 
 
-
     <dimen name="heightPrimarykIos">36dp</dimen>
     <dimen name="heightPrimaryDarkIos">20dp</dimen>
     <dimen name="heightPrimaryDark">23dp</dimen>
@@ -75,7 +74,6 @@
     <dimen name="font_size_XXXlarge">55.0sp</dimen>
 
     <dimen name="line_height">0.5dp</dimen>
-
 
 
 </resources>

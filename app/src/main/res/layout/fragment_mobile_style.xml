@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundForIos"
 
-   >
+    >
 
 
     <android.support.v4.widget.NestedScrollView
@@ -114,6 +114,33 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/carrierRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftCarrier"
+                    style="@style/LeftTitle"
+
+                    android:text="运营商"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvCarrier"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftCarrier"
+
+                    android:hint="选择运营商"
+                    />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,6 +195,7 @@
 
             </RelativeLayout>
 
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
@@ -187,12 +215,195 @@
 
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:layout_marginRight="@dimen/margin_small"
                     android:id="@+id/ckType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_small"
                     android:text="是"/>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/iosContainer"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/dirRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_selected_underline"
+                    android:padding="@dimen/padding_small">
+
+                    <android.support.v7.widget.AppCompatTextView
+
+
+                        style="@style/LeftTitle"
+
+
+                        android:text="显示锁定旋转"
+
+                        />
+
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/ckDir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:text="是"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/batteryRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_selected_underline"
+                    android:padding="@dimen/padding_small">
+
+                    <android.support.v7.widget.AppCompatTextView
+
+
+                        style="@style/LeftTitle"
+
+
+                        android:text="显示充电中"
+
+                        />
+
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/ckBattery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:text="是"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/batteryNumRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_selected_underline"
+                    android:padding="@dimen/padding_small">
+
+                    <android.support.v7.widget.AppCompatTextView
+
+
+                        style="@style/LeftTitle"
+
+
+                        android:text="显示电池百分比"
+
+                        />
+
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/ckBatteryNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:text="是"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/blueTeethRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_selected_underline"
+                    android:padding="@dimen/padding_small">
+
+                    <android.support.v7.widget.AppCompatTextView
+
+
+                        style="@style/LeftTitle"
+
+
+                        android:text="显示蓝牙图标"
+
+                        />
+
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/ckBlueTeeth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:text="是"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/locationRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_selected_underline"
+                    android:padding="@dimen/padding_small">
+
+                    <android.support.v7.widget.AppCompatTextView
+
+
+                        style="@style/LeftTitle"
+
+
+                        android:text="显示定位图标"
+
+                        />
+
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/ckLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:text="是"/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected_underline"
+                android:padding="@dimen/padding_small">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvLeftBattery"
+                    style="@style/LeftTitle"
+
+                    android:text="电量"
+android:tag="电量（%s）"
+                    />
+
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:id="@+id/seekBarBatteryNum"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftBattery"
+                    android:hint="选择手机时间"
+                    android:progress="80"
+
+                    android:max="100"
+                    />
 
 
             </RelativeLayout>

@@ -5,7 +5,7 @@ import com.banditcat.app.AndroidApplication;
 import com.banditcat.app.di.PerActivity;
 import com.banditcat.app.mvp.presenters.base.Presenter;
 import com.banditcat.app.mvp.views.BaseHandleView;
-import com.banditcat.app.utils.LoginUtils;
+import com.banditcat.app.utils.ThrowableUtils;
 import com.banditcat.data.entitys.base.BaseRespEntity;
 import com.banditcat.data.entitys.rep.LogoutReqEntity;
 import com.banditcat.domain.interactor.LogoutUseCase;
@@ -103,28 +103,14 @@ public class LogoutPresenter implements Presenter<BaseHandleView> {
         mDisposable = mLogoutUseCase.execute().subscribe(new Consumer<BaseRespEntity>() {
             @Override
             public void accept(BaseRespEntity baseResEntity) throws Exception {
+
+                mAndroidApplication.clearShared();
                 mBaseView.hideLoading();
                 mBaseView.noticeSuccess();
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                mBaseView.hideLoading();
 
-                if (!LoginUtils.isLogin(throwable)) {
-                    mBaseView.navigateLogin();
-                    return;
-                }
-
-                if (LoginUtils.isUpdateApk(throwable, mBaseView.getContext(), mAndroidApplication)) {
-
-                    return;
-                }
-
-                mBaseView.noticeSuccess();
 
             }
-        });
+        }, new ThrowableUtils(mBaseView, mAndroidApplication));
 
     }
 

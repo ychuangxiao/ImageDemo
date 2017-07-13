@@ -55,5 +55,5 @@ public interface BaseView {
     /**
      * Get a {@link Context}.
      */
-    Context getContext();
+    Context context();
 }

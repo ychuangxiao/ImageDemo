@@ -3,6 +3,7 @@ package com.banditcat.domain.utils;
 
 import android.text.TextUtils;
 
+import com.banditcat.data.constant.TextConstant;
 import com.banditcat.data.entitys.base.BaseRespEntity;
 import com.banditcat.data.rest.exceptions.BaseErrorException;
 
@@ -57,8 +58,12 @@ public class RetrofitUtils<T> implements Function<BaseRespEntity<T>, Observable<
                     subscriber.onError(new BaseErrorException(
                             "未获取到数据,请稍后重试!", ""));
                 }
+                else {
+                    subscriber.onError(new BaseErrorException(TextConstant.BASE_ERROR_MSG, ""));
+                }
 
-                subscriber.onComplete();
+
+                    subscriber.onComplete();
             }
         });
     }

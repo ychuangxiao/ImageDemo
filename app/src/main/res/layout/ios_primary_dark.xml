@@ -89,44 +89,36 @@ android:layout_marginLeft="@dimen/margin_tiny"
         android:src="@mipmap/ic_ios_top_location"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintRight_toLeftOf="@+id/tvAlarm"
+        app:layout_constraintRight_toLeftOf="@+id/tvBlueTeeth"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_marginRight="@dimen/margin_tiny"
-        android:id="@+id/tvAlarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_ios_top_alarm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvBlueth"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/tvBlueth"
+        android:id="@+id/tvBlueTeeth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_tiny"
         android:src="@mipmap/ic_ios_top_blueth"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/bateryNum"
+        app:layout_constraintRight_toLeftOf="@+id/batteryNum"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/bateryNum"
+        android:id="@+id/batteryNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="90%"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/ios_top_title_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/batery"
+        app:layout_constraintRight_toLeftOf="@+id/battery"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/batery"
+        android:id="@+id/battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

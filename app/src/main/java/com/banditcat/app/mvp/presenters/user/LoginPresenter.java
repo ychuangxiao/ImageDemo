@@ -55,11 +55,10 @@ public class LoginPresenter implements Presenter<LoginView> {
 
 
 
-    public void initLoginInfo(String userName, String password, String account, String imei) {
+    public void initLoginInfo(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.account = account;
-        this.imei = imei;
+
     }
 
     /**

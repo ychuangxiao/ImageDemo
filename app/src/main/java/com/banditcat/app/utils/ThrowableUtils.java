@@ -74,7 +74,7 @@ public class ThrowableUtils implements Consumer<Throwable> {
                     //intent.setClass(mBaseView.getContext(), DownApkActivity.class);
                     intent.putExtras(bundle);
 
-                    mBaseView.getContext().startActivity(intent);
+                    mBaseView.context().startActivity(intent);
                     break;
                 default:
                     mBaseView.showError(throwable.getMessage());

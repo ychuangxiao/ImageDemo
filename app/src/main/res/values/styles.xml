@@ -64,7 +64,6 @@
     </style>
 
 
-
     <style name="LeftTitle">
         <item name="android:layout_width">@dimen/widthLeftTitle</item>
         <item name="android:layout_height">wrap_content</item>
@@ -116,6 +115,7 @@
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
     </style>
+
     <style name="ImageView.Small" parent="ImageView">
 
         <item name="android:layout_width">60dp</item>
@@ -127,12 +127,12 @@
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
     </style>
+
     <style name="ImageView.MatchParent" parent="ImageView">
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
-
 
 
     <style name="TextView.White" parent="@style/TextView">
@@ -177,11 +177,9 @@
     </style>
 
 
-
     <style name="TextView.White.Small" parent="@style/TextView.White">
         <item name="android:textSize">@dimen/font_size_small</item>
     </style>
-
 
 
     <style name="TextView.White.XLarge" parent="@style/TextView.White">
@@ -250,8 +248,6 @@
     </style>
 
 
-
-
     <style name="TextView.Red" parent="@style/TextView">
         <item name="android:textColor">@color/red</item>
         <item name="android:gravity">left</item>
@@ -293,8 +289,6 @@
     <style name="TextView.Silver.Medium" parent="@style/TextView.Silver">
         <item name="android:textSize">@dimen/font_size_medium</item>
     </style>
-
-
 
 
     <style name="TextView.Blue.Small" parent="@style/TextView.Silver">

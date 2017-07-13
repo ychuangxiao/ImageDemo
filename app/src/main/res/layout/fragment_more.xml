@@ -3,19 +3,21 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-android:background="@color/colorWhite"
+
              tools:context="com.banditcat.app.views.fragment.MoreFragment">
 
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true">
+        android:background="@color/colorBackgroundForIos"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
-
             android:layout_height="match_parent"
+
+            android:clickable="true"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatImageView
@@ -35,6 +37,7 @@ android:background="@color/colorWhite"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/margin_medium"
+                android:tag="当前版本 V%s"
                 android:text="当前版本 V1.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -45,47 +48,51 @@ android:background="@color/colorWhite"
                 android:id="@+id/suggestRelativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_selected_underline"
+                android:background="@drawable/bg_item_selected"
                 android:clickable="true"
                 android:duplicateParentState="false"
-                android:padding="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
                 app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
 
                 <android.support.v7.widget.AppCompatTextView
-
                     android:id="@+id/tvLeftSuggest"
                     style="@style/LeftTitle"
+                    android:layout_alignParentStart="true"
 
-                    android:text="意见反馈"
+                    android:layout_alignParentTop="true"
 
-                    />
+                    android:clickable="false"
+                    android:text="意见反馈"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvSuggest"
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftSuggest"
-
+                    android:clickable="false"
                     android:hint="请您提供宝贵的意见"
                     />
 
 
             </RelativeLayout>
 
+            <include layout="@layout/content_line"></include>
 
             <RelativeLayout
                 android:id="@+id/customerServicesRelativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_selected_underline"
-                android:clickable="true"
-                android:padding="@dimen/padding_small"
+                android:background="@drawable/bg_item_selected"
+
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
                 app:layout_constraintTop_toBottomOf="@+id/suggestRelativeLayout">
 
                 <android.support.v7.widget.AppCompatTextView
-
                     android:id="@+id/tvLeftQQ"
                     style="@style/LeftTitle"
-
+                    android:clickable="false"
+                    android:onClick="false"
                     android:text="客服1 QQ"
 
                     />
@@ -94,59 +101,191 @@ android:background="@color/colorWhite"
                     android:id="@+id/tvQQ"
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftQQ"
-                    android:hint="88888888"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:text="123891464"
                     />
 
 
             </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
+
+            <RelativeLayout
+                android:id="@+id/customerServicesRelativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                app:layout_constraintTop_toBottomOf="@+id/suggestRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftQQ2"
+                    style="@style/LeftTitle"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:text="客服2 QQ"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvQQ2"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftQQ2"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:text="183067565"
+                    />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
+
+            <RelativeLayout
+                android:id="@+id/customerServicesRelativeLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                app:layout_constraintTop_toBottomOf="@+id/suggestRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftQQ3"
+                    style="@style/LeftTitle"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:text="客服3 QQ"
+
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvQQ3"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftQQ3"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:text="61242188"
+                    />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
 
 
             <RelativeLayout
                 android:id="@+id/protocolRelativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-                android:background="@drawable/bg_item_selected_underline"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/bg_item_selected"
                 android:clickable="true"
 
-                android:padding="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
                 app:layout_constraintTop_toBottomOf="@+id/customerServicesRelativeLayout">
 
                 <android.support.v7.widget.AppCompatTextView
 
-                    android:id="@+id/tvLeftProtocol"
+                    android:id="@+id/tvProtocol"
                     style="@style/LeftTitle"
-
                     android:layout_width="match_parent"
-
+                    android:clickable="false"
+                    android:onClick="false"
                     android:text="用户协议"
                     />
 
 
             </RelativeLayout>
 
+            <include layout="@layout/content_line"></include>
 
             <RelativeLayout
                 android:id="@+id/cacheRelativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-                android:background="@drawable/bg_item_selected_underline"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/bg_item_selected"
                 android:clickable="true"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
 
-                android:padding="@dimen/padding_small"
                 app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvLeftCache"
+                    android:id="@+id/tvCache"
                     style="@style/LeftTitle"
+
                     android:layout_width="match_parent"
+                    android:clickable="false"
+                    android:onClick="false"
                     android:text="清除缓存"
                     />
 
 
             </RelativeLayout>
 
+            <include layout="@layout/content_line"></include>
+
+
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+
+                android:paddingBottom="@dimen/padding_tiny"
+
+                app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvYouHui"
+                    style="@style/LeftTitle"
+                    android:layout_width="match_parent"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:tag="http://www.382tv.com/"
+                    android:text="专享优惠"
+                    />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
+
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+
+                android:paddingBottom="@dimen/padding_tiny"
+
+                app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvYouHui2"
+                    style="@style/LeftTitle"
+                    android:layout_width="match_parent"
+                    android:clickable="false"
+                    android:onClick="false"
+                    android:tag="http://vip.cxylm.net/"
+                    android:text="专享影视"
+                    />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

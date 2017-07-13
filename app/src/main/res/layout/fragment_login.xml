@@ -1,0 +1,199 @@
+<FrameLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.banditcat.app.views.fragment.LoginFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_large">
+
+
+        <ImageView
+            android:id="@+id/ivDemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@mipmap/ic_top_batery_76"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <com.banditcat.app.views.widget.BatteryView
+            android:id="@+id/verticalBattery"
+            android:layout_width="16dp"
+            android:layout_height="24dp"
+            android:background="@color/transparent"
+
+            android:gravity="center"
+            app:batteryColor="@android:color/black"
+            app:batteryOrientation="vertical"
+            app:batteryPower="90"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDemo"
+            />
+
+
+        <com.banditcat.app.views.widget.BatteryView
+            android:id="@+id/horizontalBattery"
+            android:layout_width="40dp"
+            android:layout_height="14dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/transparent"
+            android:gravity="center"
+            app:batteryColor="@android:color/black"
+            app:batteryOrientation="horizontal"
+            app:batteryPower="90"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verticalBattery"/>
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/topLogoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:contentDescription=""
+            android:src="@mipmap/ic_launcher"
+            android:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalBattery"/>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/accountConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_container_single"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topLogoImage">
+
+            <com.banditcat.app.views.widget.ClearEditText
+                android:id="@+id/etUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawablePadding="@dimen/padding_small"
+                android:hint="用户名"
+                android:inputType="text"
+                android:maxLength="15"
+                android:padding="@dimen/padding_medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/md_grey_500"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etUsername"></View>
+
+            <com.banditcat.app.views.widget.ClearEditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawablePadding="@dimen/padding_small"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:padding="@dimen/padding_medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line2"/>
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnHandle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_btn_selected"
+            android:text="登录"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
+
+
+        <LinearLayout
+            android:id="@+id/loginLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/topLogoImage">
+
+            <RelativeLayout
+                android:id="@+id/suggestRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:duplicateParentState="false"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftUserName"
+                    style="@style/LeftTitle"
+                    android:layout_alignParentStart="true"
+
+                    android:layout_alignParentTop="true"
+
+                    android:clickable="false"
+                    android:text="用户名"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvUserName"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftUserName"
+                    android:clickable="false"
+                    android:hint="请您提供宝贵的意见"
+                    />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_line"></include>
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/bg_btn_selected_red"
+                android:text="退出"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_size_medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
+
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+</FrameLayout>

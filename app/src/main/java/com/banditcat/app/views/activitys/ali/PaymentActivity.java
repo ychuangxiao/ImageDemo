@@ -46,7 +46,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
 
     AliPaymentModel aliPaymentModel;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new
+            BottomNavigationView
             .OnNavigationItemSelectedListener() {
 
         @Override
@@ -74,7 +75,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                 case R.id.navigation_dashboard:
 
 
-
                     fragment = getSupportFragmentManager().findFragmentByTag(paymentMenuTag);
 
                     if (fragment != null) {
@@ -92,8 +92,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                 case R.id.navigation_notifications:
 
 
-
-
                     fragment = getSupportFragmentManager().findFragmentByTag(paymentTag);
 
                     if (fragment != null) {
@@ -101,7 +99,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
                         showFragment(mPaymentGoogleFragment);
                         mPaymentGoogleFragment.loadViewData(aliPaymentModel);
-
 
 
                     } else {
@@ -180,6 +177,13 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         aliPaymentModel.setTopTime(aliPaymentModel.getCreateTime());
         aliPaymentModel.setLastTime(TimeUtils.addHour2(2, aliPaymentModel.getCreateTime()));
 
+        aliPaymentModel.setBatteryAdd(true);
+        aliPaymentModel.setBatteryNum(true);
+        aliPaymentModel.setBlueTeeth(true);
+        aliPaymentModel.setLocation(true);
+        aliPaymentModel.setBatteryAdd(true);
+        aliPaymentModel.setDir(true);
+        aliPaymentModel.setBatteryNumBar(40);
 
         navigation.setSelectedItemId(R.id.navigation_home);
 
@@ -211,9 +215,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 
-
     }
-    
+
 
     /**
      * 获得布局视图ID
