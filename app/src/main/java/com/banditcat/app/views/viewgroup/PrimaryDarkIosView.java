@@ -2,6 +2,8 @@ package com.banditcat.app.views.viewgroup;
 
 
 import android.content.Context;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.banditcat.app.R;
 import com.banditcat.app.model.AliPaymentModel;
 import com.banditcat.app.utils.TimeUtils;
+import com.banditcat.app.utils.ViewUtils;
 
 import java.util.Calendar;
 
@@ -33,7 +36,7 @@ import butterknife.ButterKnife;
  */
 public class PrimaryDarkIosView extends RelativeLayout {
 
-
+    private ClipDrawable clipDrawableTest;
     Context mContext;//上下文
     boolean alreadyInflated = false;
 
@@ -49,6 +52,9 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
     @BindView(R.id.tvLocation)
     AppCompatImageView tvLocation;
+
+    @BindView(R.id.battery)
+    AppCompatImageView battery;
 
 
 
@@ -165,9 +171,28 @@ public class PrimaryDarkIosView extends RelativeLayout {
                 break;
         }
 
+        LayerDrawable layerDrawableTest = (LayerDrawable) battery.getDrawable();
+        clipDrawableTest = (ClipDrawable) layerDrawableTest
+                .findDrawableByLayerId(R.id.clipDrawable);
+
+
+        clipDrawableTest.setLevel(calculateLevel(aliPaymentModel.getBatteryNumBar()));
     }
 
-
+    /**
+     * 根据自己的电池图标做响应的调整
+     *
+     * @param progress
+     *            0-100
+     * @return 0-10000
+     */
+    private int calculateLevel(int progress) {
+        int leftOffest = ViewUtils.dip2px(mContext, 2);
+        int powerLength = ViewUtils.dip2px(mContext, 26.5f);// 40 px in hdpi
+        int totalLength = ViewUtils.dip2px(mContext, 32.5f);// 49 px in hdpi
+        int level = (leftOffest + powerLength * progress / 100) * 10000 / totalLength;
+        return level;
+    }
     /**
      * The malreadyInflated hack is needed because of an Android bug
      * which leads to infinite calls of onFinishInflate()
