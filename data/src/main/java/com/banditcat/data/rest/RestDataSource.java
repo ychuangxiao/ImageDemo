@@ -11,6 +11,7 @@ import com.banditcat.data.entitys.base.BaseRespEntity;
 import com.banditcat.data.entitys.realm.UserRealm;
 import com.banditcat.data.entitys.rep.LogonEntity;
 import com.banditcat.data.entitys.rep.LogoutReqEntity;
+import com.banditcat.data.entitys.rep.RegReqEntity;
 import com.banditcat.data.entitys.rep.base.BaseCrashReqEntity;
 import com.banditcat.data.entitys.rep.base.BaseReqEntity;
 import com.banditcat.data.entitys.resp.LoginResEntity;
@@ -119,6 +120,17 @@ public class RestDataSource implements BaseRepository {
 
 
         return mRestApi.downFile(baseReqEntity.getAuthorization(), baseReqEntity.getUrl());
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param entity 请求实体
+     * @return
+     */
+    @Override
+    public Observable<BaseRespEntity> register(RegReqEntity entity) {
+        return mRestApi.register(TextConstant.API_KEY,entity);
     }
 
 

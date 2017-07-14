@@ -60,6 +60,8 @@ public class TextConstant {
 
 
 
+    public static final String ACTION_LOGOUT="ACTION_LOGOUT";
+    public static final String ACTION_REG="ACTION_REG";
 
 
 }

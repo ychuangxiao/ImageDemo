@@ -4,6 +4,7 @@ package com.banditcat.app.di.components;
 import com.banditcat.app.di.PerActivity;
 import com.banditcat.app.di.modules.ActivityModule;
 import com.banditcat.app.di.modules.BizModule;
+import com.banditcat.app.views.activitys.user.RegActivity;
 import com.banditcat.app.views.fragment.LoginFragment;
 
 import dagger.Component;
@@ -27,5 +28,7 @@ import dagger.Component;
 public interface BizComponent extends ActivityComponent {
 
     void inject(LoginFragment fragment);//用户登录
+
+    void inject(RegActivity regActivity);
 
 }

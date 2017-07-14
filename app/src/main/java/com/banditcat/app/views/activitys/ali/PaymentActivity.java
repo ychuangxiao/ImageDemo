@@ -15,6 +15,7 @@ import com.banditcat.app.model.BankModel;
 import com.banditcat.app.utils.TimeUtils;
 import com.banditcat.app.views.base.BaseActivity;
 import com.banditcat.app.views.fragment.PaymentGoogleFragment;
+import com.banditcat.app.views.fragment.PaymentIosFragment;
 import com.banditcat.app.views.fragment.PaymentMenuFragment;
 import com.banditcat.app.views.fragment.PaymentMobileStyleFragment;
 import com.banditcat.app.views.listeners.MobileChangeListener;
@@ -36,6 +37,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
     PaymentGoogleFragment mPaymentGoogleFragment;
     String paymentTag = "PaymentGoogleFragment";
+
+
+    PaymentIosFragment mPaymentIosFragment;
+
+    String paymentIosTag = "PaymentIosFragment";
+
     Fragment fragment;
 
     PaymentMenuFragment mPaymentMenuFragment;
@@ -48,72 +55,86 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     AliPaymentModel aliPaymentModel;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new
             BottomNavigationView
-            .OnNavigationItemSelectedListener() {
+                    .OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            hideFragment();
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
+                    hideFragment();
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
 
 
-                    fragment = getSupportFragmentManager().findFragmentByTag(mobileStyleTag);
+                            if (mPaymentMobileStyleFragment != null) {
 
-                    if (fragment != null) {
-                        mPaymentMobileStyleFragment = (PaymentMobileStyleFragment) fragment;
-                        showFragment(mPaymentMobileStyleFragment);
-                        mPaymentMobileStyleFragment.loadViewData(aliPaymentModel);
-                    } else {
+                                showFragment(mPaymentMobileStyleFragment);
+                                mPaymentMobileStyleFragment.loadViewData(aliPaymentModel);
+                            } else {
 
-                        mPaymentMobileStyleFragment = PaymentMobileStyleFragment.newInstance(aliPaymentModel);
-                        addFragment(R.id.content, mPaymentMobileStyleFragment, mobileStyleTag);
-                        mPaymentMobileStyleFragment.setMobileChangeListener(PaymentActivity.this);
+                                mPaymentMobileStyleFragment = PaymentMobileStyleFragment.newInstance(aliPaymentModel);
+                                addFragment(R.id.content, mPaymentMobileStyleFragment, mobileStyleTag);
+                                mPaymentMobileStyleFragment.setMobileChangeListener(PaymentActivity.this);
 
+                            }
+                            return true;
+                        case R.id.navigation_dashboard:
+
+
+                            if (mPaymentMenuFragment != null) {
+
+                                showFragment(mPaymentMenuFragment);
+                                mPaymentMenuFragment.loadViewData(aliPaymentModel);
+                            } else {
+
+                                mPaymentMenuFragment = PaymentMenuFragment.newInstance(aliPaymentModel);
+                                addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
+                                mPaymentMenuFragment.setMobileChangeListener(PaymentActivity.this);
+                            }
+
+                            return true;
+                        case R.id.navigation_notifications:
+
+
+                            switch (aliPaymentModel.getMobileType()) {
+                                case AppConstant.ACTION_10:
+
+                                    if (mPaymentIosFragment != null) {
+
+                                        showFragment(mPaymentIosFragment);
+                                        mPaymentIosFragment.loadViewData(aliPaymentModel);
+                                    } else {
+                                        mPaymentIosFragment = PaymentIosFragment.newInstance(aliPaymentModel);
+                                        addFragment(R.id.content, mPaymentIosFragment, paymentIosTag);
+                                        mPaymentIosFragment.setMobileChangeListener(PaymentActivity.this);
+                                    }
+
+                                    break;
+                                case AppConstant.ACTION_20:
+
+                                    if (mPaymentGoogleFragment != null) {
+
+                                        showFragment(mPaymentGoogleFragment);
+                                        mPaymentGoogleFragment.loadViewData(aliPaymentModel);
+
+
+                                    } else {
+
+                                        mPaymentGoogleFragment = PaymentGoogleFragment.newInstance(aliPaymentModel);
+                                        addFragment(R.id.content, mPaymentGoogleFragment, paymentTag);
+                                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
+                                    }
+
+
+                                    break;
+                            }
+
+
+                            return true;
                     }
-                    return true;
-                case R.id.navigation_dashboard:
+                    return false;
+                }
 
-
-                    fragment = getSupportFragmentManager().findFragmentByTag(paymentMenuTag);
-
-                    if (fragment != null) {
-                        mPaymentMenuFragment = (PaymentMenuFragment) fragment;
-                        showFragment(mPaymentMenuFragment);
-                        mPaymentMenuFragment.loadViewData(aliPaymentModel);
-                    } else {
-
-                        mPaymentMenuFragment = PaymentMenuFragment.newInstance(aliPaymentModel);
-                        addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
-                        mPaymentMenuFragment.setMobileChangeListener(PaymentActivity.this);
-                    }
-
-                    return true;
-                case R.id.navigation_notifications:
-
-
-                    fragment = getSupportFragmentManager().findFragmentByTag(paymentTag);
-
-                    if (fragment != null) {
-                        mPaymentGoogleFragment = (PaymentGoogleFragment) fragment;
-
-                        showFragment(mPaymentGoogleFragment);
-                        mPaymentGoogleFragment.loadViewData(aliPaymentModel);
-
-
-                    } else {
-
-                        mPaymentGoogleFragment = PaymentGoogleFragment.newInstance(aliPaymentModel);
-                        addFragment(R.id.content, mPaymentGoogleFragment, paymentTag);
-                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
-                    }
-
-                    return true;
-            }
-            return false;
-        }
-
-    };
+            };
 
 
     void hideFragment() {
@@ -124,6 +145,15 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
             mPaymentMobileStyleFragment = (PaymentMobileStyleFragment) fragment;
 
             hideFragment(mPaymentMobileStyleFragment);
+        }
+
+
+        fragment = getSupportFragmentManager().findFragmentByTag(paymentIosTag);
+
+        if (fragment != null) {
+            mPaymentIosFragment = (PaymentIosFragment) fragment;
+
+            hideFragment(mPaymentIosFragment);
         }
 
 
@@ -162,6 +192,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
         aliPaymentModel.setBankModel(bankModel);
 
+        aliPaymentModel.setTopToolStyle(AppConstant.ACTION_10);
         aliPaymentModel.setTopToolStyle(AppConstant.ACTION_10);
         aliPaymentModel.setMobileType(AppConstant.ACTION_20);
         aliPaymentModel.setNetworkSignal(AppConstant.ACTION_10);
@@ -246,7 +277,22 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         if (id == R.id.action_settings) {
 
 
-            mPaymentGoogleFragment.createImage();
+            switch (aliPaymentModel.getMobileType()) {
+                case AppConstant.ACTION_10:
+
+                    if (mPaymentIosFragment == null) {
+                        alertMsg("请切换到预览效果");
+                        return true;
+                    }
+                    mPaymentIosFragment.createImage();
+                    break;
+                case AppConstant.ACTION_20:
+                    if (mPaymentGoogleFragment == null) {
+                        alertMsg("请切换到预览效果");
+                        return true;
+                    }
+                    mPaymentGoogleFragment.createImage();
+            }
 
             return true;
         }

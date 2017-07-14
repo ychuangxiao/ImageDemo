@@ -8,6 +8,7 @@
     <string name="name_database">banditcat_tutu.realm</string>
 
     <!--操作提示-->
+    <string name="alert_handle_reg_success">用户注册成功！请登录！</string>
     <string name="alert_handle">数据处理中,请耐心等待...</string>
     <string name="alert_loading">数据加载中,请耐心等待...</string>
     <string name="alert_login">登录中...</string>
@@ -28,6 +29,11 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_protocol_web_view">用户协议</string>
+    <string name="title_activity_reg">用户注册</string>
+    <string name="title_btn_reg">注册</string>
+    <string name="hint_user_name">输入用户名</string>
+    <string name="hint_pwd">输入密码</string>
+    <string name="hint_qq">输入QQ号码</string>
 
 
 </resources>

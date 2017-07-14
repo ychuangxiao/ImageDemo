@@ -4,6 +4,7 @@ package com.banditcat.data.rest;
 import com.banditcat.data.constant.TextConstant;
 import com.banditcat.data.entitys.base.BaseRespEntity;
 import com.banditcat.data.entitys.rep.LogonEntity;
+import com.banditcat.data.entitys.rep.RegReqEntity;
 import com.banditcat.data.entitys.rep.base.BaseCrashReqEntity;
 import com.banditcat.data.entitys.resp.LoginResEntity;
 
@@ -41,7 +42,8 @@ public interface RestApi {
      * @return
      */
     @POST("er/upload")
-    Observable<BaseRespEntity> saveCrashLog(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body BaseCrashReqEntity crashReqEntity);
+    Observable<BaseRespEntity> saveCrashLog(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body
+            BaseCrashReqEntity crashReqEntity);
 
 
     /**
@@ -51,7 +53,8 @@ public interface RestApi {
      * @return
      */
     @POST("sec/login/")
-    Observable<BaseRespEntity<LoginResEntity>> login(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body LogonEntity logonEntity);
+    Observable<BaseRespEntity<LoginResEntity>> login(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body
+            LogonEntity logonEntity);
 
 
     /**
@@ -62,7 +65,6 @@ public interface RestApi {
     @GET("sec/logout")
     Observable<BaseRespEntity> logout(@Header(TextConstant.AUTHOR_NAME) String authorization);
 
- 
 
     /**
      * 检查更新
@@ -77,6 +79,18 @@ public interface RestApi {
     @Streaming
     @GET
     Observable<ResponseBody> downFile(@Header(TextConstant.AUTHOR_NAME) String authorization, @Url String fileUrl);
- 
+
+
+    /**
+     * 用户注册
+     *
+     * @param authorization 认证信息
+     * @param entity        请求实体
+     * @return
+     */
+    @POST("app/adduser")
+    Observable<BaseRespEntity> register(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body RegReqEntity
+            entity);
+
 
 }

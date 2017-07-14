@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.banditcat.app.R;
+import com.banditcat.app.constant.AppConstant;
 import com.banditcat.app.model.AliPaymentModel;
 import com.banditcat.app.utils.TimeUtils;
 import com.banditcat.app.utils.ViewUtils;
@@ -49,13 +50,19 @@ public class PrimaryDarkIosView extends RelativeLayout {
     @BindView(R.id.signal)
     AppCompatImageView signal;
 
+    @BindView(R.id.batteryNum)
+    AppCompatTextView batteryNum;
+
 
     @BindView(R.id.tvLocation)
     AppCompatImageView tvLocation;
 
+    @BindView(R.id.dischargeImageView)
+    AppCompatImageView dischargeImageView;
+
+
     @BindView(R.id.battery)
     AppCompatImageView battery;
-
 
 
     @BindView(R.id.tvDir)
@@ -83,93 +90,153 @@ public class PrimaryDarkIosView extends RelativeLayout {
     }
 
     String ampmText;
+
     public void binder(AliPaymentModel aliPaymentModel) {
 
 
         if (!aliPaymentModel.getDateTimeStyle()) {
             Calendar mCalendar = Calendar.getInstance();
-            mCalendar.setTimeInMillis(TimeUtils.millis2millis(aliPaymentModel.getTopTime(),TimeUtils.DEFAULT_PATTERN));
+            mCalendar.setTimeInMillis(TimeUtils.millis2millis(aliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN));
             int apm = mCalendar.get(Calendar.AM_PM);
 
 
             int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
 
-            if (hour<1)
-            {
+            if (hour < 1) {
                 ampmText = "午夜 ";
-            }
-            else  if (hour<12)
-            {
+            } else if (hour < 12) {
                 ampmText = "上午 ";
-            }
-            else  if (hour<13)
-            {
+            } else if (hour < 13) {
                 ampmText = "中午 ";
-            }
-            else
-            {
+            } else {
                 ampmText = "下午 ";
             }
 
 
             if (apm == 1) {
-                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4_1));
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
 
             } else {
-                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4_1));
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
             }
         } else {
             topDateTime.setText(TimeUtils.millis2String(aliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
         }
 
 
-
-
-
-        if (aliPaymentModel.getDir())
-        {
+        if (aliPaymentModel.getDir()) {
             tvDir.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             tvDir.setVisibility(View.GONE);
         }
 
-        if (aliPaymentModel.getLocation())
-        {
+        if (aliPaymentModel.getLocation()) {
             tvLocation.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             tvLocation.setVisibility(View.GONE);
         }
 
 
-        if (aliPaymentModel.getBlueTeeth())
-        {
+        if (aliPaymentModel.getBlueTeeth()) {
             tvBlueTeeth.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             tvBlueTeeth.setVisibility(View.GONE);
         }
-
-
-        switch (aliPaymentModel.getNetworkSignal())
-        {
-            case 10:
-                signal.setImageResource(R.mipmap.ic_ios_top_signal1);
-                break;
-            case 20:
-                signal.setImageResource(R.mipmap.ic_ios_top_signal2);
-                break;
-            case 30:
-                signal.setImageResource(R.mipmap.ic_ios_top_signal3);
-                break;
-            case 40:
-                signal.setImageResource(R.mipmap.ic_ios_top_signal4);
-                break;
-            case 50:
-                signal.setImageResource(R.mipmap.ic_ios_top_signal5);
-                break;
+        if (aliPaymentModel.getBatteryNum()) {
+            batteryNum.setText(String.valueOf(aliPaymentModel.getBatteryNumBar()) + "%");
+            batteryNum.setVisibility(View.VISIBLE);
+        } else {
+            batteryNum.setVisibility(View.GONE);
         }
+
+
+        //判断是白色 还是 黑色
+
+        if (aliPaymentModel.getMobileType().compareTo(AppConstant.ACTION_10) == 0) {
+            //是否充电
+            if (aliPaymentModel.getBatteryAdd()) {
+                battery.setImageResource(R.drawable.battery_green_black);
+                dischargeImageView.setVisibility(View.VISIBLE);
+            } else {
+                dischargeImageView.setVisibility(View.GONE);
+
+                //小于20 显示红色
+                if (aliPaymentModel.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_black);
+                } else {
+                    battery.setImageResource(R.drawable.battery_black);
+                }
+
+            }
+
+
+            switch (aliPaymentModel.getNetworkSignal()) {
+                case 10:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal1);
+                    break;
+                case 20:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal2);
+                    break;
+                case 30:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal3);
+                    break;
+                case 40:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal4);
+                    break;
+                case 50:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal5);
+                    break;
+            }
+
+            tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
+            tvLocation.setImageResource(R.mipmap.ic_ios_top_location);
+            tvDir.setImageResource(R.mipmap.ic_ios_top_dir);
+            tvBlueTeeth.setImageResource(R.mipmap.ic_ios_top_blueth);
+        } else {
+            //是否充电
+            if (aliPaymentModel.getBatteryAdd()) {
+                battery.setImageResource(R.drawable.battery_green_white);
+                dischargeImageView.setVisibility(View.VISIBLE);
+            } else {
+                dischargeImageView.setVisibility(View.GONE);
+
+                //小于20 显示红色
+                if (aliPaymentModel.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_white);
+                } else {
+                    battery.setImageResource(R.drawable.battery_white);
+                }
+
+            }
+
+            switch (aliPaymentModel.getNetworkSignal()) {
+                case 10:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal1);
+                    break;
+                case 20:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal2);
+                    break;
+                case 30:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal3);
+                    break;
+                case 40:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal4);
+                    break;
+                case 50:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal5);
+                    break;
+            }
+
+            tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_wifi);
+            tvLocation.setImageResource(R.mipmap.ic_ios_white_top_location);
+            tvDir.setImageResource(R.mipmap.ic_ios_white_top_dir);
+            tvBlueTeeth.setImageResource(R.mipmap.ic_ios_white_top_blueth);
+        }
+
 
         LayerDrawable layerDrawableTest = (LayerDrawable) battery.getDrawable();
         clipDrawableTest = (ClipDrawable) layerDrawableTest
@@ -177,13 +244,14 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
 
         clipDrawableTest.setLevel(calculateLevel(aliPaymentModel.getBatteryNumBar()));
+
+
     }
 
     /**
      * 根据自己的电池图标做响应的调整
      *
-     * @param progress
-     *            0-100
+     * @param progress 0-100
      * @return 0-10000
      */
     private int calculateLevel(int progress) {
@@ -193,6 +261,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
         int level = (leftOffest + powerLength * progress / 100) * 10000 / totalLength;
         return level;
     }
+
     /**
      * The malreadyInflated hack is needed because of an Android bug
      * which leads to infinite calls of onFinishInflate()

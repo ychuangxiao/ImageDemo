@@ -17,47 +17,6 @@
         android:padding="@dimen/padding_large">
 
 
-        <ImageView
-            android:id="@+id/ivDemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:src="@mipmap/ic_top_batery_76"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <com.banditcat.app.views.widget.BatteryView
-            android:id="@+id/verticalBattery"
-            android:layout_width="16dp"
-            android:layout_height="24dp"
-            android:background="@color/transparent"
-
-            android:gravity="center"
-            app:batteryColor="@android:color/black"
-            app:batteryOrientation="vertical"
-            app:batteryPower="90"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivDemo"
-            />
-
-
-        <com.banditcat.app.views.widget.BatteryView
-            android:id="@+id/horizontalBattery"
-            android:layout_width="40dp"
-            android:layout_height="14dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/transparent"
-            android:gravity="center"
-            app:batteryColor="@android:color/black"
-            app:batteryOrientation="horizontal"
-            app:batteryPower="90"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/verticalBattery"/>
-
-
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/topLogoImage"
             android:layout_width="wrap_content"
@@ -68,7 +27,7 @@
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalBattery"/>
+            />
 
 
         <android.support.constraint.ConstraintLayout
@@ -120,6 +79,15 @@
         </android.support.constraint.ConstraintLayout>
 
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="注册用户"
+            android:textColor="@color/md_blue_300"
+            app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnHandle"
             android:layout_width="0dp"
@@ -131,7 +99,7 @@
             android:textSize="@dimen/font_size_medium"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvReg"/>
 
 
         <LinearLayout

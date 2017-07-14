@@ -132,10 +132,10 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvCarrier"
                     style="@style/RightTitle"
-                    android:layout_toRightOf="@+id/tvLeftCarrier"
 
                     android:hint="选择运营商"
-                    />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"/>
 
 
             </RelativeLayout>

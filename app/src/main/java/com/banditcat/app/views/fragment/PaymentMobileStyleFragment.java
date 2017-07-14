@@ -89,6 +89,9 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     @BindView(R.id.tvLeftBattery)
     AppCompatTextView tvLeftBattery;
 
+    @BindView(R.id.tvCarrier)
+    AppCompatTextView tvCarrier;//运营商
+
 
     //菜单
 
@@ -99,6 +102,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     PopupMenu mMobileTypePopupMenu;//手机型号弹出框
 
     PopupMenu mToolStylePopupMenu;//顶部工具栏样式
+
+    PopupMenu mCarrierPopupMenu;//运营商样式弹出框
 
 
     TimePickerDialog mTimePickerDialog;

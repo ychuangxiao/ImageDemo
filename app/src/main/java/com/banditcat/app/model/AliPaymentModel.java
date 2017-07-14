@@ -1,5 +1,7 @@
 package com.banditcat.app.model;
 
+import com.banditcat.app.model.base.BaseMobileModel;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -7,42 +9,21 @@ import java.math.BigDecimal;
  * Created by banditcat-pc on 2017/7/2.
  */
 
-public class AliPaymentModel implements Serializable {
-
-
-    private Integer topToolStyle;//工具栏样式
-    private Integer mobileType;//手机类型
-    private Integer networkType;//网络类型
-    private Integer networkSignal;//信号强度
+public class AliPaymentModel extends BaseMobileModel implements Serializable {
 
     private String receiptUserName;
     private String bankNo;
-
     private BigDecimal receiptMoney;
-
     private BankModel mBankModel;
-
     private Boolean finish;
-
     private String mRemark;//转账说明
-
     private String paymentType;//付款方式
 
-    private Long topTime;//顶部时间
+
     private Long paymentTime;//付款成功时间
     private Long lastTime;//到账时间
-
-    private Boolean dateTimeStyle = false;//是否24小时
-    private Boolean isLocation = false;//是否显示定位
-    private Boolean isBlueTeeth = false;//是否显示蓝牙
-    private Boolean isBatteryNum = false;//是否显示百分比
-    private Boolean isBatteryAdd = false;//是否充电中
-    private Boolean isDir = false;//是否旋转
-
-    private Integer batteryNumBar = 80;
-
-
     private Long createTime;//创建时间
+
 
     public String getReceiptUserName() {
         return receiptUserName;
@@ -60,6 +41,14 @@ public class AliPaymentModel implements Serializable {
         this.bankNo = bankNo;
     }
 
+    public BigDecimal getReceiptMoney() {
+        return receiptMoney;
+    }
+
+    public void setReceiptMoney(BigDecimal receiptMoney) {
+        this.receiptMoney = receiptMoney;
+    }
+
     public BankModel getBankModel() {
         return mBankModel;
     }
@@ -68,12 +57,28 @@ public class AliPaymentModel implements Serializable {
         mBankModel = bankModel;
     }
 
-    public Long getTopTime() {
-        return topTime;
+    public Boolean getFinish() {
+        return finish;
     }
 
-    public void setTopTime(Long topTime) {
-        this.topTime = topTime;
+    public void setFinish(Boolean finish) {
+        this.finish = finish;
+    }
+
+    public String getRemark() {
+        return mRemark;
+    }
+
+    public void setRemark(String remark) {
+        mRemark = remark;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 
     public Long getPaymentTime() {
@@ -98,126 +103,5 @@ public class AliPaymentModel implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
-    }
-
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public BigDecimal getReceiptMoney() {
-        return receiptMoney;
-    }
-
-    public void setReceiptMoney(BigDecimal receiptMoney) {
-        this.receiptMoney = receiptMoney;
-    }
-
-    public String getRemark() {
-        return mRemark;
-    }
-
-    public void setRemark(String remark) {
-        mRemark = remark;
-    }
-
-    public Boolean getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Boolean finish) {
-        this.finish = finish;
-    }
-
-    public Boolean getDateTimeStyle() {
-        return dateTimeStyle;
-    }
-
-    public void setDateTimeStyle(Boolean dateTimeStyle) {
-        this.dateTimeStyle = dateTimeStyle;
-    }
-
-    public Integer getNetworkType() {
-        return networkType;
-    }
-
-    public void setNetworkType(Integer networkType) {
-        this.networkType = networkType;
-    }
-
-    public Integer getNetworkSignal() {
-        return networkSignal;
-    }
-
-    public void setNetworkSignal(Integer networkSignal) {
-        this.networkSignal = networkSignal;
-    }
-
-    public Integer getMobileType() {
-        return mobileType;
-    }
-
-    public void setMobileType(Integer mobileType) {
-        this.mobileType = mobileType;
-    }
-
-    public Integer getTopToolStyle() {
-        return topToolStyle;
-    }
-
-    public void setTopToolStyle(Integer topToolStyle) {
-        this.topToolStyle = topToolStyle;
-    }
-
-    public Boolean getLocation() {
-        return isLocation;
-    }
-
-    public void setLocation(Boolean location) {
-        isLocation = location;
-    }
-
-    public Boolean getBlueTeeth() {
-        return isBlueTeeth;
-    }
-
-    public void setBlueTeeth(Boolean blueTeeth) {
-        isBlueTeeth = blueTeeth;
-    }
-
-    public Boolean getBatteryNum() {
-        return isBatteryNum;
-    }
-
-    public void setBatteryNum(Boolean batteryNum) {
-        isBatteryNum = batteryNum;
-    }
-
-    public Boolean getBatteryAdd() {
-        return isBatteryAdd;
-    }
-
-    public void setBatteryAdd(Boolean batteryAdd) {
-        isBatteryAdd = batteryAdd;
-    }
-
-    public Boolean getDir() {
-        return isDir;
-    }
-
-    public void setDir(Boolean dir) {
-        isDir = dir;
-    }
-
-
-    public Integer getBatteryNumBar() {
-        return batteryNumBar;
-    }
-
-    public void setBatteryNumBar(Integer batteryNumBar) {
-        this.batteryNumBar = batteryNumBar;
     }
 }

@@ -2,6 +2,7 @@ package com.banditcat.app.views.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,7 @@ import com.banditcat.app.mvp.views.AutoLoginHandleView;
 import com.banditcat.app.mvp.views.BaseHandleView;
 import com.banditcat.app.mvp.views.LoginView;
 import com.banditcat.app.utils.ViewUtils;
+import com.banditcat.app.views.activitys.user.RegActivity;
 import com.banditcat.app.views.base.BaseFragmentDaggerActivity;
 import com.banditcat.app.views.widget.ClearEditText;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
@@ -165,7 +167,7 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
     @Override
     public void navigateToLogin() {
 
-        etPassword.setText("" );
+        etPassword.setText("");
         loginLinearLayout.setVisibility(View.GONE);
         accountConstraintLayout.setVisibility(View.VISIBLE);
         btnHandle.setVisibility(View.VISIBLE);
@@ -276,5 +278,10 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
             etUsername.setText(users.first().getUserUid());
             etUsername.setSelection(etUsername.length());
         }
+    }
+
+    @OnClick(R.id.tvReg)
+    void onRegClick() {
+        navigateActivity(new Intent(getActivity(), RegActivity.class));
     }
 }

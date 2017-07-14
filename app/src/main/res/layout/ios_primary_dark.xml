@@ -6,7 +6,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="@dimen/heightPrimaryDarkIos"
-    android:background="@color/colorBackgroundForIos"
+    android:background="@color/colorWhite"
     android:paddingTop="2dp">
 
 
@@ -100,6 +100,8 @@
         android:id="@+id/batteryNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="@dimen/padding_tiny"
+
         android:text="90%"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/ios_top_title_font_size"
@@ -111,9 +113,20 @@
         android:id="@+id/battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/battery_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/dischargeImageView"
+        app:layout_constraintTop_toTopOf="parent"
 
+        app:layout_goneMarginRight="@dimen/margin_tiny"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/dischargeImageView"
+        android:layout_width="@dimen/heightDischarge"
+        android:layout_height="@dimen/heightDischarge"
         android:layout_marginRight="@dimen/margin_tiny"
-        android:src="@drawable/battery"
+        android:src="@mipmap/ic_discharge_black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

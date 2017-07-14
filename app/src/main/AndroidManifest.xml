@@ -55,6 +55,11 @@
             android:label="@string/title_activity_protocol_web_view"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".views.activitys.user.RegActivity"
+            android:label="@string/title_activity_reg"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

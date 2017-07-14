@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.banditcat.app.views.activitys.user.RegActivity">
+
+    <include layout="@layout/content_toolbar"/>
+
+
+    <include layout="@layout/content_reg"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnHandle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:background="@drawable/bg_btn_selected"
+        android:text="@string/title_btn_reg"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size_medium"
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>

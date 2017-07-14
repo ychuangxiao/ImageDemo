@@ -4,6 +4,7 @@ import com.banditcat.data.entitys.base.BaseRespEntity;
 import com.banditcat.data.entitys.realm.UserRealm;
 import com.banditcat.data.entitys.rep.LogonEntity;
 import com.banditcat.data.entitys.rep.LogoutReqEntity;
+import com.banditcat.data.entitys.rep.RegReqEntity;
 import com.banditcat.data.entitys.rep.base.BaseCrashReqEntity;
 import com.banditcat.data.entitys.rep.base.BaseReqEntity;
 import com.banditcat.data.entitys.resp.LoginResEntity;
@@ -78,6 +79,13 @@ public interface BaseRepository {
      */
     Observable<ResponseBody> downFile(BaseReqEntity baseReqEntity);
 
-
+    /**
+     * 用户注册
+     *
+     * @param entity        请求实体
+     * @return
+     */
+    Observable<BaseRespEntity> register( RegReqEntity
+            entity);
 
 }

@@ -11,6 +11,7 @@ import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.banditcat.app.AndroidApplication;
@@ -28,6 +30,7 @@ import com.banditcat.app.di.modules.ActivityModule;
 import com.banditcat.app.model.BankModel;
 import com.banditcat.common.fontawesom.IconicsDrawable;
 import com.banditcat.common.fontawesom.typeface.IIcon;
+import com.ilogie.android.library.common.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     protected Toolbar mToolbar;//工具条控件
 
-    @BindView(R.id.tv_title)
+    @BindView(R.id.topTitle)
     protected AppCompatTextView mTitleView;//工具条标题控件
 
 
@@ -181,6 +184,19 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public BaseActivity setHomeOnClickListener() {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        return this;
+    }
+
+
+    public BaseActivity setBackOnClickListener(AppCompatTextView textView) {
+
+
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -307,7 +323,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // 这些方法写到基类好一些
     protected void openAppSetting(String content) {
-        new AlertDialog.Builder(this).setMessage(content).setPositiveButton("设置", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setMessage(content).setPositiveButton("设置", new DialogInterface.OnClickListener
+                () {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 跳转到app设置
@@ -317,7 +334,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }).create().show();
     }
-
 
 
     /*
@@ -393,5 +409,51 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * valid edittext
+     *
+     * @param editText widget
+     * @return true or false
+     */
+    public boolean validViewEmpty(AppCompatEditText editText, String hintMsg) {
+        if (StringUtils.isEmpty(editText.getText().toString())) {
 
+
+            alertMsg(hintMsg);
+            editText.setFocusable(true);
+            editText.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public boolean validChooseValue(String value, String hintMsg) {
+        if (StringUtils.isEmpty(value)) {
+
+            alertMsg(hintMsg);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * valid textView
+     *
+     * @param textView widget
+     * @param hintMsg  提示语句
+     * @result = true or false
+     */
+    public boolean validTextView(TextView textView, String hintMsg) {
+        if (StringUtils.isEmpty(textView.getText().toString()))
+
+        {
+            alertMsg(hintMsg);
+            return false;
+        }
+        return true;
+
+    }
 }

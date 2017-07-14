@@ -61,6 +61,8 @@
     <dimen name="heightPrimarykIos">36dp</dimen>
     <dimen name="heightPrimaryDarkIos">20dp</dimen>
     <dimen name="heightPrimaryDark">23dp</dimen>
+    <dimen name="heightDischarge">12dp</dimen>
+    <dimen name="widthDischarge">14dp</dimen>
 
     <dimen name="widthLeftTitle">120dp</dimen>
 
