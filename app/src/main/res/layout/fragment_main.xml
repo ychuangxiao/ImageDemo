@@ -2,13 +2,93 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="demo.banditcat.com.imagedemo.fragment.MainFragment">
+    >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_list"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
 
-    </android.support.v7.widget.RecyclerView>
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/LeftTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:background="@color/md_teal_400"
+
+            android:text="会员专区"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold"
+
+            />
+
+        <RelativeLayout
+android:id="@+id/favourableRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/bg_item_selected"
+            android:clickable="true"
+
+            android:paddingBottom="@dimen/padding_tiny"
+            >
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvYouHui"
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+
+                android:clickable="false"
+
+                android:tag="http://www.382tv.com/"
+                android:text="专享优惠"
+                />
+
+
+        </RelativeLayout>
+
+        <include layout="@layout/content_line"></include>
+
+        <RelativeLayout
+android:id="@+id/videoRelativeLayout"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected"
+
+
+
+            android:clickable="true"
+
+            android:paddingBottom="@dimen/padding_tiny">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvYouHui2"
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+                android:clickable="false"
+
+                android:tag="http://vip.cxylm.net/"
+                android:text="专享影视"
+                />
+
+
+        </RelativeLayout>
+
+        <include layout="@layout/content_line"></include>
+    </LinearLayout>
 </FrameLayout>

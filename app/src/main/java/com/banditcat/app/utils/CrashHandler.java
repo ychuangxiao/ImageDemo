@@ -88,7 +88,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler, BaseHandle
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        if (null != ex && NetConnectUtils.isNetConnected(mAndroidApplication)) {
+        if (null != ex ) {
 
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);

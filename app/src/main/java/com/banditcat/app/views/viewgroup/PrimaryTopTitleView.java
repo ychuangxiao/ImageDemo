@@ -2,8 +2,10 @@ package com.banditcat.app.views.viewgroup;
 
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.widget.RelativeLayout;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.banditcat.app.R;
 import com.banditcat.app.model.AliPaymentModel;
@@ -30,7 +32,12 @@ public class PrimaryTopTitleView extends RelativeLayout {
     boolean alreadyInflated = false;
 
 
+    @BindView(R.id.back)
+    AppCompatImageView back;
 
+    public AppCompatImageView getBack() {
+        return back;
+    }
 
     /**
      * 静态视图绑定

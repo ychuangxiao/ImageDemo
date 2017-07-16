@@ -11,15 +11,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.util.LruCache;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.banditcat.app.R;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,65 +33,81 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public  class SimpleUtils {
+public class SimpleUtils {
 
     /**
      * 将 Bitmap 保存到SD卡
+     *
      * @param context
      * @param mybitmap
      * @param name
      * @return
      */
-    public static boolean saveBitmapToSdCard(Context context, Bitmap mybitmap, String name){
+    public static boolean saveBitmapToSdCard(Context context, Bitmap mybitmap, String name) {
 
 
-        if (mybitmap == null)
-        {
+        if (mybitmap == null) {
             Toast.makeText(context, "图片生成失败", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         boolean result = false;
         //创建位图保存目录
+
+
         String path = Environment.getExternalStorageDirectory() + "/1000ttt/";
         File sd = new File(path);
-        if (!sd.exists()){
+        if (!sd.exists()) {
             sd.mkdir();
         }
-        name = UUID.randomUUID().toString();
-        File file = new File(path+name+".jpg");
+        name = TimeUtils.millis2String(System.currentTimeMillis(),TimeUtils.DEFAULT_PATTERN_7)+".jpg";
+        File file = new File(path + name );
         FileOutputStream fileOutputStream = null;
-        if (!file.exists()){
+        if (!file.exists()) {
             try {
-                // 判断SD卡是否存在，并且是否具有读写权限
-                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-                    fileOutputStream = new FileOutputStream(file);
-                    mybitmap.compress(Bitmap.CompressFormat.JPEG,100,fileOutputStream);
-                    fileOutputStream.flush();
-                    fileOutputStream.close();
 
-                    //update gallery
-                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    Uri uri = Uri.fromFile(file);
-                    intent.setData(uri);
-                    context.sendBroadcast(intent);
+
+                // 判断SD卡是否存在，并且是否具有读写权限
+                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+
+
+
+                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+
+                    mybitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+
+                    bos.flush();
+                    bos.close();
+
+
+                    // 其次把文件插入到系统图库
+                    MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                            file.getAbsolutePath(), name, null);
+                    // 最后通知图库更新
+                    context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+
                     Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show();
                     result = true;
 
 
                     // 最后通知图库更新
                     context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
-                }
-                else{
+                } else {
                     Toast.makeText(context, "不能读取到SD卡", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT);
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT);
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT);
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT);
             }
         }
         return result;
@@ -96,6 +117,7 @@ public  class SimpleUtils {
     /**
      * 手动测量摆放View
      * 对于手动 inflate 或者其他方式代码生成加载的View进行测量，避免该View无尺寸
+     *
      * @param v
      * @param width
      * @param height
@@ -118,10 +140,10 @@ public  class SimpleUtils {
     }
 
 
-
     /**
      * 获取一个 View 的缓存视图
-     *  (前提是这个View已经渲染完成显示在页面上)
+     * (前提是这个View已经渲染完成显示在页面上)
+     *
      * @param view
      * @return
      */
@@ -161,7 +183,8 @@ public  class SimpleUtils {
     }
 
     /**
-     *  对ScrollView进行截图
+     * 对ScrollView进行截图
+     *
      * @param scrollView
      * @return
      */
@@ -180,14 +203,19 @@ public  class SimpleUtils {
         return bitmap;
     }
 
-    public static Bitmap getViewImage(NestedScrollView nestedScrollView,Point point)
-    {
+    public static Bitmap getViewImage(View nestedScrollView, Point point) {
 
         Bitmap bitmap = null;
 
+        ViewGroup.LayoutParams layoutParams = nestedScrollView.getLayoutParams();
 
-        bitmap = Bitmap.createBitmap(point.x, point.y, Bitmap.Config.ARGB_8888);
-          Canvas canvas = new Canvas(bitmap);
+        bitmap = Bitmap.createBitmap(layoutParams.width, layoutParams.height, Bitmap.Config.ARGB_8888);
+
+
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(nestedScrollView.getResources().getColor(R
+                .color.colorBackgroundForIos));
+
         nestedScrollView.draw(canvas);
         return bitmap;
 

@@ -79,8 +79,8 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvMobileType"
                     style="@style/RightTitle"
-                    android:layout_toRightOf="@+id/tvLeftMobileType"
-
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:hint="选择手机型号"
                     />
 
@@ -105,8 +105,8 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvSignal"
                     style="@style/RightTitle"
-                    android:layout_toRightOf="@+id/tvLeftSignal"
-
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:hint="选择信号强度"
                     />
 
@@ -132,10 +132,11 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvCarrier"
                     style="@style/RightTitle"
+                    android:layout_width="wrap_content"
 
-                    android:hint="选择运营商"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:hint="选择运营商"/>
 
 
             </RelativeLayout>
@@ -159,8 +160,8 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvNetwork"
                     style="@style/RightTitle"
-                    android:layout_toRightOf="@+id/tvLeftNetwork"
-
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:hint="选择网络信号"
                     />
 
@@ -187,8 +188,8 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvCreateTime2"
                     style="@style/RightTitle"
-                    android:layout_toRightOf="@+id/tvCreateTime"
-
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:hint="选择手机时间"
                     />
 
@@ -228,9 +229,10 @@
 
             <LinearLayout
                 android:id="@+id/iosContainer"
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/dirRelativeLayout"
                     android:layout_width="match_parent"
@@ -390,8 +392,8 @@
                     android:id="@+id/tvLeftBattery"
                     style="@style/LeftTitle"
 
+                    android:tag="电量（%s）"
                     android:text="电量"
-android:tag="电量（%s）"
                     />
 
 
@@ -400,9 +402,9 @@ android:tag="电量（%s）"
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftBattery"
                     android:hint="选择手机时间"
-                    android:progress="80"
-
                     android:max="100"
+
+                    android:progress="80"
                     />
 
 

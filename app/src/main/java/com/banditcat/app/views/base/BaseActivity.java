@@ -1,14 +1,19 @@
 package com.banditcat.app.views.base;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
@@ -25,6 +30,7 @@ import android.widget.Toast;
 
 import com.banditcat.app.AndroidApplication;
 import com.banditcat.app.R;
+import com.banditcat.app.constant.AppConstant;
 import com.banditcat.app.di.components.ApplicationComponent;
 import com.banditcat.app.di.modules.ActivityModule;
 import com.banditcat.app.model.BankModel;
@@ -456,4 +462,28 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
 
     }
+
+    public boolean checkPermissions()
+    {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // 没有权限。
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // 用户拒绝过这个权限了，应该提示用户，为什么需要这个权限。
+                alertMsg("您已经拒绝文件写入权限，请开启！");
+            } else {
+                // 申请授权。
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, AppConstant.ACTION_10);
+            }
+
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
+    }
+
+
 }

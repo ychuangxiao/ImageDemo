@@ -6,26 +6,37 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.banditcat.app.BuildConfig;
 import com.banditcat.app.R;
 import com.banditcat.app.constant.AppConstant;
 import com.banditcat.app.model.AliPaymentModel;
+import com.banditcat.app.model.EditModel;
+import com.banditcat.app.utils.MathUtils;
 import com.banditcat.app.utils.SimpleUtils;
 import com.banditcat.app.utils.TimeUtils;
 import com.banditcat.app.utils.ViewUtils;
 import com.banditcat.app.views.activitys.google.ChangeReceiptActivity;
 import com.banditcat.app.views.base.BaseFragment;
 import com.banditcat.app.views.listeners.MobileChangeListener;
+import com.banditcat.app.views.viewgroup.EditTextItemView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkIosView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkView;
 import com.banditcat.app.views.viewgroup.PrimaryTopTitleIosView;
@@ -48,12 +59,14 @@ import butterknife.OnTextChanged;
  * Use the {@link PaymentIosFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaymentIosFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
+        .OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static BottomNavigationView mBottomNavigationView;
 
     //手机外观
 
@@ -75,10 +88,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
     @BindView(R.id.tvPaymentType)
     AppCompatTextView tvPaymentType;
-
-
-    @BindView(R.id.etPaymentType)
-    AppCompatEditText etPaymentType;
 
 
     @BindView(R.id.tvOrderNo2)
@@ -113,12 +122,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     @BindView(R.id.tvReceiptUserInfo)
     AppCompatTextView tvReceiptUserInfo;
 
-    @BindView(R.id.moneyRelativeLayout)
-    RelativeLayout moneyRelativeLayout;
-
-    @BindView(R.id.etMoney)
-    AppCompatEditText etMoney;
-
 
     @BindView(R.id.tvCreateTime2)
     AppCompatTextView tvCreateTime;
@@ -126,14 +129,15 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     @BindView(R.id.tvBankImage)
     AppCompatImageView tvBankImage;
 
-    @BindView(R.id.etRemark)
-    AppCompatEditText etRemark;
 
     @BindView(R.id.tvRemark)
     AppCompatTextView tvRemark;
 
     @BindView(R.id.tvBankUserName)
     AppCompatTextView tvBankUserName;
+
+    @BindView(R.id.watermarkImageView)
+    AppCompatImageView watermarkImageView;
 
     DatePickerDialog mDatePickerDialog;
 
@@ -153,6 +157,9 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     Context mContext;
 
 
+    BottomSheetDialog mBottomSheetDialog;
+    EditTextItemView mEditTextItemView;
+
     public void setContext(Context context) {
         mContext = context;
     }
@@ -167,8 +174,10 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
      *
      * @return A new instance of fragment PaymentGoogleFragment.
      */
-    public static PaymentIosFragment newInstance(AliPaymentModel aliPaymentModel) {
+    public static PaymentIosFragment newInstance(AliPaymentModel aliPaymentModel,BottomNavigationView navigationView) {
 
+
+        mBottomNavigationView = navigationView;
         PaymentIosFragment fragment = new PaymentIosFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, aliPaymentModel);
@@ -192,11 +201,45 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         }
 
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon.icon_right, getResources().getColor(R.color
+        if (BuildConfig.HAS_WATERMAR) {
+            if (getApplicationComponent(getContext().getApplicationContext()).context()
+                    .sharedpreferences.Watermark().get()) {
+
+
+                watermarkImageView.setVisibility(View.GONE);
+            } else {
+                watermarkImageView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        DisplayMetrics dm = new DisplayMetrics();
+        //获取屏幕信息
+
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int screenWidth = dm.widthPixels;
+
+        int screenHeigh = dm.heightPixels;
+
+
+        ViewGroup.LayoutParams layoutParams = alipayConstraintLayout.getLayoutParams();
+
+        layoutParams.width = screenWidth;
+        layoutParams.height = screenHeigh;
+
+        alipayConstraintLayout.setLayoutParams(layoutParams);
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon
+                .icon_right, getResources().getColor(R.color
                 .colorRightTitle), 4f);
 
 
         loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
+
+
+        //创建底部文本编辑视图
+
+        mEditTextItemView = EditTextItemView.build(getActivity());
 
 
     }
@@ -207,38 +250,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         mAliPaymentModel = model;
 
         //判断手机类型
-
-        if (mAliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
-            //
-
-            //添加顶部标题栏
-            mPrimaryDarkView = PrimaryDarkView.build(getActivity());
-
-            primaryDarkConstraintLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onTopDateTimeClick();
-                }
-            });
-
-            primaryDarkConstraintLayout.removeAllViews();
-
-
-
-            primaryDarkConstraintLayout.addView(mPrimaryDarkView);
-
-            //添加工具栏
-
-
-            PrimaryTopTitleView primaryTopTitleView = PrimaryTopTitleView.build(getActivity());
-
-
-            primaryConstraintLayout.removeAllViews();
-
-
-            primaryConstraintLayout.addView(primaryTopTitleView);
-        } else {
-
+        primaryDarkConstraintLayout.removeAllViews();
+        if (mAliPaymentModel.getTopToolStyle() == AppConstant.ACTION_10) {
 
             mPrimaryDarkIosView = PrimaryDarkIosView.build(getActivity());
             mPrimaryDarkIosView.setOnClickListener(new View.OnClickListener() {
@@ -248,19 +261,31 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                 }
             });
 
-            primaryDarkConstraintLayout.removeAllViews();
+
             mPrimaryDarkIosView.binder(mAliPaymentModel);
             primaryDarkConstraintLayout.addView(mPrimaryDarkIosView);
 
-
-            PrimaryTopTitleIosView primaryTopTitleIosView = PrimaryTopTitleIosView.build(getActivity());
-
-            primaryConstraintLayout.removeAllViews();
-
-
-            primaryConstraintLayout.addView(primaryTopTitleIosView);
-
         }
+        else {
+            mBottomNavigationView.setVisibility(View.GONE);
+        }
+
+
+        PrimaryTopTitleIosView primaryTopTitleIosView = PrimaryTopTitleIosView.build
+                (getActivity());
+
+        primaryConstraintLayout.removeAllViews();
+
+        primaryTopTitleIosView.getTvBackHome().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBottomNavigationView.setVisibility(View.VISIBLE);
+                mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
+            }
+        });
+
+
+        primaryConstraintLayout.addView(primaryTopTitleIosView);
 
 
         initViewInfo();
@@ -289,7 +314,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
         ViewUtils.initBankInfo(tvBankImage, mAliPaymentModel.getBankModel().getType());
         tvBankUserName.setText(mAliPaymentModel.getReceiptUserName());
-        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(), mAliPaymentModel.getBankModel().getBankName(),
+        tvReceiptUserInfo.setText(String.format(tvReceiptUserInfo.getTag().toString(),
+                mAliPaymentModel.getBankModel().getBankName(),
                 mAliPaymentModel.getBankNo(), mAliPaymentModel.getReceiptUserName()));
         tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
         tvPaymentType.setText(mAliPaymentModel.getPaymentType());
@@ -306,9 +332,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         mAliPaymentModel.setLastTime(TimeUtils.addHour2(2, time));
 
 
-        if (mAliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
-            mPrimaryDarkView.binder(mAliPaymentModel);
-        } else {
+        if (mPrimaryDarkIosView != null) {
             mPrimaryDarkIosView.binder(mAliPaymentModel);
         }
 
@@ -320,7 +344,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
 
         if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-            tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.addHour(2, time)));
+            tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(),
+                    TimeUtils.addHour(2, time)));
         } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
             tvBankHandleOverTime.setText(TimeUtils.addHour(2, time));
 
@@ -338,7 +363,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
      */
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_payment_ios;
+        return R.layout.fragment_payment_google;
     }
 
 
@@ -355,8 +380,9 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
 
 
-            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar
-                    .DAY_OF_MONTH));
+            mDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH), calendar.get(Calendar
+                            .DAY_OF_MONTH));
 
             mDatePickerDialog.show(getActivity().getFragmentManager(), "Datepickerdialog");
         }
@@ -372,8 +398,9 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
         calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
 
-        mDatePickerDialog30 = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar
-                .DAY_OF_MONTH));
+        mDatePickerDialog30 = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH), calendar.get(Calendar
+                        .DAY_OF_MONTH));
 
         mDatePickerDialog30.show(getActivity().getFragmentManager(), "DatePickerDialog30");
     }
@@ -385,7 +412,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
-        mTimePickerDialog30 = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+        mTimePickerDialog30 = TimePickerDialog.newInstance(this, calendar.get(Calendar
+                .HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
         mTimePickerDialog30.show(getActivity().getFragmentManager(), "mTimePickerDialog30");
 
         return true;
@@ -401,7 +429,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             Calendar calendar = Calendar.getInstance();
 
             calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-            mTimePickerDialog2 = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+            mTimePickerDialog2 = TimePickerDialog.newInstance(this, calendar.get(Calendar
+                    .HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             mTimePickerDialog2.show(getActivity().getFragmentManager(), "TimePickerDialog2");
         }
 
@@ -419,7 +448,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
 
 
-        mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+        mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE), true);
 
         mTimePickerDialog.show(getActivity().getFragmentManager(), "TimePickerDialog");
 
@@ -435,7 +465,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             case 10:
 
                 calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                                .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                         second);
 
                 mAliPaymentModel.setTopTime(calendar.getTimeInMillis());
@@ -445,12 +476,9 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                 }
 
 
-                if (mAliPaymentModel.getMobileType()==AppConstant.ACTION_20)
-                {
+                if (mAliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
                     mPrimaryDarkView.binder(mAliPaymentModel);
-                }
-                else
-                {
+                } else {
                     mPrimaryDarkIosView.binder(mAliPaymentModel);
                 }
 
@@ -459,7 +487,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             case 20:
 
                 calendar.setTimeInMillis(mAliPaymentModel.getPaymentTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                                .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                         second);
 
                 mAliPaymentModel.setPaymentTime(calendar.getTimeInMillis());
@@ -476,23 +505,34 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                 //判断下 时间不能早于付款成功时间
 
                 calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
-                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                                .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                         second);
 
-                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis())) {
+                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
+                )) {
 
 
                     mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
 
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+
                     if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar
+                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
+                                .toString(), TimeUtils.millis2String(calendar
                                 .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
                     } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
+                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
+                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
+                            .show();
 
                     return;
                 }
@@ -514,6 +554,13 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                 calendar.set(year, monthOfYear, dayOfMonth);
 
                 mAliPaymentModel.setPaymentTime(calendar.getTimeInMillis());
+
+                if (mModelMobileChangeListener != null) {
+
+                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                }
+
+
                 setTimeInfo(mAliPaymentModel.getPaymentTime());
 
                 break;
@@ -521,18 +568,27 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             case 30:
                 calendar.setTimeInMillis(mAliPaymentModel.getLastTime());
                 calendar.set(year, monthOfYear, dayOfMonth);
-                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis())) {
+                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
+                )) {
 
                     mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
                     if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag().toString(), TimeUtils.millis2String(calendar
+                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
+                                .toString(), TimeUtils.millis2String(calendar
                                 .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
                     } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
+                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
+                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
+                            .show();
 
                     return;
                 }
@@ -564,7 +620,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         tvHandleType.setText("处理中");
         tvHandleType.setTextColor(getResources().getColor(R.color.colorUnHandle));
         tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorUnHandleLine));
-        tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_ali_tx_jd_more));
+        tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap
+                .ic_ali_tx_jd_more));
         tvWXTSMessage.setVisibility(View.VISIBLE);
         tvWXTS.setVisibility(View.VISIBLE);
 
@@ -586,30 +643,116 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         setTimeInfo(mAliPaymentModel.getPaymentTime());
     }
 
+    EditModel model;
 
     //金额
     @OnClick(R.id.tvMoney)
     void onMoneyClick() {
 
-
+/*
         if (moneyRelativeLayout.getVisibility() == View.GONE) {
 
             moneyRelativeLayout.setVisibility(View.VISIBLE);
         } else {
             moneyRelativeLayout.setVisibility(View.GONE);
+        }*/
+
+
+        model = new EditModel();
+        model.setHintText("付款金额");
+        model.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+        model.setHandleAction(AppConstant.ACTION_10);
+        model.setMaxLength(12);
+        model.setText(MathUtils.toString(mAliPaymentModel.getReceiptMoney()));
+
+        initDialog();
+
+    }
+
+    private void initDialog() {
+        if (mBottomSheetDialog == null) {
+            mBottomSheetDialog = new BottomSheetDialog(getActivity());
+
+
+            mBottomSheetDialog.setContentView(mEditTextItemView);
+
+
+            mEditTextItemView.getBtnHandle().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    switch (model.getHandleAction()) {
+                        case AppConstant.ACTION_10:
+
+                            mAliPaymentModel.setReceiptMoney(new BigDecimal(mEditTextItemView
+                                    .getEtChangeValue().getText().toString()));
+
+                            tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney
+                                    ()));
+                            break;
+
+                        case AppConstant.ACTION_20:
+
+                            mAliPaymentModel.setPaymentType(mEditTextItemView
+                                    .getEtChangeValue().getText().toString());
+                            tvPaymentType.setText(mAliPaymentModel.getPaymentType());
+
+                            break;
+
+                        case AppConstant.ACTION_30:
+
+                            mAliPaymentModel.setRemark(mEditTextItemView
+                                    .getEtChangeValue().getText().toString());
+                            tvRemark.setText(mAliPaymentModel.getRemark());
+
+                            break;
+                    }
+
+
+                    mBottomSheetDialog.dismiss();
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+                }
+            });
+
+            mEditTextItemView.getBtnCancel().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mBottomSheetDialog.dismiss();
+                }
+            });
+
+            View view = mBottomSheetDialog.getWindow().findViewById(android.support.design.R.id
+                    .design_bottom_sheet);
+            BottomSheetBehavior.from(view).setPeekHeight(alipayConstraintLayout.getLayoutParams()
+                    .height);
+
+
         }
+        mEditTextItemView.getEtChangeValue().setMaxLines(model.getMaxLines());
+        mEditTextItemView.binder(model);
+
+        mEditTextItemView
+                .getEtChangeValue().setSelection(model.getText().length());
+
+        mBottomSheetDialog.show();
     }
 
     @OnClick(R.id.tvPaymentType)
     void onPaymentTypeClick() {
 
 
-        if (etPaymentType.getVisibility() == View.GONE) {
-
-            etPaymentType.setVisibility(View.VISIBLE);
-        } else {
-            etPaymentType.setVisibility(View.GONE);
-        }
+        model = new EditModel();
+        model.setHintText("付款方式");
+        model.setInputType(InputType.TYPE_CLASS_TEXT);
+        model.setHandleAction(AppConstant.ACTION_20);
+        model.setMaxLength(20);
+        model.setText(mAliPaymentModel.getPaymentType());
+        initDialog();
     }
 
 
@@ -617,12 +760,15 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     void onRemarkClick() {
 
 
-        if (etRemark.getVisibility() == View.GONE) {
+        model = new EditModel();
+        model.setHintText("转账说明");
+        model.setInputType(InputType.TYPE_CLASS_TEXT);
+        model.setHandleAction(AppConstant.ACTION_30);
+        model.setMaxLength(50);
+        model.setMaxLines(5);
+        model.setText(mAliPaymentModel.getRemark());
 
-            etRemark.setVisibility(View.VISIBLE);
-        } else {
-            etRemark.setVisibility(View.GONE);
-        }
+        initDialog();
     }
 
 
@@ -633,6 +779,10 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         }
 
         mAliPaymentModel.setPaymentType(s.toString());
+        if (mModelMobileChangeListener != null) {
+
+            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+        }
 
         tvPaymentType.setText(mAliPaymentModel.getPaymentType());
     }
@@ -645,6 +795,10 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         }
 
         mAliPaymentModel.setRemark(s.toString());
+        if (mModelMobileChangeListener != null) {
+
+            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+        }
 
         tvRemark.setText(mAliPaymentModel.getRemark());
     }
@@ -659,6 +813,10 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
 
         mAliPaymentModel.setReceiptMoney(new BigDecimal(s.toString()));
+        if (mModelMobileChangeListener != null) {
+
+            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+        }
 
         tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
     }
@@ -683,6 +841,14 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                 Bundle bunde = data.getExtras();
                 mAliPaymentModel = (AliPaymentModel) bunde.getSerializable(AppConstant.EXTRA_NO);
 
+                //主要是 户名 银行 卡号
+
+                if (mModelMobileChangeListener != null) {
+
+                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                }
+
+
                 initViewInfo();
                 break;
             default:
@@ -698,15 +864,17 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         getActivity().getWindowManager().getDefaultDisplay().getSize(point);
 
 
-        //Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout,point);
-        Bitmap cacheBitmapFromView = SimpleUtils.getViewImage(aliNestedScrollView, point);
+        //Bitmap cacheBitmapFromView = SimpleUtils.getCacheBitmapFromView(alipayConstraintLayout,
+        // point);
+        Bitmap cacheBitmapFromView = SimpleUtils.getViewImage(alipayConstraintLayout, point);
         SimpleUtils.saveBitmapToSdCard(getActivity(), cacheBitmapFromView, "styleOne");
     }
 
 
     MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
 
-    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel> modelMobileChangeListener) {
+    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel>
+                                                modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }
 }

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="输入收款人账户名称"
             android:inputType="text"
-            android:maxLength="20"
+            android:maxLength="6"
             android:maxLines="1"
             android:textSize="@dimen/google_font_size" />
     </android.support.design.widget.TextInputLayout>

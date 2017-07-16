@@ -26,6 +26,11 @@ public class AppConstant {
     public static final  int ACTION_30 =30;
     public static final  int ACTION_40 =40;
     public static final  int ACTION_50 =50;
+    public static final  int ACTION_60 =60;
+    public static final  int ACTION_70 =70;
+    public static final  int ACTION_80 =80;
+    public static final  int ACTION_90 =90;
+    public static final  int ACTION_100 =100;
 
 
     //手机类型
@@ -56,4 +61,9 @@ public class AppConstant {
     //顶部样式
     public static final  String TOOL_STYLE_SYSTEM ="系统";
     public static final  String TOOL_STYLE_CUSTOM ="自定义";
+
+
+    public static final  String CARRIER_CHINA_YD ="中国移动";
+    public static final  String CARRIER_CHINA_LT ="中国联通";
+    public static final  String CARRIER_CHINA_DX ="中国电信";
 }

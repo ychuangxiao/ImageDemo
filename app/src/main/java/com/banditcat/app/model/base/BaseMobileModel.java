@@ -30,7 +30,7 @@ public class BaseMobileModel implements Serializable {
     private Integer mobileType;//手机类型
     private Integer networkType;//网络类型
     private Integer networkSignal;//信号强度
-    private Integer mobileCarrier;//手机运营商
+    private String mobileCarrier;//手机运营商
 
 
     private Long topTime;//顶部时间
@@ -76,11 +76,11 @@ public class BaseMobileModel implements Serializable {
         this.networkSignal = networkSignal;
     }
 
-    public Integer getMobileCarrier() {
+    public String getMobileCarrier() {
         return mobileCarrier;
     }
 
-    public void setMobileCarrier(Integer mobileCarrier) {
+    public void setMobileCarrier(String mobileCarrier) {
         this.mobileCarrier = mobileCarrier;
     }
 

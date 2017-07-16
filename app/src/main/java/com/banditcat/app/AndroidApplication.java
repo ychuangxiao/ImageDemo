@@ -83,7 +83,7 @@ public class AndroidApplication extends Application {
      */
     private void initRealm() {
         //Realm数据配置相关
-        realmConfiguration = new RealmConfiguration.Builder().name(getString(R.string.name_database)).schemaVersion(1).migration(new Migration())
+        realmConfiguration = new RealmConfiguration.Builder().name(getString(R.string.name_database)).schemaVersion(0).migration(new Migration())
                 .build();
 
         Realm.setDefaultConfiguration(realmConfiguration);// Make this Realm the default

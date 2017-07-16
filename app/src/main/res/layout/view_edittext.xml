@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:padding="@dimen/padding_medium">
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvChangeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_tiny"
+        android:paddingLeft="2dp"
+        android:text="付款金额"
+         />
+
+
+    <com.banditcat.app.views.widget.ClearEditText
+
+        android:ellipsize="end"
+
+        android:maxLines="2"
+        android:id="@+id/etChangeValue"
+        android:layout_width="553dp"
+        android:layout_height="wrap_content"
+        android:text="aaaaaaa"
+        android:textSize="@dimen/font_size_small"
+        app:layout_constraintTop_toBottomOf="@+id/tvChangeValue"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:background="@color/silver"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:background="@drawable/bg_btn_selected"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="@dimen/padding_large"
+        android:text="确定"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnCancel"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_selected"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="@dimen/padding_large"
+        android:text="取消"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

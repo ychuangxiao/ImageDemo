@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+
+
+    <color name="colorPrimaryDarkForWeChat">@color/colorBlack</color>
+    <color name="colorPrimaryForWeChat">#393a3e</color>
+
     <color name="colorLeftTitle">#686666</color>
     <color name="colorRightTitle">#7b7878</color>
 
@@ -427,4 +432,13 @@
     <color name="md_blue_grey_700">#455a64</color>
     <color name="md_blue_grey_800">#37474f</color>
     <color name="md_blue_grey_900">#263238</color>
+
+    <color name="web_chat_line">#ffc9c9c9</color>
+
+
+    <color name="wechat_bg">#ffebebeb</color>
+
+    <color name="colorWeChatBackground">#ffc9c9c9</color>
+
+
 </resources>

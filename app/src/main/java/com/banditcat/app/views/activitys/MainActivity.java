@@ -1,6 +1,7 @@
 package com.banditcat.app.views.activitys;
 
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -12,13 +13,21 @@ import com.banditcat.app.R;
 import com.banditcat.app.di.HasComponent;
 import com.banditcat.app.di.components.BizComponent;
 import com.banditcat.app.di.components.DaggerBizComponent;
+import com.banditcat.app.utils.TimeUtils;
 import com.banditcat.app.views.base.BaseActivity;
 import com.banditcat.app.views.fragment.LoginFragment;
 import com.banditcat.app.views.fragment.MainFragment;
 import com.banditcat.app.views.fragment.MoreFragment;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
+import com.banditcat.data.constant.TextConstant;
+import com.banditcat.data.entitys.realm.AppRealm;
+import com.banditcat.data.entitys.realm.UserRealm;
+import com.ilogie.android.library.common.util.ArrayUtils;
 
 import butterknife.BindView;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 
 public class MainActivity extends BaseActivity implements HasComponent<BizComponent> {
@@ -41,6 +50,14 @@ public class MainActivity extends BaseActivity implements HasComponent<BizCompon
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
+    Realm mRealm;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mRealm = Realm.getDefaultInstance();
+    }
 
     /**
      * 初始化视图，工具条等信息
@@ -195,5 +212,53 @@ public class MainActivity extends BaseActivity implements HasComponent<BizCompon
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mRealm != null) {
+            mRealm.close();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        //判断是否有初始化时间
+
+
+        final Long[] time = new Long[1];
+
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                AppRealm appRealm = mRealm.where(AppRealm.class).findFirst();
+
+                if (appRealm == null || appRealm.getInitTime() < 0L) {
+
+                    appRealm =  mRealm.createObject(AppRealm.class);
+                    appRealm.setInitTime(System.currentTimeMillis());
+                } else {
+
+                    time[0] = appRealm.getInitTime();
+
+                }
+
+
+            }
+        });
+
+
+        if (time != null && time.length >= 1 && time[0] != null && time[0] > 0L
+                && TimeUtils.daysBetween(time[0], System.currentTimeMillis()) >= 1) {
+            getApplicationComponent().context().sharedpreferences.Watermark().put(false);
+        }
+
     }
 }

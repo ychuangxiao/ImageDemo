@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.banditcat.app.views.activitys.tencent.WeChatActivity">
+
+    <include layout="@layout/content_we_chat_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+
+        <FrameLayout
+            android:id="@+id/content"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorHandle">
+
+
+        </FrameLayout>
+
+        <View
+
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/web_chat_line"/>
+
+        <RadioGroup
+
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/web_chat_bottom_nav_height"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rdMessage"
+
+                style="@style/AppCompatRadioButton2"
+
+                android:checked="true"
+                android:drawableTop="@drawable/wechat_message"
+
+                android:text="微信"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+
+                android:id="@+id/rdContacts"
+                style="@style/AppCompatRadioButton2"
+                android:layout_height="@dimen/web_chat_bottom_nav_height"
+                android:drawableTop="@drawable/wechat_contacts"
+
+                android:text="通讯录"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+
+                android:id="@+id/rdDiscovery"
+                style="@style/AppCompatRadioButton2"
+                android:drawableTop="@drawable/wechat_discovery"
+
+                android:text="发现"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+
+                android:id="@+id/rdMe"
+                style="@style/AppCompatRadioButton2"
+                android:drawableTop="@drawable/wechat_me"
+
+                android:text="我"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

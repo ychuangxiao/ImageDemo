@@ -80,7 +80,6 @@ public final class SharedPreferencesUtils extends SharedPreferencesHelper {
         }
 
 
-
     }
 
 
@@ -141,7 +140,6 @@ public final class SharedPreferencesUtils extends SharedPreferencesHelper {
     }
 
 
-
     /**
      * apk更新状态
      *
@@ -159,6 +157,16 @@ public final class SharedPreferencesUtils extends SharedPreferencesHelper {
      */
     public BooleanPrefField Synced() {
         return booleanField("Synced", false);
+    }
+
+
+    /**
+     * 是否水印
+     *
+     * @return
+     */
+    public BooleanPrefField Watermark() {
+        return booleanField("Watermark", true);
     }
 
 }

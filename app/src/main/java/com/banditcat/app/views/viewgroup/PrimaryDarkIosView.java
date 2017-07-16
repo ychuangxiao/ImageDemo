@@ -42,6 +42,8 @@ public class PrimaryDarkIosView extends RelativeLayout {
     boolean alreadyInflated = false;
 
 
+    @BindView(R.id.tvMobileType)
+    AppCompatTextView tvMobileType;
     @BindView(R.id.tvWifi)
     AppCompatImageView tvWifi;
 
@@ -96,7 +98,8 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
         if (!aliPaymentModel.getDateTimeStyle()) {
             Calendar mCalendar = Calendar.getInstance();
-            mCalendar.setTimeInMillis(TimeUtils.millis2millis(aliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN));
+            mCalendar.setTimeInMillis(TimeUtils.millis2millis(aliPaymentModel.getTopTime(),
+                    TimeUtils.DEFAULT_PATTERN));
             int apm = mCalendar.get(Calendar.AM_PM);
 
 
@@ -114,15 +117,18 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
 
             if (apm == 1) {
-                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis
+                        (), TimeUtils
                         .DEFAULT_PATTERN_4_1));
 
             } else {
-                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis
+                        (), TimeUtils
                         .DEFAULT_PATTERN_4_1));
             }
         } else {
-            topDateTime.setText(TimeUtils.millis2String(aliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
+            topDateTime.setText(TimeUtils.millis2String(aliPaymentModel.getTopTime(), TimeUtils
+                    .DEFAULT_PATTERN_4));
         }
 
 
@@ -155,20 +161,30 @@ public class PrimaryDarkIosView extends RelativeLayout {
         //判断是白色 还是 黑色
 
         if (aliPaymentModel.getMobileType().compareTo(AppConstant.ACTION_10) == 0) {
-            //是否充电
+
+
             if (aliPaymentModel.getBatteryAdd()) {
-                battery.setImageResource(R.drawable.battery_green_black);
+
+                if (aliPaymentModel.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_black);
+                } else {
+                    //是否充电
+                    battery.setImageResource(R.drawable.battery_green_black);
+                }
+
                 dischargeImageView.setVisibility(View.VISIBLE);
             } else {
                 dischargeImageView.setVisibility(View.GONE);
 
-                //小于20 显示红色
+
                 if (aliPaymentModel.getBatteryNumBar() < 20) {
 
                     battery.setImageResource(R.drawable.battery_red_black);
                 } else {
                     battery.setImageResource(R.drawable.battery_black);
                 }
+
 
             }
 
@@ -245,7 +261,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
         clipDrawableTest.setLevel(calculateLevel(aliPaymentModel.getBatteryNumBar()));
 
-
+        tvMobileType.setText(aliPaymentModel.getMobileCarrier());
     }
 
     /**

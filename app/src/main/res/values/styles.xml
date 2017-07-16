@@ -13,6 +13,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="AppTheme.NoActionBar.We.Chat" parent="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
@@ -43,7 +53,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size</item>
         <item name="android:singleLine">false</item>
-        <item name="android:inputType">text|textNoSuggestions</item>
+
     </style>
 
     <style name="TextView.White.Large" parent="TextView">
@@ -61,6 +71,11 @@
     <style name="PaymentLineCircle">
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="PaymentLineCircle.800.400" parent="PaymentLineCircle">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
     </style>
 
 
@@ -301,6 +316,17 @@
 
     <style name="TextView.Blue.Medium" parent="@style/TextView.Silver">
         <item name="android:textSize">@dimen/font_size_medium</item>
+    </style>
+
+
+    <style name="AppCompatRadioButton2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:padding">@dimen/padding_tiny</item>
+        <item name="android:layout_height">@dimen/web_chat_bottom_nav_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item><!--去除RadioButton默认带的圆点-->
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/font_size_micro</item>
     </style>
 
 </resources>

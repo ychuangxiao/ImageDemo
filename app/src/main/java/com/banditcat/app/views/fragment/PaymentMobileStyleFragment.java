@@ -1,6 +1,7 @@
 package com.banditcat.app.views.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -28,6 +29,9 @@ import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
+import static com.banditcat.app.constant.AppConstant.CARRIER_CHINA_DX;
+import static com.banditcat.app.constant.AppConstant.CARRIER_CHINA_LT;
+import static com.banditcat.app.constant.AppConstant.CARRIER_CHINA_YD;
 import static com.banditcat.app.constant.AppConstant.MOBILE_ANDROID;
 import static com.banditcat.app.constant.AppConstant.MOBILE_IOS;
 import static com.banditcat.app.constant.AppConstant.TOOL_STYLE_CUSTOM;
@@ -38,12 +42,15 @@ import static com.banditcat.app.constant.AppConstant.TOOL_STYLE_CUSTOM;
  * Use the {@link PaymentMobileStyleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaymentMobileStyleFragment extends BaseFragment implements TimePickerDialog.OnTimeSetListener {
+public class PaymentMobileStyleFragment extends BaseFragment implements TimePickerDialog
+        .OnTimeSetListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    BottomNavigationView navigation;
 
     AliPaymentModel mAliPaymentModel;
 
@@ -119,7 +126,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
      * @return A new instance of fragment PaymentMenuFragment.
      */
 
-    public static PaymentMobileStyleFragment newInstance(AliPaymentModel aliPaymentModel) {
+    public static PaymentMobileStyleFragment newInstance(AliPaymentModel
+                                                                 aliPaymentModel) {
         PaymentMobileStyleFragment fragment = new PaymentMobileStyleFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, aliPaymentModel);
@@ -144,19 +152,23 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
         }
 
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvCreateTime, BaseFontAwesome.Icon.icon_right, getResources
+        ViewUtils.setCompoundRightDrawables(getContext(), tvCreateTime, BaseFontAwesome.Icon
+                .icon_right, getResources
                 ().getColor(R.color
                 .colorRightTitle), 4f);
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvMobileType, BaseFontAwesome.Icon.icon_right, getResources
+        ViewUtils.setCompoundRightDrawables(getContext(), tvMobileType, BaseFontAwesome.Icon
+                .icon_right, getResources
                 ().getColor(R.color
                 .colorRightTitle), 4f);
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvSignal, BaseFontAwesome.Icon.icon_right, getResources()
+        ViewUtils.setCompoundRightDrawables(getContext(), tvSignal, BaseFontAwesome.Icon
+                .icon_right, getResources()
                 .getColor(R.color
                         .colorRightTitle), 4f);
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvNetwork, BaseFontAwesome.Icon.icon_right, getResources()
+        ViewUtils.setCompoundRightDrawables(getContext(), tvNetwork, BaseFontAwesome.Icon
+                .icon_right, getResources()
                 .getColor(R.color
                         .colorRightTitle), 4f);
 
@@ -221,8 +233,9 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 }
 
 
-                tvLeftBattery.setText(String.format(tvLeftBattery.getTag().toString(), mAliPaymentModel
-                        .getBatteryNumBar()));
+                tvLeftBattery.setText(String.format(tvLeftBattery.getTag().toString(),
+                        mAliPaymentModel
+                                .getBatteryNumBar()));
 
                 if (mModelMobileChangeListener != null) {
 
@@ -253,12 +266,18 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
         mAliPaymentModel = model;
 
 
-        tvCreateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
+        tvCarrier.setText(mAliPaymentModel.getMobileCarrier());
+
+        tvCreateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils
+                .DEFAULT_PATTERN_4));
 
 
         switch (mAliPaymentModel.getTopToolStyle()) {
             case AppConstant.ACTION_10:
                 tvTopStyle.setText(AppConstant.TOOL_STYLE_CUSTOM);
+                break;
+            case AppConstant.ACTION_20:
+                tvTopStyle.setText(AppConstant.TOOL_STYLE_SYSTEM);
                 break;
         }
 
@@ -351,7 +370,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
+                        (Calendar.DAY_OF_MONTH),
                 hourOfDay, minute, second);
 
         mAliPaymentModel.setTopTime(calendar.getTimeInMillis());
@@ -361,7 +381,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
         }
 
 
-        tvCreateTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_4));
+        tvCreateTime.setText(TimeUtils.millis2String(calendar.getTimeInMillis(), TimeUtils
+                .DEFAULT_PATTERN_4));
     }
 
 
@@ -370,8 +391,9 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
-        mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get
-                (Calendar.MINUTE), true);
+        mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get
+                        (Calendar.MINUTE), true);
         mTimePickerDialog.show(getActivity().getFragmentManager(), "mTimePickerDialog30");
 
 
@@ -446,9 +468,12 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
             mToolStylePopupMenu.getMenu().setGroupCheckable(0, true, true);
 
             int menuIndex = 0;
-
-            mToolStylePopupMenu.getMenu().add(0, menuIndex, 0, TOOL_STYLE_CUSTOM).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_10));
+            mToolStylePopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.TOOL_STYLE_SYSTEM)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_20));
+            mToolStylePopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.TOOL_STYLE_CUSTOM)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_10));
 
 
             mToolStylePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -457,7 +482,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setTopToolStyle(Integer.parseInt(item.getTitleCondensed().toString()));
+                    mAliPaymentModel.setTopToolStyle(Integer.parseInt(item.getTitleCondensed()
+                            .toString()));
                     if (mModelMobileChangeListener != null) {
 
                         mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
@@ -475,6 +501,43 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     }
 
 
+    @OnClick(R.id.tvCarrier)
+    void onTopCarrierClick() {
+        if (null == mCarrierPopupMenu) {
+            mCarrierPopupMenu = new PopupMenu(getActivity(), tvCarrier);
+            mCarrierPopupMenu.getMenu().setGroupCheckable(0, true, true);
+
+            int menuIndex = 0;
+
+            mCarrierPopupMenu.getMenu().add(0, menuIndex, 0, CARRIER_CHINA_YD);
+            mCarrierPopupMenu.getMenu().add(0, menuIndex, 0, CARRIER_CHINA_LT);
+            mCarrierPopupMenu.getMenu().add(0, menuIndex, 0, CARRIER_CHINA_DX);
+
+
+            mCarrierPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+
+
+                    mAliPaymentModel.setMobileCarrier(item.getTitle().toString());
+                    if (mModelMobileChangeListener != null) {
+
+                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    }
+
+                    tvCarrier.setText(item.getTitle());
+
+                    return false;
+                }
+            });
+
+
+        }
+        mCarrierPopupMenu.show();
+    }
+
+
     @OnClick(R.id.tvMobileType)
     void onMobileTypeClick() {
 
@@ -485,31 +548,38 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_IOS).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_10));
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_IOS).setTitleCondensed
+                    (String.valueOf
+                            (AppConstant.ACTION_10));
             menuIndex++;
-            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_ANDROID).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_20));
+            mMobileTypePopupMenu.getMenu().add(0, menuIndex, 0, MOBILE_ANDROID).setTitleCondensed
+                    (String.valueOf
+                            (AppConstant.ACTION_20));
 
 
-            mMobileTypePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            mMobileTypePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener
+                    () {
 
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setMobileType(Integer.parseInt(item.getTitleCondensed().toString()));
+                    mAliPaymentModel.setMobileType(Integer.parseInt(item.getTitleCondensed()
+                            .toString()));
                     if (mModelMobileChangeListener != null) {
 
                         mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
                     }
 
+
                     switch (mAliPaymentModel.getMobileType()) {
                         case AppConstant.ACTION_10:
                             iosContainer.setVisibility(View.VISIBLE);
+                            carrierRelativeLayout.setVisibility(View.VISIBLE);
                             break;
                         case AppConstant.ACTION_20:
                             iosContainer.setVisibility(View.GONE);
+                            carrierRelativeLayout.setVisibility(View.GONE);
                             break;
                     }
 
@@ -526,6 +596,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
         mMobileTypePopupMenu.show();
     }
 
+
     @OnClick(R.id.tvSignal)
     void onSignalClick() {
 
@@ -536,20 +607,25 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_1).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_10));
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_1)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_10));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_2).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_20));
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_2)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_20));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_3).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_30));
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_3)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_30));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_4).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_40));
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_4)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_40));
             menuIndex++;
-            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_5).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_50));
+            mSignalPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_SIGNAL_5)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_50));
 
 
             mSignalPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -558,7 +634,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setNetworkSignal(Integer.parseInt(item.getTitleCondensed().toString()));
+                    mAliPaymentModel.setNetworkSignal(Integer.parseInt(item.getTitleCondensed()
+                            .toString()));
                     if (mModelMobileChangeListener != null) {
 
                         mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
@@ -585,20 +662,25 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
             int menuIndex = 0;
 
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_WIFI).setTitleCondensed(String
-                    .valueOf(AppConstant.ACTION_10));
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_WIFI)
+                    .setTitleCondensed(String
+                            .valueOf(AppConstant.ACTION_10));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_G).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_20));
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_G)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_20));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_E).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_30));
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_E)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_30));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_3G).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_40));
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_3G)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_40));
             menuIndex++;
-            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_4G).setTitleCondensed(String.valueOf
-                    (AppConstant.ACTION_50));
+            mNetworkPopupMenu.getMenu().add(0, menuIndex, 0, AppConstant.NETWORK_4G)
+                    .setTitleCondensed(String.valueOf
+                            (AppConstant.ACTION_50));
 
 
             mNetworkPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -607,7 +689,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setNetworkType(Integer.parseInt(item.getTitleCondensed().toString()));
+                    mAliPaymentModel.setNetworkType(Integer.parseInt(item.getTitleCondensed()
+                            .toString()));
                     if (mModelMobileChangeListener != null) {
 
                         mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
@@ -628,7 +711,8 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
     MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
 
-    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel> modelMobileChangeListener) {
+    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel>
+                                                modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }
 

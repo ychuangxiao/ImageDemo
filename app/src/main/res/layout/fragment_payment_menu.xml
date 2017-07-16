@@ -79,8 +79,8 @@
                 android:background="@null"
                 android:gravity="right"
                 android:hint="输入银行户名"
-                android:inputType="numberDecimal"
-                android:maxLength="12"
+                android:inputType="text"
+                android:maxLength="6"
                 android:padding="@dimen/padding_small"
                 android:textSize="@dimen/google_font_size"/>
 
@@ -158,8 +158,8 @@
                 android:background="@null"
                 android:gravity="right"
                 android:hint="输入说明"
-                android:inputType="numberDecimal"
-                android:maxLength="20"
+                android:inputType="text"
+                android:maxLength="32"
                 android:padding="@dimen/padding_small"
                 android:textSize="@dimen/google_font_size"/>
 

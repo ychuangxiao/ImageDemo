@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:drawable="@mipmap/ic_me_normal" android:state_focused="false" android:state_pressed="false" android:state_selected="false" android:state_checked="false"/>
+    <item android:drawable="@mipmap/ic_me_press" android:state_focused="false" android:state_pressed="false" android:state_selected="true" android:state_checked="true"/>
+    <item android:drawable="@mipmap/ic_me_press" android:state_focused="true" android:state_pressed="false" android:state_selected="false" android:state_checked="false"/>
+    <item android:drawable="@mipmap/ic_me_press" android:state_focused="true" android:state_pressed="false" android:state_selected="true" android:state_checked="true"/>
+    <item android:drawable="@mipmap/ic_me_press" android:state_pressed="true" android:state_selected="true" android:state_checked="true"/>
+    <item android:drawable="@mipmap/ic_me_press" android:state_checked="true"/>
+</selector>

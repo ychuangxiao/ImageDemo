@@ -186,6 +186,8 @@ public class TimeUtils {
 
     public static final String DEFAULT_PATTERN_6 = "yyyy-MM-dd hh:mm:ss";
 
+    public static final String DEFAULT_PATTERN_7 = "yyyyMMddHHmmss";
+
     /**
      * 将时间戳转为时间字符串
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>
@@ -209,11 +211,10 @@ public class TimeUtils {
         return new SimpleDateFormat(pattern, Locale.getDefault()).format(new Date(millis));
     }
 
-    public static long millis2millis(long millis,String pattern)
-    {
+    public static long millis2millis(long millis, String pattern) {
         String value = millis2String(millis);
 
-        return string2Millis(value,pattern);
+        return string2Millis(value, pattern);
     }
 
 
@@ -310,5 +311,18 @@ public class TimeUtils {
     }
 
 
+    /**
+     * 两个时间戳之间的天数
+     * */
+    public static int daysBetween(Long startMillis, Long endMillis) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(startMillis);
+        Long time1 = cal.getTimeInMillis();
+        cal.setTimeInMillis(endMillis);
+        Long time2 = cal.getTimeInMillis();
+        Long between_days = (time2 - time1) / (1000 * 3600 * 24);
+
+        return Integer.parseInt(String.valueOf(between_days));
+    }
 }
 

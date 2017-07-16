@@ -135,7 +135,7 @@ public class MathUtils {
 
 
     public static String toString(BigDecimal bigDecimal) {
-        DecimalFormat df = new DecimalFormat("#.########");
+        DecimalFormat df = new DecimalFormat("#.00");
 
 
         return bigDecimal != null ? df.format(bigDecimal) : "0";

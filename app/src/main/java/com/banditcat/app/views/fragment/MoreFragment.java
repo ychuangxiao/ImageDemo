@@ -51,11 +51,7 @@ public class MoreFragment extends BaseFragment {
     @BindView(R.id.tvCache)
     AppCompatTextView tvCache;
 
-    @BindView(R.id.tvYouHui)
-    AppCompatTextView tvYouHui;
 
-    @BindView(R.id.tvYouHui2)
-    AppCompatTextView tvYouHui2;
 
 
 
@@ -126,14 +122,14 @@ public class MoreFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.tvProtocol)
+    @OnClick(R.id.protocolRelativeLayout)
     void onProtocolClick() {
         Intent intent = new Intent(getActivity(), ProtocolWebViewActivity.class);
         intent.putExtra(AppConstant.EXTRA_NO, "http://ssss.cxylm.net/service/");
         navigateActivity(intent);
     }
 
-    @OnClick(R.id.tvQQ)
+    @OnClick(R.id.customerServicesRelativeLayout)
     void onQQClick() {
 
         String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ.getText().toString()
@@ -141,7 +137,7 @@ public class MoreFragment extends BaseFragment {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
     }
 
-    @OnClick(R.id.tvQQ2)
+    @OnClick(R.id.customerServicesRelativeLayout2)
     void onQQ2Click() {
 
         String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ2.getText().toString()
@@ -149,7 +145,7 @@ public class MoreFragment extends BaseFragment {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
     }
 
-    @OnClick(R.id.tvQQ3)
+    @OnClick(R.id.customerServicesRelativeLayout3)
     void onQQ3Click() {
 
         String qqUrl = String.format("mqqwpa://im/chat?chat_type=wpa&uin=%s&version=1", tvQQ3.getText().toString()
@@ -157,23 +153,5 @@ public class MoreFragment extends BaseFragment {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(qqUrl)));
     }
 
-    @OnClick(R.id.tvYouHui)
-    void onYouHui()
-    {
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(tvYouHui.getTag().toString());
-        intent.setData(content_url);
-        startActivity(intent);
-    }
 
-    @OnClick(R.id.tvYouHui2)
-    void onYouHui2()
-    {
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(tvYouHui2.getTag().toString());
-        intent.setData(content_url);
-        startActivity(intent);
-    }
 }

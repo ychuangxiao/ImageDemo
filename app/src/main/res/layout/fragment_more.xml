@@ -92,17 +92,18 @@
                     android:id="@+id/tvLeftQQ"
                     style="@style/LeftTitle"
                     android:clickable="false"
-                    android:onClick="false"
+                    
                     android:text="客服1 QQ"
 
-                    />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvQQ"
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftQQ"
                     android:clickable="false"
-                    android:onClick="false"
+
                     android:text="123891464"
                     />
 
@@ -125,7 +126,7 @@
                     android:id="@+id/tvLeftQQ2"
                     style="@style/LeftTitle"
                     android:clickable="false"
-                    android:onClick="false"
+
                     android:text="客服2 QQ"
 
                     />
@@ -135,7 +136,7 @@
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftQQ2"
                     android:clickable="false"
-                    android:onClick="false"
+
                     android:text="183067565"
                     />
 
@@ -158,7 +159,7 @@
                     android:id="@+id/tvLeftQQ3"
                     style="@style/LeftTitle"
                     android:clickable="false"
-                    android:onClick="false"
+
                     android:text="客服3 QQ"
 
                     />
@@ -168,7 +169,7 @@
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftQQ3"
                     android:clickable="false"
-                    android:onClick="false"
+
                     android:text="61242188"
                     />
 
@@ -196,7 +197,7 @@
                     style="@style/LeftTitle"
                     android:layout_width="match_parent"
                     android:clickable="false"
-                    android:onClick="false"
+                     
                     android:text="用户协议"
                     />
 
@@ -223,69 +224,14 @@
 
                     android:layout_width="match_parent"
                     android:clickable="false"
-                    android:onClick="false"
+                    
                     android:text="清除缓存"
                     />
 
 
             </RelativeLayout>
 
-            <include layout="@layout/content_line"></include>
 
-
-            <RelativeLayout
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/bg_item_selected"
-                android:clickable="true"
-
-                android:paddingBottom="@dimen/padding_tiny"
-
-                app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvYouHui"
-                    style="@style/LeftTitle"
-                    android:layout_width="match_parent"
-                    android:clickable="false"
-                    android:onClick="false"
-                    android:tag="http://www.382tv.com/"
-                    android:text="专享优惠"
-                    />
-
-
-            </RelativeLayout>
-
-            <include layout="@layout/content_line"></include>
-
-            <RelativeLayout
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:background="@drawable/bg_item_selected"
-                android:clickable="true"
-
-                android:paddingBottom="@dimen/padding_tiny"
-
-                app:layout_constraintTop_toBottomOf="@+id/protocolRelativeLayout">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvYouHui2"
-                    style="@style/LeftTitle"
-                    android:layout_width="match_parent"
-                    android:clickable="false"
-                    android:onClick="false"
-                    android:tag="http://vip.cxylm.net/"
-                    android:text="专享影视"
-                    />
-
-
-            </RelativeLayout>
-
-            <include layout="@layout/content_line"></include>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

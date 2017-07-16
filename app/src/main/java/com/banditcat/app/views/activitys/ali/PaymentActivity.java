@@ -1,10 +1,13 @@
 package com.banditcat.app.views.activitys.ali;
 
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -53,7 +56,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
 
     AliPaymentModel aliPaymentModel;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new
+    private BottomNavigationView.OnNavigationItemSelectedListener
+            mOnNavigationItemSelectedListener = new
             BottomNavigationView
                     .OnNavigationItemSelectedListener() {
 
@@ -71,9 +75,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                 mPaymentMobileStyleFragment.loadViewData(aliPaymentModel);
                             } else {
 
-                                mPaymentMobileStyleFragment = PaymentMobileStyleFragment.newInstance(aliPaymentModel);
-                                addFragment(R.id.content, mPaymentMobileStyleFragment, mobileStyleTag);
-                                mPaymentMobileStyleFragment.setMobileChangeListener(PaymentActivity.this);
+                                mPaymentMobileStyleFragment = PaymentMobileStyleFragment
+                                        .newInstance(aliPaymentModel);
+                                addFragment(R.id.content, mPaymentMobileStyleFragment,
+                                        mobileStyleTag);
+                                mPaymentMobileStyleFragment.setMobileChangeListener
+                                        (PaymentActivity.this);
 
                             }
                             return true;
@@ -86,7 +93,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                 mPaymentMenuFragment.loadViewData(aliPaymentModel);
                             } else {
 
-                                mPaymentMenuFragment = PaymentMenuFragment.newInstance(aliPaymentModel);
+                                mPaymentMenuFragment = PaymentMenuFragment.newInstance
+                                        (aliPaymentModel);
                                 addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
                                 mPaymentMenuFragment.setMobileChangeListener(PaymentActivity.this);
                             }
@@ -103,9 +111,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                         showFragment(mPaymentIosFragment);
                                         mPaymentIosFragment.loadViewData(aliPaymentModel);
                                     } else {
-                                        mPaymentIosFragment = PaymentIosFragment.newInstance(aliPaymentModel);
-                                        addFragment(R.id.content, mPaymentIosFragment, paymentIosTag);
-                                        mPaymentIosFragment.setMobileChangeListener(PaymentActivity.this);
+                                        mPaymentIosFragment = PaymentIosFragment.newInstance
+                                                (aliPaymentModel, navigation);
+                                        addFragment(R.id.content, mPaymentIosFragment,
+                                                paymentIosTag);
+                                        mPaymentIosFragment.setMobileChangeListener
+                                                (PaymentActivity.this);
                                     }
 
                                     break;
@@ -119,9 +130,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
                                     } else {
 
-                                        mPaymentGoogleFragment = PaymentGoogleFragment.newInstance(aliPaymentModel);
-                                        addFragment(R.id.content, mPaymentGoogleFragment, paymentTag);
-                                        mPaymentGoogleFragment.setMobileChangeListener(PaymentActivity.this);
+                                        mPaymentGoogleFragment = PaymentGoogleFragment
+                                                .newInstance(aliPaymentModel, navigation);
+                                        addFragment(R.id.content, mPaymentGoogleFragment,
+                                                paymentTag);
+                                        mPaymentGoogleFragment.setMobileChangeListener
+                                                (PaymentActivity.this);
                                     }
 
 
@@ -181,7 +195,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     @Override
     public void initView() {
 
-        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(true).setHomeOnClickListener();
+        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(true)
+                .setHomeOnClickListener();
 
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -200,6 +215,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         aliPaymentModel.setFinish(false);
         aliPaymentModel.setRemark("转账");
         aliPaymentModel.setBankNo("8888");
+        aliPaymentModel.setMobileCarrier(AppConstant.CARRIER_CHINA_YD);
         aliPaymentModel.setReceiptUserName("张三");
         aliPaymentModel.setPaymentType("中国工商银行(6666)");
         aliPaymentModel.setReceiptMoney(BigDecimal.valueOf(8888888.00));
@@ -277,31 +293,68 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         if (id == R.id.action_settings) {
 
 
-            switch (aliPaymentModel.getMobileType()) {
-                case AppConstant.ACTION_10:
-
-                    if (mPaymentIosFragment == null) {
-                        alertMsg("请切换到预览效果");
-                        return true;
-                    }
-                    mPaymentIosFragment.createImage();
-                    break;
-                case AppConstant.ACTION_20:
-                    if (mPaymentGoogleFragment == null) {
-                        alertMsg("请切换到预览效果");
-                        return true;
-                    }
-                    mPaymentGoogleFragment.createImage();
+            if (checkPermissions()) {
+                createImage();
             }
 
+
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Nullable
+    private Boolean createImage() {
+        switch (aliPaymentModel.getMobileType()) {
+            case AppConstant.ACTION_10:
+
+                if (mPaymentIosFragment == null) {
+                    alertMsg("请切换到预览效果");
+                    return true;
+                }
+                mPaymentIosFragment.createImage();
+                break;
+            case AppConstant.ACTION_20:
+                if (mPaymentGoogleFragment == null) {
+                    alertMsg("请切换到预览效果");
+                    return true;
+                }
+                mPaymentGoogleFragment.createImage();
+        }
+        return null;
+    }
+
     @Override
     public void onItemClickListener(AliPaymentModel model) {
         aliPaymentModel = model;
+
+        //判断是否为系统
+
+        if (model.getTopToolStyle() == AppConstant.ACTION_20) {
+            mToolbar.setVisibility(View.GONE);
+        } else if (model.getTopToolStyle() == AppConstant.ACTION_10) {
+            mToolbar.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case AppConstant.ACTION_10: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    createImage();
+                } else {
+                    // 权限被用户拒绝了，洗洗睡吧。
+                }
+                return;
+            }
+        }
     }
 }

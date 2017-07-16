@@ -2,8 +2,11 @@ package com.banditcat.app.views.viewgroup;
 
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.RelativeLayout;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.banditcat.app.R;
 import com.banditcat.app.model.AliPaymentModel;
@@ -29,8 +32,13 @@ public class PrimaryTopTitleIosView extends RelativeLayout {
     Context mContext;//上下文
     boolean alreadyInflated = false;
 
+    @BindView(R.id.tvBackHome)
+    AppCompatTextView tvBackHome;
 
 
+    public AppCompatTextView getTvBackHome() {
+        return tvBackHome;
+    }
 
     /**
      * 静态视图绑定
