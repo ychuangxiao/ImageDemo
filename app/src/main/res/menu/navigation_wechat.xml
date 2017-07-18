@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@mipmap/wechaat_title_right_search"
+        android:title="搜索"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/navigation_add"
+        android:icon="@mipmap/ic_title_right_add"
+        android:title="添加"
+        app:showAsAction="always"/>
+
+
+
+</menu>

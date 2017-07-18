@@ -438,7 +438,10 @@
 
     <color name="wechat_bg">#ffebebeb</color>
 
-    <color name="colorWeChatBackground">#ffc9c9c9</color>
+    <color name="colorWeChatBackground">#ebebeb</color>
 
+    <color name="wechat_text_view_focused">#ff45c01a</color>
 
+    <color name="wechat_color_ff666666">#ff666666</color>
+    <color name="wechat_color_ffe5e5e5">#ffe5e5e5</color>
 </resources>

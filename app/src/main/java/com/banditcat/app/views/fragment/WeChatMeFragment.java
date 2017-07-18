@@ -1,15 +1,15 @@
 package com.banditcat.app.views.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 
 import com.banditcat.app.R;
+import com.banditcat.app.views.activitys.tencent.PurseActivity;
 import com.banditcat.app.views.base.BaseFragment;
+
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,7 +50,6 @@ public class WeChatMeFragment extends BaseFragment {
     }
 
 
-
     @Override
     protected void DestroyView() {
 
@@ -67,5 +66,8 @@ public class WeChatMeFragment extends BaseFragment {
     }
 
 
-
+    @OnClick(R.id.tvMoney)
+    void onMoneyClick() {
+        navigateActivity(new Intent(getActivity(), PurseActivity.class));
+    }
 }

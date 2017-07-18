@@ -147,7 +147,7 @@
                     android:tag="0"
                     android:text="处理中"
                     android:textColor="#ed8c04"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvMoney"/>
@@ -388,7 +388,8 @@
                     android:id="@+id/tvBankHandleOverTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
+                    android:paddingBottom="8dp"
+
                     android:tag="预计%s前"
                     android:text="预计06-11 23:03前"
                     android:textColor="#b3b1b1"

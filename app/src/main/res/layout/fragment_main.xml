@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
 
         android:clickable="true"
         android:orientation="vertical">
@@ -35,60 +35,30 @@
 
             />
 
-        <RelativeLayout
-android:id="@+id/favourableRelativeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvFavourable"
+            style="@style/LeftTitle"
 
+            android:layout_width="match_parent"
             android:background="@drawable/bg_item_selected"
             android:clickable="true"
-
-            android:paddingBottom="@dimen/padding_tiny"
-            >
-
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tvYouHui"
-                style="@style/LeftTitle"
-                android:layout_width="match_parent"
-
-                android:clickable="false"
-
-                android:tag="http://www.382tv.com/"
-                android:text="专享优惠"
-                />
-
-
-        </RelativeLayout>
+            android:padding="@dimen/padding_medium"
+            android:tag="http://www.382tv.com/"
+            android:text="专享优惠"
+            />
 
         <include layout="@layout/content_line"></include>
 
-        <RelativeLayout
-android:id="@+id/videoRelativeLayout"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvVideo"
+            style="@style/LeftTitle"
+            android:padding="@dimen/padding_medium"
+            android:layout_width="match_parent"
+            android:clickable="false"
             android:background="@drawable/bg_item_selected"
-
-
-
-            android:clickable="true"
-
-            android:paddingBottom="@dimen/padding_tiny">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tvYouHui2"
-                style="@style/LeftTitle"
-                android:layout_width="match_parent"
-                android:clickable="false"
-
-                android:tag="http://vip.cxylm.net/"
-                android:text="专享影视"
-                />
-
-
-        </RelativeLayout>
-
+            android:tag="http://vip.cxylm.net/"
+            android:text="专享影视"
+            />
         <include layout="@layout/content_line"></include>
     </LinearLayout>
 </FrameLayout>

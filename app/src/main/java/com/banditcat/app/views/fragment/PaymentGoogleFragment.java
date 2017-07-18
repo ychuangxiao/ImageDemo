@@ -5,28 +5,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.banditcat.app.BuildConfig;
 import com.banditcat.app.R;
 import com.banditcat.app.constant.AppConstant;
 import com.banditcat.app.model.AliPaymentModel;
@@ -41,14 +35,12 @@ import com.banditcat.app.views.listeners.MobileChangeListener;
 import com.banditcat.app.views.viewgroup.EditTextItemView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkIosView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkView;
-import com.banditcat.app.views.viewgroup.PrimaryTopTitleIosView;
 import com.banditcat.app.views.viewgroup.PrimaryTopTitleView;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -206,15 +198,13 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
         }
 
 
-        if (BuildConfig.HAS_WATERMAR) {
-            if (getApplicationComponent(getContext().getApplicationContext()).context()
-                    .sharedpreferences.Watermark().get()) {
+        if (getApplicationComponent(getContext().getApplicationContext()).context()
+                .sharedpreferences.Watermark().get()) {
 
 
-                watermarkImageView.setVisibility(View.GONE);
-            } else {
-                watermarkImageView.setVisibility(View.VISIBLE);
-            }
+            watermarkImageView.setVisibility(View.GONE);
+        } else {
+            watermarkImageView.setVisibility(View.VISIBLE);
         }
 
 

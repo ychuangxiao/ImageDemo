@@ -2,16 +2,26 @@ package com.banditcat.app.views.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.banditcat.app.R;
 import com.banditcat.app.views.base.BaseFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WeChatFindFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+ /**
+  * 文件名称：{@link WeChatFindFragment}
+  * <br/>
+  * 功能描述： 发现
+  * <br/>
+  * 创建作者：banditcat
+  * <br/>
+  * 创建时间：2017/7/17 09:32
+  * <br/>
+  * 修改作者：banditcat
+  * <br/>
+  * 修改时间：2017/7/17 09:32
+  * <br/>
+  * 修改备注：
+  */
 public class WeChatFindFragment extends BaseFragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,7 +69,7 @@ public class WeChatFindFragment extends BaseFragment {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_we_chat_me;
+        return R.layout.fragment_we_chat_find;
     }
 
 

@@ -166,7 +166,7 @@ public final class SharedPreferencesUtils extends SharedPreferencesHelper {
      * @return
      */
     public BooleanPrefField Watermark() {
-        return booleanField("Watermark", true);
+        return booleanField("Watermark", false);
     }
 
 }

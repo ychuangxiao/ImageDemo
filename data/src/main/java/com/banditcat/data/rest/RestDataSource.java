@@ -57,8 +57,10 @@ public class RestDataSource implements BaseRepository {
     public RestDataSource(AppEntity appEntity, Endpoint endpoint) {
 
         mContext = appEntity.getContext();
-        mRestApi = ServiceGenerator.createService(ServiceGenerator.createOkHttpClient(appEntity, true), RestApi.class, endpoint.getEndpoint());
-        mUnFailureRestApi = ServiceGenerator.createService(ServiceGenerator.createOkHttpClient(appEntity, false), RestApi.class, endpoint
+        mRestApi = ServiceGenerator.createService(ServiceGenerator.createOkHttpClient(appEntity, true), RestApi
+                .class, endpoint.getEndpoint());
+        mUnFailureRestApi = ServiceGenerator.createService(ServiceGenerator.createOkHttpClient(appEntity, false),
+                RestApi.class, endpoint
                 .getEndpoint());
 
     }
@@ -74,7 +76,8 @@ public class RestDataSource implements BaseRepository {
     public Observable<BaseRespEntity> saveCrashLog(BaseCrashReqEntity crashReqEntity) {
 
 
-        return mRestApi.saveCrashLog(TextConstant.API_KEY, crashReqEntity).onErrorResumeNext(new HttpRespExceptionUtils<BaseRespEntity>());
+        return mRestApi.saveCrashLog(TextConstant.API_KEY, crashReqEntity).onErrorResumeNext(new
+                HttpRespExceptionUtils<BaseRespEntity>());
 
 
     }
@@ -89,11 +92,13 @@ public class RestDataSource implements BaseRepository {
     public Observable<UserRealm> autoLogin() {
         Realm realm = Realm.getDefaultInstance();
 
-        RealmResults<UserRealm> userRealms = realm.where(UserRealm.class).isNotNull(TextConstant.COLUMN_NAME_FOR_PASSWORD).findAllSorted
+        RealmResults<UserRealm> userRealms = realm.where(UserRealm.class).isNotNull(TextConstant
+                .COLUMN_NAME_FOR_PASSWORD).findAllSorted
                 (TextConstant.COLUMN_NAME_FOR_LATESTDATE, Sort.DESCENDING);
 
 
-        return (userRealms != null && !userRealms.isEmpty()) ? Observable.just(userRealms.first()) : Observable.just(new UserRealm());
+        return (userRealms != null && !userRealms.isEmpty()) ? Observable.just(userRealms.first()) : Observable.just
+                (new UserRealm());
 
     }
 
@@ -106,7 +111,8 @@ public class RestDataSource implements BaseRepository {
     @Override
     public Observable<BaseRespEntity> checkUpdate(BaseReqEntity baseReqEntity) {
 
-        return mRestApi.checkUpdate(TextConstant.API_KEY).onErrorResumeNext(new HttpRespExceptionUtils<BaseRespEntity>());
+        return mRestApi.checkUpdate(TextConstant.API_KEY).onErrorResumeNext(new
+                HttpRespExceptionUtils<BaseRespEntity>());
 
     }
 
@@ -130,7 +136,7 @@ public class RestDataSource implements BaseRepository {
      */
     @Override
     public Observable<BaseRespEntity> register(RegReqEntity entity) {
-        return mRestApi.register(TextConstant.API_KEY,entity);
+        return mRestApi.register(TextConstant.API_KEY, entity);
     }
 
 
@@ -166,7 +172,8 @@ public class RestDataSource implements BaseRepository {
     public Observable<BaseRespEntity> logout(final LogoutReqEntity logoutReqEntity) {
 
         delUserToDb(logoutReqEntity.getAuthorization(), logoutReqEntity.getUserId());
-        return mRestApi.logout(logoutReqEntity.getAuthorization()).onErrorResumeNext(new HttpRespExceptionUtils<BaseRespEntity>());
+        return mRestApi.logout(logoutReqEntity.getAuthorization()).onErrorResumeNext(new
+                HttpRespExceptionUtils<BaseRespEntity>());
     }
 
 
@@ -178,7 +185,8 @@ public class RestDataSource implements BaseRepository {
     private boolean isNoThereInternetConnection() {
         boolean isConnected;
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(Context
+                .CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
 
@@ -211,8 +219,7 @@ public class RestDataSource implements BaseRepository {
                     user.setUserUid(logonEntity.getUsername());
                     user.setPassword(respEntity.getAuthCode());
                     user.setLatestDate(System.currentTimeMillis());
-
-
+                    user.setActive(20L);
                 }
             });
 
@@ -237,7 +244,8 @@ public class RestDataSource implements BaseRepository {
             @Override
             public void execute(Realm realm) {
 
-                RealmResults<UserRealm> users = realm.where(UserRealm.class).equalTo("password", authorization, Case.INSENSITIVE).findAll();
+                RealmResults<UserRealm> users = realm.where(UserRealm.class).equalTo("password", authorization, Case
+                        .INSENSITIVE).findAll();
 
                 if (null != users && users.size() >= 1) {
                     users.get(0).setPassword(null); // indirectly delete object

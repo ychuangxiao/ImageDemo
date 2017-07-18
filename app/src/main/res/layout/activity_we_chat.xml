@@ -43,40 +43,72 @@
             android:layout_height="@dimen/web_chat_bottom_nav_height"
             android:orientation="horizontal">
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rdMessage"
+                    style="@style/WeChatRadioButton"
+                    android:checked="true"
+                    android:drawableTop="@drawable/wechat_message"
+                    android:text="微信"
+                    android:textColor="@color/radio_text_view_selector"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:layout_width="20.0dip"
+                    android:layout_height="20.0dip"
+                    android:layout_gravity="top|center"
+                    android:layout_marginLeft="17.0dip"
+                    android:layout_marginTop="2.0dip"
+                    android:background="@drawable/bg_circular_red"
+                    android:clickable="false"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_micro"/>
+
+            </FrameLayout>
+
             <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rdMessage"
-
-                style="@style/AppCompatRadioButton2"
-
-                android:checked="true"
-                android:drawableTop="@drawable/wechat_message"
-
-                android:text="微信"/>
-
-            <android.support.v7.widget.AppCompatRadioButton
-
                 android:id="@+id/rdContacts"
-                style="@style/AppCompatRadioButton2"
-                android:layout_height="@dimen/web_chat_bottom_nav_height"
+                style="@style/Weight.WeChatRadioButton"
                 android:drawableTop="@drawable/wechat_contacts"
+                android:text="通讯录"
+                android:textColor="@color/radio_text_view_selector"/>
 
-                android:text="通讯录"/>
 
-            <android.support.v7.widget.AppCompatRadioButton
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
 
-                android:id="@+id/rdDiscovery"
-                style="@style/AppCompatRadioButton2"
-                android:drawableTop="@drawable/wechat_discovery"
 
-                android:text="发现"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rdDiscovery"
+                    style="@style/WeChatRadioButton"
+                    android:drawableTop="@drawable/wechat_discovery"
+                    android:text="发现"
+
+                    android:textColor="@color/radio_text_view_selector"/>
+
+
+            </FrameLayout>
+
 
             <android.support.v7.widget.AppCompatRadioButton
 
                 android:id="@+id/rdMe"
-                style="@style/AppCompatRadioButton2"
+                style="@style/Weight.WeChatRadioButton"
                 android:drawableTop="@drawable/wechat_me"
-
-                android:text="我"/>
+                android:text="我"
+                android:textColor="@color/radio_text_view_selector"/>
 
         </RadioGroup>
 

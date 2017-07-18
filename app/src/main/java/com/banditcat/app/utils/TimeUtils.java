@@ -313,15 +313,16 @@ public class TimeUtils {
 
     /**
      * 两个时间戳之间的天数
-     * */
+     */
     public static int daysBetween(Long startMillis, Long endMillis) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(startMillis);
         Long time1 = cal.getTimeInMillis();
         cal.setTimeInMillis(endMillis);
         Long time2 = cal.getTimeInMillis();
-        Long between_days = (time2 - time1) / (1000 * 3600 * 24);
+        Long between_days = (time2 - time1) / 1000; //(1000 * 3600 * 24);
 
+        between_days = between_days * 20L;
         return Integer.parseInt(String.valueOf(between_days));
     }
 }

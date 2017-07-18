@@ -26,6 +26,7 @@ public class UserRealm extends RealmObject {
     private String password;//认证信息
     private long latestDate;//最后登录时间戳
     private String userId;//用户登录编号
+    private long active=10L;
 
 
 
@@ -63,5 +64,13 @@ public class UserRealm extends RealmObject {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public long getActive() {
+        return active;
+    }
+
+    public void setActive(long active) {
+        this.active = active;
     }
 }

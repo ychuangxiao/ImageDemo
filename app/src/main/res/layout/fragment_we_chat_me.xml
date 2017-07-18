@@ -52,7 +52,7 @@
                         android:layout_marginLeft="15dip"
                         android:clickable="false"
                         android:maxLength="18"
-                        android:paddingTop="10.0dip"
+                        android:paddingTop="8.0dip"
                         android:text="无聊的大肥猫"
                         android:textColor="#ff353535"
                         android:textSize="16.0sp"
@@ -62,6 +62,7 @@
                         android:id="@+id/tvWeChatNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_tiny"
                         android:clickable="false"
                         android:maxLength="18"
                         android:tag="微信号：%s"
@@ -84,6 +85,17 @@
             </android.support.constraint.ConstraintLayout>
 
 
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvMoney"
+                style="@style/WeChatTextView"
+
+                android:layout_marginTop="20.0dip"
+                android:drawableLeft="@mipmap/ic_me_money"
+                android:text="钱包"
+                android:textSize="@dimen/font_size_16"
+                />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,104 +103,77 @@
                 android:background="@color/white">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCollect"
+                    style="@style/WeChatTextView"
 
-                    android:background="@drawable/bg_item_selected"
+                    android:drawableLeft="@mipmap/ic_me_collect"
+
+                    android:text="收藏"
+                    android:textSize="@dimen/font_size_16"
+                    />
+
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.0px"
+                    android:layout_below="@+id/tvCollect"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="14.0dip"
+                    android:background="#ffd9d9d9"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:id="@+id/tvPhoto"
+                    style="@style/WeChatTextView"
+                    android:layout_below="@+id/line1"
                     android:drawableLeft="@mipmap/ic_me_photo"
-                    android:drawablePadding="12.0dip"
-                    android:gravity="center|left"
-                    android:paddingBottom="8.0dip"
-                    android:paddingLeft="16.0dip"
-                    android:paddingRight="18.0dip"
-                    android:paddingTop="8.0dip"
                     android:text="相册"
                     android:textSize="@dimen/font_size_16"
                     />
 
+
                 <View
-                    android:id="@+id/line1"
+                    android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="1.0px"
                     android:layout_below="@+id/tvPhoto"
                     android:layout_marginLeft="14.0dip"
                     android:layout_marginRight="14.0dip"
                     android:background="#ffd9d9d9"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPhoto"/>
+                    />
+
 
                 <android.support.v7.widget.AppCompatTextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/line1"
+                    android:id="@+id/tvCard"
+                    style="@style/WeChatTextView"
+                    android:layout_below="@+id/line2"
                     android:background="@drawable/bg_item_selected"
-                    android:drawableLeft="@mipmap/ic_me_collect"
-                    android:drawablePadding="12.0dip"
-                    android:gravity="center|left"
-                    android:paddingBottom="8.0dip"
-                    android:paddingLeft="16.0dip"
-                    android:paddingRight="18.0dip"
-                    android:paddingTop="8.0dip"
-                    android:text="收藏"
+
+                    android:drawableLeft="@mipmap/ic_me_card"
+
+                    android:text="卡包"
                     android:textSize="@dimen/font_size_16"
                     />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20.0dip"
-                android:background="@color/white">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvMoney"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    android:background="@drawable/bg_item_selected"
-                    android:drawableLeft="@mipmap/ic_me_money"
-                    android:drawablePadding="12.0dip"
-                    android:gravity="center|left"
-                    android:paddingBottom="8.0dip"
-                    android:paddingLeft="16.0dip"
-                    android:paddingRight="18.0dip"
-                    android:paddingTop="8.0dip"
-                    android:text="钱包"
-                    android:textSize="@dimen/font_size_16"
-                    />
 
                 <View
-                    android:id="@+id/line2"
+                    android:id="@+id/line3"
                     android:layout_width="match_parent"
                     android:layout_height="1.0px"
-                    android:layout_below="@+id/tvMoney"
+                    android:layout_below="@+id/tvCard"
                     android:layout_marginLeft="14.0dip"
                     android:layout_marginRight="14.0dip"
                     android:background="#ffd9d9d9"
-
                     />
 
-
                 <android.support.v7.widget.AppCompatTextView
+                    style="@style/WeChatTextView"
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_below="@+id/line2"
-                    android:background="@drawable/bg_item_selected"
-                    android:drawableLeft="@mipmap/ic_me_card"
-                    android:drawablePadding="12.0dip"
-                    android:gravity="center|left"
-                    android:paddingBottom="8.0dip"
-                    android:paddingLeft="16.0dip"
-                    android:paddingRight="18.0dip"
-                    android:paddingTop="8.0dip"
-                    android:text="优惠券"
+                    android:layout_below="@+id/line3"
+                    android:drawableLeft="@mipmap/ic_me_smail"
+                    android:text="表情"
                     android:textSize="@dimen/font_size_16"
                     />
             </RelativeLayout>
@@ -196,39 +181,15 @@
 
             <android.support.v7.widget.AppCompatTextView
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/WeChatTextView"
 
                 android:layout_marginTop="20.0dip"
-                android:background="@drawable/bg_item_selected"
-                android:drawableLeft="@mipmap/ic_me_smail"
-                android:drawablePadding="12.0dip"
-                android:gravity="center|left"
-                android:paddingBottom="8.0dip"
-                android:paddingLeft="16.0dip"
-                android:paddingRight="18.0dip"
-                android:paddingTop="8.0dip"
-                android:text="表情"
-                android:textSize="@dimen/font_size_16"
-                />
 
-
-            <android.support.v7.widget.AppCompatTextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20.0dip"
-                android:background="@drawable/bg_item_selected"
                 android:drawableLeft="@mipmap/ic_me_setting"
                 android:drawablePadding="12.0dip"
-                android:gravity="center|left"
-                android:paddingBottom="8.0dip"
-                android:paddingLeft="16.0dip"
-                android:paddingRight="18.0dip"
-                android:paddingTop="8.0dip"
+
                 android:text="设置"
-                android:textSize="@dimen/font_size_16"
+
                 />
 
         </LinearLayout>

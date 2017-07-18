@@ -494,7 +494,7 @@
                     android:id="@+id/tvOrderNo"
                     style="@style/Google.TextView.Left.800.400"
                     android:layout_marginTop="16dp"
-                    android:text="创建时间"
+                    android:text="订单号"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCreateTime"/>
 

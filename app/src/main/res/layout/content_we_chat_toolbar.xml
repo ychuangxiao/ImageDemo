@@ -27,5 +27,7 @@
             android:textSize="@dimen/font_size_medium"
 
             />
+
+
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>

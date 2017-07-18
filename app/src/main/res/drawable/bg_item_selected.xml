@@ -12,9 +12,9 @@
             <shape>
                 <gradient
                     android:angle="270.0"
-                    android:endColor="@color/colorUnHandleLine"
-                    android:centerColor="@color/colorUnHandleLine"
-                    android:startColor="@color/colorUnHandleLine"
+                    android:endColor="@color/whiteSmoke"
+                    android:centerColor="@color/whiteSmoke"
+                    android:startColor="@color/whiteSmoke"
 
                     />
 

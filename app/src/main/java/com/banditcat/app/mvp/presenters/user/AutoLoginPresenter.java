@@ -83,7 +83,7 @@ public class AutoLoginPresenter implements Presenter<AutoLoginHandleView> {
     @Override
     public void attachView(AutoLoginHandleView baseView) {
 
-        this.mAutoLoginHandleView =   baseView;
+        this.mAutoLoginHandleView = baseView;
     }
 
     /**
@@ -99,7 +99,7 @@ public class AutoLoginPresenter implements Presenter<AutoLoginHandleView> {
                 if (userRealm != null && StringUtils.isNotEmpty(userRealm.getUserUid())) {
                     mAndroidApplication.sharedpreferences.Authorization().put(userRealm.getPassword());//设置授权码
                     mAndroidApplication.sharedpreferences.UserId().put(userRealm.getUserId());//设置司机编号
-
+                    mAndroidApplication.sharedpreferences.Watermark().put(userRealm.getActive() == 20L);
 
                     mAutoLoginHandleView.navigateToHome();
                 }
@@ -114,8 +114,6 @@ public class AutoLoginPresenter implements Presenter<AutoLoginHandleView> {
         });
 
     }
-
-
 
 
 }

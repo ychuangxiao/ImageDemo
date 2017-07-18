@@ -11,7 +11,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
@@ -20,11 +19,8 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.banditcat.app.BuildConfig;
 import com.banditcat.app.R;
 import com.banditcat.app.constant.AppConstant;
 import com.banditcat.app.model.AliPaymentModel;
@@ -40,7 +36,6 @@ import com.banditcat.app.views.viewgroup.EditTextItemView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkIosView;
 import com.banditcat.app.views.viewgroup.PrimaryDarkView;
 import com.banditcat.app.views.viewgroup.PrimaryTopTitleIosView;
-import com.banditcat.app.views.viewgroup.PrimaryTopTitleView;
 import com.banditcat.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -174,7 +169,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
      *
      * @return A new instance of fragment PaymentGoogleFragment.
      */
-    public static PaymentIosFragment newInstance(AliPaymentModel aliPaymentModel,BottomNavigationView navigationView) {
+    public static PaymentIosFragment newInstance(AliPaymentModel aliPaymentModel, BottomNavigationView navigationView) {
 
 
         mBottomNavigationView = navigationView;
@@ -201,15 +196,13 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         }
 
 
-        if (BuildConfig.HAS_WATERMAR) {
-            if (getApplicationComponent(getContext().getApplicationContext()).context()
-                    .sharedpreferences.Watermark().get()) {
+        if (getApplicationComponent(getContext().getApplicationContext()).context()
+                .sharedpreferences.Watermark().get()) {
 
 
-                watermarkImageView.setVisibility(View.GONE);
-            } else {
-                watermarkImageView.setVisibility(View.VISIBLE);
-            }
+            watermarkImageView.setVisibility(View.GONE);
+        } else {
+            watermarkImageView.setVisibility(View.VISIBLE);
         }
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -265,8 +258,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             mPrimaryDarkIosView.binder(mAliPaymentModel);
             primaryDarkConstraintLayout.addView(mPrimaryDarkIosView);
 
-        }
-        else {
+        } else {
             mBottomNavigationView.setVisibility(View.GONE);
         }
 
@@ -363,7 +355,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
      */
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_payment_google;
+        return R.layout.fragment_payment_ios;
     }
 
 
@@ -874,7 +866,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
 
     public void setMobileChangeListener(MobileChangeListener<AliPaymentModel>
-                                                modelMobileChangeListener) {
+            modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }
 }

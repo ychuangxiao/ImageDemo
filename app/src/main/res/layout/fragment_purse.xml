@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWeChatBackground"
+    tools:context="com.banditcat.app.views.activitys.tencent.PurseActivityFragment"
+    tools:showIn="@layout/activity_purse">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/moneyConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#ff686f78"
+        android:paddingBottom="28.0dip"
+        android:paddingTop="30.0dip"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv1"
+            style="@style/Purse.TextView"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_wallet_pay"
+            android:text="收付款"
+
+            app:layout_constraintHorizontal_chainStyle="spread"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv2"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv2"
+            style="@style/Purse.TextView"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_wallet_small_charge"
+            android:text="零钱"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv1"
+            app:layout_constraintRight_toLeftOf="@+id/tv3"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv3"
+            style="@style/Purse.TextView"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_wallet_bankcard"
+            android:text="银行卡"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv2"
+
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥999,999,999.00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv2"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTencentServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="7.0dip"
+        android:paddingLeft="12.0dip"
+        android:paddingTop="12.5dip"
+        android:text="腾讯服务"
+        android:textColor="@color/wechat_color_ff666666"
+        android:textSize="@dimen/font_size_15"
+        app:layout_constraintTop_toBottomOf="@+id/moneyConstraintLayout"/>
+
+
+    <View
+        android:id="@+id/topHorizontalLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/wechat_color_ffe5e5e5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTencentServer"/>
+
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topHorizontalLine">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv4"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_1"
+            android:text="面对面红包"
+
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv5"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine1"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv5"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv5"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_2"
+            android:text="手机充值"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv4"
+            app:layout_constraintRight_toLeftOf="@+id/tv6"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine2"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv6"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv6"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_3"
+            android:text="理财通"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv5"
+
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/wechat_color_ffe5e5e5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout1"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine1">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv7"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_3"
+            android:text="Q币充值"
+
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv8"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine3"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv8"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv8"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_4"
+            android:text="生活缴费"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv7"
+            app:layout_constraintRight_toLeftOf="@+id/tv9"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine4"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv9"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv9"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_5"
+            android:text="城市服务"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv8"
+
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/wechat_color_ffe5e5e5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout2"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine2">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv10"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_7"
+            android:text="Q币充值"
+
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv11"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine5"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv11"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv11"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_purse_8"
+            android:text="生活缴费"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv10"
+            app:layout_constraintRight_toLeftOf="@+id/tv12"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/verticalLine6"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="0dp"
+            android:background="@color/wechat_color_ffe5e5e5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv12"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv12"
+            style="@style/Purse.TextView.Server"
+            android:layout_width="0dp"
+            android:background="@null"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv11"
+
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/horizontalLine3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/wechat_color_ffe5e5e5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout3"/>
+
+    <TextView
+        android:id="@+id/tvTencentServer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="7.0dip"
+        android:paddingLeft="12.0dip"
+        android:paddingTop="12.5dip"
+        android:text="第三方服务"
+        android:textColor="@color/wechat_color_ff666666"
+        android:textSize="@dimen/font_size_15"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine3"/>
+</android.support.constraint.ConstraintLayout>

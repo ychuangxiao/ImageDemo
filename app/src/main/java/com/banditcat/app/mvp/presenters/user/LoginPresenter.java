@@ -119,7 +119,7 @@ public class LoginPresenter implements Presenter<LoginView> {
                 mAndroidApplication.sharedpreferences.Authorization().put(loginResEntity.getAuthCode());//设置授权码
 
                 mAndroidApplication.sharedpreferences.UserId().put(loginResEntity.getUserCode());//用户代码
-
+                mAndroidApplication.sharedpreferences.Watermark().put(loginResEntity.getIsactive().compareTo("Y")==0);
                 mLoginView.hideLoading();
                 mLoginView.navigateToHome();
             }

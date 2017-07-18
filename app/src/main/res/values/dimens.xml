@@ -75,15 +75,15 @@
     <dimen name="font_size_XXlarge">40.0sp</dimen>
     <dimen name="font_size_XXXlarge">55.0sp</dimen>
 
-
+    <dimen name="font_size_14">14.0sp</dimen>
+    <dimen name="font_size_15">15.0sp</dimen>
     <dimen name="font_size_16">16.0sp</dimen>
-
 
 
     <dimen name="line_height">0.5dp</dimen>
 
     <dimen name="web_chat_bottom_nav_height">55.0dip</dimen>
 
-    <dimen name="web_chat_abc_action_bar_default_height">46.0dip</dimen>
+    <dimen name="web_chat_abc_action_bar_default_height">50.0dip</dimen>
 
 </resources>
