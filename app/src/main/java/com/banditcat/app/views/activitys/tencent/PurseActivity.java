@@ -11,7 +11,7 @@ public class PurseActivity extends BaseActivity {
      */
     @Override
     public void initView() {
-        setToolTitle(getString(R.string.title_activity_we_chat)).setDisplayHome(true)
+        setToolTitle(getString(R.string.title_activity_purse)).setDisplayHome(true)
                 .setHomeOnClickListener();
     }
 
