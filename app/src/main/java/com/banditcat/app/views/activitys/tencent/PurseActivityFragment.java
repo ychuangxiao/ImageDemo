@@ -1,11 +1,8 @@
 package com.banditcat.app.views.activitys.tencent;
 
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
@@ -13,6 +10,7 @@ import com.banditcat.app.R;
 import com.banditcat.app.views.base.BaseFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -41,6 +39,9 @@ public class PurseActivityFragment extends BaseFragment {
     @BindView(R.id.relativeLayout16)
     RelativeLayout relativeLayout16;
 
+    @BindView(R.id.tvPocketMoney)
+    AppCompatTextView tvPocketMoney;
+
     public PurseActivityFragment() {
     }
 
@@ -61,10 +62,9 @@ public class PurseActivityFragment extends BaseFragment {
 
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int screenWidth = (dm.widthPixels/3);
+        int screenWidth = (dm.widthPixels / 3);
 
-        int screenHeight =  (int)(dm.widthPixels/3*0.85);
-
+        int screenHeight = (int) (dm.widthPixels / 3 * 0.85);
 
 
         ViewGroup.LayoutParams layoutParams = relativeLayout1.getLayoutParams();
@@ -73,8 +73,6 @@ public class PurseActivityFragment extends BaseFragment {
         layoutParams.height = screenHeight;
 
         relativeLayout1.setLayoutParams(layoutParams);
-
-
 
 
         layoutParams = relativeLayout4.getLayoutParams();
@@ -93,7 +91,6 @@ public class PurseActivityFragment extends BaseFragment {
         layoutParams.width = screenWidth;
         layoutParams.height = screenHeight;
         relativeLayout10.setLayoutParams(layoutParams);
-
 
 
         layoutParams = relativeLayout13.getLayoutParams();
@@ -117,6 +114,11 @@ public class PurseActivityFragment extends BaseFragment {
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_purse;
+    }
+
+    @OnClick(R.id.tvPocketMoney)
+    void onPocketMoneyClick() {
+        navigateActivity(new Intent(getActivity(), PocketMoneyActivity.class));
     }
 
 

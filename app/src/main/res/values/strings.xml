@@ -36,6 +36,7 @@
     <string name="hint_qq">输入QQ号码</string>
     <string name="title_activity_we_chat">微信</string>
     <string name="title_activity_purse">我的钱包</string>
+    <string name="title_activity_pocket_money">零钱</string>
 
 
 </resources>

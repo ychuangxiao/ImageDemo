@@ -54,8 +54,6 @@ public abstract class BaseFragment extends Fragment {
     protected abstract int getContentViewId();
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -118,12 +116,14 @@ public abstract class BaseFragment extends Fragment {
      */
     public void navigateActivity(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
-        // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+
+
+        getActivity().overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     public void navigateActivity(Intent intent) {
         startActivity(intent);
-        // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+        getActivity().overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     /*
@@ -183,8 +183,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void showToastMessage(String message) {
 
-        if (StringUtils.isEmpty(message))
-        {
+        if (StringUtils.isEmpty(message)) {
             return;
         }
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();

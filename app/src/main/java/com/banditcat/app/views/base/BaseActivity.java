@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -234,7 +233,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void navigateActivity(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
-        // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+        overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     /**
@@ -244,7 +243,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void navigateActivity(Intent intent) {
         startActivity(intent);
-        // overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+         overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     /**
