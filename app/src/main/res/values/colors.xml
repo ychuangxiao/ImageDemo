@@ -444,4 +444,7 @@
 
     <color name="wechat_color_ff666666">#ff666666</color>
     <color name="wechat_color_ffe5e5e5">#ffe5e5e5</color>
+
+    <color name="wechat_color_line">@color/wechat_color_ffe5e5e5</color>
+
 </resources>
