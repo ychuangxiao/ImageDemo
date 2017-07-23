@@ -8,12 +8,22 @@
     <string name="name_database">banditcat_tutu.realm</string>
 
     <!--操作提示-->
+    <string name="title_download_confirm_title">发现新版本,您是否去下载更新？</string>
+    <string name="title_download_confirm">发现新版本,下载中...</string>
+
     <string name="alert_handle_reg_success">用户注册成功！请登录！</string>
     <string name="alert_handle">数据处理中,请耐心等待...</string>
     <string name="alert_loading">数据加载中,请耐心等待...</string>
     <string name="alert_login">登录中...</string>
     <string name="alert_station_move_success">库存调整成功...</string>
     <string name="title_setting_confirm">您确认退出账号吗?</string>
+
+    <string name="title_un_login_confirm">
+        您的账号在另一台设备登录。如非本人操作，则密码可能已泄露，建议修改密码或联系管理员冻结账号。
+    </string>
+
+    <string name="title_un_network_confirm">网络不可用，请开启网络！</string>
+    <string name="title_confirm_login">重新登录</string>
     <string name="title_setting_confirm_yes">是</string>
     <string name="title_setting_confirm_no">否</string>
 
@@ -37,6 +47,8 @@
     <string name="title_activity_we_chat">微信</string>
     <string name="title_activity_purse">我的钱包</string>
     <string name="title_activity_pocket_money">零钱</string>
+    <string name="title_activity_contact_detail">详细资料</string>
+    <string name="title_activity_we_chat_message">发消息</string>
 
 
 </resources>

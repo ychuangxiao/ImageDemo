@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context="com.banditcat.app.views.activitys.tencent.PocketMoneyActivityFragment"
+    tools:context="com.sb.app.views.activitys.tencent.PocketMoneyActivityFragment"
     tools:showIn="@layout/activity_pocket_money">
 
     <android.support.v7.widget.AppCompatImageView

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWeChatBackground"
-    tools:context="com.banditcat.app.views.activitys.tencent.PurseActivityFragment"
+    tools:context="com.sb.app.views.activitys.tencent.PurseActivityFragment"
     tools:showIn="@layout/activity_purse">
 
 

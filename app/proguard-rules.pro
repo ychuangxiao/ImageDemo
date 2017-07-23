@@ -258,14 +258,14 @@
 ## ----------------------------------
 ##   ########## 项目pojo 和 试图模型 混淆    ##########
 ## ----------------------------------
--dontwarn com.banditcat.app.model.**
--keep class com.banditcat.app.model.**  {*;}
+-dontwarn com.sb.app.model.**
+-keep class com.sb.app.model.**  {*;}
 
--dontwarn com.banditcat.data.entitys.**
--keep class com.banditcat.data.entitys.**  {*;}
+-dontwarn com.sb.data.entitys.**
+-keep class com.sb.data.entitys.**  {*;}
 
 
 
--dontwarn com.banditcat.app.views.widget.**
--keep class com.banditcat.app.views.widget.**  {*;}
+-dontwarn com.sb.app.views.widget.**
+-keep class com.sb.app.views.widget.**  {*;}
 

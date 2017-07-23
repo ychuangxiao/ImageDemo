@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.banditcat.app"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.sb.app">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".AndroidApplication"
@@ -53,7 +54,6 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-
             android:name=".views.activitys.ali.PaymentActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_payment"
@@ -92,6 +92,27 @@
             android:name=".views.activitys.tencent.PocketMoneyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_pocket_money"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:name=".views.activitys.DownApkActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:label="@string/title_activity_pocket_money"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.ContactDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:label="@string/title_activity_contact_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:name=".views.activitys.tencent.WeChatMessageActivity"
+            android:label="@string/title_activity_we_chat_message"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>

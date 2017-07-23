@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sb.app.views.activitys.tencent.WeChatMessageActivityFragment"
+    tools:showIn="@layout/activity_we_chat_message">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/bottomChatConstraintLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="10">
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottomChatConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#fff4f4f4"
+        android:padding="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerList"
+        app:layout_constraintVertical_weight="0.5">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btnModeVoice"
+
+            android:layout_width="32.0dip"
+            android:layout_height="32.0dip"
+            android:background="@mipmap/ic_wechat_vocie"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:padding="@dimen/padding_tiny"
+            android:id="@+id/etContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:background="@drawable/bg_edittext_message"
+            android:text="32232323232323"
+            android:textSize="16.0sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/btnModeVoice"
+            app:layout_constraintRight_toLeftOf="@+id/btnEmoji"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btnEmoji"
+            android:layout_width="32.0dip"
+            android:layout_height="32.0dip"
+            android:layout_marginRight="10.0dip"
+            android:background="@mipmap/ic_wechat_emoji_btn_normal"
+            app:layout_constraintRight_toLeftOf="@+id/btnPlus"
+            />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSend"
+            android:layout_width="45.0dip"
+            android:layout_height="34.0dip"
+            android:background="@drawable/btn_bg_pocket_money"
+            android:text="发送"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_15"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btnPlus"
+            android:layout_width="32.0dip"
+            android:layout_height="32.0dip"
+            android:background="@mipmap/ic_wechat_plus"
+            android:visibility="visible"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

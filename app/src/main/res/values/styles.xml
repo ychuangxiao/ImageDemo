@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,7 +22,10 @@
         <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
+
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -411,5 +416,11 @@
         <item name="android:background">@color/wechat_color_ffe5e5e5</item>
     </style>
 
+
+    <style  name="EditTextStyle" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/bg_decoration_bottom_green</item>
+        <item name="android:textCursorDrawable">@drawable/bg_decoration_bottom_green</item>
+        <item name="android:textSelectHandle">@drawable/bg_decoration_bottom_green</item>
+    </style >
 
 </resources>

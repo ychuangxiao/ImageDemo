@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.banditcat.app.views.fragment.WeChatMeFragment">
+             tools:context="com.sb.app.views.fragment.WeChatMeFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

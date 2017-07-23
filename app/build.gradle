@@ -14,10 +14,10 @@ android {
 
     signingConfigs {
         rf_release_config {
-            storeFile file(ILOGIE_RELEASE_STORE_FILE)
-            storePassword ILOGIE_RELEASE_STORE_PASSWORD
-            keyAlias ILOGIE_RELEASE_KEY_ALIAS
-            keyPassword ILOGIE_RELEASE_KEY_PASSWORD
+            storeFile file(BANDITCAT_RELEASE_STORE_FILE)
+            storePassword BANDITCAT_RELEASE_STORE_PASSWORD
+            keyAlias BANDITCAT_RELEASE_KEY_ALIAS
+            keyPassword BANDITCAT_RELEASE_KEY_PASSWORD
         }
     }
 
@@ -145,7 +145,7 @@ android {
                             icon: "@mipmap/ic_launcher"
                     ]
                     applicationId globalConfiguration.configuration.applicationId + ".sharkman"
-                    buildConfigField 'boolean', 'HAS_WATERMAR', 'true'
+                    buildConfigField 'boolean', 'HAS_WATERMAR', 'false'
                     buildConfigField 'String', 'API_BASE_URL', '"http://122.114.97.223:8083/333333/api/"'
                     minSdkVersion globalConfiguration.configuration.minSdkVersion
                 }
@@ -183,8 +183,7 @@ dependencies {
     compile appDependencies.retrofit
     //
     compile appDependencies.converterGson
-    //
-    compile appDependencies.adapterxjava2
+
     //
     compile appDependencies.butterKnife
     //视图注解
@@ -197,8 +196,11 @@ dependencies {
     compile project(':common')
 
     // 大神写的这个库可以支持到rxjava2.X
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile appDependencies.rxJava2Adapter
+    compile appDependencies.supportv4
+    compile appDependencies.constraint
+    compile appDependencies.swipeToLoadLayout
+
+
+
 }

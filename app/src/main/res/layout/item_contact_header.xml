@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvNewFriend"
+        style="@style/WeChatTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_contacts_new_friend"
+        android:text="新的朋友"
+        android:textColor="#ff353535"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+    <View
+        android:id="@+id/line1"
+
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_marginLeft="14.0dip"
+        android:layout_marginRight="14.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNewFriend"
+
+        />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textColor="#ff353535"
+        android:id="@+id/tvGroupChat"
+        style="@style/WeChatTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_contacts_group"
+        android:text="群聊"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_marginLeft="14.0dip"
+        android:layout_marginRight="14.0dip"
+        android:background="#ffd9d9d9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGroupChat"
+
+        />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textColor="#ff353535"
+        android:id="@+id/tvTag"
+        style="@style/WeChatTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_contacts_tag"
+        android:text="标签"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        />
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_marginLeft="14.0dip"
+        android:layout_marginRight="14.0dip"
+        android:background="#ffd9d9d9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTag"
+
+        />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textColor="#ff353535"
+        android:id="@+id/tvPublicNo"
+        style="@style/WeChatTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_contacts_public_no"
+        android:text="公众号"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line3"
+        />
+</LinearLayout>

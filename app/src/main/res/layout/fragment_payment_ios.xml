@@ -98,7 +98,8 @@
                         android:gravity="center"
                         android:text="张帆"
                         android:textColor="#000000"
-                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
                         app:layout_constraintLeft_toRightOf="@+id/tvBankImage"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -146,7 +147,7 @@
 
                     android:tag="0"
                     android:text="处理中"
-                    android:textColor="#ed8c04"
+                    android:textColor="#ff7700"
                     android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -158,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="交易完成"
-                    android:textColor="#ed8c04"
+                    android:textColor="#ff7700"
                     android:textSize="12sp"
                     android:visibility="invisible"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -416,7 +417,7 @@
                     android:layout_marginLeft="@dimen/margin_large"
                     android:gravity="right"
                     android:text="本页不作为转账成功凭据，实际以银行入账为准。如最终入账失败，资金原路退回"
-                    android:textColor="#ed8c04"
+                    android:textColor="#ff7700"
                     android:textSize="@dimen/google_title_font_size"
                     app:layout_constraintLeft_toRightOf="@+id/tvWXTS"
 

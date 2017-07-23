@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.banditcat.app.views.activitys.tencent.WeChatActivity">
+    tools:context="com.sb.app.views.activitys.tencent.WeChatActivity">
 
     <include layout="@layout/content_we_chat_toolbar"/>
 
@@ -75,12 +75,24 @@
 
             </FrameLayout>
 
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rdContacts"
-                style="@style/Weight.WeChatRadioButton"
-                android:drawableTop="@drawable/wechat_contacts"
-                android:text="通讯录"
-                android:textColor="@color/radio_text_view_selector"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rdContacts"
+                    style="@style/WeChatRadioButton"
+                    android:drawableTop="@drawable/wechat_contacts"
+                    android:text="发现"
+
+                    android:textColor="@color/radio_text_view_selector"/>
+
+
+            </FrameLayout>
+
 
 
             <FrameLayout
@@ -102,13 +114,25 @@
             </FrameLayout>
 
 
-            <android.support.v7.widget.AppCompatRadioButton
 
-                android:id="@+id/rdMe"
-                style="@style/Weight.WeChatRadioButton"
-                android:drawableTop="@drawable/wechat_me"
-                android:text="我"
-                android:textColor="@color/radio_text_view_selector"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rdMe"
+                    style="@style/WeChatRadioButton"
+                    android:drawableTop="@drawable/wechat_me"
+                    android:text="发现"
+
+                    android:textColor="@color/radio_text_view_selector"/>
+
+
+            </FrameLayout>
+
 
         </RadioGroup>
 

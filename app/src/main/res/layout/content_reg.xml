@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_medium"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.banditcat.app.views.activitys.user.RegActivity"
+    tools:context="com.sb.app.views.activitys.user.RegActivity"
     tools:showIn="@layout/activity_reg">
 
     <android.support.design.widget.TextInputLayout
@@ -19,7 +19,7 @@
         app:layout_constraintRight_toRightOf="parent"
         >
 
-        <com.banditcat.app.views.widget.ClearEditText
+        <com.sb.app.views.widget.ClearEditText
             android:id="@+id/etUserName"
 
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userNameTextInputLayout"
         >
 
-        <com.banditcat.app.views.widget.ClearEditText
+        <com.sb.app.views.widget.ClearEditText
             android:id="@+id/etPwd"
 
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pwdTextInputLayout"
         >
 
-        <com.banditcat.app.views.widget.ClearEditText
+        <com.sb.app.views.widget.ClearEditText
             android:id="@+id/etQQ"
 
             android:layout_width="match_parent"

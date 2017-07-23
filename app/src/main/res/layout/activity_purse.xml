@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.banditcat.app.views.activitys.tencent.PurseActivity">
+    tools:context="com.sb.app.views.activitys.tencent.PurseActivity">
 
     <include layout="@layout/content_we_chat_toolbar"/>
 

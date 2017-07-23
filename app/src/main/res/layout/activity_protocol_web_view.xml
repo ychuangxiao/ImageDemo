@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.banditcat.app.views.webview.ProtocolWebViewActivity">
+    tools:context="com.sb.app.views.webview.ProtocolWebViewActivity">
 
     <include layout="@layout/content_toolbar"/>
     <include layout="@layout/content_protocol_web_view"/>

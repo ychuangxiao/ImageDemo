@@ -17,7 +17,7 @@
          />
 
 
-    <com.banditcat.app.views.widget.ClearEditText
+    <com.sb.app.views.widget.ClearEditText
 
         android:ellipsize="end"
 

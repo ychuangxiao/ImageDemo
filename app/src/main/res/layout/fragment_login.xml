@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.banditcat.app.views.fragment.LoginFragment">
+    tools:context="com.sb.app.views.fragment.LoginFragment">
 
 
     <android.support.constraint.ConstraintLayout
@@ -40,7 +40,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topLogoImage">
 
-            <com.banditcat.app.views.widget.ClearEditText
+            <com.sb.app.views.widget.ClearEditText
                 android:id="@+id/etUsername"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etUsername"></View>
 
-            <com.banditcat.app.views.widget.ClearEditText
+            <com.sb.app.views.widget.ClearEditText
                 android:id="@+id/etPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
             android:text="注册用户"
-            android:textColor="@color/md_blue_300"
+            android:textColor="@color/md_blue_900"
             app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -125,7 +125,6 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tvLeftUserName"
                     style="@style/LeftTitle"
-                    android:layout_alignParentStart="true"
 
                     android:layout_alignParentTop="true"
 
@@ -137,7 +136,7 @@
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftUserName"
                     android:clickable="false"
-                    android:hint="请您提供宝贵的意见"
+
                     />
 
 
@@ -161,6 +160,15 @@
 
 
         </LinearLayout>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录即表示您同意《银鲨截图服务条款》"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
 
