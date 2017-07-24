@@ -14,10 +14,10 @@ android {
 
     signingConfigs {
         rf_release_config {
-            storeFile file(BANDITCAT_RELEASE_STORE_FILE)
-            storePassword BANDITCAT_RELEASE_STORE_PASSWORD
-            keyAlias BANDITCAT_RELEASE_KEY_ALIAS
-            keyPassword BANDITCAT_RELEASE_KEY_PASSWORD
+            storeFile file(ILOGIE_RELEASE_STORE_FILE)
+            storePassword ILOGIE_RELEASE_STORE_PASSWORD
+            keyAlias ILOGIE_RELEASE_KEY_ALIAS
+            keyPassword ILOGIE_RELEASE_KEY_PASSWORD
         }
     }
 

@@ -1,7 +1,6 @@
 package com.sb.app.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,11 +8,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.util.LruCache;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +28,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class SimpleUtils {
 
@@ -81,14 +77,22 @@ public class SimpleUtils {
 
 
                     // 其次把文件插入到系统图库
-                    MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    String url = MediaStore.Images.Media.insertImage(context.getContentResolver(),
                             file.getAbsolutePath(), name, null);
-                    // 最后通知图库更新
+                   /* // 最后通知图库更新
                     context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" +
-                            path)));
+                            url)));
+*/
+
+                    MediaScanner mediaScanner = new MediaScanner(context);
+
+                    mediaScanner.scanFile(file,"image/jpeg");
+
 
                     Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show();
                     result = true;
+
+                    mybitmap.recycle();
 
                 } else {
                     Toast.makeText(context, "不能读取到SD卡", Toast.LENGTH_SHORT).show();
