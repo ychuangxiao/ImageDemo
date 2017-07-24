@@ -17,12 +17,15 @@ import com.sb.app.AndroidApplication;
 import com.sb.app.R;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.ApplicationComponent;
+import com.sb.app.model.BankModel;
 import com.sb.app.utils.ViewUtils;
 import com.ilogie.android.library.common.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -208,4 +211,26 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
+    public Collection<BankModel> initBankInfo() {
+        Collection<BankModel> bankModels = new ArrayList<>();
+
+        bankModels.add(new BankModel("中国银行", 10));
+        bankModels.add(new BankModel("中国建设银行", 20));
+        bankModels.add(new BankModel("中国农业银行", 30));
+        bankModels.add(new BankModel("中国工商银行", 40));
+        bankModels.add(new BankModel("中国邮政储蓄银行", 50));
+        bankModels.add(new BankModel("中国民生银行", 60));
+        bankModels.add(new BankModel("中国光大银行", 70));
+        bankModels.add(new BankModel("中信银行", 80));
+        bankModels.add(new BankModel("招商银行", 90));
+        bankModels.add(new BankModel("兴业银行", 100));
+        bankModels.add(new BankModel("网商银行", 110));
+        bankModels.add(new BankModel("浦发银行", 120));
+        bankModels.add(new BankModel("平安银行", 130));
+        bankModels.add(new BankModel("交通银行", 140));
+        bankModels.add(new BankModel("华夏银行", 150));
+        bankModels.add(new BankModel("广发银行", 160));
+
+        return bankModels;
+    }
 }
