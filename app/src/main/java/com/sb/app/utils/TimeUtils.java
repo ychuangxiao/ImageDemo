@@ -320,8 +320,9 @@ public class TimeUtils {
         Long time1 = cal.getTimeInMillis();
         cal.setTimeInMillis(endMillis);
         Long time2 = cal.getTimeInMillis();
-        Long between_days = (time2 - time1) / (1000 * 3600 * 24);
+        Long between_days = (time2 - time1) / 1000 ;//(1000 * 3600 * 24);
 
+        between_days = between_days * 3600 * 1;
 
         return Integer.parseInt(String.valueOf(between_days));
     }

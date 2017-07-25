@@ -318,7 +318,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
 
 
         if (time != null && time != null && time > 0L
-                && TimeUtils.daysBetween(time, System.currentTimeMillis()) >= 1) {
+                && TimeUtils.daysBetween(time, System.currentTimeMillis()) >= 2) {
             getApplicationComponent().context().sharedpreferences.Watermark().put(true);
         } else {
             getApplicationComponent().context().sharedpreferences.Watermark().put(false);

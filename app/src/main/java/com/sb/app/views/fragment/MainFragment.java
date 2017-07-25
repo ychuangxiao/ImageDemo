@@ -1,10 +1,12 @@
 package com.sb.app.views.fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +17,7 @@ import android.widget.RadioGroup;
 import com.sb.app.R;
 import com.sb.app.model.ScreenModel;
 import com.sb.app.model.menu.HomeHandleModel;
+import com.sb.app.utils.ClipboardUtil;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.ali.PaymentActivity;
 import com.sb.app.views.activitys.tencent.WeChatActivity;
@@ -25,10 +28,13 @@ import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,8 +48,16 @@ public class MainFragment extends BaseFragment {
     @BindView(R.id.tvVideo)
     AppCompatTextView tvVideo;
 
+    @BindView(R.id.tvHelp)
+    AppCompatTextView tvHelp;
+
+    @BindView(R.id.tvAbout)
+    AppCompatTextView tvAbout;
+
+
     @BindView(R.id.tvFavourable)
     AppCompatTextView tvFavourable;
+
 
     @BindView(R.id.tvWeChat)
     AppCompatTextView tvWeChat;
@@ -87,7 +101,7 @@ public class MainFragment extends BaseFragment {
 
 
         ViewUtils.setCompoundTopDrawables(getActivity(), tvWeChat, BaseFontAwesome.Icon
-                .icon_weixin, getResources().getColor(R.color.md_green_A400), 24F);
+                .icon_weixin, getResources().getColor(R.color.md_grey_800), 24F);
 
         ViewUtils.setCompoundTopDrawables(getActivity(), tvAli, BaseFontAwesome.Icon
                 .icon_ali, getResources().getColor(R.color.md_light_blue_800), 24F);
@@ -107,7 +121,7 @@ public class MainFragment extends BaseFragment {
     @OnClick(R.id.weChatRelativeLayout)
     void onWeChatClick() {
 
-        navigateActivity(new Intent(getActivity(), WeChatActivity.class));
+        //navigateActivity(new Intent(getActivity(), WeChatActivity.class));
     }
 
     @OnClick(R.id.aliRelativeLayout)
@@ -141,6 +155,59 @@ public class MainFragment extends BaseFragment {
         Intent intent = new Intent();
         intent.setAction("android.intent.action.VIEW");
         Uri content_url = Uri.parse(tvVideo.getTag().toString());
+        intent.setData(content_url);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tvFollow)
+    void onFollowClick() {
+
+
+        ClipboardUtil.copy(getString(R.string.title_follow_confirm), getActivity());
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        final AlertDialog dialog = builder.setMessage(getResources().getString(R.string.title_follow_message)).setPositiveButton
+                ("确定", new DialogInterface.OnClickListener() {// 退出按钮
+                    public void onClick(DialogInterface dialog, int i) {
+
+
+                    }
+                }).show
+                ();// 显示对话框
+
+
+        Observable<Long> observable=Observable.timer(2,TimeUnit.SECONDS);
+
+        observable.subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    @OnClick(R.id.tvAbout)
+    void onAboutClick() {
+
+
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(tvAbout.getTag().toString());
+        intent.setData(content_url);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.tvHelp)
+    void onHelpClick() {
+
+
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(tvHelp.getTag().toString());
         intent.setData(content_url);
         startActivity(intent);
     }

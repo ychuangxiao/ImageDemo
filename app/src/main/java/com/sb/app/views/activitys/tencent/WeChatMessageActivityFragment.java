@@ -76,6 +76,6 @@ public class WeChatMessageActivityFragment extends BaseFragment {
 
     @OnClick(R.id.btnEmoji)
     void onEmojiClick() {
-        emojiRecycler.setVisibility(View.VISIBLE);
+        //emojiRecycler.setVisibility(View.VISIBLE);
     }
 }

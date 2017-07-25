@@ -6,113 +6,176 @@
     >
 
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
 
-        android:clickable="true"
-        android:orientation="vertical">
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/handleConstraintLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:minHeight="120dp">
+            android:layout_height="match_parent"
 
-            <RelativeLayout
-                android:id="@+id/weChatRelativeLayout"
-                style="@style/Purse.RelativeLayout.Server"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/aliRelativeLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/handleConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="120dp">
+
+                <RelativeLayout
+                    android:id="@+id/weChatRelativeLayout"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/aliRelativeLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvWeChat"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="微信"
+                        />
+                </RelativeLayout>
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvWeChat"
-                    style="@style/Purse.TextView.Server"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Purse.Vertical.Line"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/aliRelativeLayout"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                    android:text="微信"
-                    />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/aliRelativeLayout"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/weChatRelativeLayout"
+
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvAli"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="支付宝"
+                        />
+                </RelativeLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <include layout="@layout/content_line"></include>
 
             <android.support.v7.widget.AppCompatTextView
-                style="@style/Purse.Vertical.Line"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/aliRelativeLayout"
-                app:layout_constraintTop_toTopOf="parent"/>
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            <RelativeLayout
-                android:id="@+id/aliRelativeLayout"
-                style="@style/Purse.RelativeLayout.Server"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@+id/weChatRelativeLayout"
+                android:background="@color/md_grey_200"
 
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="会员专区"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="bold"
 
-                >
+                />
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvAli"
-                    style="@style/Purse.TextView.Server"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            <include layout="@layout/content_line"></include>
 
-                    android:text="支付宝"
-                    />
-            </RelativeLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvFavourable"
+                style="@style/LeftTitle"
 
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:padding="@dimen/padding_medium"
+                android:tag="http://www.382tv.com/"
+                android:text="专享优惠"
+                />
 
-        </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/content_line"></include>
 
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvVideo"
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="false"
+                android:padding="@dimen/padding_medium"
+                android:tag="http://vip.cxylm.net/"
+                android:text="专享影视"
+                />
 
-        <include layout="@layout/content_line"></include>
+            <include layout="@layout/content_line"></include>
 
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/LeftTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:background="@color/md_grey_200"
+                android:background="@color/md_grey_200"
 
-            android:text="会员专区"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_medium"
-            android:textStyle="bold"
+                android:text="服务专区"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_medium"
+                android:textStyle="bold"
 
-            />
-        <include layout="@layout/content_line"></include>
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvFavourable"
-            style="@style/LeftTitle"
+                />
 
-            android:layout_width="match_parent"
-            android:background="@drawable/bg_item_selected"
-            android:clickable="true"
-            android:padding="@dimen/padding_medium"
-            android:tag="http://www.382tv.com/"
-            android:text="专享优惠"
-            />
+            <include layout="@layout/content_line"></include>
 
-        <include layout="@layout/content_line"></include>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvHelp"
+                style="@style/LeftTitle"
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvVideo"
-            style="@style/LeftTitle"
-            android:layout_width="match_parent"
-            android:background="@drawable/bg_item_selected"
-            android:clickable="false"
-            android:padding="@dimen/padding_medium"
-            android:tag="http://vip.cxylm.net/"
-            android:text="专享影视"
-            />
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:padding="@dimen/padding_medium"
+                android:tag="http://mp.weixin.qq.com/s/hIElD6gzq-Q4ejp_20K75g"
+                android:text="使用视频教程"
+                />
 
-        <include layout="@layout/content_line"></include>
-    </LinearLayout>
+            <include layout="@layout/content_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvAbout"
+                style="@style/LeftTitle"
+
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:padding="@dimen/padding_medium"
+                android:tag="http://mp.weixin.qq.com/s/_7IxF8-ZueY2wDtPYw-U4Q"
+                android:text="关于银鲨网络"
+                />
+
+            <include layout="@layout/content_line"></include>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvFollow"
+                style="@style/LeftTitle"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:padding="@dimen/padding_medium"
+
+                android:text="微信搜索“银鲨网络”关注官方公众号"
+                />
+
+            <include layout="@layout/content_line"></include>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </FrameLayout>
