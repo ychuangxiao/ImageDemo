@@ -12,16 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sb.app.R;
+import com.sb.app.constant.AppConstant;
+import com.sb.app.di.components.BizComponent;
 import com.sb.app.views.adapters.BankAdapter;
+import com.sb.app.views.adapters.WeChatMessageAdapter;
 import com.sb.app.views.base.BaseFragment;
+import com.sb.app.views.base.BaseFragmentDaggerActivity;
+import com.sb.data.entitys.realm.ContactRealm;
+import com.sb.data.entitys.realm.WebChatMessageRealm;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class WeChatMessageActivityFragment extends BaseFragment {
+public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
 
 
     @BindView(R.id.emojiRecycler)
@@ -31,14 +45,32 @@ public class WeChatMessageActivityFragment extends BaseFragment {
     AppCompatImageView btnEmoji;
 
 
+    @BindView(R.id.recyclerList)
+    RecyclerView recyclerList;
 
-    BankAdapter mBankAdapter;
+
+    @Inject
+    WeChatMessageAdapter mWeChatMessageAdapter;
+
+
+    Realm mRealm;
+
 
     public WeChatMessageActivityFragment() {
+        mRealm = Realm.getDefaultInstance();
     }
 
     @Override
     protected void DestroyView() {
+        if (mRealm != null) {
+            mRealm.close();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
 
     }
 
@@ -47,19 +79,55 @@ public class WeChatMessageActivityFragment extends BaseFragment {
      */
     @Override
     public void initView() {
-        mBaseRecyclerView = emojiRecycler;
-
-        mBankAdapter = new BankAdapter(getActivity(), 0);
-
-        initLinearLayoutRecyclerView(new GridLayoutManager(getActivity(),10)).setAdapter(mBankAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-
-        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.bg_decoration_bottom));
-        mBaseRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        mBankAdapter.setItems(initBankInfo());
+        mBaseRecyclerView = recyclerList;
+        initLinearLayoutRecyclerView(new LinearLayoutManager(getActivity())).setAdapter(mWeChatMessageAdapter);
+
+
+        final List<WebChatMessageRealm> webChatMessageRealms = new ArrayList<>();
+
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                WebChatMessageRealm webChatMessageRealm;
+
+                ContactRealm me = realm.where(ContactRealm.class).equalTo("isMe", true).findFirst();
+
+
+                ContactRealm other = realm.where(ContactRealm.class).equalTo("isMe", false).findFirst();
+
+
+                for (int i = 0; i < 10; i++) {
+
+                    webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+
+
+
+
+                    if (i == 0) {
+                        webChatMessageRealm.setUserRealm(me);
+                    } else {
+                        webChatMessageRealm.setUserRealm(other);
+                    }
+
+                    webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RED_PACKED);
+                   /* if (i / 2 == 0) {
+                        webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TRANSFER);
+                    }
+                    else {
+                        webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RED_PACKED);
+                    }*/
+                    webChatMessageRealms.add(webChatMessageRealm);
+
+                }
+            }
+        });
+
+
+        mWeChatMessageAdapter.setMessageRealms(webChatMessageRealms);
     }
 
     /**
@@ -73,9 +141,24 @@ public class WeChatMessageActivityFragment extends BaseFragment {
     }
 
 
-
     @OnClick(R.id.btnEmoji)
     void onEmojiClick() {
         //emojiRecycler.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 初始化注解
+     */
+    @Override
+    public void initInjector() {
+        this.getComponent(BizComponent.class).inject(this);
+    }
+
+    /**
+     * 初始化中间者
+     */
+    @Override
+    public void initPresenter() {
+
     }
 }

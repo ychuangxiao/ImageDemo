@@ -110,19 +110,17 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
             @Override
             public void execute(Realm realm) {
                 ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                contactRealm.setMe(true);
+                contactRealm.setUserNick("无聊的大匪猫");
 
-
-                contactRealm.setUserNick("欧阳轩辕");
-
-                mContactRealms.add(contactRealm);
 
                 contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-
+                contactRealm.setMe(false);
                 contactRealm.setUserNick("王小二");
                 mContactRealms.add(contactRealm);
 
                 contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-
+                contactRealm.setMe(false);
                 contactRealm.setUserNick("完颜瑾文");
                 mContactRealms.add(contactRealm);
             }

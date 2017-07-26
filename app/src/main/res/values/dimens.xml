@@ -75,6 +75,8 @@
     <dimen name="font_size_XXlarge">40.0sp</dimen>
     <dimen name="font_size_XXXlarge">55.0sp</dimen>
 
+    <dimen name="font_size_10">10.0sp</dimen>
+    <dimen name="font_size_11">11.0sp</dimen>
     <dimen name="font_size_12">12.0sp</dimen>
     <dimen name="font_size_13">13.0sp</dimen>
     <dimen name="font_size_14">14.0sp</dimen>
@@ -89,5 +91,8 @@
     <dimen name="web_chat_bottom_nav_height">55.0dip</dimen>
 
     <dimen name="web_chat_abc_action_bar_default_height">50.0dip</dimen>
+
+
+    <dimen name="size_avatar">40.0dip</dimen>
 
 </resources>

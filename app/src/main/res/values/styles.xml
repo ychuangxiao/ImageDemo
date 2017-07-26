@@ -26,8 +26,6 @@
     </style>
 
 
-
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
@@ -417,10 +415,119 @@
     </style>
 
 
-    <style  name="EditTextStyle" parent="Base.V7.Widget.AppCompat.EditText">
+    <style name="EditTextStyle" parent="Base.V7.Widget.AppCompat.EditText">
         <item name="android:background">@drawable/bg_decoration_bottom_green</item>
         <item name="android:textCursorDrawable">@drawable/bg_decoration_bottom_green</item>
         <item name="android:textSelectHandle">@drawable/bg_decoration_bottom_green</item>
-    </style >
+    </style>
+
+    <style name="WeChat.HeaderImage" parent="">
+
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@mipmap/ic_banditcats</item>
+        <item name="android:layout_width">@dimen/size_avatar</item>
+        <item name="android:layout_height">@dimen/size_avatar</item>
+        <item name="android:layout_marginTop">8.0dip</item>
+
+    </style>
+
+    <style name="WeChat.Transfer" parent="">
+
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@mipmap/ic_transfer_we_chat</item>
+        <item name="android:layout_width">33.0dip</item>
+        <item name="android:layout_height">33.0dip</item>
+        <item name="android:layout_marginTop">2dip</item>
+    </style>
+
+    <style name="WeChat.RedPacket" parent="">
+
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@mipmap/ic_redpacket_we_chat</item>
+        <item name="android:layout_width">29.0dip</item>
+        <item name="android:layout_height">34.0dip</item>
+        <item name="android:layout_marginTop">2dip</item>
+    </style>
+
+
+    <style name="WeChat.RedPacket.Content" parent="">
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_small</item>
+        <item name="android:textSize">@dimen/font_size_15</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxEms">10</item>
+        <item name="android:minEms">10</item>
+    </style>
+
+    <style name="WeChat.RedPacket.Details" parent="">
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_small</item>
+        <item name="android:layout_marginTop">0dip</item>
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="WeChat.RedPacket.Source" parent="">
+        <item name="android:layout_marginTop">6dip</item>
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/font_size_10</item>
+        <item name="android:textColor">#ff999999</item>
+
+    </style>
+
+
+    <style name="WeChat.RedPacket.Container.Right" parent="WeChat.RedPacket.Container">
+
+        <item name="android:background">@drawable/ic_redpacket_right_default</item>
+        <item name="android:layout_marginRight">@dimen/margin_tiny</item>
+
+    </style>
+
+    <style name="WeChat.RedPacket.Container.Left" parent="WeChat.RedPacket.Container">
+        <item name="android:background">@drawable/ic_redpacket_left_default</item>
+        <item name="android:layout_marginLeft">@dimen/margin_tiny</item>
+
+    </style>
+
+    <style name="WeChat.RedPacket.Container" parent="">
+        <item name="android:layout_width">218.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+
+
+        <item name="android:paddingLeft">@dimen/padding_small</item>
+        <item name="android:paddingRight">@dimen/padding_small</item>
+        <item name="android:paddingTop">4dip</item>
+
+    </style>
+
+
+    <style name="WeChat.DateTime" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bg_date_time_we_chat</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:paddingTop">2.0dip</item>
+        <item name="android:paddingRight">5.0dip</item>
+        <item name="android:paddingBottom">2.0dip</item>
+    </style>
+
 
 </resources>

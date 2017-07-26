@@ -1,83 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
- android:layout_marginTop="200dp"
+    android:layout_height="wrap_content"
     android:padding="@dimen/padding_small">
 
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvChatDateTime"
+        style="@style/WeChat.DateTime"
+        android:background="@drawable/bg_date_time_we_chat"
+        android:text="2016-5-25 00:28:47"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/headerImage"
-        android:layout_width="48.0dip"
-        android:layout_height="48.0dip"
-        android:clickable="false"
-        android:src="@mipmap/ic_banditcats"
-  app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        style="@style/WeChat.HeaderImage"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChatDateTime"
+
+        app:layout_goneMarginTop="0.0dip"
+        />
 
     <android.support.constraint.ConstraintLayout
 
-        android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_marginLeft="65dip"
-        android:layout_marginRight="4dip"
-        android:background="@drawable/ic_redpacket_right_default"
-        android:paddingLeft="@dimen/padding_medium"
-        android:paddingRight="@dimen/padding_medium"
-        android:paddingTop="@dimen/padding_small"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-
-        app:layout_constraintRight_toRightOf="parent"
+        style="@style/WeChat.RedPacket.Container.Right"
         app:layout_constraintRight_toLeftOf="@+id/headerImage"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/headerImage"
         >
 
 
         <android.support.v7.widget.AppCompatImageView
-
-
             android:id="@+id/ivRed"
-            android:layout_width="40dip"
-            android:layout_height="50dip"
-            android:layout_marginTop="@dimen/margin_tiny"
-            android:src="@mipmap/ic_redpacket_we_chat"
+            style="@style/WeChat.RedPacket"
             app:layout_constraintTop_toTopOf="parent"/>
 
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topRedContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+            style="@style/WeChat.RedPacket.Content"
             android:text="红包已被领完"
-            android:textSize="@dimen/font_size_19"
-
-            android:textColor="@color/white"
             app:layout_constraintLeft_toRightOf="@+id/ivRed"
             app:layout_constraintTop_toTopOf="@+id/ivRed"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_marginTop="6dip"
-            app:layout_constraintTop_toBottomOf="@+id/topRedContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+
+            android:id="@+id/tvRedDetails"
+            style="@style/WeChat.RedPacket.Details"
+
             android:text="查看详情"
-            android:textSize="@dimen/font_size_14"
-            android:textColor="@color/white"
+
             app:layout_constraintLeft_toRightOf="@+id/ivRed"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/topRedContent"
+            />
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_marginBottom="4dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+            style="@style/WeChat.RedPacket.Source"
             android:text="微信红包"
-            android:textSize="@dimen/font_size_12"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvRedDetails"
+            />
 
     </android.support.constraint.ConstraintLayout>
 

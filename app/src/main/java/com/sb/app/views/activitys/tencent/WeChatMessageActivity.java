@@ -10,13 +10,17 @@ import android.view.View;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
+import com.sb.app.di.HasComponent;
+import com.sb.app.di.components.BizComponent;
+import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.views.base.BaseActivity;
+import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
 
 import io.realm.Realm;
 
-public class WeChatMessageActivity extends BaseActivity {
+public class WeChatMessageActivity extends BaseActivity implements HasComponent<BizComponent> {
 
     private String userId;
 
@@ -27,11 +31,19 @@ public class WeChatMessageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         mRealm = Realm.getDefaultInstance();
+
+        this.mBizComponent = DaggerBizComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+
+
         super.onCreate(savedInstanceState);
 
 
-
     }
+
+
 
 
     @Override
@@ -105,5 +117,12 @@ public class WeChatMessageActivity extends BaseActivity {
     protected int getContentViewId() {
         return R.layout.activity_we_chat_message;
     }
+
+    @Override
+    public BizComponent getComponent() {
+        return mBizComponent;
+    }
+
+    BizComponent mBizComponent;
 
 }
