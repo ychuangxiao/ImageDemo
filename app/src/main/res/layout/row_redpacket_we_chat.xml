@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="110dp"
         android:layout_marginLeft="@dimen/margin_tiny"
-        android:layout_marginRight="55dip"
+        android:layout_marginRight="60dip"
         android:background="@drawable/ic_redpacket_left_default"
         android:paddingLeft="@dimen/padding_medium"
         android:paddingRight="@dimen/padding_medium"
