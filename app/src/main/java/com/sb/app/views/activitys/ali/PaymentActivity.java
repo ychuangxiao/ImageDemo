@@ -16,7 +16,6 @@ import com.sb.app.constant.AppConstant;
 import com.sb.app.model.AliPaymentModel;
 import com.sb.app.model.BankModel;
 import com.sb.app.utils.TimeUtils;
-import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.fragment.PaymentGoogleFragment;
 import com.sb.app.views.fragment.PaymentIosFragment;
@@ -106,9 +105,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
                             switch (aliPaymentModel.getMobileType()) {
                                 case AppConstant.ACTION_10:
-
-
-
 
 
                                     if (mPaymentIosFragment != null) {
@@ -221,7 +217,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         aliPaymentModel.setRemark("转账");
         aliPaymentModel.setBankNo("8888");
         aliPaymentModel.setMobileCarrier(AppConstant.CARRIER_CHINA_YD);
-        aliPaymentModel.setReceiptUserName("张三");
+        aliPaymentModel.setReceiptUserName(getString(R.string.app_name));
         aliPaymentModel.setPaymentType("中国工商银行(6666)");
         aliPaymentModel.setReceiptMoney(BigDecimal.valueOf(8888888.00));
         aliPaymentModel.setCreateTime(System.currentTimeMillis());

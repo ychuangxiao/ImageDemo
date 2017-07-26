@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ android:layout_marginTop="100dp"
+    android:padding="@dimen/padding_small">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/headerImage"
+        android:layout_width="48.0dip"
+        android:layout_height="48.0dip"
+        android:clickable="false"
+        android:src="@mipmap/ic_banditcats"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="@dimen/margin_tiny"
+        android:layout_marginRight="55dip"
+        android:background="@drawable/ic_redpacket_left_default"
+        android:paddingLeft="@dimen/padding_medium"
+        android:paddingRight="@dimen/padding_medium"
+        android:paddingTop="@dimen/padding_small"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/headerImage"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+
+        <android.support.v7.widget.AppCompatImageView
+
+
+            android:id="@+id/ivRed"
+            android:layout_width="40dip"
+            android:layout_height="50dip"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:src="@mipmap/ic_redpacket_we_chat"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/topRedContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:text="红包已被领完"
+            android:textSize="@dimen/font_size_19"
+
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toRightOf="@+id/ivRed"
+            app:layout_constraintTop_toTopOf="@+id/ivRed"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_marginTop="6dip"
+            app:layout_constraintTop_toBottomOf="@+id/topRedContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:text="查看详情"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toRightOf="@+id/ivRed"
+             />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_marginBottom="4dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信红包"
+            android:textSize="@dimen/font_size_12"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

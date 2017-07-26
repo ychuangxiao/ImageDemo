@@ -3,6 +3,7 @@ package com.sb.app.views.fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -10,7 +11,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.ilogie.android.library.common.util.ArrayUtils;
 import com.sb.app.R;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.mvp.presenters.user.AutoLoginPresenter;
@@ -26,7 +29,6 @@ import com.sb.app.views.widget.ClearEditText;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.UserRealm;
-import com.ilogie.android.library.common.util.ArrayUtils;
 
 import javax.inject.Inject;
 
@@ -57,6 +59,9 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
     @BindView(R.id.btnHandle)
     AppCompatButton btnHandle;
 
+    @BindView(R.id.tvReg)
+    AppCompatTextView tvReg;
+
     @BindView(R.id.tvUserName)
     AppCompatTextView tvUserName;
 
@@ -65,6 +70,15 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
 
     @BindView(R.id.loginLinearLayout)
     LinearLayout loginLinearLayout;
+
+    @BindView(R.id.tvGrade)
+    AppCompatTextView tvGrade;
+
+    @BindView(R.id.tvWatermark)
+    AppCompatTextView tvWatermark;
+
+    @BindView(R.id.watermarkHandleRelativeLayout)
+    RelativeLayout watermarkHandleRelativeLayout;
 
 
     @Inject
@@ -136,11 +150,9 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
     }
 
 
-    public void refreshData()
-    {
+    public void refreshData() {
         mAutoLoginPresenter.autoLogin();
     }
-
 
 
     /**
@@ -166,6 +178,16 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
         loginLinearLayout.setVisibility(View.VISIBLE);
         accountConstraintLayout.setVisibility(View.GONE);
         btnHandle.setVisibility(View.GONE);
+        tvReg.setVisibility(View.GONE);
+
+        tvGrade.setText("免费会员");
+        tvWatermark.setText("未去水印");
+
+        if (!getApplicationComponent(getContext().getApplicationContext()).context().sharedpreferences.Watermark().get()) {
+            tvGrade.setText("永久会员");
+            tvWatermark.setText("已去水印");
+        }
+
     }
 
     /**
@@ -178,6 +200,7 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
         loginLinearLayout.setVisibility(View.GONE);
         accountConstraintLayout.setVisibility(View.VISIBLE);
         btnHandle.setVisibility(View.VISIBLE);
+        tvReg.setVisibility(View.VISIBLE);
     }
 
 
@@ -290,5 +313,14 @@ public class LoginFragment extends BaseFragmentDaggerActivity implements LoginVi
     @OnClick(R.id.tvReg)
     void onRegClick() {
         navigateActivity(new Intent(getActivity(), RegActivity.class));
+    }
+
+    @OnClick(R.id.watermarkHandleRelativeLayout)
+    void onWatermarkHandleClick() {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(watermarkHandleRelativeLayout.getTag().toString());
+        intent.setData(content_url);
+        startActivity(intent);
     }
 }

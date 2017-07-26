@@ -14,8 +14,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_large">
-
+        android:padding="@dimen/padding_medium">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/topLogoImage"
@@ -49,7 +48,8 @@
                 android:hint="用户名"
                 android:inputType="text"
                 android:maxLength="15"
-                android:padding="@dimen/padding_medium"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/font_size_14"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 />
@@ -72,7 +72,8 @@
                 android:hint="密码"
                 android:inputType="textPassword"
                 android:maxLength="15"
-                android:padding="@dimen/padding_medium"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/font_size_14"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line2"/>
@@ -83,7 +84,7 @@
             android:id="@+id/tvReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_medium"
+            android:padding="@dimen/padding_small"
             android:text="注册用户"
             android:textColor="@color/md_blue_900"
             app:layout_constraintTop_toBottomOf="@+id/accountConstraintLayout"/>
@@ -100,7 +101,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReg"/>
-
 
         <LinearLayout
             android:id="@+id/loginLinearLayout"
@@ -136,8 +136,99 @@
                     style="@style/RightTitle"
                     android:layout_toRightOf="@+id/tvLeftUserName"
                     android:clickable="false"
+                    android:textColor="@color/md_green_500"
 
                     />
+
+
+            </RelativeLayout>
+            <include layout="@layout/content_line"></include>
+            <RelativeLayout
+                android:id="@+id/gradeRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:duplicateParentState="false"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftGrade"
+                    style="@style/LeftTitle"
+
+                    android:layout_alignParentTop="true"
+
+                    android:clickable="false"
+                    android:text="会员类型"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvGrade"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftGrade"
+                    android:clickable="false"
+                    android:text="免费会员"
+                    android:textColor="@color/md_green_500"
+                    />
+
+
+            </RelativeLayout>
+            <include layout="@layout/content_line"></include>
+            <RelativeLayout
+                android:id="@+id/watermarkRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:duplicateParentState="false"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftWatermark"
+                    style="@style/LeftTitle"
+
+                    android:layout_alignParentTop="true"
+
+                    android:clickable="false"
+                    android:text="去水印"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvWatermark"
+                    style="@style/RightTitle"
+                    android:layout_toRightOf="@+id/tvLeftWatermark"
+                    android:clickable="false"
+                    android:text="未去水印"
+                    android:textColor="@color/md_green_500"
+
+                    />
+
+
+            </RelativeLayout>
+            <include layout="@layout/content_line"></include>
+            <RelativeLayout
+
+                android:id="@+id/watermarkHandleRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true"
+                android:duplicateParentState="false"
+                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+                android:tag="http://mp.weixin.qq.com/s/0wYFXdgj1jWT_V2V55eGqg"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentVersion">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLeftWatermarkHandle"
+                    style="@style/LeftTitle"
+
+                    android:layout_width="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:clickable="false"
+                    android:text="如何去水印"/>
 
 
             </RelativeLayout>

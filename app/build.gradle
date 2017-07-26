@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
 
 
@@ -140,7 +139,7 @@ android {
 
         sharkman
                 {
-                    resValue "string", "app_name", "银鲨截图"
+                    resValue "string", "app_name", "银鲨截图"//我要截图
                     manifestPlaceholders = [
                             icon: "@mipmap/ic_launcher"
                     ]
@@ -160,9 +159,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    apt appDependencies.guava
-    apt appDependencies.daggerCompiler
-    apt fileTree(dir: 'compile-libs', include: ['*.jar'])
+    annotationProcessor appDependencies.guava
+    annotationProcessor appDependencies.daggerCompiler
+    annotationProcessor fileTree(dir: 'compile-libs', include: ['*.jar'])
     testCompile appTestDependencies.junit
     compile(name: 'ilogie-android-library-release', ext: 'aar')
     //ilogie library

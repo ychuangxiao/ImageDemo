@@ -8,30 +8,21 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 
 import com.sb.app.R;
 import com.sb.app.model.ScreenModel;
-import com.sb.app.model.menu.HomeHandleModel;
 import com.sb.app.utils.ClipboardUtil;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.ali.PaymentActivity;
 import com.sb.app.views.activitys.tencent.WeChatActivity;
 import com.sb.app.views.adapters.MainAdapter;
 import com.sb.app.views.base.BaseFragment;
-import com.sb.app.views.listeners.RecyclerClickListener;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -121,7 +112,7 @@ public class MainFragment extends BaseFragment {
     @OnClick(R.id.weChatRelativeLayout)
     void onWeChatClick() {
 
-        //navigateActivity(new Intent(getActivity(), WeChatActivity.class));
+        navigateActivity(new Intent(getActivity(), WeChatActivity.class));
     }
 
     @OnClick(R.id.aliRelativeLayout)
