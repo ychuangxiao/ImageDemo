@@ -25,6 +25,10 @@ public class AppConstant {
     public static final int RECEIVED_ACTION_N = 0;
 
 
+    public static final int REQUEST_CODE = 10;
+    public static final int RESULT_CODE_RED_PACKET = 20;
+    public static final int RESULT_CODE_TRANSFER = 30;
+
     public static final int ACTION_10 = 10;
     public static final int ACTION_20 = 20;
     public static final int ACTION_30 = 30;

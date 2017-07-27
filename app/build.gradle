@@ -200,6 +200,4 @@ dependencies {
     compile appDependencies.constraint
     compile appDependencies.swipeToLoadLayout
 
-
-
 }

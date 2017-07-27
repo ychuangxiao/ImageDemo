@@ -54,6 +54,7 @@
     <string name="title_activity_pocket_money">零钱</string>
     <string name="title_activity_contact_detail">详细资料</string>
     <string name="title_activity_we_chat_message">发消息</string>
+    <string name="title_activity_send_red_packet">发红包</string>
 
 
 </resources>

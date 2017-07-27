@@ -90,7 +90,7 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
 
 
         } else {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+            //mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
 
         }
 

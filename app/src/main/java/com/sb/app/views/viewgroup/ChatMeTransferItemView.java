@@ -93,7 +93,7 @@ public class ChatMeTransferItemView extends RelativeLayout {
             mTvRedDetails.setText(webChatMessageRealm.getSubMessage());
 
         } else {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+            //mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
             mTvRedDetails.setText(webChatMessageRealm.getSubMessage());
         }
         mRedPackedConstraintLayout.setPadding(mRedPackedConstraintLayout.getPaddingLeft()

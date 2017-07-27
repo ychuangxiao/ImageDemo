@@ -53,6 +53,7 @@ public class TextConstant {
 
 
 
+    public static final String COLUMN_NAME_FOR_ID = "id";//用户编号
     public static final String COLUMN_NAME_FOR_USERID_CONTACTREALM = "userId";//用户编号
 
     public static final String COLUMN_NAME_FOR_PASSWORD = "password";//认证信息字段

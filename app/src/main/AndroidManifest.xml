@@ -110,10 +110,17 @@
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>
         <activity
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:name=".views.activitys.tencent.WeChatMessageActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_we_chat_message"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:name=".views.activitys.tencent.SendRedPacketActivity"
+            android:label="@string/title_activity_send_red_packet"
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>
     </application>
