@@ -473,8 +473,6 @@ public class WeChatMessageActivity extends BaseActivity {
 
                 WebChatMessageRealm webChatMessageRealm;
 
-                ContactRealm me = realm.where(ContactRealm.class).equalTo("isMe", true).findFirst();
-                ContactRealm other = realm.where(ContactRealm.class).equalTo("isMe", false).findFirst();
 
 
                 webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
@@ -487,17 +485,18 @@ public class WeChatMessageActivity extends BaseActivity {
                 webChatMessageRealm.setMessage(String.format("￥%s", MathUtils.toString(new BigDecimal
                         (webChatMessageRealm.getAmount()))));
                 webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TRANSFER);
-                webChatMessageRealm.setSubMessage("转账给" + other.getUserNick());
 
 
-                if (redPackedModel.getSource() == AppConstant.MESSAGE_TYPE_ME_SEND_RED_PACKED) {
 
+                if (redPackedModel.getSource() == AppConstant.MESSAGE_TYPE_ME_SEND_TRANSFER) {
+
+                    webChatMessageRealm.setSubMessage("转账给" + otherContactRealm.getUserNick());
                     webChatMessageRealm.setContactRealm(meContactRealm);
 
                 } else {
 
                     webChatMessageRealm.setContactRealm(otherContactRealm);
-
+                    webChatMessageRealm.setSubMessage("转账给" + meContactRealm.getUserNick());
                 }
                 webChatMessageRealm.setSendTime(System.currentTimeMillis());
                 webChatMessageRealm.setSourceMessage("");
