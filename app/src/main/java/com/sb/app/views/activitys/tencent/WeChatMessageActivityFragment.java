@@ -98,6 +98,12 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
     @BindView(R.id.relativeLayout8)
     RelativeLayout mRelativeLayout8;
 
+    @BindView(R.id.relativeLayout9)
+    RelativeLayout relativeLayout9;
+
+    @BindView(R.id.tvClear)
+    AppCompatTextView tvClear;
+
 
     @BindView(R.id.chatTypeConstraintLayout)
     ConstraintLayout chatTypeConstraintLayout;
@@ -142,6 +148,7 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
         ViewUtils.setCompoundTopDrawables(getActivity(), mTvVoice, BaseFontAwesome.Icon.icon_voice, getResources().getColor(R.color.md_grey_600), 10F);
         ViewUtils.setCompoundTopDrawables(getActivity(), mTvChatDateTime, BaseFontAwesome.Icon.icon_chat_time, getResources().getColor(R.color.md_grey_600), 10F);
         ViewUtils.setCompoundTopDrawables(getActivity(), mTvRetract, BaseFontAwesome.Icon.icon_retract, getResources().getColor(R.color.md_grey_600), 10F);
+        ViewUtils.setCompoundTopDrawables(getActivity(), tvClear, BaseFontAwesome.Icon.icon_delete, getResources().getColor(R.color.md_grey_600), 10F);
 
 
         mWebChatMessageRealms = mRealm.where(WebChatMessageRealm.class)
@@ -325,6 +332,24 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
         }
 
 
+    }
+
+    @OnClick(R.id.tvClear)
+    void onClearClick() {
+
+
+        if (ArrayUtils.isNotEmpty(mWebChatMessageRealms)) {
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    mWebChatMessageRealms.deleteAllFromRealm();
+                }
+            });
+        }
+
+
+
+        weChatLinearLayout.removeAllViews();
     }
 
     /**

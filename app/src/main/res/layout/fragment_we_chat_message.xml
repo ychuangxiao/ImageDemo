@@ -20,10 +20,10 @@
         app:layout_constraintVertical_weight="1">
 
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/weChatLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
@@ -49,11 +49,11 @@
 
 
         <android.support.constraint.ConstraintLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:id="@+id/sendChatConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="@dimen/padding_small"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -214,7 +214,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintLeft_toRightOf="@+id/relativeLayout3"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout5"
+
                     app:layout_constraintTop_toTopOf="parent"
                     >
 
@@ -226,6 +227,28 @@
                         android:text="红包"
 
 
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
+                    style="@style/Purse.RelativeLayout.Server"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout4"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvTransfer"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="转账"
                         />
                 </RelativeLayout>
 
@@ -244,33 +267,12 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/relativeLayout5"
-                    style="@style/Purse.RelativeLayout.Server"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout6"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tvTransfer"
-                        style="@style/Purse.TextView.Server"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:text="转账"
-                        />
-                </RelativeLayout>
-
-
-                <RelativeLayout
                     android:id="@+id/relativeLayout6"
                     style="@style/Purse.RelativeLayout.Server"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+
                     app:layout_constraintRight_toLeftOf="@+id/relativeLayout7"
                     app:layout_constraintTop_toTopOf="parent"
                     >
@@ -306,25 +308,58 @@
                         />
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/relativeLayout8"
                     style="@style/Purse.RelativeLayout.Server"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintLeft_toRightOf="@+id/relativeLayout7"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout9"
                     app:layout_constraintTop_toTopOf="parent"
                     >
 
                     <android.support.v7.widget.AppCompatTextView
-
                         android:id="@+id/tvRetract"
                         style="@style/Purse.TextView.Server"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="撤回"
                         />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout9"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout8"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout10"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvClear"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="清屏"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout10"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout9"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+
                 </RelativeLayout>
 
 

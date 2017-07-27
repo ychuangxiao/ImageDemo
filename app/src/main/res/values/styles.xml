@@ -21,7 +21,7 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/md_grey_600</item>
 
     </style>
 
