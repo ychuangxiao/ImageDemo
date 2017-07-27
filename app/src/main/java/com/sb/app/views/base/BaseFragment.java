@@ -13,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.AndroidApplication;
 import com.sb.app.R;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.ApplicationComponent;
 import com.sb.app.model.BankModel;
-import com.sb.app.utils.ViewUtils;
-import com.ilogie.android.library.common.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,7 +62,7 @@ public abstract class BaseFragment extends Fragment {
 
 
         View mRootView = inflater.inflate(getContentViewId(), container, false);
-        ButterKnife.bind(this, mRootView);//绑定framgent
+        mUnbinder = ButterKnife.bind(this, mRootView);//绑定framgent
         return mRootView;
 
     }

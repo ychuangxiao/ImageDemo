@@ -1,11 +1,8 @@
 package com.sb.app.views.activitys.tencent;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
@@ -14,7 +11,6 @@ import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.views.base.BaseActivity;
-import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
 
@@ -115,6 +111,13 @@ public class WeChatMessageActivity extends BaseActivity implements HasComponent<
      */
     @Override
     protected int getContentViewId() {
+
+        // 隐藏标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 隐藏状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         return R.layout.activity_we_chat_message;
     }
 

@@ -8,18 +8,25 @@
     tools:context="com.sb.app.views.activitys.tencent.WeChatMessageActivityFragment"
     tools:showIn="@layout/activity_we_chat_message">
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/recyclerList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         app:layout_constraintBottom_toTopOf="@+id/bottomChatConstraintLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintVertical_weight="10">
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintVertical_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/weChatLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/bottomChatConstraintLayout"
@@ -42,6 +49,8 @@
 
 
         <android.support.constraint.ConstraintLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/sendChatConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,8 +69,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etContent"
+            <com.sb.app.views.widget.ClearEditText
+                android:id="@+id/etMessageContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6.0dip"
@@ -104,8 +113,223 @@
                 android:layout_width="32.0dip"
                 android:layout_height="32.0dip"
                 android:background="@mipmap/ic_wechat_plus"
+                android:tag="10"
                 android:visibility="visible"
                 app:layout_constraintRight_toRightOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/chatTypeConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendChatConstraintLayout">
+
+            <View
+                android:id="@+id/chatLine"
+                style="@style/Purse.Horizontal.Line"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                ></View>
+
+            <android.support.constraint.ConstraintLayout
+
+                android:id="@+id/consLayout1"
+                android:layout_width="0dp"
+                android:layout_height="75dip"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chatLine">
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    style="@style/Purse.RelativeLayout.Server"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvPhoto"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="图片"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout1"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvCamera"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拍摄"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout2"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvVideoChat"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="视频聊天"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout4"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvRedPacket"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="红包"
+
+
+                        />
+                </RelativeLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+
+                android:id="@+id/consLayout2"
+                android:layout_width="0dp"
+                android:layout_height="75dip"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/consLayout1">
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
+                    style="@style/Purse.RelativeLayout.Server"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvTransfer"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="转账"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout6"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout5"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout7"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvChatDateTime"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="聊天时间"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout7"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout6"
+                    app:layout_constraintRight_toLeftOf="@+id/relativeLayout8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvVoice"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="语音输入"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout8"
+                    style="@style/Purse.RelativeLayout.Server"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout7"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <android.support.v7.widget.AppCompatTextView
+
+                        android:id="@+id/tvRetract"
+                        style="@style/Purse.TextView.Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="撤回"
+                        />
+                </RelativeLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
         </android.support.constraint.ConstraintLayout>
 
         <android.support.v7.widget.RecyclerView

@@ -21,6 +21,10 @@ public class AppConstant {
     public static final String EXTRA_NO_TYPE = "type";//单号类型扩展参数
 
 
+    public static final int RECEIVED_ACTION_Y = 10;
+    public static final int RECEIVED_ACTION_N = 0;
+
+
     public static final int ACTION_10 = 10;
     public static final int ACTION_20 = 20;
     public static final int ACTION_30 = 30;
@@ -41,9 +45,9 @@ public class AppConstant {
 
 
     public static final int MESSAGE_TYPE_TRANSFER = 20;
-    public static final int MESSAGE_TYPE_ME_SEND_TRANSFER = 3;
-    public static final int MESSAGE_TYPE_OTHER_SEND_TRANSFER = 4;
 
+    public static final int MESSAGE_TYPE_OTHER_SEND_TRANSFER = 3;
+    public static final int MESSAGE_TYPE_ME_SEND_TRANSFER = 4;
 
     //手机类型
 

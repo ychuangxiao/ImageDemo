@@ -3,16 +3,14 @@ package com.sb.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.ilogie.android.library.common.util.ArrayUtils;
+import com.ilogie.android.library.common.util.LogUtils;
 import com.sb.app.base.Migration;
 import com.sb.app.di.components.ApplicationComponent;
 import com.sb.app.di.components.DaggerApplicationComponent;
 import com.sb.app.di.modules.ApplicationModule;
 import com.sb.app.utils.CrashHandler;
 import com.sb.app.utils.SharedPreferencesUtils;
-import com.ilogie.android.library.common.util.ArrayUtils;
-import com.ilogie.android.library.common.util.LogUtils;
-import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.activitys.ali.PaymentActivity;
 
 import java.util.HashSet;
 
@@ -86,7 +84,7 @@ public class AndroidApplication extends Application {
      */
     private void initRealm() {
         //Realm数据配置相关
-        realmConfiguration = new RealmConfiguration.Builder().name(getString(R.string.name_database)).schemaVersion(0).migration(new Migration())
+        realmConfiguration = new RealmConfiguration.Builder().name(getString(R.string.name_database)).schemaVersion(1).migration(new Migration())
                 .build();
 
         Realm.setDefaultConfiguration(realmConfiguration);// Make this Realm the default

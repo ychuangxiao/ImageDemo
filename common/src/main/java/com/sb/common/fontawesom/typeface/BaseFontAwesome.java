@@ -128,23 +128,25 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_save('\ue684'),
 
+        icon_phone('\ue65a'),
+
         icon_ali('\ue67c'),
 
         icon_nva_home('\ue600'),
 
         icon_more('\ue61f'),
 
-        icon_batery_white('\ue697'),
-
-        icon_batery_full('\ue825'),
-
         icon_repeat('\ue68b'),
 
         icon_checked('\ue65b'),
 
+        icon_chat_time('\ue682'),
+
         icon_mobile('\ue64e'),
 
         icon_brow('\ue6a8'),
+
+        icon_retract('\ue60a'),
 
         icon_content('\ue65d'),
 
@@ -152,11 +154,13 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_nav_more('\ue63b'),
 
-        icon_xinhao('\ue614'),
-
         icon_user('\ue75c'),
 
         icon_nva_me('\ue6b3'),
+
+        icon_red_packet('\ue61a'),
+
+        icon_voice('\ue789'),
 
         icon_date('\ue616'),
 
@@ -168,9 +172,13 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_time('\ue674'),
 
+        icon_camera('\ue666'),
+
         icon_right('\ue60d'),
 
-        icon_wifi('\ue76b');
+        icon_video('\ue64f'),
+
+        icon_transfer('\ue633');
 
 
         char character;
