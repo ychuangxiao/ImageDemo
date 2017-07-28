@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -20,13 +24,14 @@ import com.ilogie.android.library.common.util.ArrayUtils;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
-
 import com.sb.app.model.RedPackedModel;
 import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseActivity;
+import com.sb.app.views.viewgroup.ChatFriendMessageItemView;
 import com.sb.app.views.viewgroup.ChatFriendRedPacketItemView;
 import com.sb.app.views.viewgroup.ChatFriendTransferItemView;
+import com.sb.app.views.viewgroup.ChatMeMessageItemView;
 import com.sb.app.views.viewgroup.ChatMeRedPacketItemView;
 import com.sb.app.views.viewgroup.ChatMeTransferItemView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
@@ -48,14 +53,21 @@ import io.realm.Sort;
 
 public class WeChatMessageActivity extends BaseActivity {
 
+    @BindView(R.id.btnEmoji)
+    AppCompatImageView mBtnEmoji;
+
+    @BindView(R.id.sendRelativeLayout1)
+    RelativeLayout mSendRelativeLayout1;
+
+    @BindView(R.id.btnSend)
+    AppCompatButton mBtnSend;
+    @BindView(R.id.sendRelativeLayout2)
+    RelativeLayout mSendRelativeLayout2;
     private String groupId;
 
 
     @BindView(R.id.emojiRecycler)
     RecyclerView emojiRecycler;
-
-    @BindView(R.id.btnEmoji)
-    AppCompatImageView btnEmoji;
 
 
     @BindView(R.id.recyclerList)
@@ -177,6 +189,8 @@ public class WeChatMessageActivity extends BaseActivity {
     ChatFriendRedPacketItemView friendRedPacketItemView;
     ChatMeTransferItemView meTransferItemView;
     ChatFriendTransferItemView friendTransferItemView;
+    ChatMeMessageItemView mMeMessageItemView;
+    ChatFriendMessageItemView mFriendMessageItemView;
 
     private void refreshData() {
 
@@ -217,6 +231,19 @@ public class WeChatMessageActivity extends BaseActivity {
                     friendTransferItemView = ChatFriendTransferItemView.build(this);
                     friendTransferItemView.binder(webChatMessageRealm);
                     weChatLinearLayout.addView(friendTransferItemView);
+                }
+                break;
+            case AppConstant.MESSAGE_TYPE_MESSAGE:
+
+                if (webChatMessageRealm.getContactRealm().isMe()) {
+                    mMeMessageItemView = ChatMeMessageItemView.build(this);
+                    mMeMessageItemView.binder(webChatMessageRealm);
+                    weChatLinearLayout.addView(mMeMessageItemView);
+
+                } else {
+                    mFriendMessageItemView = ChatFriendMessageItemView.build(this);
+                    mFriendMessageItemView.binder(webChatMessageRealm);
+                    weChatLinearLayout.addView(mFriendMessageItemView);
                 }
                 break;
         }
@@ -271,6 +298,54 @@ public class WeChatMessageActivity extends BaseActivity {
                 .getColor(R.color.md_grey_600), 10F);
         ViewUtils.setCompoundTopDrawables(this, tvClear, BaseFontAwesome.Icon.icon_delete, getResources().getColor(R
                 .color.md_grey_600), 10F);
+
+
+        etMessageContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (StringUtils.isEmpty(etMessageContent.getText().toString())) {
+
+
+                    if (btnPlus.getVisibility() != View.VISIBLE) {
+                        btnPlus.setVisibility(View.VISIBLE);
+                        mBtnSend.setVisibility(View.GONE);
+
+                        ViewGroup.LayoutParams layoutParams = mSendRelativeLayout1.getLayoutParams();
+
+                        layoutParams.width = 70;
+                        mSendRelativeLayout1.setLayoutParams(layoutParams);
+
+                    }
+
+
+                } else {
+
+                    if (mBtnSend.getVisibility() != View.VISIBLE) {
+
+
+                        ViewGroup.LayoutParams layoutParams = mSendRelativeLayout1.getLayoutParams();
+
+                        layoutParams.width = 100;
+                        mSendRelativeLayout1.setLayoutParams(layoutParams);
+                        mBtnSend.setVisibility(View.VISIBLE);
+                        btnPlus.setVisibility(View.GONE);
+                    }
+
+                }
+
+            }
+        });
 
 
         mWebChatMessageRealms = mRealm.where(WebChatMessageRealm.class)
@@ -371,6 +446,49 @@ public class WeChatMessageActivity extends BaseActivity {
 
 
         weChatLinearLayout.removeAllViews();
+    }
+
+
+    private int temp = 1;
+
+    @OnClick(R.id.btnSend)
+    void onSendClick() {
+
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                WebChatMessageRealm webChatMessageRealm;
+
+
+                webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+
+                if (temp == 1) {
+                    temp = 2;
+                    webChatMessageRealm.setContactRealm(meContactRealm);
+                } else {
+                    webChatMessageRealm.setContactRealm(otherContactRealm);
+                    temp = 1;
+                }
+
+                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_MESSAGE);
+                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
+                webChatMessageRealm.setMessage(etMessageContent.getText().toString().trim());
+                webChatMessageRealm.setSendTime(System.currentTimeMillis());
+                webChatMessageRealm.setSourceMessage("");
+                createMessageLayout(webChatMessageRealm);
+            }
+        });
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mNestedScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+
+        etMessageContent.setText("");
     }
 
     @Override
@@ -474,7 +592,6 @@ public class WeChatMessageActivity extends BaseActivity {
                 WebChatMessageRealm webChatMessageRealm;
 
 
-
                 webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
                 webChatMessageRealm.setAmount(Double.parseDouble(redPackedModel.getAmount().toString()));
                 webChatMessageRealm.setAmountStatus(AppConstant.RECEIVED_ACTION_N);
@@ -485,7 +602,6 @@ public class WeChatMessageActivity extends BaseActivity {
                 webChatMessageRealm.setMessage(String.format("￥%s", MathUtils.toString(new BigDecimal
                         (webChatMessageRealm.getAmount()))));
                 webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TRANSFER);
-
 
 
                 if (redPackedModel.getSource() == AppConstant.MESSAGE_TYPE_ME_SEND_TRANSFER) {

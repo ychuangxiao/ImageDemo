@@ -49,6 +49,7 @@ public class AppConstant {
 
 
     public static final int MESSAGE_TYPE_TRANSFER = 20;
+    public static final int MESSAGE_TYPE_MESSAGE = 30;
 
     public static final int MESSAGE_TYPE_OTHER_SEND_TRANSFER = 3;
     public static final int MESSAGE_TYPE_ME_SEND_TRANSFER = 4;
