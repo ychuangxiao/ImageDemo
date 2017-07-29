@@ -439,7 +439,7 @@
         <item name="android:src">@mipmap/ic_transfer_we_chat</item>
         <item name="android:layout_width">33.0dip</item>
         <item name="android:layout_height">33.0dip</item>
-        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginTop">0dip</item>
     </style>
 
     <style name="WeChat.RedPacket" parent="">
@@ -449,7 +449,7 @@
         <item name="android:src">@mipmap/ic_redpacket_we_chat</item>
         <item name="android:layout_width">29.0dip</item>
         <item name="android:layout_height">34.0dip</item>
-        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginTop">0dip</item>
     </style>
 
 
@@ -475,7 +475,7 @@
         <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textSize">@dimen/font_size_15</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:maxWidth">266.0dip</item>
+        <item name="android:maxWidth">250.0dip</item>
 
     </style>
 
@@ -496,7 +496,7 @@
     </style>
 
     <style name="WeChat.RedPacket.Source" parent="">
-        <item name="android:layout_marginTop">6dip</item>
+        <item name="android:layout_marginTop">0dip</item>
         <item name="android:clickable">false</item>
         <item name="android:scaleType">fitXY</item>
         <item name="android:layout_width">wrap_content</item>
@@ -511,14 +511,14 @@
     <style name="WeChat.RedPacket.Container.Right" parent="WeChat.Container">
 
         <item name="android:background">@drawable/ic_redpacket_right_default</item>
-        <item name="android:layout_marginRight">@dimen/margin_tiny</item>
+
 
     </style>
 
 
     <style name="WeChat.RedPacket.Container.Left" parent="WeChat.Container">
         <item name="android:background">@drawable/ic_redpacket_left_default</item>
-        <item name="android:layout_marginLeft">@dimen/margin_tiny</item>
+
     </style>
 
 
@@ -526,10 +526,9 @@
         <item name="android:layout_width">218.0dip</item>
         <item name="android:layout_height">wrap_content</item>
 
-
-        <item name="android:paddingLeft">@dimen/padding_small</item>
+      <!--  <item name="android:paddingLeft">@dimen/padding_small</item>
         <item name="android:paddingRight">@dimen/padding_small</item>
-        <item name="android:paddingTop">4dip</item>
+        <item name="android:paddingTop">4dip</item>-->
 
     </style>
 

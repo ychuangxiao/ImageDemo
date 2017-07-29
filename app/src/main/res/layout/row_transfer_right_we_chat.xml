@@ -7,10 +7,11 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/padding_small"
     >
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-     >
+        >
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -40,36 +41,50 @@
             app:layout_constraintTop_toTopOf="@+id/headerImage"
             >
 
+            <android.support.constraint.ConstraintLayout
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/ivRed"
-                style="@style/WeChat.Transfer"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/redDetailsConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="60dip"
+                android:layout_marginLeft="12dip"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ivRed"
+                    style="@style/WeChat.Transfer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/topRedContent"
-                style="@style/WeChat.RedPacket.Content"
-                android:text="￥89,800.00"
-                app:layout_constraintLeft_toRightOf="@+id/ivRed"
-                app:layout_constraintTop_toTopOf="@+id/ivRed"/>
+                <android.support.v7.widget.AppCompatTextView
 
-            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/topRedContent"
+                    style="@style/WeChat.RedPacket.Content"
+                    android:text="￥89,800.00"
+                    app:layout_constraintLeft_toRightOf="@+id/ivRed"
+                    app:layout_constraintTop_toTopOf="@+id/ivRed"/>
 
-                android:id="@+id/tvRedDetails"
-                style="@style/WeChat.RedPacket.Details"
+                <android.support.v7.widget.AppCompatTextView
 
-                android:text="已被领取"
+                    android:id="@+id/tvRedDetails"
+                    style="@style/WeChat.RedPacket.Details"
 
-                app:layout_constraintLeft_toRightOf="@+id/ivRed"
-                app:layout_constraintTop_toBottomOf="@+id/topRedContent"
-                />
+                    android:text="已被领取"
+
+                    app:layout_constraintLeft_toRightOf="@+id/ivRed"
+                    app:layout_constraintTop_toBottomOf="@+id/topRedContent"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
 
             <android.support.v7.widget.AppCompatTextView
 
                 style="@style/WeChat.RedPacket.Source"
                 android:text="微信转账"
-                app:layout_constraintTop_toBottomOf="@+id/tvRedDetails"
+                app:layout_constraintLeft_toLeftOf="@+id/redDetailsConstraintLayout"
+                app:layout_constraintTop_toBottomOf="@+id/redDetailsConstraintLayout"
                 />
 
         </android.support.constraint.ConstraintLayout>

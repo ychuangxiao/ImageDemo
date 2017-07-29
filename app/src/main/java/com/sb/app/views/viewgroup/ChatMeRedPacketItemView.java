@@ -72,14 +72,33 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     /**
      * 绑定消息
      */
-    public void binder(WebChatMessageRealm webChatMessageRealm) {
-        mTvChatDateTime.setText(TimeUtils.getLastDateTime(webChatMessageRealm.getSendTime(), System.currentTimeMillis(), false));
+    public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
+
+
+        if (isFirst) {
+
+            if (lastSendTime < 1L) {
+                mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
+                        .DEFAULT_PATTERN_4));
+
+            } else {
+                mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getSendTime(), System
+                        .currentTimeMillis()));
+            }
+
+        } else {
+
+            mTvChatDateTime.setText(TimeUtils.getLastDateTime(lastSendTime, webChatMessageRealm.getSendTime()));
+
+        }
 
 
         if (StringUtils.isEmpty(mTvChatDateTime.getText().toString())) {
             mTvChatDateTime.setVisibility(View.GONE);
         } else {
             mTvChatDateTime.setVisibility(View.VISIBLE);
+
+            lastSendTime = webChatMessageRealm.getSendTime();
         }
 
         mTopRedContent.setText(webChatMessageRealm.getMessage());
@@ -99,6 +118,9 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
                 , 4
                 , mRedPackedConstraintLayout.getPaddingRight()
                 , mRedPackedConstraintLayout.getPaddingBottom());
+
+
+        return lastSendTime;
     }
 
 

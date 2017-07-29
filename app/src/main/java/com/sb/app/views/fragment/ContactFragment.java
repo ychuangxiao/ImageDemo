@@ -28,6 +28,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,6 +103,7 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
     List<ContactRealm> mContactRealms;
 
+
     @Override
     public void initView() {
 
@@ -109,20 +111,37 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                contactRealm.setMe(true);
-                contactRealm.setUserNick("无聊的大匪猫");
 
 
-                contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                contactRealm.setMe(false);
-                contactRealm.setUserNick("王小二");
-                mContactRealms.add(contactRealm);
+                long count = realm.where(ContactRealm.class).count();
 
-                contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                contactRealm.setMe(false);
-                contactRealm.setUserNick("完颜瑾文");
-                mContactRealms.add(contactRealm);
+
+
+                if (count < 1) {
+                    ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(true);
+                    contactRealm.setUserNick("无聊的大匪猫");
+
+
+                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(false);
+                    contactRealm.setUserNick("王小二");
+                    mContactRealms.add(contactRealm);
+
+                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(false);
+                    contactRealm.setUserNick("完颜瑾文");
+                    mContactRealms.add(contactRealm);
+                }
+
+
+                RealmResults<ContactRealm> contactRealmRealmResults = realm.where(ContactRealm.class).findAll();
+
+                for (ContactRealm contactRealm : contactRealmRealmResults) {
+                    mContactRealms.add(contactRealm);
+                }
+
+
             }
         });
 

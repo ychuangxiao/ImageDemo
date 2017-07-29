@@ -2,6 +2,7 @@ package com.sb.app.views.activitys.tencent;
 
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -41,10 +42,10 @@ import io.realm.Sort;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
+public class WeChatMessageActivityFragment extends Fragment {
 
 
-    @BindView(R.id.emojiRecycler)
+    /*@BindView(R.id.emojiRecycler)
     RecyclerView emojiRecycler;
 
     @BindView(R.id.btnEmoji)
@@ -131,9 +132,9 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
 
     }
 
-    /**
+    *//**
      * 初始化视图，工具条等信息
-     */
+     *//*
     @Override
     public void initView() {
 
@@ -249,11 +250,11 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
         }
     }
 
-    /**
+    *//**
      * 获得布局视图ID
      *
      * @return 视图ID
-     */
+     *//*
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_we_chat_message;
@@ -352,20 +353,20 @@ public class WeChatMessageActivityFragment extends BaseFragmentDaggerActivity {
         weChatLinearLayout.removeAllViews();
     }
 
-    /**
+    *//**
      * 初始化注解
-     */
+     *//*
     @Override
     public void initInjector() {
         this.getComponent(BizComponent.class).inject(this);
     }
 
-    /**
+    *//**
      * 初始化中间者
-     */
+     *//*
     @Override
     public void initPresenter() {
 
-    }
+    }*/
 
 }

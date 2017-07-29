@@ -41,7 +41,7 @@ public class WeChatMessageAdapter extends RecyclerViewAdapterBase<WebChatMessage
     @Override
     public void onBindViewHolder(ViewWrapper<ChatMeRedPacketItemView> viewHolder, final int position) {
         ChatMeRedPacketItemView view = viewHolder.getView();
-        view.binder(items.get(position));
+        //view.binder(items.get(position));
 
 
     }

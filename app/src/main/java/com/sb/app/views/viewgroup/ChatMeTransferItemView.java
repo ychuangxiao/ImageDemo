@@ -72,16 +72,24 @@ public class ChatMeTransferItemView extends RelativeLayout {
     /**
      * 绑定消息
      */
-    public void binder(WebChatMessageRealm webChatMessageRealm) {
+    public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
 
-        mTvChatDateTime.setText(TimeUtils.getLastDateTime(webChatMessageRealm.getSendTime(), System.currentTimeMillis(), false));
+        if (isFirst) {
 
+            if (lastSendTime < 1L) {
+                mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
+                        .DEFAULT_PATTERN_4));
 
-        if (StringUtils.isEmpty(mTvChatDateTime.getText().toString())) {
-            mTvChatDateTime.setVisibility(View.GONE);
+            } else {
+                mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getSendTime(), System
+                        .currentTimeMillis()));
+            }
+
         } else {
-            mTvChatDateTime.setVisibility(View.VISIBLE);
+
+            mTvChatDateTime.setText(TimeUtils.getLastDateTime(lastSendTime, webChatMessageRealm.getSendTime()));
+
         }
 
 
@@ -100,6 +108,8 @@ public class ChatMeTransferItemView extends RelativeLayout {
                 , 4
                 , mRedPackedConstraintLayout.getPaddingRight()
                 , mRedPackedConstraintLayout.getPaddingBottom());
+
+        return lastSendTime;
     }
 
 

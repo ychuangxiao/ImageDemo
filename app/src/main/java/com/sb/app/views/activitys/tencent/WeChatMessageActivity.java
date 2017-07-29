@@ -25,7 +25,9 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedModel;
+import com.sb.app.utils.LogUtils;
 import com.sb.app.utils.MathUtils;
+import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.viewgroup.ChatFriendMessageItemView;
@@ -41,10 +43,12 @@ import com.sb.data.entitys.realm.ContactRealm;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -195,27 +199,33 @@ public class WeChatMessageActivity extends BaseActivity {
     private void refreshData() {
 
 
+        int i = 0;
         for (WebChatMessageRealm webChatMessageRealm : mWebChatMessageRealms) {
 
 
-            createMessageLayout(webChatMessageRealm);
+            createMessageLayout(webChatMessageRealm, i == 0);
+            i++;
         }
     }
 
 
-    private void createMessageLayout(WebChatMessageRealm webChatMessageRealm) {
+    private void createMessageLayout(WebChatMessageRealm webChatMessageRealm, boolean isFirst) {
+
+
+
+
 
         switch (webChatMessageRealm.getMessageType()) {
             case AppConstant.MESSAGE_TYPE_RED_PACKED:
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
                     meRedPacketItemView = ChatMeRedPacketItemView.build(this);
-                    meRedPacketItemView.binder(webChatMessageRealm);
+                    lastSendTime = meRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(meRedPacketItemView);
 
                 } else {
                     friendRedPacketItemView = ChatFriendRedPacketItemView.build(this);
-                    friendRedPacketItemView.binder(webChatMessageRealm);
+                    lastSendTime = friendRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(friendRedPacketItemView);
                 }
 
@@ -224,12 +234,12 @@ public class WeChatMessageActivity extends BaseActivity {
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
                     meTransferItemView = ChatMeTransferItemView.build(this);
-                    meTransferItemView.binder(webChatMessageRealm);
+                    lastSendTime = meTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(meTransferItemView);
 
                 } else {
                     friendTransferItemView = ChatFriendTransferItemView.build(this);
-                    friendTransferItemView.binder(webChatMessageRealm);
+                    lastSendTime = friendTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(friendTransferItemView);
                 }
                 break;
@@ -237,18 +247,39 @@ public class WeChatMessageActivity extends BaseActivity {
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
                     mMeMessageItemView = ChatMeMessageItemView.build(this);
-                    mMeMessageItemView.binder(webChatMessageRealm);
+                    lastSendTime = mMeMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(mMeMessageItemView);
 
                 } else {
                     mFriendMessageItemView = ChatFriendMessageItemView.build(this);
-                    mFriendMessageItemView.binder(webChatMessageRealm);
+                    lastSendTime = mFriendMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     weChatLinearLayout.addView(mFriendMessageItemView);
                 }
                 break;
         }
+
+
+        LogUtils.d("ceshi", TimeUtils.millis2String(lastSendTime, TimeUtils.DEFAULT_PATTERN_9));
     }
 
+
+    @OnTouch(R.id.recyclerList)
+    boolean onChatLayoutTouch(android.view.View view, android.view.MotionEvent event) {
+        hiddenBottomHandleLayout();
+        etMessageContent.clearFocus();
+        hideSoftInput(etMessageContent);
+        return false;
+    }
+
+
+    @OnTouch(R.id.etMessageContent)
+    boolean onMessageContentTouch(android.view.View view, android.view.MotionEvent event) {
+        hiddenBottomHandleLayout();
+        return false;
+    }
+
+
+    Long lastSendTime = 0L;
 
     /**
      * 初始化视图，工具条等信息
@@ -352,6 +383,13 @@ public class WeChatMessageActivity extends BaseActivity {
                 .equalTo("groupId", chatGroupRealm.getId(), Case.INSENSITIVE).findAllSorted("sendTime", Sort.ASCENDING);
 
 
+        //得到最后一个消息的记录
+
+        if (ArrayUtils.isNotEmpty(mWebChatMessageRealms)) {
+            lastSendTime = mWebChatMessageRealms.where().max("sendTime").longValue();
+        }
+
+
         mWebChatMessageRealms.addChangeListener(new RealmChangeListener<RealmResults<WebChatMessageRealm>>() {
             @Override
             public void onChange(RealmResults<WebChatMessageRealm> results) {
@@ -404,7 +442,7 @@ public class WeChatMessageActivity extends BaseActivity {
 
         RedPackedModel redPackedModel = new RedPackedModel();
 
-        redPackedModel.setSource(AppConstant.MESSAGE_TYPE_ME_SEND_RED_PACKED);
+        redPackedModel.setSource(AppConstant.MESSAGE_TYPE_OTHER_SEND_RED_PACKED);
         redPackedModel.setSendType(AppConstant.RESULT_CODE_RED_PACKET);
         Intent intent = new Intent(this, SendRedPacketActivity.class);
         intent.putExtra(AppConstant.EXTRA_NO, redPackedModel);
@@ -417,18 +455,30 @@ public class WeChatMessageActivity extends BaseActivity {
     void onPlusClick() {
 
         if (btnPlus.getTag().toString().compareTo(String.valueOf(AppConstant.ACTION_10)) == 0) {
-            chatTypeConstraintLayout.setVisibility(View.VISIBLE);
-            btnPlus.setTag(String.valueOf(AppConstant.ACTION_20));
-
-            etMessageContent.clearFocus();
+            showBottomHandleLayout();
 
         } else if (btnPlus.getTag().toString().compareTo(String.valueOf(AppConstant.ACTION_20)) == 0) {
-            chatTypeConstraintLayout.setVisibility(View.GONE);
-            btnPlus.setTag(String.valueOf(AppConstant.ACTION_10));
-            etMessageContent.requestFocus();
+            showSoftInput();
+            hiddenBottomHandleLayout();
         }
 
 
+    }
+
+    private void hiddenBottomHandleLayout() {
+
+        chatTypeConstraintLayout.setVisibility(View.GONE);
+        btnPlus.setTag(String.valueOf(AppConstant.ACTION_10));
+        etMessageContent.requestFocus();
+    }
+
+    private void showBottomHandleLayout() {
+        hideSoftInput(etMessageContent);
+
+        chatTypeConstraintLayout.setVisibility(View.VISIBLE);
+        btnPlus.setTag(String.valueOf(AppConstant.ACTION_20));
+
+        etMessageContent.clearFocus();
     }
 
     @OnClick(R.id.tvClear)
@@ -455,6 +505,10 @@ public class WeChatMessageActivity extends BaseActivity {
     void onSendClick() {
 
 
+
+
+
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -477,7 +531,7 @@ public class WeChatMessageActivity extends BaseActivity {
                 webChatMessageRealm.setMessage(etMessageContent.getText().toString().trim());
                 webChatMessageRealm.setSendTime(System.currentTimeMillis());
                 webChatMessageRealm.setSourceMessage("");
-                createMessageLayout(webChatMessageRealm);
+                createMessageLayout(webChatMessageRealm, (lastSendTime==0L));
             }
         });
 
@@ -571,7 +625,7 @@ public class WeChatMessageActivity extends BaseActivity {
                 webChatMessageRealm.setSendTime(System.currentTimeMillis());
                 webChatMessageRealm.setSourceMessage("");
 
-                createMessageLayout(webChatMessageRealm);
+                createMessageLayout(webChatMessageRealm, (lastSendTime==0L));
             }
         });
 
@@ -616,7 +670,7 @@ public class WeChatMessageActivity extends BaseActivity {
                 }
                 webChatMessageRealm.setSendTime(System.currentTimeMillis());
                 webChatMessageRealm.setSourceMessage("");
-                createMessageLayout(webChatMessageRealm);
+                createMessageLayout(webChatMessageRealm, (lastSendTime==0L));
             }
         });
 

@@ -12,6 +12,7 @@ import com.ilogie.android.library.common.util.ArrayUtils;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
+import com.sb.app.utils.LogUtils;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
@@ -121,6 +122,8 @@ public class ContactDetailActivity extends BaseActivity {
             }
         }
 
+
+        LogUtils.d("ceshi",groupUid);
 
         Intent intent = new Intent(this, WeChatMessageActivity.class);
 

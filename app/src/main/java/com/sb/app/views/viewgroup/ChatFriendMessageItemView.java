@@ -4,7 +4,6 @@ package com.sb.app.views.viewgroup;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.Html;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -67,20 +66,40 @@ public class ChatFriendMessageItemView extends RelativeLayout {
     /**
      * 绑定消息
      */
-    public void binder(WebChatMessageRealm webChatMessageRealm) {
+    public Long binder(WebChatMessageRealm webChatMessageRealm,Long lastSendTime,boolean isFirst) {
 
 
-        mTvChatDateTime.setText(TimeUtils.getLastDateTime(webChatMessageRealm.getSendTime(), System.currentTimeMillis(), true));
+        if (isFirst) {
+
+            if (lastSendTime < 1L) {
+                mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
+                        .DEFAULT_PATTERN_4));
+
+            } else {
+                mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getSendTime(), System
+                        .currentTimeMillis()));
+            }
+
+        } else {
+
+            mTvChatDateTime.setText(TimeUtils.getLastDateTime(lastSendTime, webChatMessageRealm.getSendTime()));
+
+        }
 
 
         if (StringUtils.isEmpty(mTvChatDateTime.getText().toString())) {
             mTvChatDateTime.setVisibility(View.GONE);
         } else {
             mTvChatDateTime.setVisibility(View.VISIBLE);
+
+            lastSendTime = webChatMessageRealm.getSendTime();
         }
 
-        mTopRedContent.setText(Html.fromHtml(webChatMessageRealm.getMessage()));
 
+        mTopRedContent.setText(webChatMessageRealm.getMessage());
+
+
+        return lastSendTime;
 
     }
 

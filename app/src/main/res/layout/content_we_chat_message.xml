@@ -72,7 +72,8 @@
 
 
             <com.sb.app.views.widget.ClearEditText
-                android:paddingBottom="@dimen/padding_tiny"
+                android:paddingTop="@dimen/padding_tiny"
+               android:paddingBottom="4dip"
                 android:paddingLeft="@dimen/padding_small"
                 android:id="@+id/etMessageContent"
                 android:layout_width="0dp"
@@ -81,12 +82,11 @@
                 android:layout_marginRight="6.0dip"
                 android:background="@drawable/bg_edittext_message"
 
-
                 android:textSize="16.0sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/btnModeVoice"
                 app:layout_constraintRight_toLeftOf="@+id/sendRelativeLayout2"
-                app:layout_constraintTop_toTopOf="parent"
+
                 />
 
             <RelativeLayout

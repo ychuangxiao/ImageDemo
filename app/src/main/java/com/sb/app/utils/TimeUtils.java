@@ -1,5 +1,6 @@
 package com.sb.app.utils;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -191,6 +192,8 @@ public class TimeUtils {
 
     public static final String DEFAULT_PATTERN_8 = "yyyy年MM月dd日 HH:mm";
 
+    public static final String DEFAULT_PATTERN_9 = "yyyy年MM月dd日 HH:mm:ss:SSS";
+
 
     /**
      * 将时间戳转为时间字符串
@@ -340,7 +343,11 @@ public class TimeUtils {
      * @return
      */
     public static int minuteBetween(Long startMillis, Long endMillis, int minute) {
+
+
         Calendar cal = Calendar.getInstance();
+
+
         cal.setTimeInMillis(startMillis);
         Long time1 = cal.getTimeInMillis();
         cal.setTimeInMillis(endMillis);
@@ -355,12 +362,23 @@ public class TimeUtils {
         return Integer.parseInt(String.valueOf(between_days));
     }
 
-    public static String getLastDateTime(Long startMillis, Long endMillis, boolean is24) {
+    public static String getLastDateTime(Long startMillis, Long endMillis) {
+
+
 
 
         Calendar cal = Calendar.getInstance();
+
+        //昨天时间
+        Long yesterdayTime;
+        cal.setTimeInMillis(TimeUtils.millis2millis(startMillis, TimeUtils.DEFAULT_PATTERN_5));
+
+        yesterdayTime = cal.getTimeInMillis();
+
+
         cal.setTimeInMillis(startMillis);
         Long time1 = cal.getTimeInMillis();
+
         cal.setTimeInMillis(endMillis);
         Long time2 = cal.getTimeInMillis();
 
@@ -374,25 +392,86 @@ public class TimeUtils {
 
 
         //第一步 判断是否是两周外
-        between_days = (time2 - time1) / (1000 * 3600 * 24 * 14);
+        between_days = (time2 - yesterdayTime) / (1000 * 3600 * 24);
 
         if (between_days > 14) {
-            return TimeUtils.millis2String(time2, DEFAULT_PATTERN_8);
-        } else if (between_days <= 14 && between_days > 1) {
-            return getWeekOfDate(time2) + " " + TimeUtils.millis2String(time2, (is24) ? DEFAULT_PATTERN_4 : DEFAULT_PATTERN_4_1);
-        } else if (between_days < 2 && between_days >= 1) {
-            return "昨天 " + TimeUtils.millis2String(time2, (is24) ? DEFAULT_PATTERN_4 : DEFAULT_PATTERN_4_1);
-        } else {
-            between_days =   (time2 - time1) / (1000 * 60 * 20);//这个值看看是否是大于20分钟
 
-            if (between_days>20)
-            {
-                return TimeUtils.millis2String(time2, (is24) ? DEFAULT_PATTERN_4 : DEFAULT_PATTERN_4_1);
+            //都要判断是否大于20分钟
+
+            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            if (between_days > 20) {
+                return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_8);
+            } else {
+                return "";
             }
+        } else if (between_days <= 14 && between_days > 1) {
+
+            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            if (between_days > 20) {
+                return getWeekOfDate(endMillis) + " " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
+            } else {
+                return "";
+            }
+
+
+        } else if (between_days == 1) {
+
+            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            if (between_days > 20) {
+                return "昨天 " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
+            } else {
+                return "";
+            }
+
+        } else {
+
+
+            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+
+            if (between_days > 20) {
+                return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
+            } else {
+                return "";
+            }
+
         }
 
+    }
 
-        return "";
+
+    public static String getFirstDateTime(Long startMillis, Long endMillis) {
+
+
+        Calendar cal = Calendar.getInstance();
+
+
+        //昨天时间
+        Long yesterdayTime;
+        cal.setTimeInMillis(TimeUtils.millis2millis(startMillis, TimeUtils.DEFAULT_PATTERN_5));
+
+        yesterdayTime = cal.getTimeInMillis();
+
+        cal.setTimeInMillis(endMillis);
+        Long time2 = cal.getTimeInMillis();
+
+
+        //两周内 显示 星期几 HH:mm 昨天显示 显示：昨天 HH:mm 今天显示： HH:mm ，同时 只显示20分钟以内的
+
+        //(1000 * 3600 * 24)
+
+        //分钟
+        Long between_days = (time2 - yesterdayTime) / (1000 * 3600 * 24);
+
+        if (between_days > 14) {
+            return TimeUtils.millis2String(startMillis, DEFAULT_PATTERN_8);
+        } else if (between_days <= 14 && between_days > 1) {
+            return getWeekOfDate(startMillis) + " " + TimeUtils.millis2String(startMillis, DEFAULT_PATTERN_4);
+        }
+        if (between_days == 1) {
+            return "昨天 " + TimeUtils.millis2String(startMillis, DEFAULT_PATTERN_4);
+        } else {
+            return TimeUtils.millis2String(startMillis, DEFAULT_PATTERN_4);
+        }
     }
 
     public static String getWeekOfDate(Long millis) {
