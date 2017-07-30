@@ -447,4 +447,6 @@
 
     <color name="wechat_color_line">@color/wechat_color_ffe5e5e5</color>
 
+    <color name="wechat_color_group_default">#ff353535</color>
+    <color name="wechat_color_group_pay">@color/md_blue_500</color>
 </resources>

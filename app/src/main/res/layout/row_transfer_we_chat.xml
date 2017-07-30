@@ -1,97 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/padding_small"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:padding="@dimen/padding_small"
+              android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvChatDateTime"
+        style="@style/WeChat.DateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15.0dip"
+        android:background="@drawable/bg_date_time_we_chat"
+        android:text="2016-5-25 00:28:47"/>
 
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip">
 
-        >
-
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvChatDateTime"
-            style="@style/WeChat.DateTime"
-
-            android:background="@drawable/bg_date_time_we_chat"
-            android:text="2016-5-25 00:28:47"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
 
         <android.support.v7.widget.AppCompatImageView
+            android:layout_alignParentTop="true"
             android:id="@+id/headerImage"
             style="@style/WeChat.HeaderImage"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvChatDateTime"
-            app:layout_goneMarginTop="0.0dip"
             />
 
-        <android.support.constraint.ConstraintLayout
+
+        <LinearLayout
+            android:id="@+id/layoutTransfer"
+            android:layout_width="218.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="6.0dip"
+            android:layout_toRightOf="@+id/headerImage"
             android:background="@drawable/ic_left_red_packet_default"
-            android:id="@+id/redPackedConstraintLayout"
-            style="@style/WeChat.RedPacket.Container.Left"
-            app:layout_constraintStart_toEndOf="@+id/headerImage"
-            app:layout_constraintTop_toTopOf="@+id/headerImage"
-            >
+            android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/layoutInfo"
+                android:layout_width="218.0dip"
+                android:layout_height="60.0dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                android:id="@+id/redDetailsConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="60dip"
-                android:layout_marginLeft="14dip"
-
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivRed"
                     style="@style/WeChat.Transfer"
-                    android:layout_marginLeft="5dip"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-
-                <android.support.v7.widget.AppCompatTextView
-
-                    android:id="@+id/topRedContent"
-                    style="@style/WeChat.RedPacket.Content"
-                    android:text="￥89,800.00"
-                    app:layout_constraintLeft_toRightOf="@+id/ivRed"
-                    app:layout_constraintTop_toTopOf="@+id/ivRed"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tvRedDetails"
-                    style="@style/WeChat.RedPacket.Details"
-
-                    android:text="已收钱"
-
-                    app:layout_constraintLeft_toRightOf="@+id/ivRed"
-                    app:layout_constraintTop_toBottomOf="@+id/topRedContent"
+                    android:layout_marginLeft="12.5dip"
                     />
 
-            </android.support.constraint.ConstraintLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="6.0dip">
 
-            <android.support.v7.widget.AppCompatTextView
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvTransferExplain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxEms="10"
+                        android:minEms="10"
+                        android:text="恭喜发财，大吉大利2323232323"
+                        android:textColor="#ffffffff"
+                        android:textSize="15.0sp"
+                        android:textStyle="bold"/>
 
-                style="@style/WeChat.RedPacket.Source"
-                android:text="微信转账"
-                app:layout_constraintLeft_toLeftOf="@+id/redDetailsConstraintLayout"
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/textTransferAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1.0dip"
+                        android:text="￥0.01"
+                        android:textColor="#ffffffff"
+                        android:textSize="12.5sp"/>
+                </LinearLayout>
+            </LinearLayout>
 
-                app:layout_constraintTop_toBottomOf="@+id/redDetailsConstraintLayout"
-                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="20.0dip">
 
-        </android.support.constraint.ConstraintLayout>
-
-
-    </android.support.constraint.ConstraintLayout>
-
-</RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10.599976dip"
+                    android:paddingTop="1.0px"
+                    android:text="微信转账"
+                    android:textColor="#ff999999"
+                    android:textSize="10.0sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

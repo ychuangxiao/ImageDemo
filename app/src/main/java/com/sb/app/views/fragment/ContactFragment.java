@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.BizComponent;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.tencent.ContactDetailActivity;
 import com.sb.app.views.adapters.ContactAdapter;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
@@ -102,7 +103,23 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
 
     List<ContactRealm> mContactRealms;
+    RealmResults<ContactRealm> contactRealmRealmResults;
 
+    public void loadData() {
+
+        contactRealmRealmResults = mRealm.where(ContactRealm.class).equalTo("isMe",false).findAll();
+
+        mContactRealms.clear();
+        for (ContactRealm contactRealm : contactRealmRealmResults) {
+            mContactRealms.add(contactRealm);
+        }
+
+
+        mContactRealms.add(0, null);
+
+        mContactRealms.add(null);
+        mContactAdapter.setContactRealms(mContactRealms);
+    }
 
     @Override
     public void initView() {
@@ -116,29 +133,24 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
                 long count = realm.where(ContactRealm.class).count();
 
 
-
                 if (count < 1) {
                     ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
                     contactRealm.setMe(true);
-                    contactRealm.setUserNick("无聊的大匪猫");
-
-
-                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(false);
-                    contactRealm.setUserNick("王小二");
-                    mContactRealms.add(contactRealm);
+                    contactRealm.setUserNick(getString(R.string.app_name));
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
 
                     contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
                     contactRealm.setMe(false);
-                    contactRealm.setUserNick("完颜瑾文");
-                    mContactRealms.add(contactRealm);
-                }
+                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
 
-
-                RealmResults<ContactRealm> contactRealmRealmResults = realm.where(ContactRealm.class).findAll();
-
-                for (ContactRealm contactRealm : contactRealmRealmResults) {
-                    mContactRealms.add(contactRealm);
+                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(false);
+                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
                 }
 
 
@@ -153,19 +165,10 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
         initLinearLayoutRecyclerView(new LinearLayoutManager(getActivity()));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration
-                .VERTICAL);
-
-        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.bg_decoration_bottom));
-        mBaseRecyclerView.addItemDecoration(dividerItemDecoration);
-
-
-        mContactRealms.add(0, null);
-
-        mContactRealms.add(null);
-        mContactAdapter.setContactRealms(mContactRealms);
 
         mBaseRecyclerView.setAdapter(mContactAdapter);
+
+        loadData();
 
     }
 
@@ -184,5 +187,12 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
         navigateActivity(intent);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        loadData();
     }
 }

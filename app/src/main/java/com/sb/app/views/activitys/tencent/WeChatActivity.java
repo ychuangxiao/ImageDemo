@@ -15,6 +15,8 @@ import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.fragment.WeChatFindFragment;
+import com.sb.app.views.fragment.WeChatFragment;
+import com.sb.app.views.fragment.WeChatHomeFragment;
 import com.sb.app.views.fragment.WeChatMeFragment;
 
 import butterknife.BindView;
@@ -34,6 +36,9 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
     ContactFragment mContactFragment;
 
     String contactFragmentTag = "ContactFragment";
+
+    WeChatFragment mWeChatHomeFragment;
+    String weChatHomeFragmentTag = "WeChatHomeFragment";
 
 
     @BindView(R.id.rdMessage)
@@ -58,7 +63,7 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
         setToolTitle(getString(R.string.title_activity_we_chat))
                 .setHomeOnClickListener();
 
-
+        rdMessage.setChecked(true);
     }
 
     @Override
@@ -99,8 +104,20 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
 
         switch (compoundButton.getId()) {
             case R.id.rdMessage:
-                rdMessage.requestFocus();
+
                 rdMessage.setChecked(true);
+
+                if (mWeChatHomeFragment != null) {
+
+                    showFragment(mWeChatHomeFragment);
+                    mWeChatHomeFragment.loadData();
+                } else {
+
+                    mWeChatHomeFragment = WeChatFragment.newInstance("", "");
+                    addFragment(R.id.content, mWeChatHomeFragment, weChatHomeFragmentTag);
+
+                }
+
                 break;
             case R.id.rdContacts:
 
@@ -153,6 +170,15 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
 
 
     void hideFragment() {
+
+
+        fragment = getSupportFragmentManager().findFragmentByTag(weChatHomeFragmentTag);
+
+        if (fragment != null) {
+            mWeChatHomeFragment = (WeChatFragment) fragment;
+
+            hideFragment(mWeChatHomeFragment);
+        }
 
         fragment = getSupportFragmentManager().findFragmentByTag(weChatMeFragmentTag);
 

@@ -10,6 +10,7 @@ import com.sb.app.views.activitys.tencent.WeChatMessageActivityFragment;
 import com.sb.app.views.activitys.user.RegActivity;
 import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.fragment.LoginFragment;
+import com.sb.app.views.fragment.WeChatFragment;
 
 import dagger.Component;
 
@@ -35,6 +36,7 @@ public interface BizComponent extends ActivityComponent {
     void inject(LoginFragment fragment);//用户登录
 
     void inject(ContactFragment fragment);
+    void inject(WeChatFragment fragment);
 
     void inject(WeChatMessageActivityFragment fragment);
 

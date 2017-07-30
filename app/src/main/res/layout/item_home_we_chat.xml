@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/chatRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="64.0dip"
+
+                android:background="@drawable/bg_item_selected"
+                android:clickable="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/leftHeadConstraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/avatarImage"
+                android:layout_width="48.0dip"
+                android:layout_height="48.0dip"
+
+
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_we_chat_pay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/groupRecycler"
+                android:layout_width="48.0dip"
+                android:layout_height="48.0dip"
+                android:layout_marginLeft="10dip"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvUnReadMessage"
+            android:layout_width="19.0dip"
+            android:layout_height="19.0dip"
+            android:layout_marginLeft="48dip"
+            android:layout_marginTop="3.0dip"
+            android:background="@drawable/bg_red_btn_selected"
+            android:gravity="center"
+            android:text="99"
+            android:textColor="#ffffffff"
+            android:textSize="11.0sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvGroupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dip"
+            android:layout_marginTop="12.0dip"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxEms="10"
+            android:minEms="10"
+            android:text="银鲨截图"
+            android:textColor="@color/wechat_color_group_default"
+            android:textSize="16.0sp"
+            app:layout_constraintLeft_toRightOf="@+id/leftHeadConstraintLayout"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxEms="10"
+            android:minEms="10"
+
+            android:text=""
+
+            android:textColor="#ffbababa"
+
+            android:textSize="13.5sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvGroupName"
+
+            app:layout_constraintRight_toLeftOf="@+id/tvTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvGroupName"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dip"
+            android:text="昨天"
+            android:textColor="#ff999999"
+            android:textSize="12.0sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvGroupName"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.100000024dip"
+            android:background="#ffdadada"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

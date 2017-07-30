@@ -2,6 +2,7 @@ package com.sb.app.views.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.sb.app.AndroidApplication;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.menu.HomeHandleModel;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.tencent.ContactDetailActivity;
 import com.sb.app.views.listeners.ContactClickListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
@@ -134,6 +136,10 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @BindView(R.id.tvUserNick)
         AppCompatTextView tvUserNick;
 
+        @BindView(R.id.avatarImage)
+        AppCompatImageView avatarImage;
+
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -154,6 +160,12 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             this.mContactRealm = contactRealm;
             tvUserNick.setText(contactRealm.getUserNick());
+
+
+            if (mContactRealm.isSystem()) {
+                avatarImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
+                        .getImageIndex()]);
+            }
         }
     }
 

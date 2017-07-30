@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <android.support.v7.widget.AppCompatEditText
+        <com.sb.app.views.widget.ClearEditText
             android:id="@+id/etAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,14 +37,17 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountTextInputLayout">
 
-        <android.support.v7.widget.AppCompatEditText
+        <com.sb.app.views.widget.ClearEditText
             android:id="@+id/etContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="恭喜发财，大吉大利"
-            android:inputType="text"
-            android:maxLength="6"
-            android:maxLines="1"
+            android:inputType="textMultiLine"
+            android:maxLength="50"
+            
+            android:gravity="top"
+            android:lines="3"
+            android:maxLines="3"
             android:textSize="@dimen/font_size_12"/>
     </android.support.design.widget.TextInputLayout>
 

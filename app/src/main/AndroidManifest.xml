@@ -114,14 +114,33 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_we_chat_message"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat.Message">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.SendRedPacketActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:label="@string/title_activity_send_red_packet"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>
         <activity
-            android:screenOrientation="portrait"
+            android:name=".views.activitys.tencent.ChangeFaceActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
-            android:name=".views.activitys.tencent.SendRedPacketActivity"
-            android:label="@string/title_activity_send_red_packet"
+            android:label="@string/title_activity_change_face"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.TransferActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:label="@string/title_activity_transfer"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat.Message">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.RedPacketsDetailActivity"
+            android:label="@string/title_activity_red_packets_detail"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat.RedPacket">
         </activity>
     </application>
 

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWeChatBackground"
+    android:padding="@dimen/padding_medium"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sb.app.views.activitys.tencent.TransferActivity"
+    tools:showIn="@layout/activity_transfer">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/padding_medium"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/headerImage"
+            android:layout_width="@dimen/size_avatar"
+            android:layout_height="@dimen/size_avatar"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_banditcats"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvUserNick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="@string/app_name"
+            android:textColor="@color/md_grey_500"
+            android:textSize="@dimen/font_size_14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerImage"/>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvTransferAmountTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="转账金额"
+            android:textColor="@color/md_grey_600"
+            android:textSize="@dimen/font_size_14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserNick"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvAmountCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5.0dip"
+            android:text="￥"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTransferAmountTitle"/>
+
+        <com.sb.app.views.widget.ClearEditText
+
+            android:id="@+id/tvTransferAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:background="@null"
+            android:inputType="numberDecimal"
+            android:maxLength="11"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+
+            app:layout_constraintLeft_toRightOf="@+id/tvAmountCode"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvAmountCode"
+            />
+
+
+        <View
+            android:layout_marginTop="6.0dip"
+            android:id="@+id/line"
+            android:layout_width="0dip"
+            android:layout_height="0.100000024dip"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:background="#ffdadada"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTransferAmount"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvRemark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginTop="16dip"
+            android:paddingRight="6dip"
+            android:text=""
+            android:textColor="@color/md_grey_500"
+            android:textSize="@dimen/font_size_10"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvHandleRemark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dip"
+            android:text="添加转账说明"
+            android:textColor="@color/md_blue_300"
+            android:textSize="@dimen/font_size_10"
+            app:layout_constraintLeft_toRightOf="@+id/tvRemark"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:layout_goneMarginLeft="6.0dip"
+            />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnHandle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_tiny"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/btn_bg_pocket_money"
+            android:text="转账"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHandleRemark"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

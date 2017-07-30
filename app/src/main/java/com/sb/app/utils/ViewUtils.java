@@ -26,6 +26,7 @@ import com.sb.common.fontawesom.typeface.IIcon;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.Random;
 
 import com.sb.app.R;
 
@@ -382,7 +383,6 @@ public class ViewUtils {
                                       String staticTypefaceFieldName, String fontAssetName) {
 
 
-
         final Typeface regular = Typeface.createFromAsset(context.getAssets(),
                 fontAssetName);
         replaceFont(staticTypefaceFieldName, regular);
@@ -400,5 +400,87 @@ public class ViewUtils {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int[] getDefaultFace() {
+        int[] drawables = new int[28];
+
+
+        drawables[0] = R.mipmap.ic_face_1;
+        drawables[1] = R.mipmap.ic_face_2;
+        drawables[2] = R.mipmap.ic_face_3;
+        drawables[3] = R.mipmap.ic_face_4;
+        drawables[4] = R.mipmap.ic_face_5;
+        drawables[5] = R.mipmap.ic_face_6;
+        drawables[6] = R.mipmap.ic_face_7;
+        drawables[7] = R.mipmap.ic_face_8;
+        drawables[8] = R.mipmap.ic_face_9;
+        drawables[9] = R.mipmap.ic_face_10;
+        drawables[10] = R.mipmap.ic_face_11;
+        drawables[11] = R.mipmap.ic_face_12;
+        drawables[12] = R.mipmap.ic_face_13;
+        drawables[13] = R.mipmap.ic_face_14;
+        drawables[14] = R.mipmap.ic_face_15;
+        drawables[15] = R.mipmap.ic_face_16;
+        drawables[16] = R.mipmap.ic_face_17;
+        drawables[17] = R.mipmap.ic_face_18;
+        drawables[18] = R.mipmap.ic_face_19;
+        drawables[19] = R.mipmap.ic_face_20;
+        drawables[20] = R.mipmap.ic_face_21;
+        drawables[21] = R.mipmap.ic_face_22;
+        drawables[22] = R.mipmap.ic_face_23;
+        drawables[23] = R.mipmap.ic_face_24;
+        drawables[24] = R.mipmap.ic_face_25;
+        drawables[25] = R.mipmap.ic_face_26;
+        drawables[26] = R.mipmap.ic_face_27;
+        drawables[27] = R.mipmap.ic_face_28;
+
+
+        return drawables;
+    }
+
+
+    public static String[] getDefaultNick() {
+        String[] drawables = new String[28];
+
+
+        drawables[0] = "F.Q";
+        drawables[1] = "飞鸟";
+        drawables[2] = "飞鹰";
+        drawables[3] = "Frank";
+        drawables[4] = "fu18";
+        drawables[5] = "Ken";
+        drawables[6] = "雷子健";
+        drawables[7] = "Luck.lin";
+        drawables[8] = "梦~磁带存储";
+        drawables[9] = "*^o^*pp";
+        drawables[10] = "OGA";
+        drawables[11] = "胖子";
+        drawables[12] = "抛物线~凯凯";
+        drawables[13] = "seven";
+        drawables[14] = "ValuesFeng";
+        drawables[15] = "Water";
+        drawables[16] = "Evil.Angel";
+        drawables[17] = "大头鬼";
+        drawables[18] = "COCO";
+        drawables[19] = "笨笨木木~";
+        drawables[20] = "albert";
+        drawables[21] = "彩霞仙子";
+        drawables[22] = "爱的代价";
+        drawables[23] = "阿豆";
+        drawables[24] = "~Amor、野狼";
+        drawables[25] = "马大帅";
+        drawables[26] = "风流一夜";
+        drawables[27] = "SuperMan";
+
+
+        return drawables;
+    }
+
+    public static int getRandomIndex(int index) {
+        Random rand = new Random();
+
+
+        return rand.nextInt(index);
     }
 }

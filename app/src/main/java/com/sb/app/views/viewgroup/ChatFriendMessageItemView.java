@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
@@ -93,6 +94,14 @@ public class ChatFriendMessageItemView extends RelativeLayout {
             mTvChatDateTime.setVisibility(View.VISIBLE);
 
             lastSendTime = webChatMessageRealm.getSendTime();
+        }
+
+
+
+
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
         }
 
 

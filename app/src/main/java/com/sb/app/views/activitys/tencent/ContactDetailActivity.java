@@ -2,23 +2,24 @@ package com.sb.app.views.activitys.tencent;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 
 import com.ilogie.android.library.common.util.ArrayUtils;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.LogUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseActivity;
+import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
 
 import java.util.UUID;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -27,6 +28,10 @@ import io.realm.RealmResults;
 public class ContactDetailActivity extends BaseActivity {
 
 
+    @BindView(R.id.headerImage)
+    AppCompatImageView mHeaderImage;
+    @BindView(R.id.tvWeChatNick)
+    AppCompatTextView mTvWeChatNick;
     private String userId;
 
 
@@ -64,6 +69,9 @@ public class ContactDetailActivity extends BaseActivity {
 
     }
 
+
+    ContactRealm mContactRealm;
+
     @Override
     public void initView() {
 
@@ -72,11 +80,41 @@ public class ContactDetailActivity extends BaseActivity {
                 .setHomeOnClickListener();
         mRealm = Realm.getDefaultInstance();
         injectExtras();
+
+
+        mRealm = Realm.getDefaultInstance();
+
+        loadData();
+
+    }
+
+    void loadData()
+    {
+        mContactRealm = mRealm.where(ContactRealm.class).equalTo(TextConstant.COLUMN_NAME_FOR_USERID_CONTACTREALM,
+                userId).findFirst();
+
+        mTvWeChatNick.setText(mContactRealm.getUserNick());
+
+        if (mContactRealm.isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
+                    .getImageIndex()]);
+        }
     }
 
     @Override
     protected int getContentViewId() {
         return R.layout.activity_contact_detail;
+    }
+
+
+    @OnClick(R.id.btnHandleEdit)
+    void onHandleEditClick() {
+        Intent intent = new Intent(this, ChangeFaceActivity.class);
+
+
+        intent.putExtra(AppConstant.EXTRA_NO, userId);
+
+        navigateActivity(intent);
     }
 
     @OnClick(R.id.btnHandle)
@@ -103,7 +141,7 @@ public class ContactDetailActivity extends BaseActivity {
 
                     ChatGroupRealm chatGroupRealm = realm.createObject(ChatGroupRealm.class, groupUid);
 
-
+                    chatGroupRealm.setGroupName(otherContactRealm.getUserNick());
                     RealmList<ContactRealm> contactRealms = new RealmList<>();
                     contactRealms.add(meContactRealm);
                     contactRealms.add(otherContactRealm);
@@ -123,7 +161,7 @@ public class ContactDetailActivity extends BaseActivity {
         }
 
 
-        LogUtils.d("ceshi",groupUid);
+        LogUtils.d("ceshi", groupUid);
 
         Intent intent = new Intent(this, WeChatMessageActivity.class);
 
@@ -131,6 +169,7 @@ public class ContactDetailActivity extends BaseActivity {
         intent.putExtra(AppConstant.EXTRA_NO, groupUid);
 
         navigateActivity(intent);
+        finish();
     }
 
 
@@ -143,4 +182,10 @@ public class ContactDetailActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
 }

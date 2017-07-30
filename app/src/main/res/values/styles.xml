@@ -6,13 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="elevation">0dp</item>
 
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="elevation">0dp</item>
     </style>
 
 
@@ -21,10 +22,26 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
-        <item name="colorAccent">@color/md_grey_600</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
     </style>
 
+    <style name="AppTheme.NoActionBar.We.Chat.Message" parent="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
+        <item name="colorAccent">@color/md_grey_500</item>
+
+    </style>
+    <style name="AppTheme.NoActionBar.We.Chat.RedPacket" parent="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/md_red_700</item>
+        <item name="colorPrimaryDark">@color/md_red_700</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -428,7 +445,7 @@
         <item name="android:src">@mipmap/ic_banditcats</item>
         <item name="android:layout_width">@dimen/size_avatar</item>
         <item name="android:layout_height">@dimen/size_avatar</item>
-        <item name="android:layout_marginTop">8.0dip</item>
+
 
     </style>
 
@@ -439,14 +456,14 @@
         <item name="android:src">@mipmap/ic_transfer_we_chat</item>
         <item name="android:layout_width">33.0dip</item>
         <item name="android:layout_height">33.0dip</item>
-        <item name="android:layout_marginTop">0dip</item>
+
     </style>
 
     <style name="WeChat.RedPacket" parent="">
 
         <item name="android:clickable">false</item>
         <item name="android:scaleType">fitXY</item>
-        <item name="android:src">@mipmap/ic_redpacket_we_chat</item>
+        <item name="android:src">@mipmap/ic_red_packet</item>
         <item name="android:layout_width">29.0dip</item>
         <item name="android:layout_height">34.0dip</item>
         <item name="android:layout_marginTop">0dip</item>
@@ -472,10 +489,15 @@
         <item name="android:clickable">false</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/padding_small</item>
-        <item name="android:textSize">@dimen/font_size_15</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:maxWidth">250.0dip</item>
+
+        <item name="android:paddingLeft">8.0dip</item>
+        <item name="android:paddingTop">6.0dip</item>
+        <item name="android:paddingRight">14.0dip</item>
+        <item name="android:paddingBottom">6.0dip</item>
+
 
     </style>
 
@@ -510,15 +532,15 @@
 
     <style name="WeChat.RedPacket.Container.Right" parent="WeChat.Container">
 
-        <item name="android:background">@drawable/ic_redpacket_right_default</item>
-
+        <item name="android:background">@drawable/ic_right_red_packet_default</item>
+        <item name="android:layout_marginRight">8dip</item>
 
     </style>
 
 
     <style name="WeChat.RedPacket.Container.Left" parent="WeChat.Container">
-        <item name="android:background">@drawable/ic_redpacket_left_default</item>
-
+        <item name="android:background">@drawable/ic_left_red_packet_default</item>
+        <item name="android:layout_marginLeft">8dip</item>
     </style>
 
 
@@ -526,7 +548,7 @@
         <item name="android:layout_width">218.0dip</item>
         <item name="android:layout_height">wrap_content</item>
 
-      <!--  <item name="android:paddingLeft">@dimen/padding_small</item>
+        <!--  <item name="android:paddingLeft">@dimen/padding_small</item>
         <item name="android:paddingRight">@dimen/padding_small</item>
         <item name="android:paddingTop">4dip</item>-->
 
@@ -550,10 +572,23 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@drawable/ic_we_chat_left</item>
         <item name="android:layout_marginLeft">@dimen/margin_tiny</item>
+        <item name="android:paddingLeft">10dip</item>
+
+        <item name="android:paddingTop">2dip</item>
+        <item name="android:paddingBottom">2dip</item>
+        <item name="android:paddingRight">4dip</item>
+
     </style>
 
 
     <style name="WeChat.Message.Container.Right" parent="WeChat.Container">
+
+        <item name="android:paddingLeft">@dimen/padding_tiny</item>
+
+        <item name="android:paddingRight">6dip</item>
+        <item name="android:paddingBottom">2dip</item>
+
+
         <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@drawable/ic_we_chat_right</item>
         <item name="android:layout_marginRight">@dimen/margin_tiny</item>

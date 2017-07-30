@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sb.app.views.activitys.tencent.ChangeFaceActivity">
+
+    <include layout="@layout/content_we_chat_toolbar"/>
+    <include layout="@layout/content_change_face"/>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/margin_medium">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnHandleSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_tiny"
+            android:background="@drawable/bg_btn_selected"
+            android:text="保存"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/btnHandleSave"
+            android:id="@+id/btnHandleFace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_tiny"
+            android:background="@drawable/btn_bg_pocket_money"
+            android:text="随机头像"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btnHandleName"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            app:layout_constraintTop_toTopOf="@+id/btnHandleFace"
+            android:id="@+id/btnHandleName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_tiny"
+            android:background="@drawable/btn_bg_pocket_money"
+            android:text="随机昵称"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+            app:layout_constraintLeft_toRightOf="@+id/btnHandleFace"
+
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

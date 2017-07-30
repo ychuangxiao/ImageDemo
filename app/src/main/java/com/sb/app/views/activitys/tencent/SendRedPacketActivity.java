@@ -9,6 +9,7 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedModel;
+import com.sb.app.utils.MathUtils;
 import com.sb.app.views.base.BaseActivity;
 
 import java.math.BigDecimal;
@@ -78,6 +79,23 @@ public class SendRedPacketActivity extends BaseActivity {
 
     @OnClick(R.id.btnHandle)
     void onHandleClick() {
+
+
+        if (!validViewEmpty(mEtAmount, "金额至少为0.01元")) {
+            return;
+        }
+
+        if (MathUtils.compareTo(new BigDecimal(mEtAmount.getText().toString().trim()),new BigDecimal(200))>0)
+        {
+            alertMsg("金额不能大于200元");
+            return;
+        }
+
+        if (MathUtils.compareTo(new BigDecimal(mEtAmount.getText().toString().trim()),new BigDecimal(0.01))<0)
+        {
+            alertMsg("金额至少为0.01元");
+            return;
+        }
 
 
         mRedPackedModel.setAmount(new BigDecimal(mEtAmount.getText().toString()));

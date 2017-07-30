@@ -12,6 +12,7 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
@@ -41,10 +42,9 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
-    @BindView(R.id.topRedContent)
-    AppCompatTextView mTopRedContent;
-    @BindView(R.id.tvRedDetails)
-    AppCompatTextView mTvRedDetails;
+    @BindView(R.id.tvRedPacketsDesc)
+    AppCompatTextView tvRedPacketsDesc;
+
     @BindView(R.id.redPackedConstraintLayout)
     ConstraintLayout mRedPackedConstraintLayout;
     private boolean alreadyInflated = false;
@@ -102,21 +102,12 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
         }
 
 
-        mTopRedContent.setText(webChatMessageRealm.getMessage());
+        tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
 
-
-        if (webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_left_default);
-
-
-        } else {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_left_red_packet_default);
-
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
         }
-        mRedPackedConstraintLayout.setPadding(mRedPackedConstraintLayout.getPaddingLeft()
-                , 4
-                , mRedPackedConstraintLayout.getPaddingRight()
-                , mRedPackedConstraintLayout.getPaddingBottom());
 
 
         return lastSendTime;

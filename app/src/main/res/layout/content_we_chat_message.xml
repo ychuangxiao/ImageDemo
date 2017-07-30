@@ -72,46 +72,41 @@
 
 
             <com.sb.app.views.widget.ClearEditText
-                android:paddingTop="@dimen/padding_tiny"
-               android:paddingBottom="4dip"
-                android:paddingLeft="@dimen/padding_small"
                 android:id="@+id/etMessageContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6.0dip"
                 android:layout_marginRight="6.0dip"
                 android:background="@drawable/bg_edittext_message"
+                android:paddingBottom="4dip"
+                android:paddingLeft="@dimen/padding_small"
+                android:paddingTop="@dimen/padding_tiny"
 
                 android:textSize="16.0sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/btnModeVoice"
-                app:layout_constraintRight_toLeftOf="@+id/sendRelativeLayout2"
+                app:layout_constraintRight_toLeftOf="@+id/btnEmoji"
 
                 />
 
-            <RelativeLayout
-                app:layout_constraintRight_toLeftOf="@+id/sendRelativeLayout1"
-                android:id="@+id/sendRelativeLayout2"
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/btnEmoji"
+                android:layout_width="32.0dip"
+                android:layout_height="32.0dip"
+                android:layout_marginRight="5.0dip"
+                android:background="@mipmap/ic_wechat_emoji_btn_normal"
+                android:visibility="visible"
+                app:layout_constraintRight_toLeftOf="@+id/sendConstraintLayout1"
+
+                />
+
+
+            <android.support.constraint.ConstraintLayout
+
+                android:id="@+id/sendConstraintLayout1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/btnEmoji"
-                    android:layout_width="32.0dip"
-                    android:layout_height="32.0dip"
-                    android:layout_marginRight="10.0dip"
-                    android:background="@mipmap/ic_wechat_emoji_btn_normal"
-                    android:visibility="visible"
-
-                    />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-
-                android:id="@+id/sendRelativeLayout1"
-                android:layout_width="35.0dip"
                 android:layout_height="wrap_content"
-
+                android:gravity="center"
                 android:visibility="visible"
                 app:layout_constraintRight_toRightOf="parent">
 
@@ -131,15 +126,14 @@
                     android:layout_height="32.0dip"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/btn_bg_pocket_money"
+                    android:clickable="true"
                     android:tag="1"
                     android:text="发送"
-                    android:clickable="true"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/font_size_15"
                     android:visibility="gone"
                     />
-            </RelativeLayout>
-
+            </android.support.constraint.ConstraintLayout>
 
 
         </android.support.constraint.ConstraintLayout>

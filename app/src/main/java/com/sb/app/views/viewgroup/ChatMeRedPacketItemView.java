@@ -12,10 +12,14 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.listeners.WeChatMessage2ClickListener;
+import com.sb.app.views.listeners.WeChatMessageClickListener;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 文件名称：{@link HomeItemView}
@@ -40,10 +44,8 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
-    @BindView(R.id.topRedContent)
-    AppCompatTextView mTopRedContent;
-    @BindView(R.id.tvRedDetails)
-    AppCompatTextView mTvRedDetails;
+    @BindView(R.id.tvRedPacketsDesc)
+    AppCompatTextView tvRedPacketsDesc;
     @BindView(R.id.redPackedConstraintLayout)
     ConstraintLayout mRedPackedConstraintLayout;
 
@@ -69,11 +71,14 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     }
 
 
+    WebChatMessageRealm mChatMessageRealm;
+
     /**
      * 绑定消息
      */
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
+        mChatMessageRealm = webChatMessageRealm;
 
         if (isFirst) {
 
@@ -101,23 +106,12 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
             lastSendTime = webChatMessageRealm.getSendTime();
         }
 
-        mTopRedContent.setText(webChatMessageRealm.getMessage());
+        tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
 
-
-        if (webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_right_default);
-
-
-        } else {
-            //mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
-
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
         }
-
-
-        mRedPackedConstraintLayout.setPadding(mRedPackedConstraintLayout.getPaddingLeft()
-                , 4
-                , mRedPackedConstraintLayout.getPaddingRight()
-                , mRedPackedConstraintLayout.getPaddingBottom());
 
 
         return lastSendTime;
@@ -141,4 +135,19 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     }
 
 
+    WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
+
+    public void setMessageClickListener(WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>
+                                                messageClickListener) {
+        mMessageClickListener = messageClickListener;
+    }
+
+    @OnClick(R.id.redPackedConstraintLayout)
+    void onMessageClick()
+    {
+        if (mMessageClickListener != null)
+        {
+            mMessageClickListener.onItemClickListener(mChatMessageRealm,this);
+        }
+    }
 }

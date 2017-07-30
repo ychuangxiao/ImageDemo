@@ -15,6 +15,9 @@ public class ContactRealm extends RealmObject {
     @PrimaryKey
     private String userId;
 
+    private int imageIndex;
+    private boolean isSystem = false;
+
     private boolean isMe = false;
 
     public String getUserNick() {
@@ -47,5 +50,21 @@ public class ContactRealm extends RealmObject {
 
     public void setMe(boolean me) {
         isMe = me;
+    }
+
+    public int getImageIndex() {
+        return imageIndex;
+    }
+
+    public void setImageIndex(int imageIndex) {
+        this.imageIndex = imageIndex;
+    }
+
+    public boolean isSystem() {
+        return isSystem;
+    }
+
+    public void setSystem(boolean system) {
+        isSystem = system;
     }
 }

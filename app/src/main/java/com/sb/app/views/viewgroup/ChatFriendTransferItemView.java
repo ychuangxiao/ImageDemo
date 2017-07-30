@@ -12,6 +12,7 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
@@ -41,12 +42,11 @@ public class ChatFriendTransferItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
-    @BindView(R.id.topRedContent)
-    AppCompatTextView mTopRedContent;
-    @BindView(R.id.tvRedDetails)
-    AppCompatTextView mTvRedDetails;
-    @BindView(R.id.redPackedConstraintLayout)
-    ConstraintLayout mRedPackedConstraintLayout;
+    @BindView(R.id.tvTransferExplain)
+    AppCompatTextView mTvTransferExplain;
+    @BindView(R.id.textTransferAmount)
+    AppCompatTextView mTextTransferAmount;
+
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -72,7 +72,7 @@ public class ChatFriendTransferItemView extends RelativeLayout {
     /**
      * 绑定消息
      */
-    public long binder(WebChatMessageRealm webChatMessageRealm,Long lastSendTime,boolean isFirst) {
+    public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
 
         if (isFirst) {
@@ -102,21 +102,13 @@ public class ChatFriendTransferItemView extends RelativeLayout {
         }
 
 
-        mTopRedContent.setText(webChatMessageRealm.getMessage());
-
-
-        if (webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_left_default);
-            mTvRedDetails.setText("已被领取");
-
-        } else {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_left_red_packet_default);
-            mTvRedDetails.setText(webChatMessageRealm.getSubMessage());
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
         }
-        mRedPackedConstraintLayout.setPadding(mRedPackedConstraintLayout.getPaddingLeft()
-                , 4
-                , mRedPackedConstraintLayout.getPaddingRight()
-                , mRedPackedConstraintLayout.getPaddingBottom());
+        mTvTransferExplain.setText(webChatMessageRealm.getMessage());
+
+        mTextTransferAmount.setText(webChatMessageRealm.getSubMessage());
 
 
         return lastSendTime;

@@ -30,30 +30,20 @@
             style="@style/WeChat.HeaderImage"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvChatDateTime"
-
+            android:layout_marginTop="8.0dip"
             app:layout_goneMarginTop="0.0dip"
             />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/redPackedConstraintLayout"
-            style="@style/WeChat.Message.Container.Right"
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_marginRight="6.0dip"
+            android:id="@+id/topRedContent"
+            style="@style/WeChat.Message"
+            android:background="@drawable/ic_we_chat_right"
+            android:gravity="left|center"
+            android:text="银鲨你好"
             app:layout_constraintRight_toLeftOf="@+id/headerImage"
             app:layout_constraintTop_toTopOf="@+id/headerImage"
-
-            >
-
-
-            <android.support.v7.widget.AppCompatTextView
-
-                android:id="@+id/topRedContent"
-                style="@style/WeChat.Message"
-                android:gravity="left"
-                android:text=""
-                />
-
-
-        </android.support.constraint.ConstraintLayout>
-
+            />
 
     </android.support.constraint.ConstraintLayout>
 

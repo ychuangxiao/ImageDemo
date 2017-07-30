@@ -5,13 +5,13 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
+import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
@@ -41,12 +41,12 @@ public class ChatMeTransferItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
-    @BindView(R.id.topRedContent)
-    AppCompatTextView mTopRedContent;
-    @BindView(R.id.tvRedDetails)
-    AppCompatTextView mTvRedDetails;
-    @BindView(R.id.redPackedConstraintLayout)
-    ConstraintLayout mRedPackedConstraintLayout;
+
+
+    @BindView(R.id.tvTransferExplain)
+    AppCompatTextView mTvTransferExplain;
+    @BindView(R.id.textTransferAmount)
+    AppCompatTextView mTextTransferAmount;
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -93,21 +93,14 @@ public class ChatMeTransferItemView extends RelativeLayout {
         }
 
 
-        mTopRedContent.setText(webChatMessageRealm.getMessage());
+        mTvTransferExplain.setText(webChatMessageRealm.getMessage());
 
+        mTextTransferAmount.setText(webChatMessageRealm.getSubMessage());
 
-        if (webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_right_default);
-            mTvRedDetails.setText(webChatMessageRealm.getSubMessage());
-
-        } else {
-            //mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
-            mTvRedDetails.setText(webChatMessageRealm.getSubMessage());
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
         }
-        mRedPackedConstraintLayout.setPadding(mRedPackedConstraintLayout.getPaddingLeft()
-                , 4
-                , mRedPackedConstraintLayout.getPaddingRight()
-                , mRedPackedConstraintLayout.getPaddingBottom());
 
         return lastSendTime;
     }
