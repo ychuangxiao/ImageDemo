@@ -45,7 +45,7 @@ public class RetrofitVoidUtils implements Function<BaseRespEntity, Observable<Ba
                     subscriber.onNext(baseResponseEntity);
                 } else if (!TextUtils.isEmpty(baseResponseEntity.getErr()) && !TextUtils.isEmpty(baseResponseEntity.getMsg())) {
                     //如果没有错误代码,说明不是业务逻辑错误,无须提供给客户端显示
-                    subscriber.onError(new BaseErrorException(baseResponseEntity.getMsg(), baseResponseEntity.getErr()));
+                    subscriber.onError(new BaseErrorException(baseResponseEntity.getMsg(), baseResponseEntity.getErr(),baseResponseEntity.getErrorDetails()));
                 }
 
                 subscriber.onComplete();

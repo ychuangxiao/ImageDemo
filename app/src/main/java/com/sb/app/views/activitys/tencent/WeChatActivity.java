@@ -1,5 +1,6 @@
 package com.sb.app.views.activitys.tencent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatRadioButton;
@@ -12,15 +13,20 @@ import com.sb.app.R;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
+import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.activitys.DemoActivity;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.fragment.WeChatFindFragment;
 import com.sb.app.views.fragment.WeChatFragment;
-import com.sb.app.views.fragment.WeChatHomeFragment;
 import com.sb.app.views.fragment.WeChatMeFragment;
+import com.sb.data.entitys.realm.ContactRealm;
+
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
+import io.realm.Realm;
 
 public class WeChatActivity extends BaseActivity implements HasComponent<BizComponent> {
 
@@ -55,7 +61,7 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
     @BindView(R.id.bottomNav)
     RadioGroup mRadioGroup;
 
-
+    Realm mRealm;
     Fragment fragment;
 
     @Override
@@ -64,6 +70,38 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
                 .setHomeOnClickListener();
 
         rdMessage.setChecked(true);
+        mRealm = Realm.getDefaultInstance();
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+
+                long count = realm.where(ContactRealm.class).count();
+
+
+                if (count < 1) {
+                    ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(true);
+                    contactRealm.setUserNick(getString(R.string.app_name));
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
+
+                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(false);
+                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
+
+                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                    contactRealm.setMe(false);
+                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
+                    contactRealm.setSystem(true);
+                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
+                }
+
+
+            }
+        });
     }
 
     @Override
@@ -222,8 +260,9 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.navigation_search) {
 
+            navigateActivity(new Intent(this, DemoActivity.class));
 
             return true;
 
@@ -239,5 +278,14 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
     @Override
     public BizComponent getComponent() {
         return mBizComponent;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null && !mRealm.isClosed()) {
+            mRealm.close();
+
+        }
     }
 }

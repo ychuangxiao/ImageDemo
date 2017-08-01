@@ -20,7 +20,7 @@ public class BaseRespEntity<T> {
     private T data;//数据
     private boolean success = false;//成功状态
     private String errorCode;//api接口业务调用错误，返回错误枚举值，便于app业务处理
-
+    private String errorDetails;//便于更新操作
     private String msg;//api接口业务调用失败，返回经过梳理的提示语
 
 
@@ -30,6 +30,22 @@ public class BaseRespEntity<T> {
     private Integer totalPage;//总页数
     private Integer totalCount;//总记录数
 
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorDetails() {
+        return errorDetails;
+    }
+
+    public void setErrorDetails(String errorDetails) {
+        this.errorDetails = errorDetails;
+    }
 
     public T getData() {
         return data;

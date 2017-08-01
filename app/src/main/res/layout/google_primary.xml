@@ -36,12 +36,13 @@
         android:paddingLeft="10dp"
         android:text="账单详情"
         android:textColor="#272727"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/line4"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.v7.widget.AppCompatImageView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:src="@mipmap/ic_alipay_nva_vertical_more"

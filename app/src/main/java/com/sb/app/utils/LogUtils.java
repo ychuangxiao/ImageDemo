@@ -27,10 +27,10 @@ public class LogUtils {
     public static void e(String tag, String msg) {
 
 
-        if (BuildConfig.DEBUG) {
+       /* if (BuildConfig.DEBUG) {
             Log.e(tag, msg);
-        }
-
+        }*/
+        Log.e(tag, msg);
     }
 
 

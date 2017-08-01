@@ -85,7 +85,9 @@
     <dimen name="font_size_17">17.0sp</dimen>
     <dimen name="font_size_18">18.0sp</dimen>
     <dimen name="font_size_19">19.0sp</dimen>
-
+    <dimen name="font_size_20">20.0sp</dimen>
+    <dimen name="font_size_22">22.0sp</dimen>
+    <dimen name="font_size_24">24.0sp</dimen>
     <dimen name="line_height">0.5dp</dimen>
 
     <dimen name="web_chat_bottom_nav_height">55.0dip</dimen>
@@ -98,5 +100,9 @@
 
     <dimen name="width_50">50.0dip</dimen>
     <dimen name="width_35">35.0dip</dimen>
+
+
+    <dimen name="height_24">24.0dip</dimen>
+
 
 </resources>

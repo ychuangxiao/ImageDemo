@@ -13,9 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +44,6 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import butterknife.OnTextChanged;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +62,12 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
     //手机外观
 
+    @BindView(R.id.tv2)
+    AppCompatTextView tv2;
 
+
+    @BindView(R.id.tv3)
+    AppCompatTextView tv3;
     @BindView(R.id.primaryDarkConstraintLayout)
     ConstraintLayout primaryDarkConstraintLayout;
 
@@ -222,9 +224,14 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
         alipayConstraintLayout.setLayoutParams(layoutParams);
 
-        ViewUtils.setCompoundRightDrawables(getContext(), tvPaymentType, BaseFontAwesome.Icon
+        ViewUtils.setCompoundRightDrawables(getContext(), tv2, BaseFontAwesome.Icon
                 .icon_right, getResources().getColor(R.color
                 .colorRightTitle), 4f);
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tv3, BaseFontAwesome.Icon
+                .icon_right, getResources().getColor(R.color
+                .colorRightTitle), 4f);
+
 
 
         loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
@@ -602,6 +609,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
             hideHandleLine();
             mAliPaymentModel.setFinish(false);
+
         }
 
 
@@ -614,8 +622,8 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorUnHandleLine));
         tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap
                 .ic_ali_tx_jd_more));
-        tvWXTSMessage.setVisibility(View.VISIBLE);
-        tvWXTS.setVisibility(View.VISIBLE);
+        tvWXTSMessage.setVisibility(View.GONE);
+        tvWXTS.setVisibility(View.GONE);
 
         setTimeInfo(mAliPaymentModel.getPaymentTime());
     }
@@ -764,54 +772,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     }
 
 
-    @OnTextChanged(value = R.id.etPaymentType, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterPaymentTypeTextChanged(Editable s) {
-        if (TextUtils.isEmpty(s.toString())) {
-            return;
-        }
 
-        mAliPaymentModel.setPaymentType(s.toString());
-        if (mModelMobileChangeListener != null) {
-
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
-        }
-
-        tvPaymentType.setText(mAliPaymentModel.getPaymentType());
-    }
-
-
-    @OnTextChanged(value = R.id.etRemark, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterRemarkTextChanged(Editable s) {
-        if (TextUtils.isEmpty(s.toString())) {
-            return;
-        }
-
-        mAliPaymentModel.setRemark(s.toString());
-        if (mModelMobileChangeListener != null) {
-
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
-        }
-
-        tvRemark.setText(mAliPaymentModel.getRemark());
-    }
-
-    @OnTextChanged(value = R.id.etMoney, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterMoneyTextChanged(Editable s) {
-
-
-        if (TextUtils.isEmpty(s.toString())) {
-            return;
-        }
-
-
-        mAliPaymentModel.setReceiptMoney(new BigDecimal(s.toString()));
-        if (mModelMobileChangeListener != null) {
-
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
-        }
-
-        tvMoney.setText(ViewUtils.mergeMoney(mAliPaymentModel.getReceiptMoney()));
-    }
 
     @OnClick(R.id.topConstraintLayout)
     void onChangeBankClick() {

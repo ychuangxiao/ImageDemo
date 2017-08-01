@@ -64,7 +64,8 @@ public class ThrowableUtils implements Consumer<Throwable> {
                     mAndroidApplication.getApplicationComponent().context().sharedpreferences.ApkUpdated().put(false);
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString(TextConstant.UPDATE_APP_ADDRESS_EXTRA, throwable.getMessage());
+                    bundle.putString(TextConstant.UPDATE_APP_ADDRESS_EXTRA, baseErrorException.getMessage());
+                    bundle.putString(TextConstant.UPDATE_APP_DETAILS_EXTRA, baseErrorException.getErrorDetails());
                     intent.setClass(mBaseView.context(), DownApkActivity.class);
                     intent.putExtras(bundle);
                     mBaseView.context().startActivity(intent);

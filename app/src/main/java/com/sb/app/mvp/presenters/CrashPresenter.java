@@ -3,11 +3,16 @@ package com.sb.app.mvp.presenters;
 
 import com.sb.app.AndroidApplication;
 import com.sb.app.di.PerCrash;
+import com.sb.app.model.CrashModel;
+import com.sb.app.model.CrashModelMapper;
 import com.sb.app.mvp.presenters.base.Presenter;
 import com.sb.app.mvp.views.BaseHandleView;
+import com.sb.data.entitys.base.BaseRespEntity;
 import com.sb.domain.interactor.CrashHandlerUseCase;
 
 import javax.inject.Inject;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * 文件名称：{@link CrashPresenter}
@@ -80,6 +85,34 @@ public class CrashPresenter implements Presenter<BaseHandleView> {
         this.mBaseHandleView = baseView;
     }
 
+    /**
+     * 日志
+     *
+     * @param crashModel 崩溃日志视图模型
+     */
+    public void save(CrashModel crashModel) {
 
+
+        crashModel.setUrl(mAndroidApplication.sharedpreferences.ApkAddress().get());
+
+        mCrashHandlerUseCase.setBaseCrashReqEntity(CrashModelMapper.getInstance().transformer(crashModel));
+
+
+        mCrashHandlerUseCase.execute().subscribe(new Consumer<BaseRespEntity>() {
+            @Override
+            public void accept(BaseRespEntity baseRespEntity) throws Exception {
+
+                mBaseHandleView.noticeSuccess();
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+                mBaseHandleView.noticeSuccess();
+            }
+        });
+
+
+    }
 
 }

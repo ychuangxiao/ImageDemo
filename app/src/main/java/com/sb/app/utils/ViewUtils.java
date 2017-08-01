@@ -19,6 +19,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.sb.app.R;
 import com.sb.app.model.ScreenModel;
 import com.sb.common.fontawesom.IconicsDrawable;
 import com.sb.common.fontawesom.typeface.IIcon;
@@ -27,8 +28,6 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Random;
-
-import com.sb.app.R;
 
 
 /**
@@ -59,6 +58,17 @@ public class ViewUtils {
         return (int) (dpValue * scale + 0.5f);
     }
 
+
+
+
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
 
     /**
      * 设置顶部图标

@@ -19,6 +19,7 @@ package com.sb.data.rest.exceptions;
 public class BaseErrorException extends Exception {
 
     private String errorCode;//错误代码
+    private String errorDetails;//错误详情，主要针对更新
 
     /**
      * 公开构造函数
@@ -40,8 +41,20 @@ public class BaseErrorException extends Exception {
         this.errorCode = errorCode;
     }
 
+    public BaseErrorException(String message, String errorCode,String errorDetails) {
+        super(message);
+        this.errorCode = errorCode;
+        this.errorDetails = errorDetails;
+    }
+
+
+
 
     public String getErrorCode() {
         return errorCode;
+    }
+
+    public String getErrorDetails() {
+        return errorDetails;
     }
 }

@@ -4,17 +4,12 @@ package com.sb.app.views.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.BizComponent;
-import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.tencent.ContactDetailActivity;
 import com.sb.app.views.adapters.ContactAdapter;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
@@ -23,7 +18,6 @@ import com.sb.data.entitys.realm.ContactRealm;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -98,7 +92,10 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
     @Override
     protected void DestroyView() {
+        if (mRealm != null && !mRealm.isClosed()) {
+            mRealm.close();
 
+        }
     }
 
 
@@ -107,7 +104,7 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
     public void loadData() {
 
-        contactRealmRealmResults = mRealm.where(ContactRealm.class).equalTo("isMe",false).findAll();
+        contactRealmRealmResults = mRealm.where(ContactRealm.class).equalTo("isMe", false).findAll();
 
         mContactRealms.clear();
         for (ContactRealm contactRealm : contactRealmRealmResults) {
@@ -125,37 +122,6 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
     public void initView() {
 
         mContactRealms = new ArrayList<>();
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-
-                long count = realm.where(ContactRealm.class).count();
-
-
-                if (count < 1) {
-                    ContactRealm contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(true);
-                    contactRealm.setUserNick(getString(R.string.app_name));
-                    contactRealm.setSystem(true);
-                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
-
-                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(false);
-                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
-                    contactRealm.setSystem(true);
-                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
-
-                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(false);
-                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
-                    contactRealm.setSystem(true);
-                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
-                }
-
-
-            }
-        });
 
 
         mBaseRecyclerView = recyclerList;

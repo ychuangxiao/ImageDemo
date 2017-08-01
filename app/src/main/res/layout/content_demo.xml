@@ -12,14 +12,95 @@
     tools:showIn="@layout/activity_demo">
 
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/etLocation"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="输入或扫描库位"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etPx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="输入像素"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textSize="@dimen/google_font_size"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etSp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="sp"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textSize="@dimen/google_font_size"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etDp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="dp"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textSize="@dimen/google_font_size"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etDip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="dip"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textSize="@dimen/google_font_size"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnHandle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/btn_bg_pocket_money"
+            android:text="计算"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/font_size_medium"
+
+            app:layout_constraintTop_toBottomOf="@+id/tvPocketMoney"/>
+
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

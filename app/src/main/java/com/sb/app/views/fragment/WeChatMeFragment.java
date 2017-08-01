@@ -4,12 +4,19 @@ package com.sb.app.views.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 
 import com.sb.app.R;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.activitys.tencent.PurseActivity;
 import com.sb.app.views.base.BaseFragment;
+import com.sb.data.entitys.realm.ContactRealm;
 
+import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,9 +25,23 @@ import butterknife.OnClick;
  */
 public class WeChatMeFragment extends BaseFragment {
 
+
+    Realm mRealm;
+
+
+    ContactRealm mContactRealm;
+
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.headerImage)
+    AppCompatImageView mHeaderImage;
+    @BindView(R.id.tvWeChatNick)
+    AppCompatTextView mTvWeChatNick;
+    @BindView(R.id.tvWeChatNo)
+    AppCompatTextView mTvWeChatNo;
+    Unbinder unbinder;
 
 
     private String mParam1;
@@ -28,7 +49,7 @@ public class WeChatMeFragment extends BaseFragment {
 
 
     public WeChatMeFragment() {
-        // Required empty public constructor
+        mRealm = Realm.getDefaultInstance();
     }
 
     /**
@@ -52,12 +73,30 @@ public class WeChatMeFragment extends BaseFragment {
 
     @Override
     protected void DestroyView() {
+        if (mRealm != null && !mRealm.isClosed()) {
+            mRealm.close();
 
+        }
     }
 
     @Override
     public void initView() {
+        refreshData();
+    }
 
+    public void refreshData() {
+        mContactRealm = mRealm.where(ContactRealm.class).equalTo("isMe",
+                true).findFirst();
+
+        mTvWeChatNick.setText(mContactRealm.getUserNick());
+        mTvWeChatNo.setText(String.format(mTvWeChatNo.getTag().toString(),mContactRealm.getUserNick()));
+
+
+
+        if (mContactRealm.isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
+                    .getImageIndex()]);
+        }
     }
 
     @Override
@@ -70,4 +109,6 @@ public class WeChatMeFragment extends BaseFragment {
     void onMoneyClick() {
         navigateActivity(new Intent(getActivity(), PurseActivity.class));
     }
+
+
 }

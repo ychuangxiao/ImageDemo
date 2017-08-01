@@ -1,6 +1,5 @@
 package com.sb.app.views.activitys;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.DaggerBizComponent;
-import com.sb.app.di.modules.ActivityModule;
 import com.sb.app.mvp.presenters.DownloadFilePresenter;
 import com.sb.app.mvp.views.DownloadFileView;
 import com.sb.app.utils.ProgressUtils;
@@ -54,6 +52,8 @@ public class DownApkActivity extends BaseDaggerActivity implements DownloadFileV
 
     private String mApkAddress;
 
+    private String mUpdateDetails;
+
     /**
      * 获得布局视图ID
      *
@@ -81,8 +81,13 @@ public class DownApkActivity extends BaseDaggerActivity implements DownloadFileV
             return;
         }
 
-        mApkAddress = extras_.getString(TextConstant.UPDATE_APP_ADDRESS_EXTRA);
+        if (!extras_.containsKey(TextConstant.UPDATE_APP_DETAILS_EXTRA)) {
+            finish();
+            return;
+        }
 
+        mApkAddress = extras_.getString(TextConstant.UPDATE_APP_ADDRESS_EXTRA);
+        mUpdateDetails = extras_.getString(TextConstant.UPDATE_APP_DETAILS_EXTRA);
 
         if (StringUtils.isEmpty(mApkAddress)) {
             alertMsg("下载地址有误！");
@@ -99,12 +104,14 @@ public class DownApkActivity extends BaseDaggerActivity implements DownloadFileV
 
         injectExtras();
 
-        
+
+
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage(getResources().getString(R.string.title_download_confirm_title)).setPositiveButton
+        builder.setTitle(getResources().getString(R.string.title_download_confirm_title));
+        builder.setMessage(mUpdateDetails).setPositiveButton
                 (getResources().getString(R.string
                         .title_setting_confirm_yes), new DialogInterface.OnClickListener() {// 退出按钮
                     public void onClick(DialogInterface dialog, int i) {

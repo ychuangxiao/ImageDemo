@@ -26,7 +26,7 @@
         android:textColor="#ff888888"
         android:textSize="@dimen/font_size_16"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tvAvatar"
+
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

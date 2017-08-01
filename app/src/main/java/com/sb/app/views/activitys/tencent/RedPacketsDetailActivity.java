@@ -5,7 +5,6 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.TextView;
 
-import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedDetailsModel;
@@ -20,7 +19,6 @@ import com.sb.data.entitys.realm.WebChatMessageRealm;
 import java.math.BigDecimal;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.realm.Realm;
 
 public class RedPacketsDetailActivity extends BaseActivity {
@@ -117,7 +115,8 @@ public class RedPacketsDetailActivity extends BaseActivity {
         mTvAmount.setText(String.format("%s 元", MathUtils.toString(new BigDecimal(messageRealm.getAmount().toString()
         ))));
 
-
+        mTvRedPacketsInfo.setText(String.format("1个红包共%s元",MathUtils.toString(new BigDecimal(messageRealm.getAmount().toString()
+        ))));
         mTvReceiveTime.setText(TimeUtils.millis2String(messageRealm.getSendTime(), TimeUtils.DEFAULT_PATTERN_4));
     }
 

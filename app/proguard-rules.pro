@@ -16,15 +16,20 @@
 #   public *;
 #}
 
--keepattributes SourceFile,LineNumberTable
--dontpreverify
--flattenpackagehierarchy
+#-keepattributes SourceFile,LineNumberTable
+
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontpreverify
 -verbose
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--ignorewarnings
+-printmapping proguardMapping.txt
+-optimizations !code/simplification/cast,!field/*,!class/merging/*
+-keepattributes *Annotation*,InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+
 
 
 
@@ -35,43 +40,57 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
+-keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
-
-
--keepattributes *Annotation*
+-keep class android.support.** {*;}
 
 -keepclasseswithmembernames class * {
     native <methods>;
 }
-
--keepclasseswithmembers class * {
-    public <init>(android.content.Context, android.util.AttributeSet);
+-keepclassmembers class * extends android.app.Activity{
+    public void *(android.view.View);
 }
-
--keepclasseswithmembers class * {
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepclassmembers class * extends android.app.Activity {
-   public void *(android.view.View);
-}
-
 -keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
-
+-keep public class * extends android.view.View{
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
-
-
--keepclassmembers class **.R$* {
-    public static <fields>;
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
 }
+-keep class **.R$* {
+ *;
+}
+-keepclassmembers class * {
+    void *(**On*Event);
+}
+
+
 
 -keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.app.Fragment
+## ----------------------------------
+##   以上是基本配置
+## ----------------------------------
+
 
 ## ----------------------------------
 ##   ########## Gson混淆    ##########

@@ -48,19 +48,21 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Google.TextView.Left" parent="TextView">
-        <item name="android:textSize">@dimen/google_font_size</item>
+        <item name="android:textSize">@dimen/font_size_15</item>
         <item name="android:textColor">@color/colorLeftTitle</item>
     </style>
 
     <style name="Google.TextView.Left.800.400" parent="Google.TextView.Left">
-        <item name="android:textSize">@dimen/font_size_micro</item>
+        <item name="android:textSize">@dimen/font_size_15</item><!--font_size_micro-->
         <item name="android:textColor">@color/colorLeftTitle</item>
     </style>
 
 
     <style name="Google.TextView.Right" parent="TextView">
-        <item name="android:textSize">@dimen/google_font_size</item>
+        <item name="android:textSize">@dimen/font_size_15</item>
         <item name="android:textColor">@color/colorRightTitle</item>
+
+
     </style>
 
     <style name="Google.TextView.Right.800.400" parent="Google.TextView.Right">
@@ -84,13 +86,13 @@
 
     <style name="PaymentLine">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">58dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginRight">10dp</item>
     </style>
 
     <style name="PaymentLineCircle">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
     </style>
 
     <style name="PaymentLineCircle.800.400" parent="PaymentLineCircle">

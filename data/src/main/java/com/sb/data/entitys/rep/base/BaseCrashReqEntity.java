@@ -18,34 +18,41 @@ package com.sb.data.entitys.rep.base;
  */
 public class BaseCrashReqEntity extends BaseReqEntity {
 
-    private String erModel;//手机机型
-    private String erVersion;//手机版本
-    private String erDescr;//异常描述
+    private String type="ERROR"; //错误日志或其他日志  目前只写ERROR
+    private String model; // 记录机型
+    private String msg;
+    private String modelVer; // 记录机型版本
 
 
-    public String getErModel() {
-        return erModel;
+    public String getType() {
+        return type;
     }
 
-    public void setErModel(String erModel) {
-        this.erModel = erModel;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getErVersion() {
-        return erVersion;
+    public String getModel() {
+        return model;
     }
 
-    public void setErVersion(String erVersion) {
-        this.erVersion = erVersion;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public String getErDescr() {
-        return erDescr;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErDescr(String erDescr) {
-        this.erDescr = erDescr;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
+    public String getModelVer() {
+        return modelVer;
+    }
 
+    public void setModelVer(String modelVer) {
+        this.modelVer = modelVer;
+    }
 }

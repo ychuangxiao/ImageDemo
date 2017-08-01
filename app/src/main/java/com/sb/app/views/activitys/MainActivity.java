@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.BuildConfig;
 import com.sb.app.R;
 import com.sb.app.di.HasComponent;
@@ -19,9 +20,9 @@ import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.mvp.presenters.BaseRespPresenter;
 import com.sb.app.mvp.views.BaseHandleView;
+import com.sb.app.utils.LogUtils;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.LoginFragment;
 import com.sb.app.views.fragment.MainFragment;
@@ -30,7 +31,6 @@ import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.AppRealm;
 import com.sb.data.entitys.realm.UserRealm;
-import com.ilogie.android.library.common.util.StringUtils;
 
 import javax.inject.Inject;
 
@@ -255,6 +255,9 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
 
 
         checkUserInfo();
+
+        LogUtils.d("px",String.valueOf(ViewUtils.px2sp(this,30)));
+
 
 
     }

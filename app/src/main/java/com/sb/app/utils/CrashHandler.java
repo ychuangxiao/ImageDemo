@@ -6,9 +6,9 @@ import android.content.Context;
 import com.sb.app.AndroidApplication;
 import com.sb.app.di.PerCrash;
 import com.sb.app.di.components.DaggerCrashComponent;
+import com.sb.app.model.CrashModel;
 import com.sb.app.mvp.presenters.CrashPresenter;
 import com.sb.app.mvp.views.BaseHandleView;
-import com.ilogie.android.library.common.util.NetConnectUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -109,14 +109,17 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler, BaseHandle
 
             LogUtils.e(TAG, stacktrace);
 
-/*
             try {
                 mCrashPresenter.save(new CrashModel(android.os.Build.MODEL, android.os.Build.VERSION.RELEASE, stacktrace));
             } catch (Exception aa) {
                 aa.printStackTrace();
             }
 
-            Thread.sleep(3000);*/
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             mAndroidApplication.exit();
 
 

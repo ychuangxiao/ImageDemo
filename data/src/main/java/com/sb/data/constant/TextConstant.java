@@ -65,6 +65,7 @@ public class TextConstant {
      * 更新地址扩展参数
      */
     public static final String UPDATE_APP_ADDRESS_EXTRA = "update_app_address_extra";
+    public static final String UPDATE_APP_DETAILS_EXTRA = "UPDATE_APP_DETAILS_EXTRA";
 
 
     public static final String ACTION_LOGOUT = "ACTION_LOGOUT";

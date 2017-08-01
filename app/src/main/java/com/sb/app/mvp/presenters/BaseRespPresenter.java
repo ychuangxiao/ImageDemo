@@ -168,6 +168,7 @@ public class BaseRespPresenter implements Presenter<BaseHandleView> {
 
     public void checkToken() {
 
+        mAndroidApplication.sharedpreferences.Watermark().put(true);
         this.mBaseView.showLoading();
         BaseReqModel baseReqModel = new BaseReqModel();
         baseReqModel.setAction(TextConstant.ACTION_CHECKTOKEN);

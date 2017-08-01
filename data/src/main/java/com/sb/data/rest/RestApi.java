@@ -41,7 +41,7 @@ public interface RestApi {
      * @param crashReqEntity 崩溃日志实体
      * @return
      */
-    @POST("er/upload")
+    @POST("app/addlog")
     Observable<BaseRespEntity> saveCrashLog(@Header(TextConstant.AUTHOR_NAME) String authorization, @Body
             BaseCrashReqEntity crashReqEntity);
 
