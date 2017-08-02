@@ -48,8 +48,6 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
     RecyclerView recyclerList;
 
 
-    private String gourpId;
-
     public BottomSheetUserFragment() {
         mRealm = Realm.getDefaultInstance();
     }
@@ -59,15 +57,21 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private String mParam1;
+    private String mParam2;
+
+
     RealmList<ContactRealm> mContactRealms;
 
-    public static BottomSheetUserFragment newInstance(String gourpId) {
+    public static BottomSheetUserFragment newInstance(String param1, String param2) {
         BottomSheetUserFragment fragment = new BottomSheetUserFragment();
 
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, gourpId);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+
 
     }
 
@@ -77,7 +81,8 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
 
         this.getComponent(BizComponent.class).inject(this);
         if (getArguments() != null) {
-            gourpId = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -85,28 +90,45 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
+
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+    }
+
+    public void refreshData(String groupId, String defaultUserId) {
+        mContactRealms = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant.TABLE_COLUMN_ID, groupId).findFirst
+                ().getContactRealms();
+
+        mChatContactAdapter.setDefaultUserId(defaultUserId);
+        mChatContactAdapter.setItems(mContactRealms, true);
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+
+        View mRootView = inflater.inflate(R.layout.fragment_contact, container, false);
+        mUnbinder = ButterKnife.bind(this, mRootView);//绑定framgent
+
         mChatContactAdapter.setOnChooseUserItemClickListener(this);
 
-        mContactRealms = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant.TABLE_COLUMN_ID, gourpId).findFirst().getContactRealms();
 
         recyclerList.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerList.setHasFixedSize(true);
         // 设置item动画
         recyclerList.setItemAnimator(new DefaultItemAnimator());
         recyclerList.setAdapter(mChatContactAdapter);
-
-
-        mChatContactAdapter.setItems(mContactRealms);
-    }
-
-
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View mRootView = inflater.inflate(R.layout.fragment_contact, container, false);
-        mUnbinder = ButterKnife.bind(this, mRootView);//绑定framgent
+        refreshData(mParam1, mParam2);
         return mRootView;
     }
 
@@ -131,8 +153,7 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
     public void onItemClickListener(ContactRealm model) {
 
 
-        if (onChooseUserItemClickListener !=null)
-        {
+        if (onChooseUserItemClickListener != null) {
             onChooseUserItemClickListener.onItemClickListener(model);
         }
         this.dismiss();

@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 
 import com.sb.app.R;
 import com.sb.app.utils.ViewUtils;
+import com.sb.common.fontawesom.IconicsDrawable;
+import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.entitys.realm.ContactRealm;
 
 import butterknife.BindView;
@@ -67,11 +69,11 @@ public class ChatContactItemView extends RelativeLayout {
     Drawable mDrawable;
 
     ContactRealm mContactRealm;
-
+    Drawable drawableRight = null;
     /**
      * 绑定按钮标题
      */
-    public void binder(ContactRealm contactRealm) {
+    public void binder(ContactRealm contactRealm,String defaultUserId) {
 
         mContactRealm = contactRealm;
         mTvUserNick.setText(contactRealm.getUserNick());
@@ -82,6 +84,15 @@ public class ChatContactItemView extends RelativeLayout {
             mAvatarImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
         }
+
+        drawableRight = null;
+        if (mContactRealm.getUserId().endsWith(defaultUserId)) {
+            drawableRight = new IconicsDrawable(mContext, BaseFontAwesome.Icon.icon_checked).actionBar(6F).color(mContext.getResources().getColor(R.color
+                    .md_red_500)).paddingDp(2);
+        }
+
+
+        mTvUserNick.setCompoundDrawables(null, null, drawableRight, null);
 
 
     }

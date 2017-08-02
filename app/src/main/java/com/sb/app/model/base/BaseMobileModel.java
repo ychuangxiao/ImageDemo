@@ -25,9 +25,9 @@ public class BaseMobileModel implements Serializable {
     /**
      * 10:黑色 20 白色
      */
-    private Integer toolbarType= AppConstant.ACTION_10;//主要是 黑色 还是 白色
+    private Integer toolbarType = AppConstant.ACTION_10;//主要是 黑色 还是 白色
     private Integer topToolStyle;//工具栏样式
-    private Integer mobileType;//手机类型
+    private Integer mobileType = AppConstant.ACTION_20;//手机类型
     private Integer networkType;//网络类型
     private Integer networkSignal;//信号强度
     private String mobileCarrier;//手机运营商

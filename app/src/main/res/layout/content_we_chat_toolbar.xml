@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
+
     <include layout="@layout/google_primary_dark"/>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
 
@@ -22,11 +24,11 @@
             style="@style/TextView.White.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="left"
             android:lines="1"
             android:maxEms="10"
-            android:ellipsize="end"
             android:minEms="10"
-            android:gravity="center"
             android:text="微信"
             android:textSize="@dimen/font_size_medium"
 

@@ -6,7 +6,7 @@ import com.sb.app.di.modules.ActivityModule;
 import com.sb.app.di.modules.BizModule;
 import com.sb.app.views.activitys.DownApkActivity;
 import com.sb.app.views.activitys.MainActivity;
-import com.sb.app.views.activitys.tencent.WeChatMessageActivityFragment;
+import com.sb.app.views.activitys.tencent.WeChatMessageFragment;
 import com.sb.app.views.activitys.user.RegActivity;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
 import com.sb.app.views.fragment.ContactFragment;
@@ -39,7 +39,7 @@ public interface BizComponent extends ActivityComponent {
     void inject(ContactFragment fragment);
     void inject(WeChatFragment fragment);
     void inject(BottomSheetUserFragment fragment);
-    void inject(WeChatMessageActivityFragment fragment);
+    void inject(WeChatMessageFragment fragment);
 
     void inject(RegActivity regActivity);
 

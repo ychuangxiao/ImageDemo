@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.ilogie.android.library.common.util.StringUtils;
@@ -231,5 +232,21 @@ public abstract class BaseFragment extends Fragment {
         bankModels.add(new BankModel("广发银行", 160));
 
         return bankModels;
+    }
+
+
+    protected void hideSoftInput(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+
+
+    }
+
+    protected void showSoftInput() {
+
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
     }
 }

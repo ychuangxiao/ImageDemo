@@ -36,6 +36,12 @@ public class ChatContactAdapter extends RecyclerViewAdapterBase<ContactRealm, Ch
     Context mContext;
 
 
+    String defaultUserId;
+
+    public void setDefaultUserId(String defaultUserId) {
+        this.defaultUserId = defaultUserId;
+    }
+
     @Inject
     public ChatContactAdapter(AndroidApplication context) {
         this.mContext = context;
@@ -51,7 +57,7 @@ public class ChatContactAdapter extends RecyclerViewAdapterBase<ContactRealm, Ch
     @Override
     public void onBindViewHolder(ViewWrapper<ChatContactItemView> viewHolder, final int position) {
         ChatContactItemView view = viewHolder.getView();
-        view.binder(items.get(position));
+        view.binder(items.get(position),defaultUserId);
         if (null != onChooseUserItemClickListener) {
 
             view.getChatRelativeLayout().setOnClickListener(new View.OnClickListener() {
