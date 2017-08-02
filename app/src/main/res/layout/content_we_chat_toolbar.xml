@@ -17,12 +17,15 @@
         app:theme="@style/AppTheme.AppBarOverlay"
         >
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/topTitle"
             style="@style/TextView.White.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:lines="1"
+            android:maxEms="10"
+            android:ellipsize="end"
+            android:minEms="10"
             android:gravity="center"
             android:text="微信"
             android:textSize="@dimen/font_size_medium"

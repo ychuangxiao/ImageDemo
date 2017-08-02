@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 
-import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedModel;
@@ -19,7 +18,6 @@ import com.sb.data.entitys.realm.ContactRealm;
 import java.math.BigDecimal;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
@@ -54,12 +52,11 @@ public class TransferActivity extends BaseActivity {
         mRealm = Realm.getDefaultInstance();
 
 
-
         setToolTitle(getString(R.string.title_activity_transfer)).setDisplayHome(true)
                 .setHomeOnClickListener();
 
         mContactRealm = mRealm.where(ContactRealm.class).equalTo(TextConstant.COLUMN_NAME_FOR_USERID_CONTACTREALM,
-                mRedPackedModel.getUserId()).findFirst();
+                mRedPackedModel.getReceiveUserId()).findFirst();
 
         mTvUserNick.setText(mContactRealm.getUserNick());
 

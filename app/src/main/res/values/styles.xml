@@ -65,6 +65,13 @@
 
     </style>
 
+    <style name="Google.TextView.Right.Black" parent="Google.TextView.Right">
+
+        <item name="android:textColor">@color/colorBlack</item>
+
+
+    </style>
+
     <style name="Google.TextView.Right.800.400" parent="Google.TextView.Right">
         <item name="android:textSize">@dimen/font_size_micro</item>
 
@@ -562,6 +569,17 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bg_date_time_we_chat</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:paddingTop">2.0dip</item>
+        <item name="android:paddingRight">5.0dip</item>
+        <item name="android:paddingBottom">2.0dip</item>
+    </style>
+
+    <style name="WeChat.Receive.Red.Packets" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
         <item name="android:background">@drawable/bg_date_time_we_chat</item>
         <item name="android:paddingLeft">5.0dip</item>
         <item name="android:paddingTop">2.0dip</item>

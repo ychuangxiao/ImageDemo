@@ -16,8 +16,9 @@ public class RedPackedModel implements Parcelable {
     private String content;
     private int source;
     private int sendType;
+    private String receiveUserId;
 
-    private String userId;
+    private String sendUserId;
 
     public BigDecimal getAmount() {
         return amount;
@@ -52,12 +53,12 @@ public class RedPackedModel implements Parcelable {
         this.sendType = sendType;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSendUserId() {
+        return sendUserId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSendUserId(String sendUserId) {
+        this.sendUserId = sendUserId;
     }
 
     public RedPackedModel() {
@@ -75,7 +76,8 @@ public class RedPackedModel implements Parcelable {
         dest.writeString(this.content);
         dest.writeInt(this.source);
         dest.writeInt(this.sendType);
-        dest.writeString(this.userId);
+        dest.writeString(this.sendUserId);
+        dest.writeString(this.receiveUserId);
     }
 
     protected RedPackedModel(Parcel in) {
@@ -83,7 +85,8 @@ public class RedPackedModel implements Parcelable {
         this.content = in.readString();
         this.source = in.readInt();
         this.sendType = in.readInt();
-        this.userId = in.readString();
+        this.sendUserId = in.readString();
+        this.receiveUserId = in.readString();
     }
 
     public static final Creator<RedPackedModel> CREATOR = new Creator<RedPackedModel>() {
@@ -97,4 +100,14 @@ public class RedPackedModel implements Parcelable {
             return new RedPackedModel[size];
         }
     };
+
+    public String getReceiveUserId() {
+        return receiveUserId;
+    }
+
+    public void setReceiveUserId(String receiveUserId) {
+        this.receiveUserId = receiveUserId;
+    }
+
+
 }

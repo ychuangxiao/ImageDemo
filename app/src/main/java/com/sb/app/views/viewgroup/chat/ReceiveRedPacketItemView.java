@@ -1,9 +1,7 @@
-package com.sb.app.views.viewgroup;
+package com.sb.app.views.viewgroup.chat;
 
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -11,18 +9,16 @@ import android.widget.RelativeLayout;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
-import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.listeners.WeChatMessage2ClickListener;
+import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 文件名称：{@link HomeItemView}
  * <br/>
- * 功能描述：朋友发的红包
+ * 功能描述：领取红包
  * <br/>
  * 创建作者：administrator
  * <br/>
@@ -34,20 +30,13 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatFriendRedPacketItemView extends RelativeLayout {
+public class ReceiveRedPacketItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
     AppCompatTextView mTvChatDateTime;
-    @BindView(R.id.headerImage)
-    AppCompatImageView mHeaderImage;
-    @BindView(R.id.ivRed)
-    AppCompatImageView mIvRed;
-    @BindView(R.id.tvRedPacketsDesc)
-    AppCompatTextView tvRedPacketsDesc;
-
-    @BindView(R.id.redPackedConstraintLayout)
-    ConstraintLayout mRedPackedConstraintLayout;
+    @BindView(R.id.tvRedPacketDetails)
+    AppCompatTextView mTvRedPacketDetails;
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -58,26 +47,23 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatFriendRedPacketItemView build(Context context) {
-        ChatFriendRedPacketItemView instance = new ChatFriendRedPacketItemView(context);
+    public static ReceiveRedPacketItemView build(Context context) {
+        ReceiveRedPacketItemView instance = new ReceiveRedPacketItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatFriendRedPacketItemView(Context context) {
+    public ReceiveRedPacketItemView(Context context) {
         super(context);
         mContext = context;
     }
 
-
-    WebChatMessageRealm mChatMessageRealm;
 
     /**
      * 绑定消息
      */
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
-        mChatMessageRealm = webChatMessageRealm;
 
         if (isFirst) {
 
@@ -106,15 +92,11 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
         }
 
 
-        tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
-
-        if (webChatMessageRealm.getContactRealm().isSystem()) {
-            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
-                    .getImageIndex()]);
-        }
+        mTvRedPacketDetails.setText(webChatMessageRealm.getContactRealm().getUserNick() + "领取了你的");
 
 
         return lastSendTime;
+
     }
 
 
@@ -128,25 +110,11 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_redpacket_we_chat, this);
+            inflate(getContext(), R.layout.row_receive_redpacket, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
 
-    WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 
-    public void setMessageClickListener(WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>
-                                                messageClickListener) {
-        mMessageClickListener = messageClickListener;
-    }
-
-    @OnClick(R.id.redPackedConstraintLayout)
-    void onMessageClick()
-    {
-        if (mMessageClickListener != null)
-        {
-            mMessageClickListener.onItemClickListener(mChatMessageRealm,this);
-        }
-    }
 }

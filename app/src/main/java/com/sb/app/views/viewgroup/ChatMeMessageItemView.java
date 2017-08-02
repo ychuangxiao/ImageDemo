@@ -65,10 +65,14 @@ public class ChatMeMessageItemView extends RelativeLayout {
     }
 
 
+    WebChatMessageRealm mChatMessageRealm;
+
     /**
      * 绑定消息
      */
-    public long binder(WebChatMessageRealm webChatMessageRealm,Long lastSendTime,boolean isFirst) {
+    public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
+
+        mChatMessageRealm = webChatMessageRealm;
 
         if (isFirst) {
 

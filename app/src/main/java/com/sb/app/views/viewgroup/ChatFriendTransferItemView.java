@@ -2,7 +2,6 @@ package com.sb.app.views.viewgroup;
 
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -11,12 +10,17 @@ import android.widget.RelativeLayout;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
+import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.listeners.WeChatMessage2ClickListener;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
+
+import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 文件名称：{@link HomeItemView}
@@ -69,10 +73,14 @@ public class ChatFriendTransferItemView extends RelativeLayout {
     }
 
 
+    WebChatMessageRealm mChatMessageRealm;
+
     /**
      * 绑定消息
      */
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
+
+        mChatMessageRealm = webChatMessageRealm;
 
 
         if (isFirst) {
@@ -102,13 +110,24 @@ public class ChatFriendTransferItemView extends RelativeLayout {
         }
 
 
+        if (webChatMessageRealm.getAmountStatus() != null &&  webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
+
+            mIvRed.setImageResource(R.mipmap.ic_transfer_received_we_chat);
+
+        } else {
+            mIvRed.setImageResource(R.mipmap.ic_transfer_we_chat);
+        }
+
+
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
         }
         mTvTransferExplain.setText(webChatMessageRealm.getMessage());
 
-        mTextTransferAmount.setText(webChatMessageRealm.getSubMessage());
+    
+        mTextTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal
+                (webChatMessageRealm.getAmount()))));
 
 
         return lastSendTime;
@@ -132,5 +151,19 @@ public class ChatFriendTransferItemView extends RelativeLayout {
         super.onFinishInflate();
     }
 
+    WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 
+    public void setMessageClickListener(WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>
+                                                messageClickListener) {
+        mMessageClickListener = messageClickListener;
+    }
+
+    @OnClick(R.id.redPackedConstraintLayout)
+    void onMessageClick()
+    {
+        if (mMessageClickListener != null)
+        {
+            mMessageClickListener.onItemClickListener(mChatMessageRealm,this);
+        }
+    }
 }

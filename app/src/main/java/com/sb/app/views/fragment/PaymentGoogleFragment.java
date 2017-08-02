@@ -529,33 +529,41 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
                                 .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                         second);
 
-                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
-                )) {
+                //判断是否已完成
+
+                if (!mAliPaymentModel.getFinish())
+                {
+                    if (TimeUtils.comperHour(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
+                    ) < 2) {
 
 
-                    mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
+                        mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
 
-                    if (mModelMobileChangeListener != null) {
+                        if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        }
+
+
+                        if (tvHandleType.getTag().toString().compareTo("0") == 0) {
+                            tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
+                                    .toString(), TimeUtils.millis2String(calendar
+                                    .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
+                        } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
+                            tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
+                                    .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
+                        }
+
+                    } else {
+                        Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
+                                .show();
+
+                        return;
                     }
-
-
-                    if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
-                                .toString(), TimeUtils.millis2String(calendar
-                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
-                    } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
-                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
-                    }
-
-                } else {
-                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
-                            .show();
-
-                    return;
                 }
+
+
+
 
                 break;
         }
@@ -790,8 +798,6 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
         initDialog();
     }
-
-
 
 
     @OnClick(R.id.topConstraintLayout)

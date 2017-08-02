@@ -1,6 +1,5 @@
 package com.sb.app.utils;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -365,8 +364,6 @@ public class TimeUtils {
     public static String getLastDateTime(Long startMillis, Long endMillis) {
 
 
-
-
         Calendar cal = Calendar.getInstance();
 
         //昨天时间
@@ -398,7 +395,7 @@ public class TimeUtils {
 
             //都要判断是否大于20分钟
 
-            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
             if (between_days > 20) {
                 return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_8);
             } else {
@@ -406,7 +403,7 @@ public class TimeUtils {
             }
         } else if (between_days <= 14 && between_days > 1) {
 
-            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
             if (between_days > 20) {
                 return getWeekOfDate(endMillis) + " " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
             } else {
@@ -416,7 +413,7 @@ public class TimeUtils {
 
         } else if (between_days == 1) {
 
-            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
             if (between_days > 20) {
                 return "昨天 " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
             } else {
@@ -426,7 +423,7 @@ public class TimeUtils {
         } else {
 
 
-            between_days =  (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
+            between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
 
             if (between_days > 20) {
                 return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
@@ -484,5 +481,28 @@ public class TimeUtils {
         return weekDays[w];
     }
 
+
+    public static Long comperHour(Long startMillis, Long endMillis) {
+
+
+        Calendar cal = Calendar.getInstance();
+
+
+        //昨天时间
+        Long yesterdayTime;
+        cal.setTimeInMillis(TimeUtils.millis2millis(startMillis, TimeUtils.DEFAULT_PATTERN));
+
+        yesterdayTime = cal.getTimeInMillis();
+
+        cal.setTimeInMillis(TimeUtils.millis2millis(endMillis, TimeUtils.DEFAULT_PATTERN));
+
+        Long time2 = cal.getTimeInMillis();
+
+
+        //小时
+        Long betweenHour = (time2 - yesterdayTime) / (1000 * 3600);
+
+        return betweenHour;
+    }
 }
 
