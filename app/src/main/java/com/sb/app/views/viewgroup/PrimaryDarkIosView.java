@@ -4,6 +4,7 @@ package com.sb.app.views.viewgroup;
 import android.content.Context;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
-import com.sb.app.model.AliPaymentModel;
+import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 
@@ -37,6 +38,8 @@ import butterknife.ButterKnife;
  */
 public class PrimaryDarkIosView extends RelativeLayout {
 
+    @BindView(R.id.topStatusContainer)
+    ConstraintLayout mTopStatusContainer;
     private ClipDrawable clipDrawableTest;
     Context mContext;//上下文
     boolean alreadyInflated = false;
@@ -93,7 +96,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
     String ampmText;
 
-    public void binder(AliPaymentModel aliPaymentModel) {
+    public void binder(BaseMobileModel aliPaymentModel) {
 
 
         if (!aliPaymentModel.getDateTimeStyle()) {
@@ -160,8 +163,10 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
         //判断是白色 还是 黑色
 
-        if (aliPaymentModel.getMobileType().compareTo(AppConstant.ACTION_10) == 0) {
+        if (aliPaymentModel.getTopStatusColor().compareTo(AppConstant.ACTION_10) == 0) {
 
+
+            mTopStatusContainer.setBackground(mContext.getResources().getDrawable(R.color.colorWhite));
 
             if (aliPaymentModel.getBatteryAdd()) {
 
@@ -206,12 +211,39 @@ public class PrimaryDarkIosView extends RelativeLayout {
                     signal.setImageResource(R.mipmap.ic_ios_top_signal5);
                     break;
             }
-
-            tvWifi.setImageResource(R.mipmap.ic_ios_top_network_wifi);
+            switch (aliPaymentModel.getNetworkType()) {
+                case 10:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_wifi);
+                    break;
+                case 20:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_g);
+                    break;
+                case 30:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_e);
+                    break;
+                case 40:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_3g);
+                    break;
+                case 50:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_4g);
+                    break;
+            }
             tvLocation.setImageResource(R.mipmap.ic_ios_top_location);
             tvDir.setImageResource(R.mipmap.ic_ios_top_dir);
             tvBlueTeeth.setImageResource(R.mipmap.ic_ios_top_blueth);
+
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
+
         } else {
+
+
+            mTopStatusContainer.setBackground(mContext.getResources().getDrawable(R.color.colorPrimaryForWeChat ));
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
+
             //是否充电
             if (aliPaymentModel.getBatteryAdd()) {
                 battery.setImageResource(R.drawable.battery_green_white);
@@ -247,7 +279,23 @@ public class PrimaryDarkIosView extends RelativeLayout {
                     break;
             }
 
-            tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_wifi);
+            switch (aliPaymentModel.getNetworkType()) {
+                case 10:
+                    tvWifi.setImageResource(R.mipmap.ic_top_network_wifi);
+                    break;
+                case 20:
+                    tvWifi.setImageResource(R.mipmap.ic_top_network_g);
+                    break;
+                case 30:
+                    tvWifi.setImageResource(R.mipmap.ic_top_network_e);
+                    break;
+                case 40:
+                    tvWifi.setImageResource(R.mipmap.ic_top_network_3g);
+                    break;
+                case 50:
+                    tvWifi.setImageResource(R.mipmap.ic_top_network_4g);
+                    break;
+            }
             tvLocation.setImageResource(R.mipmap.ic_ios_white_top_location);
             tvDir.setImageResource(R.mipmap.ic_ios_white_top_dir);
             tvBlueTeeth.setImageResource(R.mipmap.ic_ios_white_top_blueth);

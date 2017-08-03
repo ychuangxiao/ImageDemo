@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
-import com.sb.app.model.AliPaymentModel;
+import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseFragment;
@@ -34,7 +34,6 @@ import static com.sb.app.constant.AppConstant.CARRIER_CHINA_LT;
 import static com.sb.app.constant.AppConstant.CARRIER_CHINA_YD;
 import static com.sb.app.constant.AppConstant.MOBILE_ANDROID;
 import static com.sb.app.constant.AppConstant.MOBILE_IOS;
-import static com.sb.app.constant.AppConstant.TOOL_STYLE_CUSTOM;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +51,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
     BottomNavigationView navigation;
 
-    AliPaymentModel mAliPaymentModel;
+    BaseMobileModel mBaseMobileModel;
 
 
     @BindView(R.id.tvCreateTime2)
@@ -126,7 +125,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
      * @return A new instance of fragment PaymentMenuFragment.
      */
 
-    public static PaymentMobileStyleFragment newInstance(AliPaymentModel
+    public static PaymentMobileStyleFragment newInstance(BaseMobileModel
                                                                  aliPaymentModel) {
         PaymentMobileStyleFragment fragment = new PaymentMobileStyleFragment();
         Bundle args = new Bundle();
@@ -179,67 +178,67 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
 
 
                 if (progress == 0) {
-                    mAliPaymentModel.setBatteryNumBar(progress);
+                    mBaseMobileModel.setBatteryNumBar(progress);
                 } else if (progress > 0 && progress <= 4) {
-                    mAliPaymentModel.setBatteryNumBar(4);
+                    mBaseMobileModel.setBatteryNumBar(4);
                 } else if (progress > 4 && progress <= 8) {
-                    mAliPaymentModel.setBatteryNumBar(8);
+                    mBaseMobileModel.setBatteryNumBar(8);
                 } else if (progress > 8 && progress <= 12) {
-                    mAliPaymentModel.setBatteryNumBar(12);
+                    mBaseMobileModel.setBatteryNumBar(12);
                 } else if (progress > 12 && progress <= 16) {
-                    mAliPaymentModel.setBatteryNumBar(16);
+                    mBaseMobileModel.setBatteryNumBar(16);
                 } else if (progress > 16 && progress <= 20) {
-                    mAliPaymentModel.setBatteryNumBar(20);
+                    mBaseMobileModel.setBatteryNumBar(20);
                 } else if (progress > 20 && progress <= 24) {
-                    mAliPaymentModel.setBatteryNumBar(24);
+                    mBaseMobileModel.setBatteryNumBar(24);
                 } else if (progress > 24 && progress <= 28) {
-                    mAliPaymentModel.setBatteryNumBar(28);
+                    mBaseMobileModel.setBatteryNumBar(28);
                 } else if (progress > 28 && progress <= 32) {
-                    mAliPaymentModel.setBatteryNumBar(32);
+                    mBaseMobileModel.setBatteryNumBar(32);
                 } else if (progress > 32 && progress <= 36) {
-                    mAliPaymentModel.setBatteryNumBar(36);
+                    mBaseMobileModel.setBatteryNumBar(36);
                 } else if (progress > 36 && progress <= 40) {
-                    mAliPaymentModel.setBatteryNumBar(40);
+                    mBaseMobileModel.setBatteryNumBar(40);
                 } else if (progress > 40 && progress <= 44) {
-                    mAliPaymentModel.setBatteryNumBar(44);
+                    mBaseMobileModel.setBatteryNumBar(44);
                 } else if (progress > 44 && progress <= 48) {
-                    mAliPaymentModel.setBatteryNumBar(48);
+                    mBaseMobileModel.setBatteryNumBar(48);
                 } else if (progress > 48 && progress <= 52) {
-                    mAliPaymentModel.setBatteryNumBar(52);
+                    mBaseMobileModel.setBatteryNumBar(52);
                 } else if (progress > 52 && progress <= 56) {
-                    mAliPaymentModel.setBatteryNumBar(56);
+                    mBaseMobileModel.setBatteryNumBar(56);
                 } else if (progress > 56 && progress <= 60) {
-                    mAliPaymentModel.setBatteryNumBar(60);
+                    mBaseMobileModel.setBatteryNumBar(60);
                 } else if (progress > 60 && progress <= 64) {
-                    mAliPaymentModel.setBatteryNumBar(44);
+                    mBaseMobileModel.setBatteryNumBar(44);
                 } else if (progress > 64 && progress <= 68) {
-                    mAliPaymentModel.setBatteryNumBar(48);
+                    mBaseMobileModel.setBatteryNumBar(48);
                 } else if (progress > 68 && progress <= 72) {
-                    mAliPaymentModel.setBatteryNumBar(72);
+                    mBaseMobileModel.setBatteryNumBar(72);
                 } else if (progress > 72 && progress <= 76) {
-                    mAliPaymentModel.setBatteryNumBar(76);
+                    mBaseMobileModel.setBatteryNumBar(76);
                 } else if (progress > 76 && progress <= 80) {
-                    mAliPaymentModel.setBatteryNumBar(80);
+                    mBaseMobileModel.setBatteryNumBar(80);
                 } else if (progress > 80 && progress <= 84) {
-                    mAliPaymentModel.setBatteryNumBar(84);
+                    mBaseMobileModel.setBatteryNumBar(84);
                 } else if (progress > 84 && progress <= 88) {
-                    mAliPaymentModel.setBatteryNumBar(88);
+                    mBaseMobileModel.setBatteryNumBar(88);
                 } else if (progress > 88 && progress <= 92) {
-                    mAliPaymentModel.setBatteryNumBar(92);
+                    mBaseMobileModel.setBatteryNumBar(92);
                 } else if (progress > 92 && progress <= 99) {
-                    mAliPaymentModel.setBatteryNumBar(96);
+                    mBaseMobileModel.setBatteryNumBar(96);
                 } else if (progress == 100) {
-                    mAliPaymentModel.setBatteryNumBar(progress);
+                    mBaseMobileModel.setBatteryNumBar(progress);
                 }
 
 
                 tvLeftBattery.setText(String.format(tvLeftBattery.getTag().toString(),
-                        mAliPaymentModel
+                        mBaseMobileModel
                                 .getBatteryNumBar()));
 
                 if (mModelMobileChangeListener != null) {
 
-                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                    mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                 }
             }
 
@@ -254,25 +253,25 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
             }
         });
 
-        loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
+        loadViewData((BaseMobileModel) getArguments().getSerializable(ARG_PARAM1));
 
     }
 
-    public void loadViewData(AliPaymentModel model) {
+    public void loadViewData(BaseMobileModel model) {
         if (model == null) {
             return;
         }
 
-        mAliPaymentModel = model;
+        mBaseMobileModel = model;
 
 
-        tvCarrier.setText(mAliPaymentModel.getMobileCarrier());
+        tvCarrier.setText(mBaseMobileModel.getMobileCarrier());
 
-        tvCreateTime.setText(TimeUtils.millis2String(mAliPaymentModel.getTopTime(), TimeUtils
+        tvCreateTime.setText(TimeUtils.millis2String(mBaseMobileModel.getTopTime(), TimeUtils
                 .DEFAULT_PATTERN_4));
 
 
-        switch (mAliPaymentModel.getTopToolStyle()) {
+        switch (mBaseMobileModel.getTopToolStyle()) {
             case AppConstant.ACTION_10:
                 tvTopStyle.setText(AppConstant.TOOL_STYLE_CUSTOM);
                 break;
@@ -282,7 +281,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
         }
 
 
-        switch (mAliPaymentModel.getMobileType()) {
+        switch (mBaseMobileModel.getMobileType()) {
             case AppConstant.ACTION_10:
                 tvMobileType.setText(MOBILE_IOS);
                 carrierRelativeLayout.setVisibility(View.VISIBLE);
@@ -297,7 +296,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 break;
         }
 
-        switch (mAliPaymentModel.getNetworkSignal()) {
+        switch (mBaseMobileModel.getNetworkSignal()) {
             case AppConstant.ACTION_10:
                 tvSignal.setText(AppConstant.NETWORK_SIGNAL_1);
                 break;
@@ -315,7 +314,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 break;
         }
 
-        switch (mAliPaymentModel.getNetworkType()) {
+        switch (mBaseMobileModel.getNetworkType()) {
             case AppConstant.ACTION_10:
                 tvNetwork.setText(AppConstant.NETWORK_WIFI);
                 break;
@@ -333,18 +332,18 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 break;
         }
 
-        tvLeftBattery.setText(String.format(tvLeftBattery.getTag().toString(), mAliPaymentModel
+        tvLeftBattery.setText(String.format(tvLeftBattery.getTag().toString(), mBaseMobileModel
                 .getBatteryNumBar()));
 
-        seekBarBatteryNum.setProgress(mAliPaymentModel
+        seekBarBatteryNum.setProgress(mBaseMobileModel
                 .getBatteryNumBar());
 
-        ckDir.setChecked(mAliPaymentModel.getDir());
-        ckBattery.setChecked(mAliPaymentModel.getBatteryAdd());
-        ckBatteryNum.setChecked(mAliPaymentModel.getBatteryNum());
+        ckDir.setChecked(mBaseMobileModel.getDir());
+        ckBattery.setChecked(mBaseMobileModel.getBatteryAdd());
+        ckBatteryNum.setChecked(mBaseMobileModel.getBatteryNum());
 
-        ckBlueTeeth.setChecked(mAliPaymentModel.getBlueTeeth());
-        ckLocation.setChecked(mAliPaymentModel.getLocation());
+        ckBlueTeeth.setChecked(mBaseMobileModel.getBlueTeeth());
+        ckLocation.setChecked(mBaseMobileModel.getLocation());
 
     }
 
@@ -369,15 +368,15 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
+        calendar.setTimeInMillis(mBaseMobileModel.getTopTime());
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get
                         (Calendar.DAY_OF_MONTH),
                 hourOfDay, minute, second);
 
-        mAliPaymentModel.setTopTime(calendar.getTimeInMillis());
+        mBaseMobileModel.setTopTime(calendar.getTimeInMillis());
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
 
 
@@ -390,7 +389,7 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     void onBankHandleOverTimeClick() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(mAliPaymentModel.getTopTime());
+        calendar.setTimeInMillis(mBaseMobileModel.getTopTime());
         mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY)
                 , calendar.get
                         (Calendar.MINUTE), true);
@@ -402,30 +401,30 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     @OnCheckedChanged(R.id.ckType)
     void onChecked(boolean checked) {
 
-        mAliPaymentModel.setDateTimeStyle(checked);
+        mBaseMobileModel.setDateTimeStyle(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
     @OnCheckedChanged(R.id.ckDir)
     void onDirChecked(boolean checked) {
 
-        mAliPaymentModel.setDir(checked);
+        mBaseMobileModel.setDir(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
     @OnCheckedChanged(R.id.ckBattery)
     void onBatteryChecked(boolean checked) {
 
-        mAliPaymentModel.setBatteryAdd(checked);
+        mBaseMobileModel.setBatteryAdd(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
@@ -433,30 +432,30 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     @OnCheckedChanged(R.id.ckBatteryNum)
     void onBatteryNumChecked(boolean checked) {
 
-        mAliPaymentModel.setBatteryNum(checked);
+        mBaseMobileModel.setBatteryNum(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
     @OnCheckedChanged(R.id.ckBlueTeeth)
     void onBlueTeethChecked(boolean checked) {
 
-        mAliPaymentModel.setBlueTeeth(checked);
+        mBaseMobileModel.setBlueTeeth(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
     @OnCheckedChanged(R.id.ckLocation)
     void onLocationChecked(boolean checked) {
 
-        mAliPaymentModel.setLocation(checked);
+        mBaseMobileModel.setLocation(checked);
         if (mModelMobileChangeListener != null) {
 
-            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+            mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
         }
     }
 
@@ -482,11 +481,11 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setTopToolStyle(Integer.parseInt(item.getTitleCondensed()
+                    mBaseMobileModel.setTopToolStyle(Integer.parseInt(item.getTitleCondensed()
                             .toString()));
                     if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                     }
 
                     tvTopStyle.setText(item.getTitle());
@@ -520,10 +519,10 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setMobileCarrier(item.getTitle().toString());
+                    mBaseMobileModel.setMobileCarrier(item.getTitle().toString());
                     if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                     }
 
                     tvCarrier.setText(item.getTitle());
@@ -564,15 +563,15 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setMobileType(Integer.parseInt(item.getTitleCondensed()
+                    mBaseMobileModel.setMobileType(Integer.parseInt(item.getTitleCondensed()
                             .toString()));
                     if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                     }
 
 
-                    switch (mAliPaymentModel.getMobileType()) {
+                    switch (mBaseMobileModel.getMobileType()) {
                         case AppConstant.ACTION_10:
                             iosContainer.setVisibility(View.VISIBLE);
                             carrierRelativeLayout.setVisibility(View.VISIBLE);
@@ -634,11 +633,11 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setNetworkSignal(Integer.parseInt(item.getTitleCondensed()
+                    mBaseMobileModel.setNetworkSignal(Integer.parseInt(item.getTitleCondensed()
                             .toString()));
                     if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                     }
 
                     tvSignal.setText(item.getTitle());
@@ -689,11 +688,11 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
                 public boolean onMenuItemClick(MenuItem item) {
 
 
-                    mAliPaymentModel.setNetworkType(Integer.parseInt(item.getTitleCondensed()
+                    mBaseMobileModel.setNetworkType(Integer.parseInt(item.getTitleCondensed()
                             .toString()));
                     if (mModelMobileChangeListener != null) {
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        mModelMobileChangeListener.onItemClickListener(mBaseMobileModel);
                     }
 
                     tvNetwork.setText(item.getTitle());
@@ -709,9 +708,9 @@ public class PaymentMobileStyleFragment extends BaseFragment implements TimePick
     }
 
 
-    MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
+    MobileChangeListener<BaseMobileModel> mModelMobileChangeListener;
 
-    public void setMobileChangeListener(MobileChangeListener<AliPaymentModel>
+    public void setMobileChangeListener(MobileChangeListener<BaseMobileModel>
                                                 modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }

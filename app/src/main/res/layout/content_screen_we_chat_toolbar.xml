@@ -6,6 +6,13 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
 
+    <RelativeLayout
+        android:id="@+id/topPrimaryDarkContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/google_primary_dark"/>
+    </RelativeLayout>
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

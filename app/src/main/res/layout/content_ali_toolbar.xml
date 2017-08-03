@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
+
+    <RelativeLayout
+        android:id="@+id/topPrimaryDarkContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/google_primary_dark"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/web_chat_abc_action_bar_default_height"
+        android:background="@color/colorWhite"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <android.support.constraint.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/tvBackHome"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@mipmap/ali_chat_back_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/line1"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dip"
+                android:background="#c2c2c2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvBackHome"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/topTitle"
+                style="@style/TextView.White.Large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dip"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:lines="1"
+                android:maxEms="10"
+                android:minEms="10"
+                android:text="账单详情"
+                android:textColor="#272727"
+                android:textSize="@dimen/font_size_15"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/line1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/topLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#d5d3d3"
+        />
+</android.support.design.widget.AppBarLayout>

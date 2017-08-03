@@ -5,13 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
@@ -25,29 +23,13 @@ import com.sb.app.views.fragment.PaymentIosFragment;
 import com.sb.app.views.fragment.PaymentMenuFragment;
 import com.sb.app.views.fragment.PaymentMobileStyleFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
-import com.sb.app.views.viewgroup.PrimaryDarkIosView;
-import com.sb.app.views.viewgroup.PrimaryDarkView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public class PaymentActivity extends BaseActivity implements MobileChangeListener<AliPaymentModel>,TimePickerDialog.OnTimeSetListener {
-
-
-    @BindView(R.id.topPrimaryDarkContainer)
-    RelativeLayout mRelativeLayout;//头部状态栏容器
-
-    PrimaryDarkView mPrimaryDarkView;
-    PrimaryDarkIosView mPrimaryDarkIosView;
-    TimePickerDialog mTimePickerDialog;//顶部时间
-
-    //以上是新添加
-
+public class PaymentActivityV2 extends BaseActivity implements MobileChangeListener<AliPaymentModel> {
 
     @BindView(R.id.content)
     FrameLayout content;
@@ -55,8 +37,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
-    @BindView(R.id.watermarkImageView)
-    AppCompatImageView watermarkImageView;
+    private TextView mTextMessage;
 
     PaymentGoogleFragment mPaymentGoogleFragment;
     String paymentTag = "PaymentGoogleFragment";
@@ -83,12 +64,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    mergerTopStatus();
+
                     hideFragment();
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
 
-                            watermarkImageView.setVisibility(View.GONE);
+
                             if (mPaymentMobileStyleFragment != null) {
 
                                 showFragment(mPaymentMobileStyleFragment);
@@ -116,7 +97,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                         aliPaymentModel.setBlueTeeth(model.getBlueTeeth());
                                         aliPaymentModel.setLocation(model.getLocation());
                                         aliPaymentModel.setBatteryNumBar(model.getBatteryNumBar());
-                                        mergerTopStatus();
                                     }
                                 });
 
@@ -125,7 +105,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                             return true;
                         case R.id.navigation_dashboard:
 
-                            watermarkImageView.setVisibility(View.GONE);
+
                             if (mPaymentMenuFragment != null) {
 
                                 showFragment(mPaymentMenuFragment);
@@ -135,24 +115,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                 mPaymentMenuFragment = PaymentMenuFragment.newInstance
                                         (aliPaymentModel);
                                 addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
-                                mPaymentMenuFragment.setMobileChangeListener(PaymentActivity.this);
+                                mPaymentMenuFragment.setMobileChangeListener(PaymentActivityV2.this);
                             }
 
                             return true;
                         case R.id.navigation_notifications:
 
-
-                            if (getApplicationComponent().context()
-                                    .sharedpreferences.Watermark().get()) {
-
-
-                                watermarkImageView.setVisibility(View.VISIBLE);
-                            } else {
-                                watermarkImageView.setVisibility(View.GONE);
-                            }
-                            // 隐藏状态栏
-                            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
                             switch (aliPaymentModel.getMobileType()) {
                                 case AppConstant.ACTION_10:
@@ -168,7 +136,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                         addFragment(R.id.content, mPaymentIosFragment,
                                                 paymentIosTag);
                                         mPaymentIosFragment.setMobileChangeListener
-                                                (PaymentActivity.this);
+                                                (PaymentActivityV2.this);
                                     }
 
                                     break;
@@ -187,7 +155,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                         addFragment(R.id.content, mPaymentGoogleFragment,
                                                 paymentTag);
                                         mPaymentGoogleFragment.setMobileChangeListener
-                                                (PaymentActivity.this);
+                                                (PaymentActivityV2.this);
                                     }
 
 
@@ -406,93 +374,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                 }
                 return;
             }
-        }
-    }
-
-    //新添加的
-
-    @OnClick(R.id.tvBackHome)
-    void onBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
-
-            navigation.setSelectedItemId(R.id.navigation_home);
-            navigation.setVisibility(View.VISIBLE);
-            getWindow().clearFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            finish();
-        }
-    }
-
-    private void mergerTopStatus() {
-        //处理头部
-
-        mRelativeLayout.removeAllViews();
-
-
-        if (aliPaymentModel.getTopToolStyle() == AppConstant.ACTION_10) {
-
-            switch (aliPaymentModel.getMobileType()) {
-
-                case AppConstant.ACTION_10:
-                    //添加顶部标题栏
-                    mPrimaryDarkIosView = PrimaryDarkIosView.build(this);
-                    mPrimaryDarkIosView.binder(aliPaymentModel);
-                    mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            onTopDateTimeClick();
-                        }
-                    });
-                    mRelativeLayout.addView(mPrimaryDarkIosView);
-                    break;
-                case AppConstant.ACTION_20:
-                    //添加顶部标题栏
-                    mPrimaryDarkView = PrimaryDarkView.build(this);
-                    mPrimaryDarkView.binder(aliPaymentModel);
-                    mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            onTopDateTimeClick();
-                        }
-                    });
-                    mRelativeLayout.addView(mPrimaryDarkView);
-                    break;
-            }
-
-
-        }
-    }
-
-    void onTopDateTimeClick() {
-
-
-        if (mTimePickerDialog == null) {
-            Calendar calendar = Calendar.getInstance();
-
-            calendar.setTimeInMillis(aliPaymentModel.getTopTime());
-            mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar
-                    .HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-        }
-
-        mTimePickerDialog.show(this.getFragmentManager(), "TimePickerDialog2");
-    }
-
-
-    @Override
-    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.setTimeInMillis(aliPaymentModel.getTopTime());
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
-                        .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
-                second);
-        aliPaymentModel.setTopTime(calendar.getTimeInMillis());
-
-        if (aliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
-            mPrimaryDarkView.binder(aliPaymentModel);
-        } else {
-            mPrimaryDarkIosView.binder(aliPaymentModel);
         }
     }
 }

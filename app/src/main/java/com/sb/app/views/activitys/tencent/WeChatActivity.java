@@ -86,17 +86,16 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
                     contactRealm.setSystem(true);
                     contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
 
-                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(false);
-                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
-                    contactRealm.setSystem(true);
-                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
 
-                    contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
-                    contactRealm.setMe(false);
-                    contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
-                    contactRealm.setSystem(true);
-                    contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
+                    for (int i = 1; i < 15; i++) {
+                        contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
+                        contactRealm.setMe(false);
+                        contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
+                        contactRealm.setSystem(true);
+                        contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
+
+                    }
+
                 }
 
 

@@ -25,15 +25,15 @@ public class BaseMobileModel implements Serializable {
     /**
      * 10:黑色 20 白色
      */
-    private Integer toolbarType = AppConstant.ACTION_10;//主要是 黑色 还是 白色
-    private Integer topToolStyle;//工具栏样式
+    private Integer topStatusColor = AppConstant.ACTION_10;//主要是 黑色 还是 白色
+    private Integer topToolStyle = AppConstant.ACTION_10;//工具栏样式
     private Integer mobileType = AppConstant.ACTION_20;//手机类型
-    private Integer networkType;//网络类型
-    private Integer networkSignal;//信号强度
-    private String mobileCarrier;//手机运营商
+    private Integer networkType = AppConstant.ACTION_20;//网络类型
+    private Integer networkSignal = AppConstant.ACTION_20;//信号强度
+    private String mobileCarrier = "中国移动";//手机运营商
 
 
-    private Long topTime;//顶部时间
+    private Long topTime = System.currentTimeMillis();//顶部时间
 
 
     private Boolean dateTimeStyle = false;//是否24小时
@@ -148,11 +148,11 @@ public class BaseMobileModel implements Serializable {
         this.batteryNumBar = batteryNumBar;
     }
 
-    public Integer getToolbarType() {
-        return toolbarType;
+    public Integer getTopStatusColor() {
+        return topStatusColor;
     }
 
-    public void setToolbarType(Integer toolbarType) {
-        this.toolbarType = toolbarType;
+    public void setTopStatusColor(Integer topStatusColor) {
+        this.topStatusColor = topStatusColor;
     }
 }

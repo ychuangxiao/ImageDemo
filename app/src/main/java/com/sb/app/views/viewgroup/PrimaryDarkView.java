@@ -7,7 +7,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.widget.RelativeLayout;
 
 import com.sb.app.R;
-import com.sb.app.model.AliPaymentModel;
+import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
 
 import java.util.Calendar;
@@ -69,7 +69,7 @@ public class PrimaryDarkView extends RelativeLayout {
 
     String ampmText;
 
-    public void binder(AliPaymentModel aliPaymentModel) {
+    public void binder(BaseMobileModel aliPaymentModel) {
 
 
         if (!aliPaymentModel.getDateTimeStyle()) {

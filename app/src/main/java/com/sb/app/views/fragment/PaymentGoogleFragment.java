@@ -33,7 +33,6 @@ import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.EditTextItemView;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
-import com.sb.app.views.viewgroup.PrimaryTopTitleView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -140,8 +139,6 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
     @BindView(R.id.tvBankUserName)
     AppCompatTextView tvBankUserName;
 
-    @BindView(R.id.watermarkImageView)
-    AppCompatImageView watermarkImageView;
 
     DatePickerDialog mDatePickerDialog;
 
@@ -207,14 +204,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
         }
 
 
-        if (getApplicationComponent(getContext().getApplicationContext()).context()
-                .sharedpreferences.Watermark().get()) {
 
-
-            watermarkImageView.setVisibility(View.VISIBLE);
-        } else {
-            watermarkImageView.setVisibility(View.GONE);
-        }
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -266,9 +256,11 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
         //判断手机类型
 
+        mBottomNavigationView.setVisibility(View.GONE);
+
         primaryDarkConstraintLayout.removeAllViews();
         if (mAliPaymentModel.getTopToolStyle() == AppConstant.ACTION_10) {
-            //添加顶部标题栏
+           /* //添加顶部标题栏
             mPrimaryDarkView = PrimaryDarkView.build(getActivity());
 
             primaryDarkConstraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -277,14 +269,14 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
                     onTopDateTimeClick();
                 }
             });
-            primaryDarkConstraintLayout.addView(mPrimaryDarkView);
+            primaryDarkConstraintLayout.addView(mPrimaryDarkView);*/
 
 
         } else {
-            mBottomNavigationView.setVisibility(View.GONE);
+
         }
 
-
+/*
         //添加工具栏
 
 
@@ -304,7 +296,7 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
             }
         });
 
-        primaryConstraintLayout.addView(primaryTopTitleView);
+        primaryConstraintLayout.addView(primaryTopTitleView);*/
 
 
         initViewInfo();
