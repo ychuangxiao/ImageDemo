@@ -34,6 +34,7 @@
         <item name="colorAccent">@color/md_grey_500</item>
 
     </style>
+
     <style name="AppTheme.NoActionBar.We.Chat.RedPacket" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -44,6 +45,20 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.AppBarOverlay.Ali" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <item name="android:actionBarSize">@dimen/actionbar_size</item>
+        <item name="actionMenuTextColor">@android:color/black</item>
+    </style>
+
+
+    <style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:width">24dp</item>
+        <item name="android:height">24dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 

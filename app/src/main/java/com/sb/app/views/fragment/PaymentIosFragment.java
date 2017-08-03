@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.AliPaymentModel;
@@ -133,8 +134,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     @BindView(R.id.tvBankUserName)
     AppCompatTextView tvBankUserName;
 
-    @BindView(R.id.watermarkImageView)
-    AppCompatImageView watermarkImageView;
 
     DatePickerDialog mDatePickerDialog;
 
@@ -198,32 +197,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         }
 
 
-        if (getApplicationComponent(getContext().getApplicationContext()).context()
-                .sharedpreferences.Watermark().get()) {
-
-
-            watermarkImageView.setVisibility(View.VISIBLE);
-        } else {
-            watermarkImageView.setVisibility(View.GONE);
-        }
-
-        DisplayMetrics dm = new DisplayMetrics();
-        //获取屏幕信息
-
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int screenWidth = dm.widthPixels;
-
-        int screenHeigh = dm.heightPixels;
-
-
-        ViewGroup.LayoutParams layoutParams = alipayConstraintLayout.getLayoutParams();
-
-        layoutParams.width = screenWidth;
-        layoutParams.height = screenHeigh;
-
-        alipayConstraintLayout.setLayoutParams(layoutParams);
-
         ViewUtils.setCompoundRightDrawables(getContext(), tv2, BaseFontAwesome.Icon
                 .icon_right, getResources().getColor(R.color
                 .colorRightTitle), 4f);
@@ -231,7 +204,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         ViewUtils.setCompoundRightDrawables(getContext(), tv3, BaseFontAwesome.Icon
                 .icon_right, getResources().getColor(R.color
                 .colorRightTitle), 4f);
-
 
 
         loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
@@ -248,43 +220,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
 
         mAliPaymentModel = model;
-
-        //判断手机类型
-        primaryDarkConstraintLayout.removeAllViews();
-        if (mAliPaymentModel.getTopToolStyle() == AppConstant.ACTION_10) {
-
-            mPrimaryDarkIosView = PrimaryDarkIosView.build(getActivity());
-            mPrimaryDarkIosView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onTopDateTimeClick();
-                }
-            });
-
-
-            mPrimaryDarkIosView.binder(mAliPaymentModel);
-            primaryDarkConstraintLayout.addView(mPrimaryDarkIosView);
-
-        } else {
-            mBottomNavigationView.setVisibility(View.GONE);
-        }
-
-
-        PrimaryTopTitleIosView primaryTopTitleIosView = PrimaryTopTitleIosView.build
-                (getActivity());
-
-        primaryConstraintLayout.removeAllViews();
-
-        primaryTopTitleIosView.getTvBackHome().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
-            }
-        });
-
-
-        primaryConstraintLayout.addView(primaryTopTitleIosView);
+        mBottomNavigationView.setVisibility(View.GONE);
 
 
         initViewInfo();
@@ -335,8 +271,9 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
             mPrimaryDarkIosView.binder(mAliPaymentModel);
         }
 
-
-        tvOrderNo2.setText(randomOrderNo(time));
+        if (StringUtils.isEmpty(tvOrderNo2.getText().toString())) {
+            tvOrderNo2.setText(randomOrderNo(time));
+        }
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
 
         tvBankHandleTime.setText(tvPaymentTime.getText());
@@ -508,32 +445,31 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
                                 .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                         second);
 
-                if (getDistanceTime(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
-                )) {
+                //判断是否已完成
 
+                Long betweenSecond = TimeUtils.comperHour(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis
+                        ());
 
-                    mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
+                if (mAliPaymentModel.getFinish()) {
 
-                    if (mModelMobileChangeListener != null) {
+                    if (betweenSecond < 0) {
+                        Toast.makeText(getActivity(), "到账成功时间必须大于等于付款成功时间", Toast.LENGTH_SHORT)
+                                .show();
 
-                        mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                        return;
                     }
 
-
-                    if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                        tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
-                                .toString(), TimeUtils.millis2String(calendar
-                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
-                    } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-                        tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
-                                .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
-                    }
 
                 } else {
-                    Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
-                            .show();
 
-                    return;
+                    if (betweenSecond < 3600 * 2) {
+                        Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
+                                .show();
+
+                        return;
+                    }
+
+
                 }
 
                 break;
@@ -772,8 +708,6 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     }
 
 
-
-
     @OnClick(R.id.topConstraintLayout)
     void onChangeBankClick() {
 
@@ -827,7 +761,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
     MobileChangeListener<AliPaymentModel> mModelMobileChangeListener;
 
     public void setMobileChangeListener(MobileChangeListener<AliPaymentModel>
-            modelMobileChangeListener) {
+                                                modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }
 }

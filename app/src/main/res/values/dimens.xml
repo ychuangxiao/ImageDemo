@@ -104,5 +104,5 @@
 
     <dimen name="height_24">24.0dip</dimen>
 
-
+    <dimen name="actionbar_size">24dp</dimen>
 </resources>

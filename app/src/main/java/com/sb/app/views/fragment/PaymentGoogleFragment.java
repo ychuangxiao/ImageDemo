@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.AliPaymentModel;
@@ -349,7 +350,11 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
         }
 
 
-        tvOrderNo2.setText(randomOrderNo(time));
+        if (StringUtils.isEmpty(tvOrderNo2.getText().toString()))
+        {
+            tvOrderNo2.setText(randomOrderNo(time));
+        }
+
         tvPaymentTime.setText(TimeUtils.millis2String(time, TimeUtils.DEFAULT_PATTERN_3));
 
         tvBankHandleTime.setText(tvPaymentTime.getText());
@@ -523,39 +528,51 @@ public class PaymentGoogleFragment extends BaseFragment implements DatePickerDia
 
                 //判断是否已完成
 
-                if (!mAliPaymentModel.getFinish())
+                Long betweenSecond = TimeUtils.comperHour(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis());
+
+                if (mAliPaymentModel.getFinish())
                 {
-                    if (TimeUtils.comperHour(mAliPaymentModel.getPaymentTime(), calendar.getTimeInMillis()
-                    ) < 2) {
+
+                    if (betweenSecond<0)
+                    {
+                        Toast.makeText(getActivity(), "到账成功时间必须大于等于付款成功时间", Toast.LENGTH_SHORT)
+                                .show();
+
+                        return;
+                    }
 
 
-                        mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
+                }
+                else {
 
-                        if (mModelMobileChangeListener != null) {
-
-                            mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
-                        }
-
-
-                        if (tvHandleType.getTag().toString().compareTo("0") == 0) {
-                            tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
-                                    .toString(), TimeUtils.millis2String(calendar
-                                    .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
-                        } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
-                            tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
-                                    .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
-                        }
-
-                    } else {
+                    if (betweenSecond< 3600*2)
+                    {
                         Toast.makeText(getActivity(), "付款成功时间必须比到账成功时间 大2小时！", Toast.LENGTH_SHORT)
                                 .show();
 
                         return;
                     }
+
+
                 }
 
 
+                mAliPaymentModel.setLastTime(calendar.getTimeInMillis());
 
+                if (mModelMobileChangeListener != null) {
+
+                    mModelMobileChangeListener.onItemClickListener(mAliPaymentModel);
+                }
+
+
+                if (tvHandleType.getTag().toString().compareTo("0") == 0) {
+                    tvBankHandleOverTime.setText(String.format(tvBankHandleOverTime.getTag()
+                            .toString(), TimeUtils.millis2String(calendar
+                            .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3)));
+                } else if (tvHandleType.getTag().toString().compareTo("1") == 0) {
+                    tvBankHandleOverTime.setText(TimeUtils.millis2String(calendar
+                            .getTimeInMillis(), TimeUtils.DEFAULT_PATTERN_3));
+                }
 
                 break;
         }

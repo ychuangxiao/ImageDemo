@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.sb.app.R;
@@ -36,7 +39,8 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class PaymentActivity extends BaseActivity implements MobileChangeListener<AliPaymentModel>,TimePickerDialog.OnTimeSetListener {
+public class PaymentActivity extends BaseActivity implements MobileChangeListener<AliPaymentModel>, TimePickerDialog
+        .OnTimeSetListener {
 
 
     @BindView(R.id.topPrimaryDarkContainer)
@@ -46,6 +50,13 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     PrimaryDarkIosView mPrimaryDarkIosView;
     TimePickerDialog mTimePickerDialog;//顶部时间
 
+
+
+    @BindView(R.id.iosBackContainer)
+    LinearLayout iosBackContainer;
+
+    @BindView(R.id.line1)
+    AppCompatTextView topLeftLiine;
     //以上是新添加
 
 
@@ -174,6 +185,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                                     break;
                                 case AppConstant.ACTION_20:
 
+
                                     if (mPaymentGoogleFragment != null) {
 
                                         showFragment(mPaymentGoogleFragment);
@@ -247,8 +259,24 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     @Override
     public void initView() {
 
-        setToolTitle(getString(R.string.title_activity_payment));
+        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(true).setToolTitleGravity(Gravity
+                .LEFT);
 
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+
+                    navigation.setSelectedItemId(R.id.navigation_home);
+                    navigation.setVisibility(View.VISIBLE);
+                    getWindow().clearFlags(
+                            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                } else {
+                    finish();
+                }
+            }
+        });
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -411,18 +439,6 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
     //新添加的
 
-    @OnClick(R.id.tvBackHome)
-    void onBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
-
-            navigation.setSelectedItemId(R.id.navigation_home);
-            navigation.setVisibility(View.VISIBLE);
-            getWindow().clearFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            finish();
-        }
-    }
 
     private void mergerTopStatus() {
         //处理头部
@@ -462,6 +478,20 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
 
         }
+
+        if (aliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
+            mToolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
+            topLeftLiine.setVisibility(View.VISIBLE);
+            iosBackContainer.setVisibility(View.GONE);
+            setToolTitleGravity(Gravity.LEFT);
+        } else {
+            mToolbar.setNavigationIcon(null);
+            topLeftLiine.setVisibility(View.GONE);
+            iosBackContainer.setVisibility(View.VISIBLE);
+
+            setToolTitleGravity(Gravity.CENTER);
+
+        }
     }
 
     void onTopDateTimeClick() {
@@ -493,6 +523,20 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
             mPrimaryDarkView.binder(aliPaymentModel);
         } else {
             mPrimaryDarkIosView.binder(aliPaymentModel);
+        }
+    }
+
+    @OnClick(R.id.iosBackContainer)
+    void onIosBackClick()
+    {
+        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+
+            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setVisibility(View.VISIBLE);
+            getWindow().clearFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            finish();
         }
     }
 }

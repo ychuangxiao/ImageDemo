@@ -16,68 +16,66 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-
         android:layout_width="match_parent"
         android:layout_height="@dimen/web_chat_abc_action_bar_default_height"
         android:background="@color/colorWhite"
         android:minHeight="?attr/actionBarSize"
+        android:minWidth="0dp"
+        android:orientation="vertical"
+
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:theme="@style/AppTheme.AppBarOverlay"
         >
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
+            android:paddingLeft="@dimen/padding_small"
+            android:visibility="gone"
+            android:id="@+id/iosBackContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/tvBackHome"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@mipmap/ali_chat_back_img"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                app:layout_constraintLeft_toLeftOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent"
-                />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_nav_back_w"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/line1"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="10dip"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dip"
-                android:background="#c2c2c2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/tvBackHome"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/topTitle"
-                style="@style/TextView.White.Large"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dip"
-                android:ellipsize="end"
-                android:gravity="left"
-                android:lines="1"
-                android:maxEms="10"
-                android:minEms="10"
-                android:text="账单详情"
-                android:textColor="#272727"
-                android:textSize="@dimen/font_size_15"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/line1"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_gravity="center"
+                android:text="返回"
+                android:textColor="@color/md_light_blue_700"
+                android:textSize="@dimen/font_size_12"/>
+
+        </LinearLayout>
 
 
-                />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/line1"
+            android:layout_width="1dp"
+            android:layout_height="20dip"
+            android:layout_marginRight="10dp"
+            android:background="#c2c2c2"
+
+            />
 
 
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/topTitle"
+
+            style="@style/TextView.White.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="账单详情"
+            android:textColor="#272727"
+            android:textSize="@dimen/font_size_15"
+
+            />
 
 
     </android.support.v7.widget.Toolbar>

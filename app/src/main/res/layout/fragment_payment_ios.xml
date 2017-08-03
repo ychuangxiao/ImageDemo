@@ -20,16 +20,7 @@
             android:layout_height="match_parent"
             android:background="@color/colorWhite">
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/watermarkImageView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:src="@mipmap/ic_watermar"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/primaryDarkConstraintLayout"
@@ -240,14 +231,13 @@
                     </android.support.constraint.ConstraintLayout>
 
                     <android.support.v7.widget.AppCompatTextView
-
+                        android:layout_marginLeft="10dp"
                         android:id="@+id/tvAcceptTime2"
                         style="@style/Google.TextView.Left"
-
+app:layout_constraintLeft_toRightOf="@+id/paymentConstraintLayout"
                         android:text="付款成功"
 
-                        tools:layout_editor_absoluteX="70dp"
-                        tools:layout_editor_absoluteY="0dp"/>
+                         />
 
 
                     <android.support.constraint.ConstraintLayout
@@ -515,7 +505,7 @@
 
                     android:paddingLeft="25dp"
 
-                    android:text="20170611200040011100430042976330"
+                    android:text=""
                     app:layout_constraintLeft_toRightOf="@+id/tvOrderNo"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tvOrderNo"/>

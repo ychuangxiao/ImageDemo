@@ -496,7 +496,7 @@
 
                     android:paddingLeft="25dp"
 
-                    android:text="20170611200040011100430042976330"
+                    android:text=""
                     app:layout_constraintLeft_toRightOf="@+id/tvOrderNo"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tvOrderNo"/>

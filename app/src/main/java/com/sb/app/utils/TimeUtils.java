@@ -490,19 +490,22 @@ public class TimeUtils {
 
         //昨天时间
         Long yesterdayTime;
-        cal.setTimeInMillis(TimeUtils.millis2millis(startMillis, TimeUtils.DEFAULT_PATTERN));
+        cal.setTimeInMillis(TimeUtils.millis2millis(startMillis, TimeUtils.DEFAULT_PATTERN_2));
 
         yesterdayTime = cal.getTimeInMillis();
 
-        cal.setTimeInMillis(TimeUtils.millis2millis(endMillis, TimeUtils.DEFAULT_PATTERN));
+        cal.setTimeInMillis(TimeUtils.millis2millis(endMillis, TimeUtils.DEFAULT_PATTERN_2));
 
         Long time2 = cal.getTimeInMillis();
 
 
         //小时
-        Long betweenHour = (time2 - yesterdayTime) / (1000 * 3600);
+        Long betweenSecond = (time2 - yesterdayTime) / (1000);
 
-        return betweenHour;
+
+
+
+        return betweenSecond;
     }
 }
 
