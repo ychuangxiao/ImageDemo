@@ -7,15 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="18dip"
     android:background="@color/colorWhite"
-     >
+    >
 
 
     <android.support.v7.widget.AppCompatImageView
-
         android:id="@+id/signal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_tiny"
+        android:layout_marginLeft="2dip"
         android:src="@mipmap/ic_ios_top_signal1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,8 +25,8 @@
         android:id="@+id/tvMobileType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="2dip"
         android:text="中国移动"
-
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/ios_top_title_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,6 +86,8 @@
 
 
     <android.support.v7.widget.AppCompatImageView
+        android:paddingTop="4dip"
+        android:paddingBottom="4dip"
         android:id="@+id/tvBlueTeeth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

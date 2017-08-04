@@ -24,6 +24,7 @@ import com.sb.app.views.fragment.PaymentMobileStyleFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
+import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
@@ -153,7 +154,34 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         });
 
         navigation.setSelectedItemId(R.id.navigation_home);
+        setLeftMenu();
     }
+
+
+    /**
+     * 设置抽屉菜单
+     */
+    void setLeftMenu() {
+
+        Float size = 10F;
+        int color = getResources().getColor(R.color.white);
+
+        //用户
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
+
+
+        //业务管理
+        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_content, size);
+
+        //资金账户
+        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
+
+
+    }
+
 
     /**
      * 获得布局视图ID

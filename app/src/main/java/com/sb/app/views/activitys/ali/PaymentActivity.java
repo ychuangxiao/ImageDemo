@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,12 +50,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     TimePickerDialog mTimePickerDialog;//顶部时间
 
 
-
     @BindView(R.id.iosBackContainer)
     LinearLayout iosBackContainer;
+    @BindView(R.id.androidBackContainer)
+    LinearLayout androidBackContainer;
 
-    @BindView(R.id.line1)
-    AppCompatTextView topLeftLiine;
+
     //以上是新添加
 
 
@@ -259,24 +258,10 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     @Override
     public void initView() {
 
-        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(true).setToolTitleGravity(Gravity
+        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(false).setToolTitleGravity(Gravity
                 .LEFT);
 
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
-
-                    navigation.setSelectedItemId(R.id.navigation_home);
-                    navigation.setVisibility(View.VISIBLE);
-                    getWindow().clearFlags(
-                            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                } else {
-                    finish();
-                }
-            }
-        });
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -480,15 +465,16 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         }
 
         if (aliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
-            mToolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
-            topLeftLiine.setVisibility(View.VISIBLE);
+
+
             iosBackContainer.setVisibility(View.GONE);
+            androidBackContainer.setVisibility(View.VISIBLE);
             setToolTitleGravity(Gravity.LEFT);
         } else {
             mToolbar.setNavigationIcon(null);
-            topLeftLiine.setVisibility(View.GONE);
-            iosBackContainer.setVisibility(View.VISIBLE);
 
+            iosBackContainer.setVisibility(View.VISIBLE);
+            androidBackContainer.setVisibility(View.GONE);
             setToolTitleGravity(Gravity.CENTER);
 
         }
@@ -526,9 +512,8 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         }
     }
 
-    @OnClick(R.id.iosBackContainer)
-    void onIosBackClick()
-    {
+    @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
+    void onIosBackClick() {
         if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
 
             navigation.setSelectedItemId(R.id.navigation_home);

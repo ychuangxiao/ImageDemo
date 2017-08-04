@@ -33,6 +33,12 @@ public class Migration implements RealmMigration {
     public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
         RealmSchema schema = realm.getSchema();
 
+        if (oldVersion == 1) {
+            //添加消息接受者
+            schema.get("WebChatMessageRealm")
+                    .addRealmObjectField("sendContact", schema.get("ContactRealm"));
+            oldVersion++;
+        }
 
     }
 }

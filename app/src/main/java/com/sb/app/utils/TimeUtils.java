@@ -389,32 +389,33 @@ public class TimeUtils {
 
 
         //第一步 判断是否是两周外
-        between_days = (time2 - yesterdayTime) / (1000 * 3600 * 24);
+        between_days = (time2 - yesterdayTime) / 1000;//(1000 * 3600 * 24);
 
-        if (between_days > 14) {
+        //是否在两周外
+        if (between_days > 3600 * 24 * 14) {
 
             //都要判断是否大于20分钟
 
             between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
-            if (between_days > 20) {
+            if (between_days > 60 * 20) {
                 return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_8);
             } else {
                 return "";
             }
-        } else if (between_days <= 14 && between_days > 1) {
+        } else if (between_days <= 3600 * 24 * 14 && between_days > 3600 * 24) {
 
             between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
-            if (between_days > 20) {
+            if (between_days > 60 * 20) {
                 return getWeekOfDate(endMillis) + " " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
             } else {
                 return "";
             }
 
 
-        } else if (between_days == 1) {
+        } else if (between_days == 3600 * 24) {
 
             between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
-            if (between_days > 20) {
+            if (between_days > 60 * 20) {
                 return "昨天 " + TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
             } else {
                 return "";
@@ -425,7 +426,7 @@ public class TimeUtils {
 
             between_days = (time2 - time1) / 1000; //(1000 * 60 * 20);//这个值看看是否是大于20分钟
 
-            if (between_days > 20) {
+            if (between_days > 60 * 20) {
                 return TimeUtils.millis2String(endMillis, DEFAULT_PATTERN_4);
             } else {
                 return "";
@@ -501,8 +502,6 @@ public class TimeUtils {
 
         //小时
         Long betweenSecond = (time2 - yesterdayTime) / (1000);
-
-
 
 
         return betweenSecond;

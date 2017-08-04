@@ -177,7 +177,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
                     //是否充电
                     battery.setImageResource(R.drawable.battery_green_black);
                 }
-
+                dischargeImageView.setImageResource(R.mipmap.ic_discharge_black);
                 dischargeImageView.setVisibility(View.VISIBLE);
             } else {
                 dischargeImageView.setVisibility(View.GONE);
@@ -199,7 +199,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
                     signal.setImageResource(R.mipmap.ic_ios_top_signal1);
                     break;
                 case 20:
-                    signal.setImageResource(R.mipmap.ic_ios_top_signal2);
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal1);
                     break;
                 case 30:
                     signal.setImageResource(R.mipmap.ic_ios_top_signal3);
@@ -243,11 +243,22 @@ public class PrimaryDarkIosView extends RelativeLayout {
             topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
             tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
             batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
-
+            dischargeImageView.setImageResource(R.mipmap.ic_discharge_white);
             //是否充电
             if (aliPaymentModel.getBatteryAdd()) {
-                battery.setImageResource(R.drawable.battery_green_white);
+
                 dischargeImageView.setVisibility(View.VISIBLE);
+
+                if (aliPaymentModel.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_white);
+                } else {
+                    //是否充电
+                    battery.setImageResource(R.drawable.battery_green_white);
+                }
+
+
+
             } else {
                 dischargeImageView.setVisibility(View.GONE);
 
@@ -281,19 +292,19 @@ public class PrimaryDarkIosView extends RelativeLayout {
 
             switch (aliPaymentModel.getNetworkType()) {
                 case 10:
-                    tvWifi.setImageResource(R.mipmap.ic_top_network_wifi);
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_wifi);
                     break;
                 case 20:
-                    tvWifi.setImageResource(R.mipmap.ic_top_network_g);
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_g);
                     break;
                 case 30:
-                    tvWifi.setImageResource(R.mipmap.ic_top_network_e);
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_e);
                     break;
                 case 40:
-                    tvWifi.setImageResource(R.mipmap.ic_top_network_3g);
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_3g);
                     break;
                 case 50:
-                    tvWifi.setImageResource(R.mipmap.ic_top_network_4g);
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_4g);
                     break;
             }
             tvLocation.setImageResource(R.mipmap.ic_ios_white_top_location);

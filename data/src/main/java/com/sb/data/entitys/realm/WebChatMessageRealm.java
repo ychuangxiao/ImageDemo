@@ -21,9 +21,10 @@ public class WebChatMessageRealm extends RealmObject {
     private String subMessage;//转账详情
     private Double amount;//金额
     private Integer amountStatus;//转账、红包 状态；ME 已转  对方 已收/未收
-    private ContactRealm mContactRealm;
+    private ContactRealm mContactRealm;//实际操作者（接受者）
     private String sourceMessage;
     private Long sendTime;
+    private ContactRealm sendContact;//发送者
 
     public String getId() {
         return id;
@@ -103,6 +104,14 @@ public class WebChatMessageRealm extends RealmObject {
 
     public void setSubMessage(String subMessage) {
         this.subMessage = subMessage;
+    }
+
+    public ContactRealm getSendContact() {
+        return sendContact;
+    }
+
+    public void setSendContact(ContactRealm sendContact) {
+        this.sendContact = sendContact;
     }
 }
 

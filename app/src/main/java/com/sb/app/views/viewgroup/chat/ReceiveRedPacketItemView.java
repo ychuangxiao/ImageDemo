@@ -92,7 +92,18 @@ public class ReceiveRedPacketItemView extends RelativeLayout {
         }
 
 
-        mTvRedPacketDetails.setText(webChatMessageRealm.getContactRealm().getUserNick() + "领取了你的");
+        //判断下来源
+
+        if (webChatMessageRealm.getContactRealm().isMe())
+        {
+            mTvRedPacketDetails.setText("你领取了"+webChatMessageRealm.getSendContact().getUserNick() + "的");
+
+        }
+        else {
+            mTvRedPacketDetails.setText(webChatMessageRealm.getContactRealm().getUserNick() + "领取了你的");
+
+        }
+
 
 
         return lastSendTime;

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -15,8 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -26,8 +23,6 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.BizComponent;
-import com.sb.app.di.components.DaggerBizComponent;
-import com.sb.app.model.AliPaymentModel;
 import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.model.RedPackedModel;
 import com.sb.app.model.WeChatModel;
@@ -37,7 +32,6 @@ import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
-import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
 import com.sb.app.views.listeners.WeChatMessage2ClickListener;
@@ -47,7 +41,6 @@ import com.sb.app.views.viewgroup.ChatFriendTransferItemView;
 import com.sb.app.views.viewgroup.ChatMeMessageItemView;
 import com.sb.app.views.viewgroup.ChatMeRedPacketItemView;
 import com.sb.app.views.viewgroup.ChatMeTransferItemView;
-import com.sb.app.views.viewgroup.PrimaryDarkView;
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
@@ -445,6 +438,9 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
         if (ArrayUtils.isNotEmpty(mWebChatMessageRealms)) {
             lastSendTime = mWebChatMessageRealms.where().max("sendTime").longValue();
+
+
+            //判断当前时间是否比
         }
 
 
@@ -854,11 +850,14 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                         //说明是我点的
                         if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
 
+                            model.setSendContact(otherContactRealm);
                             webChatMessageRealm.setContactRealm(otherContactRealm);
                         } else {
                             webChatMessageRealm.setContactRealm(meContactRealm);
-                        }
+                            model.setSendContact(meContactRealm);//发红包这个记录的接受者是哪个
 
+                        }
+                        webChatMessageRealm.setSendContact(model.getContactRealm());
                         webChatMessageRealm.setGroupId(mWeChatModel.getGroupId());
                         webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RECEIVE_RED_PACKET);
                         webChatMessageRealm.setSendTime(System.currentTimeMillis());
@@ -886,8 +885,8 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
                 RedPackedDetailsModel model1 = new RedPackedDetailsModel();
 
-                model1.setSendUserId(meContactRealm.getUserId());
-                model1.setReceivedUserId(otherContactRealm.getUserId());
+                model1.setSendUserId(model.getContactRealm().getUserId());
+                model1.setReceivedUserId(model.getSendContact().getUserId());
                 model1.setMessageId(model.getId());
                 model1.setGroupId(model.getGroupId());
                 intent.putExtra(AppConstant.EXTRA_NO, model1);

@@ -58,6 +58,7 @@
     <string name="title_activity_change_face">修改用户信息</string>
     <string name="title_activity_transfer">转账</string>
     <string name="title_activity_red_packets_detail">红包详情</string>
+    <string name="title_activity_friend_red_packets_detail">红包详情</string>
 
 
 </resources>

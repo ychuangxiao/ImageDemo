@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sb.app">
+<manifest package="com.sb.app"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -60,7 +60,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name=".views.webview.ProtocolWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
@@ -142,6 +141,11 @@
             android:name=".views.activitys.tencent.RedPacketsDetailActivity"
             android:label="@string/title_activity_red_packets_detail"
             android:theme="@style/AppTheme.NoActionBar.We.Chat.RedPacket">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.FriendRedPacketsDetailActivity"
+            android:label="@string/title_activity_friend_red_packets_detail"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

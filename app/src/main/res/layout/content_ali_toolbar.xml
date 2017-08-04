@@ -39,8 +39,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@mipmap/ic_nav_back_w"/>
 
             <android.support.v7.widget.AppCompatTextView
@@ -49,19 +49,25 @@
                 android:layout_gravity="center"
                 android:text="返回"
                 android:textColor="@color/md_light_blue_700"
-                android:textSize="@dimen/font_size_12"/>
+                android:textSize="@dimen/font_size_14"/>
 
         </LinearLayout>
+        <LinearLayout
+
+            android:layout_marginRight="4dip"
+            android:id="@+id/androidBackContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/ic_ali_back_main"/>
 
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/line1"
-            android:layout_width="1dp"
-            android:layout_height="20dip"
-            android:layout_marginRight="10dp"
-            android:background="#c2c2c2"
 
-            />
+        </LinearLayout>
 
 
         <TextView

@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sb.app.views.activitys.tencent.WeChatMessageFragment"
-    tools:showIn="@layout/activity_we_chat_message">
+    >
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/recyclerList"
@@ -80,7 +79,7 @@
                 android:paddingBottom="4dip"
                 android:paddingLeft="@dimen/padding_small"
                 android:paddingTop="@dimen/padding_tiny"
-
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="16.0sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/btnModeVoice"
