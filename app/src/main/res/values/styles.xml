@@ -17,11 +17,21 @@
     </style>
 
 
+
+
+    <style name="AppTheme.NoActionBar.Ali" parent="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/silver</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
     <style name="AppTheme.NoActionBar.We.Chat" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -29,8 +39,8 @@
     <style name="AppTheme.NoActionBar.We.Chat.Message" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryForWeChat</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkForWeChat</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -38,8 +48,8 @@
     <style name="AppTheme.NoActionBar.We.Chat.RedPacket" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/md_red_700</item>
-        <item name="colorPrimaryDark">@color/md_red_700</item>
+        <item name="colorPrimary">@color/md_red_packets</item>
+        <item name="colorPrimaryDark">@color/md_red_packets</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -487,7 +497,7 @@
 
         <item name="android:clickable">false</item>
         <item name="android:scaleType">fitXY</item>
-        <item name="android:src">@mipmap/ic_red_packet</item>
+        <item name="android:background">@mipmap/ic_red_packet</item>
         <item name="android:layout_width">29.0dip</item>
         <item name="android:layout_height">34.0dip</item>
         <item name="android:layout_marginTop">0dip</item>

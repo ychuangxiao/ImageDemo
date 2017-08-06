@@ -3,17 +3,27 @@ package com.sb.app.views.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.activitys.tencent.EditWeChatActivity;
 import com.sb.app.views.activitys.tencent.PurseActivity;
 import com.sb.app.views.base.BaseFragment;
 import com.sb.data.entitys.realm.ContactRealm;
 
+import java.io.File;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.realm.Realm;
@@ -42,6 +52,9 @@ public class WeChatMeFragment extends BaseFragment {
     @BindView(R.id.tvWeChatNo)
     AppCompatTextView mTvWeChatNo;
     Unbinder unbinder;
+    @BindView(R.id.noConstraintLayout)
+    ConstraintLayout mNoConstraintLayout;
+    Unbinder unbinder1;
 
 
     private String mParam1;
@@ -89,13 +102,17 @@ public class WeChatMeFragment extends BaseFragment {
                 true).findFirst();
 
         mTvWeChatNick.setText(mContactRealm.getUserNick());
-        mTvWeChatNo.setText(String.format(mTvWeChatNo.getTag().toString(),mContactRealm.getUserNick()));
-
+        mTvWeChatNo.setText(String.format(mTvWeChatNo.getTag().toString(), mContactRealm.getWeChatNo()));
 
 
         if (mContactRealm.isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
+        }
+        else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
+            // 加载本地图片
+            File file = new File(mContactRealm.getImgPath());
+            Glide.with(this).load(file).into(mHeaderImage);
         }
     }
 
@@ -111,4 +128,15 @@ public class WeChatMeFragment extends BaseFragment {
     }
 
 
+    @OnClick(R.id.noConstraintLayout)
+    void onEditClick() {
+        startActivity(new Intent(getActivity(), EditWeChatActivity.class));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        refreshData();
+    }
 }

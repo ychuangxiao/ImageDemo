@@ -52,7 +52,6 @@ public class TextConstant {
     public static final String HEADER_APPLICATION_JSON_VALUE = "application/json";//json类型
 
 
-
     public static final String COLUMN_NAME_FOR_ID = "id";//用户编号
     public static final String COLUMN_NAME_FOR_USERID_CONTACTREALM = "userId";//用户编号
 
@@ -75,6 +74,29 @@ public class TextConstant {
 
     public static final long APP_ACTIVE_20 = 20L;
     public static final long APP_ACTIVE_10 = 10L;
+
+    public static final int TOOL_STYLE_SYSTEM = 1;
+    public static final int TOOL_STYLE_CUSTOMER = 2;
+
+    public static final int MOBILE_VERSION_IOS = 1;
+    public static final int MOBILE_VERSION_ANDROID_4 = 20;
+    public static final int MOBILE_VERSION_ANDROID_5 = 21;
+
+
+    public static final int NETWORK_TYPE_WIFI = 1;
+    public static final int NETWORK_TYPE_G = 2;
+    public static final int NETWORK_TYPE_E = 3;
+    public static final int NETWORK_TYPE_3G = 4;
+    public static final int NETWORK_TYPE_4G = 5;
+
+
+    public static final int NETWORK_SIGNAL_1 = 1;
+    public static final int NETWORK_SIGNAL_2 = 2;
+    public static final int NETWORK_SIGNAL_3 = 3;
+    public static final int NETWORK_SIGNAL_4 = 4;
+    public static final int NETWORK_SIGNAL_5 = 5;
+
+
 
 
 }

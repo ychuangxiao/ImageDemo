@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class RedPackedDetailsModel implements Parcelable {
 
 
+    private String currentUserId;
 
     private String groupId;
     private String messageId;
@@ -52,6 +53,17 @@ public class RedPackedDetailsModel implements Parcelable {
     }
 
 
+    public String getCurrentUserId() {
+        return currentUserId;
+    }
+
+    public void setCurrentUserId(String currentUserId) {
+        this.currentUserId = currentUserId;
+    }
+
+    public RedPackedDetailsModel() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -59,16 +71,15 @@ public class RedPackedDetailsModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.currentUserId);
         dest.writeString(this.groupId);
         dest.writeString(this.messageId);
         dest.writeString(this.sendUserId);
         dest.writeString(this.receivedUserId);
     }
 
-    public RedPackedDetailsModel() {
-    }
-
     protected RedPackedDetailsModel(Parcel in) {
+        this.currentUserId = in.readString();
         this.groupId = in.readString();
         this.messageId = in.readString();
         this.sendUserId = in.readString();

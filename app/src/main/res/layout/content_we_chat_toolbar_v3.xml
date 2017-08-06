@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
+
+    <RelativeLayout
+        android:id="@+id/topPrimaryDarkContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/ios_primary_dark"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="30.0dip"
+        android:background="@color/colorPrimaryForWeChat"
+        android:minHeight="?attr/actionBarSize"
+        android:minWidth="0dp"
+        android:orientation="vertical"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/iosBackContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="6.0dip"
+                    android:paddingLeft="4.0dip"
+
+                    android:paddingTop="6.0dip"
+                    android:src="@mipmap/ic_white_ios_back"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="微信(1000)"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/font_size_12"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/androidBackContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dip"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="0.0dip"
+                    android:paddingLeft="4.0dip"
+                    android:paddingRight="4.0dip"
+                    android:paddingTop="0.0dip"
+                    android:src="@mipmap/ic_white_title_bar_left_back"/>
+
+                <View
+
+                    android:layout_width="1.0dip"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+
+                    android:background="@color/black"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/topTitle"
+                style="@style/TextView.White.Large"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                android:ellipsize="end"
+                android:gravity="center_vertical|center"
+                android:lines="1"
+                android:maxEms="10"
+                android:minEms="10"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="18.0sp"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivSetting"
+                android:padding="1.5dip"
+                android:scaleType="centerInside"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_single_setting"
+                android:layout_width="@dimen/height_top_bar"
+                android:layout_height="@dimen/height_top_bar"/>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

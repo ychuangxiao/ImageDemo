@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:hint="恭喜发财，大吉大利"
             android:inputType="textMultiLine"
-            android:maxLength="50"
+            android:maxLength="30"
             
             android:gravity="top"
             android:lines="3"

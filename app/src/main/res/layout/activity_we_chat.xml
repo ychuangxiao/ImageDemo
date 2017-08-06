@@ -86,7 +86,7 @@
                     android:id="@+id/rdContacts"
                     style="@style/WeChatRadioButton"
                     android:drawableTop="@drawable/wechat_contacts"
-                    android:text="发现"
+                    android:text="通讯录"
 
                     android:textColor="@color/radio_text_view_selector"/>
 
@@ -126,7 +126,7 @@
                     android:id="@+id/rdMe"
                     style="@style/WeChatRadioButton"
                     android:drawableTop="@drawable/wechat_me"
-                    android:text="发现"
+                    android:text="我"
 
                     android:textColor="@color/radio_text_view_selector"/>
 

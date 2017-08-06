@@ -1,0 +1,168 @@
+<android.support.constraint.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context="com.sb.app.views.fragment.tencent.google.ReceiveRedPacketsFragment">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/topLogoImage"
+        android:layout_width="90.0dip"
+        android:layout_height="90.0dip"
+        android:layout_marginTop="46.0dip"
+        android:src="@mipmap/ic_we_chat_transfer_success"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/amountContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:layout_marginTop="16.0dip"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/topLogoImage">
+
+        <TextView
+            android:id="@+id/tvUserNick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+
+            android:gravity="center|center_vertical"
+            android:maxEms="8"
+
+            android:text=""
+            android:textColor="#ff000000"
+            android:textSize="20.0sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
+
+            android:text="已收钱"
+            android:textColor="#ff000000"
+            android:textSize="20.0sp"/>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvTransferAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3.5dip"
+        android:includeFontPadding="false"
+        android:text="￥22.99"
+        android:textColor="#ff000000"
+        android:textSize="50.0sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountContainer"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3.0dip"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTransferAmount">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvConfirmMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="已存入你的"
+            android:textColor="#ff808080"
+            android:textSize="14.0sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            android:id="@+id/tvOtherMessage"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="零钱"
+            android:textColor="#ff7a93af"
+            android:textSize="14.0sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dip"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/receiveContainer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转账时间： "
+            android:textColor="#ff808080"
+            android:textSize="14.0sp"/>
+
+        <TextView
+            android:id="@+id/tvTransferTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-5-1 23:47"
+            android:textColor="#ff808080"
+            android:textSize="14.0sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/receiveContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12.0dip"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到账时间： "
+            android:textColor="#ff808080"
+            android:textSize="14.0sp"/>
+
+        <TextView
+            android:id="@+id/tvReceiveTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-5-1 23:47"
+            android:textColor="#ff808080"
+            android:textSize="14.0sp"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -8,12 +8,15 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,9 +104,10 @@ public class ChatHomeItemView extends RelativeLayout {
                 mAvatarImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                         .getImageIndex()]);
             }
-            else {
-                //根据头像设置
-                mAvatarImage.setImageResource(R.mipmap.ic_default_nor_avatar);
+            else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
+                // 加载本地图片
+                File file = new File(mContactRealm.getImgPath());
+                Glide.with(mContext).load(file).into(mAvatarImage);
             }
 
         }

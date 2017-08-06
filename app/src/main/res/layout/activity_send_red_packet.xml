@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.sb.app.views.activitys.tencent.SendRedPacketActivity">
 
-    <include layout="@layout/content_we_chat_toolbar"/>
+    <include layout="@layout/content_we_chat_toolbar_red_packet"/>
 
 
     <include layout="@layout/content_send_red_packet"/>

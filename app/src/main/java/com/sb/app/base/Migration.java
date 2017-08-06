@@ -1,5 +1,7 @@
 package com.sb.app.base;
 
+import com.sb.data.constant.TextConstant;
+
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;
 import io.realm.RealmSchema;
@@ -36,9 +38,37 @@ public class Migration implements RealmMigration {
         if (oldVersion == 1) {
             //添加消息接受者
             schema.get("WebChatMessageRealm")
+
+                    .addField("sendTransferTime", Long.class)
+                    .addField("receiveTransferTime", Long.class)
                     .addRealmObjectField("sendContact", schema.get("ContactRealm"));
+
+
+            schema.get("ContactRealm")
+                    .addField("weChatNo", String.class);
+
+
+            //手机外观
+
+            schema.create("MobileStyleRealm")
+                    .addField("topStatusColor", Integer.class)
+                    .addField("topToolStyle", Integer.class)
+                    .addField("mobileVersion", Integer.class)
+                    .addField("networkType", Integer.class)
+                    .addField("networkSignal", Integer.class)
+                    .addField("mobileCarrier", String.class)
+                    .addField("topTime", Long.class)
+                    .addField("date24TimeStyle", Boolean.class)
+                    .addField("isLocation", Boolean.class)
+                    .addField("isBlueTeeth", Boolean.class)
+                    .addField("isBatteryNum", Boolean.class)
+                    .addField("isBatteryAdd", Boolean.class)
+                    .addField("isDir", Boolean.class)
+                    .addField("batteryNumBar", Integer.class);
+
             oldVersion++;
         }
+
 
     }
 }

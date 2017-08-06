@@ -7,7 +7,13 @@
     android:background="#fff1f1f1"
     android:theme="@style/AppTheme.AppBarOverlay">
 
-    <include layout="@layout/google_primary_dark"/>
+    <RelativeLayout
+        android:id="@+id/topPrimaryDarkContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/ios_primary_dark"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,27 +26,104 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/web_chat_abc_action_bar_default_height"
+                android:layout_width="match_parent"
+
+
+                android:layout_height="48.0dip"
                 android:background="@color/transparent"
+
                 android:minHeight="?attr/actionBarSize"
+                android:minWidth="0dp"
+                android:orientation="vertical"
+
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:theme="@style/AppTheme.AppBarOverlay"
+
                 >
 
-                <TextView
-                    android:id="@+id/topTitle"
-                    style="@style/TextView.White.Large"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/iosBackContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingBottom="6.0dip"
+                            android:paddingLeft="4.0dip"
+
+                            android:paddingTop="6.0dip"
+                            android:src="@mipmap/ic_red_packets_back"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="返回"
+                            android:textColor="#ffffcba0"
+                            android:textSize="@dimen/font_size_12"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/androidBackContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dip"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingBottom="0.0dip"
+                            android:paddingLeft="4.0dip"
+                            android:paddingRight="4.0dip"
+                            android:paddingTop="0.0dip"
+                            android:src="@mipmap/ic_red_packets_title_bar_left_back"/>
+
+                        <View
+
+                            android:layout_width="1.0dip"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+
+                            android:background="#ffffe2b1"/>
+
+                    </LinearLayout>
 
 
-                    android:text="微信"
-                    android:textSize="@dimen/font_size_medium"
+                    <TextView
+                        android:id="@+id/topTitle"
+                        style="@style/TextView.White.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
 
-                    />
+                        android:paddingLeft="55dp"
+                        android:text="红包详情"
+
+                        android:textColor="#ffffcba0"
+                        android:textSize="18.0sp"/>
+                </RelativeLayout>
 
 
             </android.support.v7.widget.Toolbar>
@@ -48,16 +131,34 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/avatarImage"
+        <RelativeLayout
             android:layout_width="62.0dip"
             android:layout_height="62.0dip"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_default_nor_avatar"
+            android:layout_gravity="bottom|center"
 
-            />
+            android:background="@drawable/bg_filletavtar_redpackets">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/avatarImage"
+                android:layout_width="58.5dip"
+                android:layout_height="58.5dip"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_default_nor_avatar"
+                app:riv_border_color="@color/transparent"
+                app:riv_border_width="0dip"
+                app:riv_corner_radius="4dip"
+                app:riv_mutate_background="true"
+
+                app:riv_tile_mode="repeat"
+
+                />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

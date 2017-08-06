@@ -1,4 +1,4 @@
-package com.sb.app.views.viewgroup;
+package com.sb.app.views.viewgroup.ios;
 
 
 import android.content.Context;
@@ -8,12 +8,17 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
+import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.listeners.WeChatMessage2ClickListener;
+import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 文件名称：{@link HomeItemView}
  * <br/>
- * 功能描述：朋友发的红包
+ * 功能描述：我发的转账
  * <br/>
  * 创建作者：administrator
  * <br/>
@@ -34,8 +39,7 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatFriendRedPacketItemView extends RelativeLayout {
-
+public class ChatMeRedPacketIosItemView extends RelativeLayout {
 
     @BindView(R.id.tvChatDateTime)
     AppCompatTextView mTvChatDateTime;
@@ -45,9 +49,9 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     AppCompatImageView mIvRed;
     @BindView(R.id.tvRedPacketsDesc)
     AppCompatTextView tvRedPacketsDesc;
-
     @BindView(R.id.redPackedConstraintLayout)
     ConstraintLayout mRedPackedConstraintLayout;
+
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -58,13 +62,13 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatFriendRedPacketItemView build(Context context) {
-        ChatFriendRedPacketItemView instance = new ChatFriendRedPacketItemView(context);
+    public static ChatMeRedPacketIosItemView build(Context context) {
+        ChatMeRedPacketIosItemView instance = new ChatMeRedPacketIosItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatFriendRedPacketItemView(Context context) {
+    public ChatMeRedPacketIosItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -78,8 +82,8 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
         mChatMessageRealm = webChatMessageRealm;
-
-        if (isFirst) {
+        mTvChatDateTime.setVisibility(View.GONE);
+        /*if (isFirst) {
 
             if (lastSendTime < 1L) {
                 mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
@@ -103,8 +107,7 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
             mTvChatDateTime.setVisibility(View.VISIBLE);
 
             lastSendTime = webChatMessageRealm.getSendTime();
-        }
-
+        }*/
 
         tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
 
@@ -112,7 +115,22 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
         }
+        else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+            // 加载本地图片
+            File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
+            Glide.with(mContext).load(file).into(mHeaderImage);
+        }
 
+        mIvRed.setBackground(null);
+        if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y)
+        {
+            mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
+            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_right_default);
+        }
+        else {
+            mIvRed.setBackgroundResource(R.mipmap.ic_red_packet_small);
+            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+        }
 
         return lastSendTime;
     }
@@ -128,11 +146,12 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_redpacket_we_chat, this);
+            inflate(getContext(), R.layout.row_redpacket_right_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
+
 
     WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 

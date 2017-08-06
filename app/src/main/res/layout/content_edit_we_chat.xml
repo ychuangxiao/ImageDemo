@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sb.app.views.activitys.tencent.EditWeChatActivity"
+    tools:showIn="@layout/activity_edit_we_chat">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_selected"
+        android:clickable="true"
+        android:padding="@dimen/padding_small"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/WeChatTextView.NoBackground"
+            android:layout_width="wrap_content"
+            android:width="70dip"
+            android:paddingLeft="0dp"
+            android:text="头像"
+
+            />
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/headerImage"
+            android:layout_width="33.0dip"
+            android:layout_height="33.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+
+            android:clickable="false"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_default_nor_avatar"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:background="#ffd9d9d9"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_selected"
+        android:clickable="true"
+        android:padding="@dimen/padding_small"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvLeftNick"
+            style="@style/WeChatTextView.NoBackground"
+            android:layout_width="wrap_content"
+            android:width="70dip"
+            android:paddingLeft="0dp"
+            android:text="昵称"
+
+            />
+
+
+        <com.sb.app.views.widget.ClearEditText
+            android:drawablePadding="@dimen/padding_small"
+            android:id="@+id/etFriendName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/tvLeftNick"
+            android:background="@null"
+            android:clickable="false"
+            android:gravity="right"
+            android:maxLength="10"
+            android:padding="@dimen/padding_tiny"
+           />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:background="#ffd9d9d9"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_selected"
+        android:clickable="true"
+        android:padding="@dimen/padding_small"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvLeftWeChatNo"
+            style="@style/WeChatTextView.NoBackground"
+            android:layout_width="wrap_content"
+            android:width="70dip"
+            android:paddingLeft="0dp"
+            android:text="微信号"
+
+            />
+
+
+        <com.sb.app.views.widget.ClearEditText
+            android:drawablePadding="@dimen/padding_small"
+            android:id="@+id/etWeChatNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/tvLeftWeChatNo"
+            android:background="@null"
+            android:clickable="false"
+            android:gravity="right"
+            android:inputType="text"
+            android:maxLength="10"
+            android:padding="@dimen/padding_tiny"
+            android:src="@mipmap/ic_default_nor_avatar"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:background="#ffd9d9d9"
+        />
+
+
+</LinearLayout>

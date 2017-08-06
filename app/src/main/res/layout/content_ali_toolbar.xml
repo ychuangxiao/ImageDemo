@@ -11,85 +11,102 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/google_primary_dark"/>
+        <include layout="@layout/ios_primary_dark"/>
     </RelativeLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/web_chat_abc_action_bar_default_height"
+        android:layout_height="30.0dip"
         android:background="@color/colorWhite"
         android:minHeight="?attr/actionBarSize"
         android:minWidth="0dp"
-        android:orientation="vertical"
-
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:theme="@style/AppTheme.AppBarOverlay"
         >
 
-        <LinearLayout
-            android:paddingLeft="@dimen/padding_small"
-            android:visibility="gone"
-            android:id="@+id/iosBackContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/ic_nav_back_w"/>
-
-            <android.support.v7.widget.AppCompatTextView
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/padding_small"
+                android:visibility="visible"
+                android:id="@+id/iosBackContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="返回"
-                android:textColor="@color/md_light_blue_700"
-                android:textSize="@dimen/font_size_14"/>
+                android:orientation="horizontal">
 
-        </LinearLayout>
-        <LinearLayout
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/ic_nav_back_w"/>
 
-            android:layout_marginRight="4dip"
-            android:id="@+id/androidBackContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="返回"
+                    android:textColor="@color/md_light_blue_700"
+                    android:textSize="@dimen/font_size_14"/>
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@mipmap/ic_ali_back_main"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+android:visibility="gone"
+                android:id="@+id/androidBackContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="0.0dip"
+                    android:paddingLeft="4.0dip"
+                    android:paddingRight="4.0dip"
+                    android:paddingTop="0.0dip"
+                    android:src="@mipmap/ic_blue_title_bar_left_back"/>
+
+                <View
+
+                    android:layout_width="1.0dip"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+
+                    android:background="@color/silver"/>
 
 
 
-        </LinearLayout>
+            </LinearLayout>
 
+            <TextView
+                android:id="@+id/topTitle"
+                style="@style/TextView.White.Large"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
 
-        <TextView
-            android:id="@+id/topTitle"
+                android:gravity="center_vertical|center"
+                android:lines="1"
+                android:maxEms="10"
+                android:minEms="10"
 
-            style="@style/TextView.White.Large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="账单详情"
-            android:textColor="#272727"
-            android:textSize="@dimen/font_size_15"
+                android:text="@string/app_name"
+                android:textColor="#272727"
+                android:textSize="16.0sp"/>
 
-            />
+        </RelativeLayout>
 
 
     </android.support.v7.widget.Toolbar>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/topLine"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#d5d3d3"
-        />
 </android.support.design.widget.AppBarLayout>

@@ -15,6 +15,8 @@ import com.sb.app.constant.AppConstant;
 import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
+import com.sb.data.constant.TextConstant;
+import com.sb.data.entitys.realm.MobileStyleRealm;
 
 import java.util.Calendar;
 
@@ -95,6 +97,229 @@ public class PrimaryDarkIosView extends RelativeLayout {
     }
 
     String ampmText;
+
+
+    public void binder(MobileStyleRealm mobileStyleRealm) {
+        if (!mobileStyleRealm.getDate24TimeStyle()) {
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(TimeUtils.millis2millis(mobileStyleRealm.getTopTime(),
+                    TimeUtils.DEFAULT_PATTERN));
+            int apm = mCalendar.get(Calendar.AM_PM);
+
+
+            int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+
+            if (hour < 1) {
+                ampmText = "午夜 ";
+            } else if (hour < 12) {
+                ampmText = "上午 ";
+            } else if (hour < 13) {
+                ampmText = "中午 ";
+            } else {
+                ampmText = "下午 ";
+            }
+
+
+            if (apm == 1) {
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis
+                        (), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
+
+            } else {
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis
+                        (), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
+            }
+        } else {
+            topDateTime.setText(TimeUtils.millis2String(mobileStyleRealm.getTopTime(), TimeUtils
+                    .DEFAULT_PATTERN_4));
+        }
+
+
+        if (mobileStyleRealm.getDir()) {
+            tvDir.setVisibility(View.VISIBLE);
+        } else {
+            tvDir.setVisibility(View.GONE);
+        }
+
+        if (mobileStyleRealm.getLocation()) {
+            tvLocation.setVisibility(View.VISIBLE);
+        } else {
+            tvLocation.setVisibility(View.GONE);
+        }
+
+
+        if (mobileStyleRealm.getBlueTeeth()) {
+            tvBlueTeeth.setVisibility(View.VISIBLE);
+        } else {
+            tvBlueTeeth.setVisibility(View.GONE);
+        }
+        if (mobileStyleRealm.getBatteryNum()) {
+            batteryNum.setText(String.valueOf(mobileStyleRealm.getBatteryNumBar()) + "%");
+            batteryNum.setVisibility(View.VISIBLE);
+        } else {
+            batteryNum.setVisibility(View.GONE);
+        }
+
+
+        //判断是白色 还是 黑色
+
+        if (mobileStyleRealm.getTopStatusColor() == R.color.colorWhite) {
+
+
+            mTopStatusContainer.setBackground(mContext.getResources().getDrawable(R.color.colorWhite));
+
+            if (mobileStyleRealm.getBatteryAdd()) {
+
+                if (mobileStyleRealm.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_black);
+                } else {
+                    //是否充电
+                    battery.setImageResource(R.drawable.battery_green_black);
+                }
+                dischargeImageView.setImageResource(R.mipmap.ic_discharge_black);
+                dischargeImageView.setVisibility(View.VISIBLE);
+            } else {
+                dischargeImageView.setVisibility(View.GONE);
+
+
+                if (mobileStyleRealm.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_black);
+                } else {
+                    battery.setImageResource(R.drawable.battery_black);
+                }
+
+
+            }
+
+
+            switch (mobileStyleRealm.getNetworkSignal()) {
+                case TextConstant.NETWORK_SIGNAL_1:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal1);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_2:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal1);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_3:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal3);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_4:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal4);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_5:
+                    signal.setImageResource(R.mipmap.ic_ios_top_signal5);
+                    break;
+            }
+            switch (mobileStyleRealm.getNetworkType()) {
+                case TextConstant.NETWORK_TYPE_WIFI:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_wifi);
+                    break;
+                case TextConstant.NETWORK_TYPE_G:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_g);
+                    break;
+                case TextConstant.NETWORK_TYPE_E:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_e);
+                    break;
+                case TextConstant.NETWORK_TYPE_3G:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_3g);
+                    break;
+                case TextConstant.NETWORK_TYPE_4G:
+                    tvWifi.setImageResource(R.mipmap.ic_top_black_network_4g);
+                    break;
+            }
+            tvLocation.setImageResource(R.mipmap.ic_ios_top_location);
+            tvDir.setImageResource(R.mipmap.ic_ios_top_dir);
+            tvBlueTeeth.setImageResource(R.mipmap.ic_ios_top_blueth);
+
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
+
+        } else {
+
+
+
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            dischargeImageView.setImageResource(R.mipmap.ic_discharge_white);
+            //是否充电
+            if (mobileStyleRealm.getBatteryAdd()) {
+
+                dischargeImageView.setVisibility(View.VISIBLE);
+
+                if (mobileStyleRealm.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_white);
+                } else {
+                    //是否充电
+                    battery.setImageResource(R.drawable.battery_green_white);
+                }
+
+
+            } else {
+                dischargeImageView.setVisibility(View.GONE);
+
+                //小于20 显示红色
+                if (mobileStyleRealm.getBatteryNumBar() < 20) {
+
+                    battery.setImageResource(R.drawable.battery_red_white);
+                } else {
+                    battery.setImageResource(R.drawable.battery_white);
+                }
+
+            }
+            switch (mobileStyleRealm.getNetworkSignal()) {
+                case TextConstant.NETWORK_SIGNAL_1:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal1);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_2:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal1);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_3:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal3);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_4:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal4);
+                    break;
+                case TextConstant.NETWORK_SIGNAL_5:
+                    signal.setImageResource(R.mipmap.ic_ios_white_top_signal5);
+                    break;
+            }
+            switch (mobileStyleRealm.getNetworkType()) {
+                case TextConstant.NETWORK_TYPE_WIFI:
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_wifi);
+                    break;
+                case TextConstant.NETWORK_TYPE_G:
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_g);
+                    break;
+                case TextConstant.NETWORK_TYPE_E:
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_e);
+                    break;
+                case TextConstant.NETWORK_TYPE_3G:
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_3g);
+                    break;
+                case TextConstant.NETWORK_TYPE_4G:
+                    tvWifi.setImageResource(R.mipmap.ic_ios_white_top_network_4g);
+                    break;
+            }
+            tvLocation.setImageResource(R.mipmap.ic_ios_white_top_location);
+            tvDir.setImageResource(R.mipmap.ic_ios_white_top_dir);
+            tvBlueTeeth.setImageResource(R.mipmap.ic_ios_white_top_blueth);
+        }
+
+        mTopStatusContainer.setBackground(mContext.getResources().getDrawable(mobileStyleRealm.getTopStatusColor()));
+        LayerDrawable layerDrawableTest = (LayerDrawable) battery.getDrawable();
+        clipDrawableTest = (ClipDrawable) layerDrawableTest
+                .findDrawableByLayerId(R.id.clipDrawable);
+
+
+        clipDrawableTest.setLevel(calculateLevel(mobileStyleRealm.getBatteryNumBar()));
+
+        tvMobileType.setText(mobileStyleRealm.getMobileCarrier());
+    }
 
     public void binder(BaseMobileModel aliPaymentModel) {
 
@@ -232,17 +457,17 @@ public class PrimaryDarkIosView extends RelativeLayout {
             tvDir.setImageResource(R.mipmap.ic_ios_top_dir);
             tvBlueTeeth.setImageResource(R.mipmap.ic_ios_top_blueth);
 
-            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
-            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
-            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorBlack ));
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
 
         } else {
 
 
-            mTopStatusContainer.setBackground(mContext.getResources().getDrawable(R.color.colorPrimaryForWeChat ));
-            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
-            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
-            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorWhite ));
+            mTopStatusContainer.setBackground(mContext.getResources().getDrawable(R.color.colorPrimaryForWeChat));
+            topDateTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            tvMobileType.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            batteryNum.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
             dischargeImageView.setImageResource(R.mipmap.ic_discharge_white);
             //是否充电
             if (aliPaymentModel.getBatteryAdd()) {
@@ -256,7 +481,6 @@ public class PrimaryDarkIosView extends RelativeLayout {
                     //是否充电
                     battery.setImageResource(R.drawable.battery_green_white);
                 }
-
 
 
             } else {
@@ -311,6 +535,7 @@ public class PrimaryDarkIosView extends RelativeLayout {
             tvDir.setImageResource(R.mipmap.ic_ios_white_top_dir);
             tvBlueTeeth.setImageResource(R.mipmap.ic_ios_white_top_blueth);
         }
+
 
 
         LayerDrawable layerDrawableTest = (LayerDrawable) battery.getDrawable();

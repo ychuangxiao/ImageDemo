@@ -63,6 +63,7 @@
                     android:paddingLeft="6.0dip">
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:paddingRight="6.0dip"
                         android:id="@+id/tvTransferExplain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

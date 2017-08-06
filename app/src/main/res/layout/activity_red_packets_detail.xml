@@ -7,10 +7,42 @@
     android:layout_height="match_parent"
     tools:context="com.sb.app.views.activitys.tencent.RedPacketsDetailActivity">
 
+
     <include layout="@layout/content_we_chat_red_packet_toolbar"/>
 
-    <include layout="@layout/content_red_packets_detail"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff4f4f4"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <FrameLayout
+            android:id="@+id/content"
 
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
 
+        </FrameLayout>
 
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation_red_packet"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/watermarkImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_watermar"
+        android:visibility="visible"
+        />
 </android.support.design.widget.CoordinatorLayout>

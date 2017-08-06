@@ -286,7 +286,7 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/relativeLayout6"
+                    android:id="@+id/sendTimeRelativeLayout"
                     style="@style/Purse.RelativeLayout.Server"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
@@ -312,7 +312,7 @@
                     style="@style/Purse.RelativeLayout.Server"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintLeft_toRightOf="@+id/relativeLayout6"
+                    app:layout_constraintLeft_toRightOf="@+id/sendTimeRelativeLayout"
                     app:layout_constraintRight_toLeftOf="@+id/relativeLayout8"
                     app:layout_constraintTop_toTopOf="parent"
                     >
@@ -398,14 +398,5 @@
     </android.support.constraint.ConstraintLayout>
 
 
-    <android.support.v7.widget.AppCompatImageView
 
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@mipmap/ic_watermar"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>

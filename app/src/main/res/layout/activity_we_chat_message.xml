@@ -8,7 +8,7 @@
     tools:context="com.sb.app.views.activitys.tencent.WeChatMessageActivity">
 
 
-    <include layout="@layout/content_screen_we_chat_toolbar"/>
+    <include layout="@layout/content_we_chat_toolbar_v3"/>
 
 
     <LinearLayout
@@ -38,8 +38,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation"/>
+            app:menu="@menu/navigation_red_packet"/>
 
     </LinearLayout>
-
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/watermarkImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_watermar"
+        android:visibility="visible"
+        />
 </android.support.design.widget.CoordinatorLayout>

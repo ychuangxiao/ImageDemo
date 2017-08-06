@@ -155,7 +155,7 @@ android {
 dependencies {
     def appDependencies = rootProject.ext.appDependencies
     def appTestDependencies = rootProject.ext.appTestDependencies
-    
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -200,6 +200,12 @@ dependencies {
     compile appDependencies.supportv4
     compile appDependencies.constraint
     compile appDependencies.swipeToLoadLayout
+
+    compile 'com.makeramen:roundedimageview:2.3.0'
+
+
+    compile appDependencies.glide
+
 
 
 }

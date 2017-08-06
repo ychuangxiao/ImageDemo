@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 import com.sb.app.R;
 import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
+import com.sb.data.constant.TextConstant;
+import com.sb.data.entitys.realm.MobileStyleRealm;
 
 import java.util.Calendar;
 
@@ -68,6 +70,164 @@ public class PrimaryDarkView extends RelativeLayout {
     }
 
     String ampmText;
+
+
+    public void binder(MobileStyleRealm mobileStyleRealm)
+    {
+        if (!mobileStyleRealm.getDate24TimeStyle()) {
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(TimeUtils.millis2millis(mobileStyleRealm.getTopTime(), TimeUtils.DEFAULT_PATTERN));
+            int apm = mCalendar.get(Calendar.AM_PM);
+
+
+            int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+
+            if (hour < 1) {
+                ampmText = "午夜 ";
+            } else if (hour < 12) {
+                ampmText = "上午 ";
+            } else if (hour < 13) {
+                ampmText = "中午 ";
+            } else {
+                ampmText = "下午 ";
+            }
+
+
+            if (apm == 1) {
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
+
+            } else {
+                topDateTime.setText(ampmText + TimeUtils.millis2String(mCalendar.getTimeInMillis(), TimeUtils
+                        .DEFAULT_PATTERN_4_1));
+            }
+        } else {
+            topDateTime.setText(TimeUtils.millis2String(mobileStyleRealm.getTopTime(), TimeUtils.DEFAULT_PATTERN_4));
+        }
+
+
+        switch (mobileStyleRealm.getNetworkType()) {
+            case TextConstant.NETWORK_TYPE_WIFI:
+                tvWifi.setImageResource(R.mipmap.ic_top_network_wifi);
+                break;
+            case TextConstant.NETWORK_TYPE_G:
+                tvWifi.setImageResource(R.mipmap.ic_top_network_g);
+                break;
+            case TextConstant.NETWORK_TYPE_E:
+                tvWifi.setImageResource(R.mipmap.ic_top_network_e);
+                break;
+            case TextConstant.NETWORK_TYPE_3G:
+                tvWifi.setImageResource(R.mipmap.ic_top_network_3g);
+                break;
+            case TextConstant.NETWORK_TYPE_4G:
+                tvWifi.setImageResource(R.mipmap.ic_top_network_4g);
+                break;
+        }
+
+
+        switch (mobileStyleRealm.getNetworkSignal()) {
+            case TextConstant.NETWORK_SIGNAL_1:
+                signal.setImageResource(R.mipmap.ic_top_signal1);
+                break;
+            case TextConstant.NETWORK_SIGNAL_2:
+                signal.setImageResource(R.mipmap.ic_top_signal2);
+                break;
+            case TextConstant.NETWORK_SIGNAL_3:
+                signal.setImageResource(R.mipmap.ic_top_signal3);
+                break;
+            case TextConstant.NETWORK_SIGNAL_4:
+                signal.setImageResource(R.mipmap.ic_top_signal4);
+                break;
+            case TextConstant.NETWORK_SIGNAL_5:
+                signal.setImageResource(R.mipmap.ic_top_signal5);
+                break;
+        }
+
+
+        switch (mobileStyleRealm.getBatteryNumBar()) {
+            case 0:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_0);
+                break;
+            case 4:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_4);
+                break;
+
+            case 8:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_8);
+                break;
+            case 12:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_12);
+                break;
+            case 16:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_16);
+                break;
+            case 20:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_20);
+                break;
+            case 24:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_24);
+                break;
+            case 28:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_28);
+                break;
+            case 32:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_32);
+                break;
+            case 36:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_36);
+                break;
+            case 40:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_40);
+                break;
+            case 44:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_44);
+                break;
+
+            case 48:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_48);
+                break;
+            case 52:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_52);
+                break;
+            case 56:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_56);
+                break;
+            case 60:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_60);
+                break;
+            case 64:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_64);
+                break;
+
+            case 68:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_68);
+                break;
+            case 72:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_72);
+                break;
+            case 76:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_76);
+                break;
+            case 80:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_80);
+                break;
+            case 84:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_84);
+                break;
+            case 88:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_88);
+                break;
+            case 92:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_92);
+                break;
+            case 96:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_96);
+                break;
+            case 100:
+                tvBattery.setImageResource(R.mipmap.ic_top_batery_100);
+                break;
+        }
+    }
 
     public void binder(BaseMobileModel aliPaymentModel) {
 

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedModel;
@@ -15,6 +18,7 @@ import com.sb.app.views.widget.ClearEditText;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
 
+import java.io.File;
 import java.math.BigDecimal;
 
 import butterknife.BindView;
@@ -35,7 +39,8 @@ public class TransferActivity extends BaseActivity {
     AppCompatTextView mTvRemark;
     @BindView(R.id.tvHandleRemark)
     AppCompatTextView mTvHandleRemark;
-
+    @BindView(R.id.watermarkImageView)
+    AppCompatImageView watermarkImageView;
 
     Realm mRealm;
 
@@ -48,6 +53,17 @@ public class TransferActivity extends BaseActivity {
     @Override
     public void initView() {
         injectExtras();
+
+
+        if (getApplicationComponent().context()
+                .sharedpreferences.Watermark().get()) {
+
+
+            watermarkImageView.setVisibility(View.VISIBLE);
+        } else {
+            watermarkImageView.setVisibility(View.GONE);
+        }
+
 
         mRealm = Realm.getDefaultInstance();
 
@@ -63,6 +79,11 @@ public class TransferActivity extends BaseActivity {
         if (mContactRealm.isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
+        }
+        else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
+            // 加载本地图片
+            File file = new File(mContactRealm.getImgPath());
+            Glide.with(this).load(file).into(mHeaderImage);
         }
     }
 

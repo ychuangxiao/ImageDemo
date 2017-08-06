@@ -43,7 +43,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutInfo"
-                android:layout_width="218.0dip"
+                android:layout_width="match_parent"
                 android:layout_height="60.0dip"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -62,6 +62,7 @@
                     android:paddingLeft="6.0dip">
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:paddingRight="6.0dip"
                         android:id="@+id/tvTransferExplain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

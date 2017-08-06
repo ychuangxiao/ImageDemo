@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.sb.app"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.sb.app">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -58,7 +58,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_payment"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.Ali">
         </activity>
         <activity
             android:name=".views.webview.ProtocolWebViewActivity"
@@ -121,7 +121,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_send_red_packet"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+            android:theme="@style/AppTheme.NoActionBar.We.Chat.RedPacket">
         </activity>
         <activity
             android:name=".views.activitys.tencent.ChangeFaceActivity"
@@ -145,6 +145,21 @@
         <activity
             android:name=".views.activitys.tencent.FriendRedPacketsDetailActivity"
             android:label="@string/title_activity_friend_red_packets_detail"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat.RedPacket">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.transfer.TransferConfirmActivity"
+            android:label="@string/title_activity_transfer_confirm"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.transfer.TransferSuccessActivity"
+            android:label="@string/title_activity_transfer_success"
+            android:theme="@style/AppTheme.NoActionBar.We.Chat">
+        </activity>
+        <activity
+            android:name=".views.activitys.tencent.EditWeChatActivity"
+            android:label="@string/title_activity_edit_we_chat"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

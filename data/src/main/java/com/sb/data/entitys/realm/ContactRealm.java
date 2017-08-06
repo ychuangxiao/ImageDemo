@@ -15,6 +15,8 @@ public class ContactRealm extends RealmObject {
     @PrimaryKey
     private String userId;
 
+    private  String weChatNo;
+
     private int imageIndex;
     private boolean isSystem = false;
 
@@ -66,5 +68,13 @@ public class ContactRealm extends RealmObject {
 
     public void setSystem(boolean system) {
         isSystem = system;
+    }
+
+    public String getWeChatNo() {
+        return weChatNo;
+    }
+
+    public void setWeChatNo(String weChatNo) {
+        this.weChatNo = weChatNo;
     }
 }

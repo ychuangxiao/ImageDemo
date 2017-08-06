@@ -9,26 +9,27 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-
         android:layout_width="match_parent"
-        android:layout_height="@dimen/web_chat_abc_action_bar_default_height"
+        android:layout_height="48.0dip"
         android:background="@color/colorPrimaryForWeChat"
         android:minHeight="?attr/actionBarSize"
+        android:minWidth="0dp"
+        android:orientation="vertical"
+        app:contentInsetStart="6dp"
+        app:contentInsetStartWithNavigation="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:theme="@style/AppTheme.AppBarOverlay"
         >
 
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:id="@+id/topTitle"
             style="@style/TextView.White.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:lines="1"
-            android:maxEms="10"
-            android:minEms="10"
-            android:text="微信"
+            android:gravity="center"
+            android:text="@string/app_name"
             android:textSize="@dimen/font_size_medium"
 
             />

@@ -6,7 +6,7 @@
 
 
 
-    <color name="colorPrimaryDarkForWeChat">@color/colorPrimaryForWeChat</color>
+    <color name="colorPrimaryDarkForWeChat">#303135</color>
     <color name="colorPrimaryForWeChat">#393a3e</color>
 
     <color name="colorLeftTitle">#686666</color>
@@ -140,6 +140,9 @@
 
 
     <!--reds-->
+    <color name="md_red_packets">#d84e43</color>
+
+
     <color name="md_red_50">#fde0dc</color>
     <color name="md_red_100">#f9bdbb</color>
     <color name="md_red_200">#f69988</color>
@@ -448,5 +451,5 @@
     <color name="wechat_color_line">@color/wechat_color_ffe5e5e5</color>
 
     <color name="wechat_color_group_default">#ff353535</color>
-    <color name="wechat_color_group_pay">@color/md_blue_500</color>
+    <color name="wechat_color_group_pay">#5a6d97</color>
 </resources>

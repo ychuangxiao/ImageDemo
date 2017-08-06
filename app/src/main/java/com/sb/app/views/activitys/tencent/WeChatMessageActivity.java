@@ -1,13 +1,19 @@
 package com.sb.app.views.activitys.tencent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ilogie.android.library.common.util.ArrayUtils;
@@ -18,9 +24,12 @@ import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.model.WeChatModel;
-import com.sb.app.model.base.BaseMobileModel;
+import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.activitys.DemoActivity;
 import com.sb.app.views.base.BaseDaggerActivity;
-import com.sb.app.views.fragment.PaymentMobileStyleFragment;
+import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
+import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
+import com.sb.app.views.fragment.tencent.ios.WeChatMessageIosFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
@@ -28,15 +37,17 @@ import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
+import com.sb.data.entitys.realm.MobileStyleRealm;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.realm.Realm;
 
 public class WeChatMessageActivity extends BaseDaggerActivity implements HasComponent<BizComponent>,
-        MobileChangeListener<WeChatModel>, TimePickerDialog.OnTimeSetListener {
+        MobileChangeListener<MobileStyleRealm>, TimePickerDialog.OnTimeSetListener {
 
 
     @BindView(R.id.topPrimaryDarkContainer)
@@ -49,15 +60,36 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     BottomNavigationView navigation;
 
 
-    BizComponent mBizComponent;
+    @BindView(R.id.iosBackContainer)
+    LinearLayout iosBackContainer;
+    @BindView(R.id.androidBackContainer)
+    LinearLayout androidBackContainer;
 
+    @BindView(R.id.ivSetting)
+    AppCompatImageView ivSetting;
+
+
+    @BindView(R.id.watermarkImageView)
+    AppCompatImageView watermarkImageView;
+
+
+
+    BizComponent mBizComponent;
+    MobileStyleRealm mMobileStyleRealm;
+    WeChatModel mWeChatModel;
 
     WeChatMessageFragment mWeChatMessageFragment;
     String mWeChatMessageFragmentTag = "WeChatMessageFragment";
 
 
-    PaymentMobileStyleFragment mPaymentMobileStyleFragment;
-    String mobileStyleTag = "PaymentMobileStyleFragment";
+    WeChatMessageIosFragment mWeChatMessageIosFragment;
+
+    String mWeChatMessageIosFragmentTag = "WeChatMessageIosFragment";
+
+    MobileStyleForDatabaseFragment mMobileStyleForDatabaseFragment;
+
+
+    String mobileStyleTag = "MobileStyleForDatabaseFragment";
 
 
     PrimaryDarkView mPrimaryDarkView;
@@ -66,6 +98,9 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     TimePickerDialog mTimePickerDialog;//顶部时间
 
     Realm mRealm;
+    ChatGroupRealm chatGroupRealm = null;
+
+    ContactRealm otherContactRealm = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +152,7 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         mRealm = Realm.getDefaultInstance();
         mWeChatModel = new WeChatModel();
         mWeChatModel.setGroupId(groupId);
-        mWeChatModel.setTopStatusColor(AppConstant.ACTION_20);
+
 
         // 必须得加上否则显示不出效果 可以通过这个在以后设置显示或隐藏
         setProgressBarIndeterminateVisibility(true);
@@ -128,11 +163,15 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             finish();
             return;
         }
+        mMobileStyleRealm = mRealm.where(MobileStyleRealm.class).findFirst();
 
 
-        ContactRealm otherContactRealm = chatGroupRealm.getContactRealms().where().equalTo("isMe", false).findFirst();
 
-        setToolTitle(otherContactRealm.getUserNick()).setDisplayHome(true);
+
+
+        otherContactRealm = chatGroupRealm.getContactRealms().where().equalTo("isMe", false).findFirst();
+
+        setToolTitle(otherContactRealm.getUserNick());
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
@@ -170,10 +209,6 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
 
-
-        //业务管理
-        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
-        setMenu(menuItem, BaseFontAwesome.Icon.icon_content, size);
 
         //资金账户
         menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
@@ -221,8 +256,6 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     }
 
 
-    WeChatModel mWeChatModel;
-
     Fragment fragment;
     private BottomNavigationView.OnNavigationItemSelectedListener
             mOnNavigationItemSelectedListener = new
@@ -236,86 +269,68 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
 
+                            watermarkImageView.setVisibility(View.GONE);
+                            if (mMobileStyleForDatabaseFragment != null) {
 
-                            if (mPaymentMobileStyleFragment != null) {
-
-                                showFragment(mPaymentMobileStyleFragment);
-                                mPaymentMobileStyleFragment.loadViewData(mWeChatModel);
+                                showFragment(mMobileStyleForDatabaseFragment);
+                                mMobileStyleForDatabaseFragment.loadViewData();
                             } else {
 
-                                mPaymentMobileStyleFragment = PaymentMobileStyleFragment
-                                        .newInstance(mWeChatModel);
+                                mMobileStyleForDatabaseFragment = MobileStyleForDatabaseFragment
+                                        .newInstance();
 
-                                mPaymentMobileStyleFragment.setMobileChangeListener(new MobileChangeListener<BaseMobileModel>() {
-                                    @Override
-                                    public void onItemClickListener(BaseMobileModel model) {
+                                mMobileStyleForDatabaseFragment.setMobileChangeListener(WeChatMessageActivity.this);
 
-                                        //更改了外观设置
-
-                                        mWeChatModel.setMobileType(model.getMobileType());
-                                        mWeChatModel.setNetworkSignal(model.getNetworkSignal());
-                                        mWeChatModel.setMobileCarrier(model.getMobileCarrier());
-                                        mWeChatModel.setNetworkType(model.getNetworkType());
-                                        mWeChatModel.setTopTime(model.getTopTime());
-                                        mWeChatModel.setDateTimeStyle(model.getDateTimeStyle());
-                                        mWeChatModel.setDir(model.getDir());
-                                        mWeChatModel.setBatteryAdd(model.getBatteryAdd());
-                                        mWeChatModel.setBatteryNum(model.getBatteryNum());
-                                        mWeChatModel.setBlueTeeth(model.getBlueTeeth());
-                                        mWeChatModel.setLocation(model.getLocation());
-                                        mWeChatModel.setBatteryNumBar(model.getBatteryNumBar());
-                                        mergerTopStatus();
-
-
-                                    }
-                                });
-
-                                addFragment(R.id.content, mPaymentMobileStyleFragment,
+                                addFragment(R.id.content, mMobileStyleForDatabaseFragment,
                                         mobileStyleTag);
 
                             }
                             return true;
-                        case R.id.navigation_dashboard:
 
-/*
-                            if (mPaymentMenuFragment != null) {
-
-                                showFragment(mPaymentMenuFragment);
-                                mPaymentMenuFragment.loadViewData(aliPaymentModel);
-                            } else {
-
-                                mPaymentMenuFragment = PaymentMenuFragment.newInstance
-                                        (aliPaymentModel);
-                                addFragment(R.id.content, mPaymentMenuFragment, paymentMenuTag);
-                                mPaymentMenuFragment.setMobileChangeListener(PaymentActivityV2.this);
-                            }*/
-
-                            return true;
                         case R.id.navigation_notifications:
 
-                            // 隐藏状态栏
-                            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-                            switch (mWeChatModel.getMobileType()) {
-                                case AppConstant.ACTION_10:
+                            if (getApplicationComponent().context()
+                                    .sharedpreferences.Watermark().get()) {
 
 
-                                   /* if (mPaymentIosFragment != null) {
+                                watermarkImageView.setVisibility(View.VISIBLE);
+                            } else {
+                                watermarkImageView.setVisibility(View.GONE);
+                            }
 
-                                        showFragment(mPaymentIosFragment);
-                                        mPaymentIosFragment.loadViewData(aliPaymentModel);
+                            if (mMobileStyleRealm.getTopToolStyle() == TextConstant.TOOL_STYLE_SYSTEM) {
+                                getWindow().clearFlags(
+                                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            } else {
+                                // 隐藏状态栏
+                                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            }
+
+
+
+
+                            navigation.setVisibility(View.GONE);
+
+                            switch (mMobileStyleRealm.getMobileVersion()) {
+                                case TextConstant.MOBILE_VERSION_IOS:
+
+
+                                    if (mWeChatMessageIosFragment != null) {
+
+                                        showFragment(mWeChatMessageIosFragment);
+                                        mWeChatMessageIosFragment.loadViewData(mWeChatModel);
                                     } else {
-                                        mPaymentIosFragment = PaymentIosFragment.newInstance
-                                                (aliPaymentModel, navigation);
-                                        addFragment(R.id.content, mPaymentIosFragment,
-                                                paymentIosTag);
-                                        mPaymentIosFragment.setMobileChangeListener
-                                                (PaymentActivityV2.this);
-                                    }*/
+                                        mWeChatMessageIosFragment = WeChatMessageIosFragment.newInstance
+                                                (mWeChatModel, navigation);
+                                        addFragment(R.id.content, mWeChatMessageIosFragment,
+                                                mWeChatMessageIosFragmentTag);
+
+                                    }
 
                                     break;
-                                case AppConstant.ACTION_20:
+                                case TextConstant.MOBILE_VERSION_ANDROID_4:
 
                                     if (mWeChatMessageFragment != null) {
 
@@ -330,7 +345,7 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                                         addFragment(R.id.content, mWeChatMessageFragment,
                                                 mWeChatMessageFragmentTag);
 
-                                        mWeChatMessageFragment.setMobileChangeListener(WeChatMessageActivity.this);
+
                                     }
 
                                     break;
@@ -347,19 +362,22 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             };
 
     private void mergerTopStatus() {
-        //处理头部
-
         mRelativeLayout.removeAllViews();
 
+        ViewGroup.LayoutParams params;
 
-        if (mWeChatModel.getTopToolStyle() == AppConstant.ACTION_10) {
+        params = mToolbar.getLayoutParams();
 
-            switch (mWeChatModel.getMobileType()) {
 
-                case AppConstant.ACTION_10:
+        if (mMobileStyleRealm.getTopToolStyle() == TextConstant.TOOL_STYLE_CUSTOMER) {
+
+
+            switch (mMobileStyleRealm.getMobileVersion()) {
+
+                case TextConstant.MOBILE_VERSION_IOS:
                     //添加顶部标题栏
-                    mPrimaryDarkIosView = PrimaryDarkIosView.build(WeChatMessageActivity.this);
-                    mPrimaryDarkIosView.binder(mWeChatModel);
+                    mPrimaryDarkIosView = PrimaryDarkIosView.build(this);
+                    mPrimaryDarkIosView.binder(mMobileStyleRealm);
                     mRelativeLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -367,11 +385,13 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                         }
                     });
                     mRelativeLayout.addView(mPrimaryDarkIosView);
+
+
                     break;
-                case AppConstant.ACTION_20:
+                case TextConstant.MOBILE_VERSION_ANDROID_4:
                     //添加顶部标题栏
-                    mPrimaryDarkView = PrimaryDarkView.build(WeChatMessageActivity.this);
-                    mPrimaryDarkView.binder(mWeChatModel);
+                    mPrimaryDarkView = PrimaryDarkView.build(this);
+                    mPrimaryDarkView.binder(mMobileStyleRealm);
                     mRelativeLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -379,11 +399,48 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                         }
                     });
                     mRelativeLayout.addView(mPrimaryDarkView);
+
+
                     break;
             }
 
+        } else {
 
+
+            getWindow().clearFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+        int padding ;
+
+        switch (mMobileStyleRealm.getMobileVersion()) {
+            case TextConstant.MOBILE_VERSION_IOS:
+                iosBackContainer.setVisibility(View.VISIBLE);
+                androidBackContainer.setVisibility(View.GONE);
+
+                params.height = ViewUtils.dip2px(this, 30);
+                mToolbar.setLayoutParams(params);
+                mTitleView.setTextSize(14F);
+                padding = ViewUtils.sp2px(this, 1.5F);
+                ivSetting.setPadding(padding,padding,padding,padding);
+
+                mTitleView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(0, 0, 0, 0);
+                break;
+            case TextConstant.MOBILE_VERSION_ANDROID_4:
+                params.height = ViewUtils.dip2px(this, 48);
+                mToolbar.setLayoutParams(params);
+
+                iosBackContainer.setVisibility(View.GONE);
+                androidBackContainer.setVisibility(View.VISIBLE);
+
+                mTitleView.setTextSize(18F);
+                  padding = ViewUtils.sp2px(this, 8.5F);
+                ivSetting.setPadding(padding,padding,padding,padding);
+                mTitleView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(ViewUtils.sp2px(this, 55F), 0, 0, 0);
+                break;
+        }
+
     }
 
 
@@ -400,39 +457,20 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         fragment = getSupportFragmentManager().findFragmentByTag(mobileStyleTag);
 
         if (fragment != null) {
-            mPaymentMobileStyleFragment = (PaymentMobileStyleFragment) fragment;
+            mMobileStyleForDatabaseFragment = (MobileStyleForDatabaseFragment) fragment;
 
-            hideFragment(mPaymentMobileStyleFragment);
+            hideFragment(mMobileStyleForDatabaseFragment);
         }
 
-     /*
-
-
-        fragment = getSupportFragmentManager().findFragmentByTag(paymentIosTag);
+        fragment = getSupportFragmentManager().findFragmentByTag(mWeChatMessageIosFragmentTag);
 
         if (fragment != null) {
-            mPaymentIosFragment = (PaymentIosFragment) fragment;
+            mWeChatMessageIosFragment = (WeChatMessageIosFragment) fragment;
 
-            hideFragment(mPaymentIosFragment);
+            hideFragment(mWeChatMessageIosFragment);
         }
 
 
-        fragment = getSupportFragmentManager().findFragmentByTag(paymentTag);
-
-        if (fragment != null) {
-            mPaymentGoogleFragment = (PaymentGoogleFragment) fragment;
-
-            hideFragment(mPaymentGoogleFragment);
-        }
-
-
-        fragment = getSupportFragmentManager().findFragmentByTag(paymentMenuTag);
-
-        if (fragment != null) {
-            mPaymentMenuFragment = (PaymentMenuFragment) fragment;
-
-            hideFragment(mPaymentMenuFragment);
-        }*/
     }
 
     void onTopDateTimeClick() {
@@ -441,7 +479,7 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         if (mTimePickerDialog == null) {
             Calendar calendar = Calendar.getInstance();
 
-            calendar.setTimeInMillis(mWeChatModel.getTopTime());
+            calendar.setTimeInMillis(mMobileStyleRealm.getTopTime());
             mTimePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar
                     .HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
         }
@@ -450,33 +488,70 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     }
 
     @Override
-    public void onItemClickListener(WeChatModel model) {
-        mWeChatModel = model;
+    public void onItemClickListener(MobileStyleRealm model) {
+        mMobileStyleRealm = model;
 
-        //判断是否为系统
-
-        if (model.getTopToolStyle() == AppConstant.ACTION_10) {
-            mToolbar.setVisibility(View.GONE);
-        } else if (model.getTopToolStyle() == AppConstant.ACTION_10) {
-            mToolbar.setVisibility(View.VISIBLE);
-        }
+        mergerTopStatus();
     }
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
 
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
 
-        calendar.setTimeInMillis(mWeChatModel.getTopTime());
+        calendar.setTimeInMillis(mMobileStyleRealm.getTopTime());
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
                         .get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
                 second);
-        mWeChatModel.setTopTime(calendar.getTimeInMillis());
 
-        if (mWeChatModel.getMobileType() == AppConstant.ACTION_20) {
-            mPrimaryDarkView.binder(mWeChatModel);
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                mMobileStyleRealm.setTopTime(calendar.getTimeInMillis());
+            }
+        });
+
+        if (mMobileStyleRealm.getMobileVersion() == TextConstant.MOBILE_VERSION_ANDROID_4) {
+            mPrimaryDarkView.binder(mMobileStyleRealm);
         } else {
-            mPrimaryDarkIosView.binder(mWeChatModel);
+            mPrimaryDarkIosView.binder(mMobileStyleRealm);
         }
+    }
+
+    @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
+    void onIosBackClick() {
+        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+
+            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setVisibility(View.VISIBLE);
+            getWindow().clearFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            finish();
+        }
+    }
+
+
+    @OnClick(R.id.ivSetting)
+    void onSettingClick()
+    {
+        Intent intent = new Intent(this, ContactDetailActivity.class);
+
+
+        intent.putExtra(AppConstant.EXTRA_NO, otherContactRealm.getUserId());
+
+        navigateActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                mMobileStyleRealm.setTopStatusColor(R.color.colorPrimaryForWeChat);
+            }
+        });
     }
 }

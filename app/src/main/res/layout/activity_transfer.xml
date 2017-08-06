@@ -11,5 +11,12 @@
     <include layout="@layout/content_transfer"/>
 
 
-
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/watermarkImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_watermar"
+        android:visibility="visible"
+        />
 </android.support.design.widget.CoordinatorLayout>

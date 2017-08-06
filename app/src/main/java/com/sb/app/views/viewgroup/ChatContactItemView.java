@@ -7,11 +7,15 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.ViewUtils;
 import com.sb.common.fontawesom.IconicsDrawable;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.entitys.realm.ContactRealm;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +88,11 @@ public class ChatContactItemView extends RelativeLayout {
             mAvatarImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
         }
-
+        else if (StringUtils.isNotEmpty(contactRealm.getImgPath())){
+            // 加载本地图片
+            File file = new File(contactRealm.getImgPath());
+            Glide.with(mContext).load(file).into(mAvatarImage);
+        }
         drawableRight = null;
         if (mContactRealm.getUserId().endsWith(defaultUserId)) {
             drawableRight = new IconicsDrawable(mContext, BaseFontAwesome.Icon.icon_checked).actionBar(6F).color(mContext.getResources().getColor(R.color

@@ -1,0 +1,172 @@
+<android.support.constraint.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context="com.sb.app.views.fragment.tencent.google.ReceiveRedPacketsFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/topConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#fff1f1f1"
+        android:paddingTop="6.0dip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/tvSendUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+            android:background="#fff1f1f1"
+            android:ellipsize="end"
+            android:text="小李飞刀"
+            android:textColor="#ff000000"
+
+            android:textSize="10.0sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/tvSendDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2.0dip"
+            android:paddingBottom="8.0dip"
+            android:text="恭喜发财，大吉大利"
+            android:textColor="#ffa6a5a5"
+            android:textSize="10.0sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSendUserName"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30.0dip"
+            android:layout_marginTop="10.0dip"
+            android:scaleType="fitXY"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSendDesc"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/tvRedPacketsInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="25dip"
+        android:gravity="center"
+
+        android:paddingLeft="16.0dip"
+
+        android:text="1个红包共40.00元"
+        android:textColor="#ffa6a5a5"
+        android:textSize="10.0sp"
+        app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="0.5dip"
+        android:background="#ffe1e1e1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRedPacketsInfo"/>
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/otherAvatarImage"
+        android:layout_width="42.0dip"
+        android:layout_height="42.0dip"
+
+        android:layout_marginLeft="16dip"
+        android:layout_marginTop="10dip"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_default_nor_avatar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        app:riv_border_color="@color/transparent"
+        app:riv_border_width="0dip"
+        app:riv_corner_radius="4dip"
+        app:riv_mutate_background="true"
+
+        />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvReceiveUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginTop="5dip"
+        android:text="@string/app_name"
+        android:textColor="#ff000000"
+        android:textSize="12.0sp"
+        app:layout_constraintLeft_toRightOf="@+id/otherAvatarImage"
+        app:layout_constraintTop_toTopOf="@+id/otherAvatarImage"/>
+
+    <TextView
+        android:id="@+id/tvReceiveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dip"
+
+        android:paddingRight="14.0sp"
+        android:text="08-02 20:12"
+        android:textColor="#ffa6a5a5"
+        android:textSize="10.0sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgReceiveUser"
+        app:layout_constraintLeft_toLeftOf="@+id/tvReceiveUserName"
+        app:layout_constraintTop_toBottomOf="@+id/tvReceiveUserName"/>
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="14.0dip"
+        android:paddingRight="14.0dip"
+        android:text="40.00元"
+        android:textColor="#ff000000"
+        android:textSize="12.0sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvReceiveUserName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="28.0dip"
+        android:text="查看我的红包记录"
+        android:textColor="#ff5171b0"
+        android:textSize="10.0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+    <android.support.v7.widget.AppCompatImageView
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_watermar"
+        android:visibility="gone"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</android.support.constraint.ConstraintLayout>

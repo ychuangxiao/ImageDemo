@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.sb.app.model.AliPaymentModel;
 import com.sb.app.model.BankModel;
 import com.sb.app.model.base.BaseMobileModel;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.fragment.PaymentGoogleFragment;
 import com.sb.app.views.fragment.PaymentIosFragment;
@@ -30,6 +32,7 @@ import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
+import com.sb.data.constant.TextConstant;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
@@ -160,9 +163,14 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                             } else {
                                 watermarkImageView.setVisibility(View.GONE);
                             }
-                            // 隐藏状态栏
-                            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            if (aliPaymentModel.getTopToolStyle() == AppConstant.ACTION_20) {
+                                getWindow().clearFlags(
+                                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            } else {
+                                // 隐藏状态栏
+                                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            }
 
                             switch (aliPaymentModel.getMobileType()) {
                                 case AppConstant.ACTION_10:
@@ -258,8 +266,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
     @Override
     public void initView() {
 
-        setToolTitle(getString(R.string.title_activity_payment)).setDisplayHome(false).setToolTitleGravity(Gravity
-                .LEFT);
+        setToolTitle(getString(R.string.title_activity_payment)) ;
 
 
 
@@ -339,35 +346,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         return R.layout.activity_payment;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-
-            if (checkPermissions()) {
-                createImage();
-            }
-
-
-            return true;
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Nullable
     private Boolean createImage() {
@@ -463,21 +442,51 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
 
         }
-
-        if (aliPaymentModel.getMobileType() == AppConstant.ACTION_20) {
-
-
-            iosBackContainer.setVisibility(View.GONE);
-            androidBackContainer.setVisibility(View.VISIBLE);
-            setToolTitleGravity(Gravity.LEFT);
-        } else {
-            mToolbar.setNavigationIcon(null);
-
-            iosBackContainer.setVisibility(View.VISIBLE);
-            androidBackContainer.setVisibility(View.GONE);
-            setToolTitleGravity(Gravity.CENTER);
-
+        else {
+            getWindow().clearFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+
+
+
+
+
+        ViewGroup.LayoutParams params;
+
+        params = mToolbar.getLayoutParams();
+
+
+
+
+
+        switch (aliPaymentModel.getMobileType()) {
+            case AppConstant.ACTION_10:
+                iosBackContainer.setVisibility(View.VISIBLE);
+                androidBackContainer.setVisibility(View.GONE);
+
+                params.height = ViewUtils.dip2px(this, 30);
+                mToolbar.setLayoutParams(params);
+                mTitleView.setTextSize(16F);
+                setToolTitle("账单详情");
+
+                mTitleView.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(0,0,0,0);
+                break;
+            case AppConstant.ACTION_20:
+                params.height = ViewUtils.dip2px(this, 48);
+                mToolbar.setLayoutParams(params);
+                setToolTitle("账单详情");
+                iosBackContainer.setVisibility(View.GONE);
+                androidBackContainer.setVisibility(View.VISIBLE);
+
+                mTitleView.setTextSize(16F);
+
+                mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(ViewUtils.sp2px(this,55F),0,0,0);
+                break;
+        }
+
+
     }
 
     void onTopDateTimeClick() {

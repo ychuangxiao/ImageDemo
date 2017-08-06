@@ -288,3 +288,8 @@
 -dontwarn com.sb.app.views.widget.**
 -keep class com.sb.app.views.widget.**  {*;}
 
+-dontwarn com.makeramen.**
+-keep class com.makeramen.**  {*;}
+
+-dontwarn com.github.bumptech.**
+-keep class com.github.bumptech.**  {*;}

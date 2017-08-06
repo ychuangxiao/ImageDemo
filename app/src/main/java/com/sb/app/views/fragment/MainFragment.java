@@ -92,7 +92,7 @@ public class MainFragment extends BaseFragment {
 
 
         ViewUtils.setCompoundTopDrawables(getActivity(), tvWeChat, BaseFontAwesome.Icon
-                .icon_weixin, getResources().getColor(R.color.md_grey_800), 24F);
+                .icon_weixin, getResources().getColor(R.color.md_green_A400), 24F);
 
         ViewUtils.setCompoundTopDrawables(getActivity(), tvAli, BaseFontAwesome.Icon
                 .icon_ali, getResources().getColor(R.color.md_light_blue_800), 24F);

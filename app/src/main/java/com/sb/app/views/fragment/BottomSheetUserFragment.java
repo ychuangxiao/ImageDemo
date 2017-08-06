@@ -100,7 +100,10 @@ public class BottomSheetUserFragment extends BottomSheetDialogFragment implement
     public void onDestroy() {
         super.onDestroy();
 
+        if (mRealm != null && !mRealm.isClosed()) {
+            mRealm.close();
 
+        }
     }
 
     public void refreshData(String groupId, String defaultUserId) {

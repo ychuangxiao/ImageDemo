@@ -92,10 +92,7 @@ public class ContactFragment extends BaseFragmentDaggerActivity implements Conta
 
     @Override
     protected void DestroyView() {
-        if (mRealm != null && !mRealm.isClosed()) {
-            mRealm.close();
 
-        }
     }
 
 

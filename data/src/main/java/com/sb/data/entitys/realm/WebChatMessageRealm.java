@@ -24,7 +24,9 @@ public class WebChatMessageRealm extends RealmObject {
     private ContactRealm mContactRealm;//实际操作者（接受者）
     private String sourceMessage;
     private Long sendTime;
+    private Long receiveTransferTime;//转账接受时间
     private ContactRealm sendContact;//发送者
+    private Long sendTransferTime;//转账发送时间
 
     public String getId() {
         return id;
@@ -112,6 +114,22 @@ public class WebChatMessageRealm extends RealmObject {
 
     public void setSendContact(ContactRealm sendContact) {
         this.sendContact = sendContact;
+    }
+
+    public Long getReceiveTransferTime() {
+        return receiveTransferTime;
+    }
+
+    public void setReceiveTransferTime(Long receiveTransferTime) {
+        this.receiveTransferTime = receiveTransferTime;
+    }
+
+    public Long getSendTransferTime() {
+        return sendTransferTime;
+    }
+
+    public void setSendTransferTime(Long sendTransferTime) {
+        this.sendTransferTime = sendTransferTime;
     }
 }
 

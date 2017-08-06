@@ -7,7 +7,7 @@ import com.sb.app.AndroidApplication;
 import com.sb.app.views.adapters.base.RecyclerViewAdapterBase;
 import com.sb.app.views.adapters.base.ViewWrapper;
 import com.sb.app.views.listeners.WeChatMessageClickListener;
-import com.sb.app.views.viewgroup.ChatMeRedPacketItemView;
+import com.sb.app.views.viewgroup.google.ChatMeRedPacketItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import javax.inject.Inject;

@@ -20,7 +20,9 @@ import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.fragment.WeChatFindFragment;
 import com.sb.app.views.fragment.WeChatFragment;
 import com.sb.app.views.fragment.WeChatMeFragment;
+import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
+import com.sb.data.entitys.realm.MobileStyleRealm;
 
 import java.util.UUID;
 
@@ -85,7 +87,7 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
                     contactRealm.setUserNick(getString(R.string.app_name));
                     contactRealm.setSystem(true);
                     contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
-
+                    contactRealm.setWeChatNo("");
 
                     for (int i = 1; i < 15; i++) {
                         contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
@@ -93,14 +95,28 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
                         contactRealm.setUserNick(ViewUtils.getDefaultNick()[ViewUtils.getRandomIndex(28)]);
                         contactRealm.setSystem(true);
                         contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
-
+                        contactRealm.setWeChatNo("");
                     }
 
                 }
 
 
+                count = realm.where(MobileStyleRealm.class).count();
+
+                if (count<1)
+                {
+                    MobileStyleRealm mobileStyleRealm = realm.createObject(MobileStyleRealm.class);
+
+
+                    mobileStyleRealm.setTopStatusColor(R.color.wechat_bg);
+                }
+
             }
         });
+
+
+
+
     }
 
     @Override

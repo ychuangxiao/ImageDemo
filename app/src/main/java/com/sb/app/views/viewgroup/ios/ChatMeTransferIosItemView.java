@@ -1,21 +1,26 @@
-package com.sb.app.views.viewgroup;
+package com.sb.app.views.viewgroup.ios;
 
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
+import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.listeners.WeChatMessage2ClickListener;
-import com.sb.app.views.listeners.WeChatMessageClickListener;
+import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
+
+import java.io.File;
+import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +29,7 @@ import butterknife.OnClick;
 /**
  * 文件名称：{@link HomeItemView}
  * <br/>
- * 功能描述：我发的转账
+ * 功能描述：朋友转账
  * <br/>
  * 创建作者：administrator
  * <br/>
@@ -36,7 +41,8 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatMeRedPacketItemView extends RelativeLayout {
+public class ChatMeTransferIosItemView extends RelativeLayout {
+
 
     @BindView(R.id.tvChatDateTime)
     AppCompatTextView mTvChatDateTime;
@@ -44,12 +50,16 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
-    @BindView(R.id.tvRedPacketsDesc)
-    AppCompatTextView tvRedPacketsDesc;
-    @BindView(R.id.redPackedConstraintLayout)
-    ConstraintLayout mRedPackedConstraintLayout;
 
+
+    @BindView(R.id.tvTransferExplain)
+    AppCompatTextView mTvTransferExplain;
+    @BindView(R.id.textTransferAmount)
+    AppCompatTextView mTextTransferAmount;
     private boolean alreadyInflated = false;
+
+    @BindView(R.id.layoutTransfer)
+    LinearLayout layoutTransfer;
 
     Context mContext;//上下文
 
@@ -59,13 +69,13 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatMeRedPacketItemView build(Context context) {
-        ChatMeRedPacketItemView instance = new ChatMeRedPacketItemView(context);
+    public static ChatMeTransferIosItemView build(Context context) {
+        ChatMeTransferIosItemView instance = new ChatMeTransferIosItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatMeRedPacketItemView(Context context) {
+    public ChatMeTransferIosItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -80,7 +90,8 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
 
         mChatMessageRealm = webChatMessageRealm;
 
-        if (isFirst) {
+        mTvChatDateTime.setVisibility(View.GONE);
+        /*if (isFirst) {
 
             if (lastSendTime < 1L) {
                 mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
@@ -97,23 +108,45 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
 
         }
 
-
         if (StringUtils.isEmpty(mTvChatDateTime.getText().toString())) {
             mTvChatDateTime.setVisibility(View.GONE);
         } else {
             mTvChatDateTime.setVisibility(View.VISIBLE);
 
             lastSendTime = webChatMessageRealm.getSendTime();
+        }*/
+
+        if (webChatMessageRealm.getAmountStatus() != null && webChatMessageRealm.getAmountStatus() == AppConstant
+                .RECEIVED_ACTION_Y) {
+
+            mIvRed.setImageResource(R.mipmap.ic_transfer_received_we_chat);
+
+        } else {
+            mIvRed.setImageResource(R.mipmap.ic_transfer_we_chat);
         }
 
-        tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
+        mTvTransferExplain.setText(webChatMessageRealm.getMessage());
+
+
+        mTextTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal
+                (webChatMessageRealm.getAmount()))));
+
 
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
+        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())) {
+            // 加载本地图片
+            File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
+            Glide.with(mContext).load(file).into(mHeaderImage);
         }
 
 
+        if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
+            layoutTransfer.setBackgroundResource(R.drawable.ic_redpacket_right_default);
+        } else {
+            layoutTransfer.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+        }
         return lastSendTime;
     }
 
@@ -128,14 +161,14 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_redpacket_right_we_chat, this);
+            inflate(getContext(), R.layout.row_transfer_right_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
 
 
-    WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
+    WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout> mMessageClickListener;
 
     public void setMessageClickListener(WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>
                                                 messageClickListener) {
@@ -143,11 +176,9 @@ public class ChatMeRedPacketItemView extends RelativeLayout {
     }
 
     @OnClick(R.id.redPackedConstraintLayout)
-    void onMessageClick()
-    {
-        if (mMessageClickListener != null)
-        {
-            mMessageClickListener.onItemClickListener(mChatMessageRealm,this);
+    void onMessageClick() {
+        if (mMessageClickListener != null) {
+            mMessageClickListener.onItemClickListener(mChatMessageRealm, this);
         }
     }
 }

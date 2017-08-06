@@ -7,11 +7,14 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,8 +76,8 @@ public class ChatMeMessageItemView extends RelativeLayout {
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
         mChatMessageRealm = webChatMessageRealm;
-
-        if (isFirst) {
+        mTvChatDateTime.setVisibility(View.GONE);
+        /*if (isFirst) {
 
             if (lastSendTime < 1L) {
                 mTvChatDateTime.setText(TimeUtils.millis2String(webChatMessageRealm.getSendTime(), TimeUtils
@@ -98,12 +101,16 @@ public class ChatMeMessageItemView extends RelativeLayout {
             mTvChatDateTime.setVisibility(View.VISIBLE);
 
             lastSendTime = webChatMessageRealm.getSendTime();
-        }
+        }*/
 
 
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
+        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+            // 加载本地图片
+            File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
+            Glide.with(mContext).load(file).into(mHeaderImage);
         }
         mTopRedContent.setText(webChatMessageRealm.getMessage());
 

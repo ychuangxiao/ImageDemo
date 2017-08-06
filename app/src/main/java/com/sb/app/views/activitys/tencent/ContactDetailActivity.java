@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 
+import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.ArrayUtils;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
@@ -16,6 +17,7 @@ import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ChatGroupRealm;
 import com.sb.data.entitys.realm.ContactRealm;
 
+import java.io.File;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -98,6 +100,11 @@ public class ContactDetailActivity extends BaseActivity {
         if (mContactRealm.isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
+        }
+        else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
+            // 加载本地图片
+            File file = new File(mContactRealm.getImgPath());
+            Glide.with(this).load(file).into(mHeaderImage);
         }
     }
 
