@@ -1,4 +1,4 @@
-package com.sb.app.views.activitys.tencent;
+package com.sb.app.views.activitys.tencent.money;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,40 +11,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
-import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
-import com.sb.app.views.fragment.tencent.google.ReceiveRedPacketsFragment;
-import com.sb.app.views.fragment.tencent.ios.ReceiveRedPacketsIosFragment;
+import com.sb.app.views.fragment.tencent.google.PurseFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
-import com.sb.data.entitys.realm.ContactRealm;
 import com.sb.data.entitys.realm.MobileStyleRealm;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.io.File;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.realm.Realm;
 
-public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implements HasComponent<BizComponent>,
+public class PurseActivity extends BaseDaggerActivity implements HasComponent<BizComponent>,
         MobileChangeListener<MobileStyleRealm>, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.topPrimaryDarkContainer)
@@ -57,10 +51,6 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
     BottomNavigationView navigation;
 
 
-    @BindView(R.id.avatarImage)
-    RoundedImageView avatarImage;
-
-
     @BindView(R.id.iosBackContainer)
     LinearLayout iosBackContainer;
     @BindView(R.id.androidBackContainer)
@@ -70,7 +60,11 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
     @BindView(R.id.watermarkImageView)
     AppCompatImageView watermarkImageView;
 
+    @BindView(R.id.ivMore)
+    ImageView ivMore;
 
+    @BindView(R.id.ivIosMore)
+    ImageView ivIosMore;
 
     MobileStyleForDatabaseFragment mMobileStyleForDatabaseFragment;
     String mobileStyleTag = "MobileStyleForDatabaseFragment";
@@ -78,15 +72,12 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
     PrimaryDarkIosView mPrimaryDarkIosView;
     TimePickerDialog mTimePickerDialog;//顶部时间
 
-    ReceiveRedPacketsFragment mReceiveRedPacketsFragment;
-    String mRedPacketsTag = "ReceiveRedPacketsFragment";
+    PurseFragment mPurseFragment;
+    String mPurseFragmentTag = "PurseFragment";
 
-    ReceiveRedPacketsIosFragment mReceiveRedPacketsIosFragment;
-    String mRedPacketsIosTag = "ReceiveRedPacketsIosFragment";
 
-    RedPackedDetailsModel mRedPackedDetailsModel;
+
     BizComponent mBizComponent;
-    ContactRealm mContactRealm;
 
     Realm mRealm;
 
@@ -109,15 +100,6 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
         }
 
 
-        mRedPackedDetailsModel = extras_.getParcelable(AppConstant.EXTRA_NO);
-
-
-        if (mRedPackedDetailsModel == null) {
-            finish();
-            return;
-        }
-
-
     }
 
     @Override
@@ -135,25 +117,12 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
      */
     @Override
     public void initView() {
-        injectExtras();
+
         mRealm = Realm.getDefaultInstance();
 
 
-        mContactRealm = mRealm.where(ContactRealm.class).equalTo(TextConstant.COLUMN_NAME_FOR_USERID_CONTACTREALM,
-                mRedPackedDetailsModel.getSendUserId()).findFirst();
-
         setToolTitle(getString(R.string.title_activity_friend_red_packets_detail));
 
-
-        if (mContactRealm.isSystem()) {
-            avatarImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
-                    .getImageIndex()]);
-        }
-        else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
-            // 加载本地图片
-            File file = new File(mContactRealm.getImgPath());
-            Glide.with(this).load(file).into(avatarImage);
-        }
 
         // 必须得加上否则显示不出效果 可以通过这个在以后设置显示或隐藏
         setProgressBarIndeterminateVisibility(true);
@@ -164,7 +133,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                mMobileStyleRealm.setTopStatusColor(R.color.md_red_packets);
+                mMobileStyleRealm.setTopStatusColor(R.color.colorPrimaryForWeChat);
             }
         });
 
@@ -206,8 +175,8 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                     hideFragment();
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-
                             watermarkImageView.setVisibility(View.GONE);
+
                             if (mMobileStyleForDatabaseFragment != null) {
 
                                 showFragment(mMobileStyleForDatabaseFragment);
@@ -218,7 +187,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                                         .newInstance();
 
                                 mMobileStyleForDatabaseFragment.setMobileChangeListener
-                                        (FriendRedPacketsDetailActivity.this);
+                                        (PurseActivity.this);
 
                                 addFragment(R.id.content, mMobileStyleForDatabaseFragment,
                                         mobileStyleTag);
@@ -235,6 +204,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                             } else {
                                 watermarkImageView.setVisibility(View.GONE);
                             }
+
                             if (mMobileStyleRealm.getTopToolStyle() == TextConstant.TOOL_STYLE_SYSTEM) {
                                 getWindow().clearFlags(
                                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -244,46 +214,23 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
                             }
 
+
                             navigation.setVisibility(View.GONE);
 
-                            switch (mMobileStyleRealm.getMobileVersion()) {
-                                case TextConstant.MOBILE_VERSION_IOS:
+                            if (mPurseFragment != null) {
 
-                                    if (mReceiveRedPacketsIosFragment != null) {
-
-                                        showFragment(mReceiveRedPacketsIosFragment);
+                                showFragment(mPurseFragment);
 
 
-                                    } else {
+                            } else {
 
-                                        mReceiveRedPacketsIosFragment = ReceiveRedPacketsIosFragment
-                                                .newInstance(mRedPackedDetailsModel, navigation);
-                                        addFragment(R.id.content, mReceiveRedPacketsIosFragment,
-                                                mRedPacketsIosTag);
+                                mPurseFragment = PurseFragment
+                                        .newInstance(navigation);
+                                addFragment(R.id.content, mPurseFragment,
+                                        mPurseFragmentTag);
 
-                                        mReceiveRedPacketsIosFragment.setMobileChangeListener
-                                                (FriendRedPacketsDetailActivity.this);
-                                    }
-                                    break;
-                                case TextConstant.MOBILE_VERSION_ANDROID_4:
-
-                                    if (mReceiveRedPacketsFragment != null) {
-
-                                        showFragment(mReceiveRedPacketsFragment);
-
-
-                                    } else {
-
-                                        mReceiveRedPacketsFragment = ReceiveRedPacketsFragment
-                                                .newInstance(mRedPackedDetailsModel, navigation);
-                                        addFragment(R.id.content, mReceiveRedPacketsFragment,
-                                                mRedPacketsTag);
-
-                                        mReceiveRedPacketsFragment.setMobileChangeListener
-                                                (FriendRedPacketsDetailActivity.this);
-                                    }
-
-                                    break;
+                                mPurseFragment.setMobileChangeListener
+                                        (PurseActivity.this);
                             }
 
 
@@ -300,11 +247,9 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
         //处理头部
 
         mRelativeLayout.removeAllViews();
-
         ViewGroup.LayoutParams params;
 
         params = mToolbar.getLayoutParams();
-
 
         if (mMobileStyleRealm.getTopToolStyle() == TextConstant.TOOL_STYLE_CUSTOMER) {
 
@@ -322,9 +267,8 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                         }
                     });
                     mRelativeLayout.addView(mPrimaryDarkIosView);
-
-
                     break;
+
                 case TextConstant.MOBILE_VERSION_ANDROID_4:
                     //添加顶部标题栏
                     mPrimaryDarkView = PrimaryDarkView.build(this);
@@ -353,28 +297,34 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
             case TextConstant.MOBILE_VERSION_IOS:
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
+                ivIosMore.setVisibility(View.VISIBLE);
+                ivMore.setVisibility(View.GONE);
 
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
-                setToolTitle("微信红包");
+                setToolTitle("钱包");
 
-                mTitleView.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(0,0,0,0);
+                mTitleView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(0, 0, 0, 0);
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
-                setToolTitle("红包详情");
+                setToolTitle("我的钱包");
                 iosBackContainer.setVisibility(View.GONE);
                 androidBackContainer.setVisibility(View.VISIBLE);
+                ivIosMore.setVisibility(View.GONE);
+                ivMore.setVisibility(View.VISIBLE);
+
 
                 mTitleView.setTextSize(18F);
 
-                mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(ViewUtils.sp2px(this,55F),0,0,0);
+                mTitleView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                mTitleView.setPadding(ViewUtils.sp2px(this, 55F), 0, 0, 0);
                 break;
         }
+
     }
 
 
@@ -394,12 +344,12 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
 
     void hideFragment() {
 
-        fragment = getSupportFragmentManager().findFragmentByTag(mRedPacketsTag);
+        fragment = getSupportFragmentManager().findFragmentByTag(mPurseFragmentTag);
 
         if (fragment != null) {
-            mReceiveRedPacketsFragment = (ReceiveRedPacketsFragment) fragment;
+            mPurseFragment = (PurseFragment) fragment;
 
-            hideFragment(mReceiveRedPacketsFragment);
+            hideFragment(mPurseFragment);
         }
 
         fragment = getSupportFragmentManager().findFragmentByTag(mobileStyleTag);
@@ -410,13 +360,6 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
             hideFragment(mMobileStyleForDatabaseFragment);
         }
 
-        fragment = getSupportFragmentManager().findFragmentByTag(mRedPacketsIosTag);
-
-        if (fragment != null) {
-            mReceiveRedPacketsIosFragment = (ReceiveRedPacketsIosFragment) fragment;
-
-            hideFragment(mReceiveRedPacketsIosFragment);
-        }
 
 
     }
@@ -428,7 +371,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
      */
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_friend_red_packets_detail;
+        return R.layout.activity_purse;
     }
 
     /**
@@ -506,6 +449,8 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
+
+
             finish();
         }
     }

@@ -14,6 +14,7 @@ import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.data.constant.TextConstant;
@@ -198,7 +199,7 @@ public class TransferConfirmDetailsIosFragment extends BaseFragmentDaggerActivit
             @Override
             public void execute(Realm realm) {
                 mChatMessageRealm.setAmountStatus(AppConstant.RECEIVED_ACTION_Y);
-                mChatMessageRealm.setReceiveTransferTime(System.currentTimeMillis());
+                mChatMessageRealm.setReceiveTransferTime(TimeUtils.addHour(ViewUtils.getRandomIndex(10),mChatMessageRealm.getSendTime(),TimeUtils.DEFAULT_PATTERN));
                 WebChatMessageRealm messageRealm = realm.createObject(WebChatMessageRealm.class, UUID
                         .randomUUID().toString());
 
@@ -206,7 +207,8 @@ public class TransferConfirmDetailsIosFragment extends BaseFragmentDaggerActivit
                 messageRealm.setContactRealm(currentContactRealm);
 
                 messageRealm.setSendTransferTime(mChatMessageRealm.getSendTime());
-                messageRealm.setReceiveTransferTime(System.currentTimeMillis());
+                messageRealm.setReceiveTransferTime(mChatMessageRealm.getReceiveTransferTime());
+
                 messageRealm.setGroupId(mChatMessageRealm.getGroupId());
                 messageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TRANSFER);
                 messageRealm.setSendTime(System.currentTimeMillis());

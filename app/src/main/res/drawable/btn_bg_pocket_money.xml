@@ -16,7 +16,7 @@
                     />
 
                 <corners
-                    android:radius="6.0dip"
+                    android:radius="3.0dip"
                     />
             </shape>
         </item>
@@ -35,7 +35,7 @@
 
                 <corners
 
-                    android:radius="6.0dip"
+                    android:radius="3.0dip"
                     />
             </shape>
         </item>

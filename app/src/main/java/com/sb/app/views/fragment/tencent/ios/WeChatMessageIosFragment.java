@@ -39,15 +39,12 @@ import com.sb.app.views.activitys.tencent.transfer.TransferSuccessActivity;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.fragment.BottomSheetDateTimeFragment;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
-import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
 import com.sb.app.views.listeners.DateClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
 import com.sb.app.views.listeners.WeChatMessage2ClickListener;
 import com.sb.app.views.viewgroup.ChatFriendMessageItemView;
-
 import com.sb.app.views.viewgroup.ChatMeMessageItemView;
-
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
 import com.sb.app.views.viewgroup.google.TimeMessageItemView;
 import com.sb.app.views.viewgroup.ios.ChatFriendRedPacketIosItemView;
@@ -879,10 +876,27 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                 intent = new Intent(getActivity(), TransferSuccessActivity.class);
                 RedPackedDetailsModel model1 = new RedPackedDetailsModel();
                 model1.setCurrentUserId(defaultUserId);
-                model1.setSendUserId(model.getContactRealm().getUserId());
-                model1.setReceivedUserId(model.getSendContact().getUserId());
                 model1.setMessageId(model.getId());
                 model1.setGroupId(model.getGroupId());
+
+                //这里还是要判断下谁转的账单
+
+                //说明是对方收了
+                if(StringUtils.isNotEmpty(model.getSourceMessage())){
+                    model1.setSendUserId(model.getSendContact().getUserId());
+                    model1.setReceivedUserId(model.getContactRealm().getUserId());
+                }
+                else
+                {
+                    model1.setSendUserId(model.getContactRealm().getUserId());
+                    model1.setReceivedUserId(model.getSendContact().getUserId());
+                }
+
+
+
+
+
+
                 intent.putExtra(AppConstant.EXTRA_NO, model1);
 
                 navigateActivity(intent);
@@ -1015,7 +1029,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
 
 
                 webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
-                webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
+                webChatMessageRealm.setSendTime(chooseSendTime);
                 webChatMessageRealm.setReceiveTransferTime(model);
                 webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TIME);
                 webChatMessageRealm.setGroupId(chatGroupRealm.getId());

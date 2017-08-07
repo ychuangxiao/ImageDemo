@@ -17,7 +17,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_top_bar_ios"
+        android:layout_height="@dimen/height_top_bar"
         android:background="@color/colorPrimaryForWeChat"
         android:minHeight="?attr/actionBarSize"
         android:minWidth="0dp"
@@ -39,9 +39,9 @@
                 android:id="@+id/iosBackContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_centerVertical="true"
-                android:visibility="visible">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -57,9 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="微信(1000)"
+                    android:text="返回"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/font_size_13"/>
+                    android:textSize="@dimen/font_size_12"/>
 
             </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="4dip"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -109,14 +109,30 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18.0sp"/>
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/ivSetting"
-                android:padding="6.5dip"
-                android:scaleType="centerInside"
-                android:layout_alignParentRight="true"
-android:src="@mipmap/ic_single_setting"
+
+            <ImageView
+                android:id="@+id/ivMore"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2.0dip"
+                android:contentDescription="@string/app_name"
+                android:paddingLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@mipmap/ic_title_bar_right_more"/>
+            <ImageView
+                android:id="@+id/ivIosMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2.0dip"
+                android:contentDescription="@string/app_name"
+                android:paddingLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@mipmap/ic_title_bar_right_more_ios"/>
+
 
         </RelativeLayout>
 

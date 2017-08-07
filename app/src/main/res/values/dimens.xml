@@ -101,6 +101,7 @@
     <dimen name="width_50">50.0dip</dimen>
     <dimen name="width_35">35.0dip</dimen>
     <dimen name="height_top_bar">48.0dip</dimen>
+    <dimen name="height_top_bar_ios">40.0dip</dimen>
 
     <dimen name="height_24">24.0dip</dimen>
 

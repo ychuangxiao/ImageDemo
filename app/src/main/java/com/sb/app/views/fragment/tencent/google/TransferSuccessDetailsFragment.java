@@ -1,17 +1,13 @@
 package com.sb.app.views.fragment.tencent.google;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sb.app.R;
-import com.sb.app.constant.AppConstant;
 import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.utils.MathUtils;
 import com.sb.app.utils.TimeUtils;
@@ -23,12 +19,8 @@ import com.sb.data.entitys.realm.MobileStyleRealm;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.realm.Realm;
 
 public class TransferSuccessDetailsFragment extends BaseFragmentDaggerActivity {
@@ -154,19 +146,19 @@ public class TransferSuccessDetailsFragment extends BaseFragmentDaggerActivity {
         if (currentContactRealm.getUserId().equals(sendUserRealm.getUserId())) {
 
 
+            mTvOtherMessage.setText("");
+            mTvConfirmMessage.setText("已存入对方零钱中");
+            mTvUserNick.setText(receivedUserRealm.getUserNick());
 
-            mTvOtherMessage.setText("零钱");
-            mTvConfirmMessage.setText("已存入你的");
-            mTvUserNick.setText("");
 
 
 
         } else if (!currentContactRealm.getUserId().equals(sendUserRealm.getUserId()) ) {
             //判断 当前用户是自己，同时发送者不是自己，那么现实为确认
-            mTvOtherMessage.setText("");
-            mTvConfirmMessage.setText("已存入对方零钱中");
-            mTvUserNick.setText(meContactRealm.getUserNick());
 
+            mTvOtherMessage.setText("零钱");
+            mTvConfirmMessage.setText("已存入你的");
+            mTvUserNick.setText("");
         }
 
 
@@ -178,8 +170,8 @@ public class TransferSuccessDetailsFragment extends BaseFragmentDaggerActivity {
                 mRedPackedDetailsModel.getMessageId()).findFirst();
 
         mTvReceiveTime.setText(TimeUtils.millis2String(mChatMessageRealm.getReceiveTransferTime(), TimeUtils
-                .DEFAULT_PATTERN_6));
-        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN_6));
+                .DEFAULT_PATTERN_2));
+        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN_2));
         mTvTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mChatMessageRealm.getAmount()
                 .toString()
         ))));

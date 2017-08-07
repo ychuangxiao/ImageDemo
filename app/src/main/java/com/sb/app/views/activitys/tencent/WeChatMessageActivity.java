@@ -7,7 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.model.WeChatModel;
 import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.activitys.DemoActivity;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
@@ -417,17 +415,17 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
 
-                params.height = ViewUtils.dip2px(this, 30);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
-                padding = ViewUtils.sp2px(this, 1.5F);
+                padding = ViewUtils.sp2px(this, 6.5F);
                 ivSetting.setPadding(padding,padding,padding,padding);
 
                 mTitleView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                 mTitleView.setPadding(0, 0, 0, 0);
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height = ViewUtils.dip2px(this, 48);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
 
                 iosBackContainer.setVisibility(View.GONE);

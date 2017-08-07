@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context="com.sb.app.views.activitys.tencent.PocketMoneyActivityFragment"
+    tools:context="com.sb.app.views.fragment.tencent.google.PocketMoneyFragment"
    >
 
     <android.support.v7.widget.AppCompatImageView
@@ -66,7 +66,7 @@
         android:layout_margin="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_large"
         android:background="@drawable/btn_bg_pocket_money_out"
-        android:text="充值"
+        android:text="提现"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/font_size_medium"
         app:layout_constraintLeft_toLeftOf="parent"

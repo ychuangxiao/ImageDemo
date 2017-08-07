@@ -278,6 +278,17 @@ public class TimeUtils {
     }
 
 
+    public static Long addHour(int hour, long millis, String pattern) {
+        Calendar now = Calendar.getInstance();
+
+        now.setTimeInMillis(TimeUtils.millis2millis(millis, pattern));
+        now.add(Calendar.HOUR_OF_DAY, hour);
+
+
+
+        return now.getTimeInMillis();
+    }
+
     public static Long addHour2(int hour, long millis) {
         Calendar now = Calendar.getInstance();
         now.setTimeInMillis(millis);

@@ -146,26 +146,29 @@ public class TransferSuccessDetailsIosFragment extends BaseFragmentDaggerActivit
         //判断 当前用户是自己，同时发送者是自己，那么现实为 对方确认
         if (currentContactRealm.getUserId().equals(sendUserRealm.getUserId())) {
 
+
             mTvOtherMessage.setText("");
             mTvConfirmMessage.setText("已存入对方零钱中");
-            mTvUserNick.setText(meContactRealm.getUserNick());
+            mTvUserNick.setText(receivedUserRealm.getUserNick());
+
+
+
 
         } else if (!currentContactRealm.getUserId().equals(sendUserRealm.getUserId()) ) {
             //判断 当前用户是自己，同时发送者不是自己，那么现实为确认
+
             mTvOtherMessage.setText("零钱");
             mTvConfirmMessage.setText("已存入你的");
             mTvUserNick.setText("");
-
         }
-
 
         mChatMessageRealm = mRealm.where(WebChatMessageRealm.class).equalTo(TextConstant
                         .COLUMN_NAME_FOR_ID,
                 mRedPackedDetailsModel.getMessageId()).findFirst();
 
         mTvReceiveTime.setText(TimeUtils.millis2String(mChatMessageRealm.getReceiveTransferTime(), TimeUtils
-                .DEFAULT_PATTERN_6));
-        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN_6));
+                .DEFAULT_PATTERN_2));
+        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN_2));
         mTvTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mChatMessageRealm.getAmount()
                 .toString()
         ))));

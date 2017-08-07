@@ -20,7 +20,6 @@ import com.sb.app.views.fragment.ContactFragment;
 import com.sb.app.views.fragment.WeChatFindFragment;
 import com.sb.app.views.fragment.WeChatFragment;
 import com.sb.app.views.fragment.WeChatMeFragment;
-import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
 import com.sb.data.entitys.realm.MobileStyleRealm;
 
@@ -88,6 +87,7 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
                     contactRealm.setSystem(true);
                     contactRealm.setImageIndex(ViewUtils.getRandomIndex(28));
                     contactRealm.setWeChatNo("");
+                    contactRealm.setMoney(88888888.88D);
 
                     for (int i = 1; i < 15; i++) {
                         contactRealm = realm.createObject(ContactRealm.class, UUID.randomUUID().toString());
@@ -103,8 +103,7 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
 
                 count = realm.where(MobileStyleRealm.class).count();
 
-                if (count<1)
-                {
+                if (count < 1) {
                     MobileStyleRealm mobileStyleRealm = realm.createObject(MobileStyleRealm.class);
 
 
@@ -113,8 +112,6 @@ public class WeChatActivity extends BaseActivity implements HasComponent<BizComp
 
             }
         });
-
-
 
 
     }

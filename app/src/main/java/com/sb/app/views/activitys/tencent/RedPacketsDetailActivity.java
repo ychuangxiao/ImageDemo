@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
@@ -25,13 +23,9 @@ import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.model.RedPackedDetailsModel;
-import com.sb.app.utils.MathUtils;
-import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.base.BaseActivity;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
-import com.sb.app.views.fragment.tencent.google.ReceiveRedPacketsFragment;
 import com.sb.app.views.fragment.tencent.google.RedPacketsDetailsFragment;
 import com.sb.app.views.fragment.tencent.ios.RedPacketsDetailIosFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
@@ -41,11 +35,9 @@ import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ContactRealm;
 import com.sb.data.entitys.realm.MobileStyleRealm;
-import com.sb.data.entitys.realm.WebChatMessageRealm;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -360,7 +352,7 @@ public class RedPacketsDetailActivity extends BaseDaggerActivity implements HasC
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
 
-                params.height = ViewUtils.dip2px(this, 30);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
                 setToolTitle("微信红包");
@@ -368,7 +360,7 @@ public class RedPacketsDetailActivity extends BaseDaggerActivity implements HasC
                 mTitleView.setPadding(0,0,0,0);
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height = ViewUtils.dip2px(this, 48);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
                 setToolTitle("红包详情");
                 iosBackContainer.setVisibility(View.GONE);

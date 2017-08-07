@@ -22,6 +22,8 @@ public class ContactRealm extends RealmObject {
 
     private boolean isMe = false;
 
+    private Double money=0D;//零钱
+
     public String getUserNick() {
         return userNick;
     }
@@ -76,5 +78,13 @@ public class ContactRealm extends RealmObject {
 
     public void setWeChatNo(String weChatNo) {
         this.weChatNo = weChatNo;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 }

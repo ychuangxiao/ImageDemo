@@ -82,14 +82,14 @@
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>
         <activity
-            android:name=".views.activitys.tencent.PurseActivity"
+            android:name=".views.activitys.tencent.money.PurseActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_purse"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.We.Chat">
         </activity>
         <activity
-            android:name=".views.activitys.tencent.PocketMoneyActivity"
+            android:name=".views.activitys.tencent.money.PocketMoneyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
             android:label="@string/title_activity_pocket_money"
             android:screenOrientation="portrait"

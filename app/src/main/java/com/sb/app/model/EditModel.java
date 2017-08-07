@@ -1,10 +1,13 @@
 package com.sb.app.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by banditcat on 2017/7/16.
  */
 
-public class EditModel {
+public class EditModel implements Parcelable {
 
     private int handleAction;
     private String hintText;
@@ -60,4 +63,44 @@ public class EditModel {
     public void setMaxLines(int maxLines) {
         this.maxLines = maxLines;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.handleAction);
+        dest.writeString(this.hintText);
+        dest.writeString(this.text);
+        dest.writeInt(this.maxLength);
+        dest.writeInt(this.inputType);
+        dest.writeInt(this.maxLines);
+    }
+
+    public EditModel() {
+    }
+
+    protected EditModel(Parcel in) {
+        this.handleAction = in.readInt();
+        this.hintText = in.readString();
+        this.text = in.readString();
+        this.maxLength = in.readInt();
+        this.inputType = in.readInt();
+        this.maxLines = in.readInt();
+    }
+
+    public static final Parcelable.Creator<EditModel> CREATOR = new Parcelable.Creator<EditModel>() {
+        @Override
+        public EditModel createFromParcel(Parcel source) {
+            return new EditModel(source);
+        }
+
+        @Override
+        public EditModel[] newArray(int size) {
+            return new EditModel[size];
+        }
+    };
 }

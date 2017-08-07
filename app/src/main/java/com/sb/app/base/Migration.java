@@ -1,7 +1,5 @@
 package com.sb.app.base;
 
-import com.sb.data.constant.TextConstant;
-
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;
 import io.realm.RealmSchema;
@@ -45,6 +43,7 @@ public class Migration implements RealmMigration {
 
 
             schema.get("ContactRealm")
+                    .addField("money", Double.class)
                     .addField("weChatNo", String.class);
 
 

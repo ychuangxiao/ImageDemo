@@ -1,15 +1,10 @@
 package com.sb.app.views.activitys.tencent.transfer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.HasComponent;
@@ -27,7 +21,6 @@ import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
 import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.activitys.tencent.RedPacketsDetailActivity;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.TransferConfirmDetailsFragment;
@@ -345,7 +338,7 @@ public class TransferConfirmActivity extends BaseDaggerActivity implements HasCo
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
 
-                params.height = ViewUtils.dip2px(this, 30);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
                 setToolTitle("转账详情");
@@ -353,7 +346,7 @@ public class TransferConfirmActivity extends BaseDaggerActivity implements HasCo
                 mTitleView.setPadding(0,0,0,0);
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height = ViewUtils.dip2px(this, 48);
+                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
                 setToolTitle("交易详情");
                 iosBackContainer.setVisibility(View.GONE);
@@ -497,8 +490,6 @@ public class TransferConfirmActivity extends BaseDaggerActivity implements HasCo
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
-
-            Intent intent = new Intent();
 
 
             finish();

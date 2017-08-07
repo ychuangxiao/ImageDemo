@@ -57,9 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="微信(1000)"
+                    android:text="返回"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/font_size_13"/>
+                    android:textSize="@dimen/font_size_12"/>
 
             </LinearLayout>
 
@@ -109,12 +109,15 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18.0sp"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <android.support.v7.widget.AppCompatTextView
+                android:paddingRight="10dip"
                 android:id="@+id/ivSetting"
-                android:padding="6.5dip"
+                android:textColor="@color/colorWhite"
                 android:scaleType="centerInside"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-android:src="@mipmap/ic_single_setting"
+android:text="零钱明细"
+                android:textSize="12.0sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

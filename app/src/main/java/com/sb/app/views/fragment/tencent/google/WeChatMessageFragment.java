@@ -79,7 +79,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         DateClickListener {
 
 
-
     public WeChatMessageFragment() {
         mRealm = Realm.getDefaultInstance();
     }
@@ -94,7 +93,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         fragment.setArguments(args);
         return fragment;
     }
-
 
 
     @BindView(R.id.btnEmoji)
@@ -186,8 +184,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
     Long lastSendTime = 0L;
     Long chooseSendTime = 0L;
     private static BottomNavigationView mBottomNavigationView;
-
-
 
 
     @Override
@@ -462,7 +458,7 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
         if (ArrayUtils.isNotEmpty(mWebChatMessageRealms)) {
             lastSendTime = mWebChatMessageRealms.where().max("sendTime").longValue();
-
+            chooseSendTime = mWebChatMessageRealms.where().max("sendTime").longValue();
 
             //判断当前时间是否比
 
@@ -857,7 +853,8 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
             if (model.getAmountStatus() != AppConstant.RECEIVED_ACTION_Y) {
 
 
-                //看看当前选中的用户是那个人
+                //当前用户：
+
                 intent = new Intent(getActivity(), TransferConfirmActivity.class);
                 RedPackedDetailsModel model1 = new RedPackedDetailsModel();
                 model1.setCurrentUserId(defaultUserId);
@@ -879,10 +876,21 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 intent = new Intent(getActivity(), TransferSuccessActivity.class);
                 RedPackedDetailsModel model1 = new RedPackedDetailsModel();
                 model1.setCurrentUserId(defaultUserId);
-                model1.setSendUserId(model.getContactRealm().getUserId());
-                model1.setReceivedUserId(model.getSendContact().getUserId());
                 model1.setMessageId(model.getId());
                 model1.setGroupId(model.getGroupId());
+
+                //这里还是要判断下谁转的账单
+
+                //说明是对方收了
+                if (StringUtils.isNotEmpty(model.getSourceMessage())) {
+                    model1.setSendUserId(model.getSendContact().getUserId());
+                    model1.setReceivedUserId(model.getContactRealm().getUserId());
+                } else {
+                    model1.setSendUserId(model.getContactRealm().getUserId());
+                    model1.setReceivedUserId(model.getSendContact().getUserId());
+                }
+
+
                 intent.putExtra(AppConstant.EXTRA_NO, model1);
 
                 navigateActivity(intent);
@@ -1013,8 +1021,7 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
 
                 webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
-                webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
-                webChatMessageRealm.setReceiveTransferTime(model);
+                webChatMessageRealm.setSendTime(chooseSendTime);
                 webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TIME);
                 webChatMessageRealm.setGroupId(chatGroupRealm.getId());
                 createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));

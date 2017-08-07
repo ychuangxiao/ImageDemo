@@ -1,16 +1,12 @@
 package com.sb.app.views.base;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.AndroidApplication;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
@@ -42,7 +39,6 @@ import com.sb.app.model.BankModel;
 import com.sb.app.utils.ViewUtils;
 import com.sb.common.fontawesom.IconicsDrawable;
 import com.sb.common.fontawesom.typeface.IIcon;
-import com.ilogie.android.library.common.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,6 +69,8 @@ import io.reactivex.schedulers.Schedulers;
  * 修改备注：
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+
 
 
     @BindView(R.id.toolbar)

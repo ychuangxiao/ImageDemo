@@ -1,22 +1,41 @@
-package com.sb.app.views.activitys.tencent;
+package com.sb.app.views.fragment.tencent.google;
 
 import android.content.Intent;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.sb.app.R;
+import com.sb.app.utils.MathUtils;
+import com.sb.app.views.activitys.tencent.money.PocketMoneyActivity;
 import com.sb.app.views.base.BaseFragment;
+import com.sb.app.views.listeners.MobileChangeListener;
+import com.sb.data.entitys.realm.ContactRealm;
+import com.sb.data.entitys.realm.MobileStyleRealm;
+
+import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PurseActivityFragment extends BaseFragment {
+public class PurseFragment extends BaseFragment {
 
+
+    public PurseFragment() {
+        mRealm = Realm.getDefaultInstance();
+    }
+
+    Realm mRealm;
+
+    static BottomNavigationView mBottomNavigationView;
+
+    ContactRealm mContactRealm;
 
     @BindView(R.id.relativeLayout1)
     RelativeLayout relativeLayout1;
@@ -39,10 +58,20 @@ public class PurseActivityFragment extends BaseFragment {
     @BindView(R.id.relativeLayout16)
     RelativeLayout relativeLayout16;
 
-    @BindView(R.id.tvPocketMoney)
-    AppCompatTextView tvPocketMoney;
+    @BindView(R.id.tvMoney)
+    AppCompatTextView tvMoney;
 
-    public PurseActivityFragment() {
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment PocketMoneyFragment.
+     */
+    public static PurseFragment newInstance(BottomNavigationView
+                                                    bottomNavigationView) {
+        PurseFragment fragment = new PurseFragment();
+        mBottomNavigationView = bottomNavigationView;
+        return fragment;
     }
 
     @Override
@@ -55,6 +84,11 @@ public class PurseActivityFragment extends BaseFragment {
      */
     @Override
     public void initView() {
+
+
+        mContactRealm = mRealm.where(ContactRealm.class).equalTo("isMe", true).findFirst();
+
+        tvMoney.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mContactRealm.getMoney().toString()))));
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -122,4 +156,19 @@ public class PurseActivityFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null && !mRealm.isClosed()) {
+            mRealm.close();
+
+        }
+    }
+
+    MobileChangeListener<MobileStyleRealm> mModelMobileChangeListener;
+
+    public void setMobileChangeListener(MobileChangeListener<MobileStyleRealm>
+                                                modelMobileChangeListener) {
+        this.mModelMobileChangeListener = modelMobileChangeListener;
+    }
 }

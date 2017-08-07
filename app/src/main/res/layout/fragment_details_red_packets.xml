@@ -82,7 +82,7 @@
 
         android:layout_marginLeft="16dip"
         android:layout_marginTop="10dip"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_default_nor_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRedPacketsInfo"

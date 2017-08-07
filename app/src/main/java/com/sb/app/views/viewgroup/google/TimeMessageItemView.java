@@ -2,7 +2,6 @@ package com.sb.app.views.viewgroup.google;
 
 
 import android.content.Context;
-import android.provider.Settings;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -66,7 +65,7 @@ public class TimeMessageItemView extends RelativeLayout {
 
         mTvMessage.setVisibility(View.GONE);
 
-        mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getReceiveTransferTime(), System
+        mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getSendTime(), System
                 .currentTimeMillis()));
     }
 
