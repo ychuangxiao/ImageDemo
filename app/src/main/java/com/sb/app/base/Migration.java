@@ -34,6 +34,15 @@ public class Migration implements RealmMigration {
         RealmSchema schema = realm.getSchema();
 
         if (oldVersion == 1) {
+
+
+            //删除数据
+
+            realm.where("ContactRealm").findAll().deleteAllFromRealm();
+            realm.where("ChatGroupRealm").findAll().deleteAllFromRealm();
+            realm.where("WebChatMessageRealm").findAll().deleteAllFromRealm();
+
+
             //添加消息接受者
             schema.get("WebChatMessageRealm")
 
