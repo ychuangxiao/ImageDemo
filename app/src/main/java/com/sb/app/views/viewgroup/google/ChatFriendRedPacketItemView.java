@@ -11,9 +11,8 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
-import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
-import com.sb.app.views.listeners.WeChatMessage2ClickListener;
+import com.sb.app.views.listeners.WeChatMessageLongClickListener;
 import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
@@ -142,9 +141,9 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
         super.onFinishInflate();
     }
 
-    WeChatMessage2ClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
+    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 
-    public void setMessageClickListener(WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>
+    public void setMessageClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
                                                 messageClickListener) {
         mMessageClickListener = messageClickListener;
     }

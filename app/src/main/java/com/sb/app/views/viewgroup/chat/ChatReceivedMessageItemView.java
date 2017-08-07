@@ -1,4 +1,4 @@
-package com.sb.app.views.viewgroup;
+package com.sb.app.views.viewgroup.chat;
 
 
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
-import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import java.io.File;
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * 文件名称：{@link HomeItemView}
  * <br/>
- * 功能描述：我发消息
+ * 功能描述：朋友发消息
  * <br/>
  * 创建作者：administrator
  * <br/>
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  * <br/>
  * 修改备注：
  */
-public class ChatMeMessageItemView extends RelativeLayout {
+public class ChatReceivedMessageItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
@@ -44,7 +44,6 @@ public class ChatMeMessageItemView extends RelativeLayout {
 
     @BindView(R.id.topRedContent)
     AppCompatTextView mTopRedContent;
-
 
     private boolean alreadyInflated = false;
 
@@ -56,13 +55,13 @@ public class ChatMeMessageItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatMeMessageItemView build(Context context) {
-        ChatMeMessageItemView instance = new ChatMeMessageItemView(context);
+    public static ChatReceivedMessageItemView build(Context context) {
+        ChatReceivedMessageItemView instance = new ChatReceivedMessageItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatMeMessageItemView(Context context) {
+    public ChatReceivedMessageItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -104,15 +103,20 @@ public class ChatMeMessageItemView extends RelativeLayout {
         }*/
 
 
+
+
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
-        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+        }
+        else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
             // 加载本地图片
             File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
             Glide.with(mContext).load(file).into(mHeaderImage);
         }
+
         mTopRedContent.setText(webChatMessageRealm.getMessage());
+
 
         return lastSendTime;
 
@@ -129,7 +133,7 @@ public class ChatMeMessageItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_message_right_we_chat, this);
+            inflate(getContext(), R.layout.row_message_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();

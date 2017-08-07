@@ -3,7 +3,7 @@ package com.sb.app.views.listeners;
 import android.widget.RelativeLayout;
 
 /**
- * 文件名称：{@link WeChatMessage2ClickListener}
+ * 文件名称：{@link WeChatMessageLongClickListener}
  * <br/>
  * 功能描述：聊天单机事件
  * <br/>
@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
  * <br/>
  * 修改备注：
  */
-public interface WeChatMessage2ClickListener<T, V extends RelativeLayout> {
+public interface WeChatMessageLongClickListener<T, V extends RelativeLayout> {
 
     void onItemClickListener(T model, V v);
 }

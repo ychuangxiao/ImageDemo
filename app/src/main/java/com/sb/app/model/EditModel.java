@@ -15,6 +15,7 @@ public class EditModel implements Parcelable {
     private int maxLength;
     private int inputType;
     private int maxLines=1;
+    private String title;
 
     public int getHandleAction() {
         return handleAction;
@@ -64,6 +65,16 @@ public class EditModel implements Parcelable {
         this.maxLines = maxLines;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public EditModel() {
+    }
 
     @Override
     public int describeContents() {
@@ -78,9 +89,7 @@ public class EditModel implements Parcelable {
         dest.writeInt(this.maxLength);
         dest.writeInt(this.inputType);
         dest.writeInt(this.maxLines);
-    }
-
-    public EditModel() {
+        dest.writeString(this.title);
     }
 
     protected EditModel(Parcel in) {
@@ -90,9 +99,10 @@ public class EditModel implements Parcelable {
         this.maxLength = in.readInt();
         this.inputType = in.readInt();
         this.maxLines = in.readInt();
+        this.title = in.readString();
     }
 
-    public static final Parcelable.Creator<EditModel> CREATOR = new Parcelable.Creator<EditModel>() {
+    public static final Creator<EditModel> CREATOR = new Creator<EditModel>() {
         @Override
         public EditModel createFromParcel(Parcel source) {
             return new EditModel(source);

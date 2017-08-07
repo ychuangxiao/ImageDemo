@@ -3,7 +3,9 @@ package com.sb.app.views.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +36,13 @@ public class BottomSheetEditSignFragment extends BottomSheetDialogFragment {
     @BindView(R.id.btnCancelHandle)
     AppCompatButton mBtnCancelHandle;
 
+    @BindView(R.id.tvTitle)
+    AppCompatTextView tvTitle;
+
     EditModel mEditModel;
     private static final String ARG_PARAM1 = "param1";
+    @BindView(R.id.amountTextInputLayout)
+    TextInputLayout mAmountTextInputLayout;
 
 
     public BottomSheetEditSignFragment() {
@@ -94,17 +101,18 @@ public class BottomSheetEditSignFragment extends BottomSheetDialogFragment {
 
 
     public void refreshData(EditModel editModel) {
+        InputFilter[] filters = {new InputFilter.LengthFilter(editModel.getMaxLength())};
+        mEtAmount.setFilters(filters);
+        tvTitle.setText(editModel.getTitle());
 
-
-
+        mAmountTextInputLayout.setHint(editModel.getHintText());
         mEtAmount.setHint(editModel.getHintText());
         mEtAmount.setText(editModel.getText());
         mEtAmount.setSelection(editModel.getText().length());
 
         mEtAmount.setInputType(editModel.getInputType());
 
-        InputFilter[] filters = {new InputFilter.LengthFilter(editModel.getMaxLength())};
-        mEtAmount.setFilters(filters);
+
 
     }
 
@@ -120,18 +128,16 @@ public class BottomSheetEditSignFragment extends BottomSheetDialogFragment {
 
 
         if (StringUtils.isEmpty(mEtAmount.getText().toString())) {
-            ToastUtils.alert(getActivity(), String.format("%s不能为空",mEditModel.getHintText()));
+            ToastUtils.alert(getActivity(), String.format("%s不能为空", mEditModel.getHintText()));
             return;
         }
-
 
 
         if (mDoubleContactClickListener != null) {
             mDoubleContactClickListener.onItemClickListener(Double.parseDouble(mEtAmount.getText().toString()));
 
-             dismiss();
-        }
-        else {
+            dismiss();
+        } else {
             dismiss();
         }
 
@@ -144,4 +150,5 @@ public class BottomSheetEditSignFragment extends BottomSheetDialogFragment {
     public void setDoubleContactClickListener(ContactClickListener<Double> doubleContactClickListener) {
         mDoubleContactClickListener = doubleContactClickListener;
     }
+
 }

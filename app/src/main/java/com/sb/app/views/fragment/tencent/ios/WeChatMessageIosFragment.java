@@ -42,9 +42,9 @@ import com.sb.app.views.fragment.BottomSheetUserFragment;
 import com.sb.app.views.listeners.DateClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
-import com.sb.app.views.listeners.WeChatMessage2ClickListener;
-import com.sb.app.views.viewgroup.ChatFriendMessageItemView;
-import com.sb.app.views.viewgroup.ChatMeMessageItemView;
+import com.sb.app.views.listeners.WeChatMessageLongClickListener;
+import com.sb.app.views.viewgroup.chat.ChatReceivedMessageItemView;
+import com.sb.app.views.viewgroup.chat.ChatSendMessageItemView;
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
 import com.sb.app.views.viewgroup.google.TimeMessageItemView;
 import com.sb.app.views.viewgroup.ios.ChatFriendRedPacketIosItemView;
@@ -75,7 +75,7 @@ import io.realm.Sort;
  * A placeholder fragment containing a simple view.
  */
 public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity implements
-        WeChatMessage2ClickListener<WebChatMessageRealm, RelativeLayout>, RecyclerClickListener<ContactRealm>,
+        WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>, RecyclerClickListener<ContactRealm>,
         DateClickListener {
 
 
@@ -237,8 +237,8 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     ChatFriendRedPacketIosItemView friendRedPacketItemView;
     ChatMeTransferIosItemView meTransferItemView;
     ChatFriendTransferIosItemView friendTransferItemView;
-    ChatMeMessageItemView mMeMessageItemView;
-    ChatFriendMessageItemView mFriendMessageItemView;
+    ChatSendMessageItemView mMeMessageItemView;
+    ChatReceivedMessageItemView mFriendMessageItemView;
     ReceiveRedPacketItemView mReceiveRedPacketItemView;
     TimeMessageItemView mTimeMessageItemView;
 
@@ -305,13 +305,13 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
             case AppConstant.MESSAGE_TYPE_MESSAGE:
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
-                    mMeMessageItemView = ChatMeMessageItemView.build(getActivity());
+                    mMeMessageItemView = ChatSendMessageItemView.build(getActivity());
                     lastSendTime = mMeMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
 
                     weChatLinearLayout.addView(mMeMessageItemView);
 
                 } else {
-                    mFriendMessageItemView = ChatFriendMessageItemView.build(getActivity());
+                    mFriendMessageItemView = ChatReceivedMessageItemView.build(getActivity());
                     lastSendTime = mFriendMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
 
                     weChatLinearLayout.addView(mFriendMessageItemView);
@@ -1006,6 +1006,8 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                                                 modelMobileChangeListener) {
         this.mModelMobileChangeListener = modelMobileChangeListener;
     }
+
+
 
 
     /**

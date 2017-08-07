@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_small"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvChatDateTime"
+            style="@style/WeChat.DateTime"
+
+            android:background="@drawable/bg_date_time_we_chat"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/tvVoiceLength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10.0dip"
+            android:gravity="center"
+            android:text="10''"
+            android:tag="%s''"
+            android:textColor="#ffaaaaaa"
+            android:textSize="15.199982sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/topRedContent"
+            app:layout_constraintTop_toTopOf="@+id/headerImage"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/topRedContent"
+            style="@style/WeChat.Voice"
+            android:layout_marginRight="6.0dip"
+            android:background="@drawable/ic_we_chat_right"
+            android:gravity="left|center"
+            android:src="@mipmap/ic_send_voice"
+            android:text="银鲨你好"
+
+            app:layout_constraintRight_toLeftOf="@+id/headerImage"
+            app:layout_constraintTop_toTopOf="@+id/headerImage"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/headerImage"
+            style="@style/WeChat.HeaderImage"
+            android:layout_marginTop="8.0dip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChatDateTime"
+            app:layout_goneMarginTop="0.0dip"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

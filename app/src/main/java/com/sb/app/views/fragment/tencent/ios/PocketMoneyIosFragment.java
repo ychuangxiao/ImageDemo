@@ -10,7 +10,6 @@ import com.sb.app.model.EditModel;
 import com.sb.app.utils.MathUtils;
 import com.sb.app.views.base.BaseFragment;
 import com.sb.app.views.fragment.BottomSheetEditSignFragment;
-import com.sb.app.views.fragment.tencent.google.PocketMoneyFragment;
 import com.sb.app.views.listeners.ContactClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.data.entitys.realm.ContactRealm;
@@ -89,13 +88,17 @@ public class PocketMoneyIosFragment extends BaseFragment implements ContactClick
      */
     @Override
     public void initView() {
-        mEditModel = new EditModel();
-        mEditModel.setHintText("零钱");
-        mEditModel.setMaxLength(8);
-        mEditModel.setText("");
-        mEditModel.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
 
         mContactRealm = mRealm.where(ContactRealm.class).equalTo("isMe", true).findFirst();
+
+        mEditModel = new EditModel();
+
+        mEditModel.setTitle("修改零钱金额");
+        mEditModel.setHintText("零钱");
+        mEditModel.setMaxLength(11);
+        mEditModel.setText(MathUtils.toString(new BigDecimal(mContactRealm.getMoney().toString())));
+        mEditModel.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+
 
         mTvPocketMoney.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mContactRealm.getMoney().toString()))));
     }
@@ -123,6 +126,7 @@ public class PocketMoneyIosFragment extends BaseFragment implements ContactClick
     @OnClick(R.id.tvPocketMoney)
     void onMoneyClick() {
 
+        mEditModel.setText(MathUtils.toString(new BigDecimal(mContactRealm.getMoney().toString())));
         mBottomSheetEditSignFragment = BottomSheetEditSignFragment.newInstance(mEditModel);
         mBottomSheetEditSignFragment.setDoubleContactClickListener(this);
         mBottomSheetEditSignFragment.show(getActivity().getSupportFragmentManager(), "BottomSheetDateTimeFragment");
