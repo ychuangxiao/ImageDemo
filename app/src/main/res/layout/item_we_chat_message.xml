@@ -14,13 +14,13 @@
     >
 
 
-    <include layout="@layout/row_redpacket_right_we_chat"></include>
+    <include layout="@layout/row_send_redpacket_we_chat"></include>
 
-    <include layout="@layout/row_redpacket_right_we_chat"></include>
+    <include layout="@layout/row_send_redpacket_we_chat"></include>
 
-    <include layout="@layout/row_redpacket_right_we_chat"></include>
+    <include layout="@layout/row_send_redpacket_we_chat"></include>
 
-    <include layout="@layout/row_redpacket_right_we_chat"></include>
+    <include layout="@layout/row_send_redpacket_we_chat"></include>
 
 
 </LinearLayout>

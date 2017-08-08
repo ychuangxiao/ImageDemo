@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatFriendRedPacketItemView extends RelativeLayout {
+public class ReceivedRedPacketItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
@@ -61,13 +61,13 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatFriendRedPacketItemView build(Context context) {
-        ChatFriendRedPacketItemView instance = new ChatFriendRedPacketItemView(context);
+    public static ReceivedRedPacketItemView build(Context context) {
+        ReceivedRedPacketItemView instance = new ReceivedRedPacketItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatFriendRedPacketItemView(Context context) {
+    public ReceivedRedPacketItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -135,7 +135,7 @@ public class ChatFriendRedPacketItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_redpacket_we_chat, this);
+            inflate(getContext(), R.layout.row_received_redpacket_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();

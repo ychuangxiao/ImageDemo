@@ -7,7 +7,7 @@ import com.sb.app.AndroidApplication;
 import com.sb.app.views.adapters.base.RecyclerViewAdapterBase;
 import com.sb.app.views.adapters.base.ViewWrapper;
 import com.sb.app.views.listeners.WeChatMessageClickListener;
-import com.sb.app.views.viewgroup.google.ChatMeRedPacketItemView;
+import com.sb.app.views.viewgroup.google.SendRedPacketItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by admin on 2017/7/23.
  */
 
-public class WeChatMessageAdapter extends RecyclerViewAdapterBase<WebChatMessageRealm, ChatMeRedPacketItemView> {
+public class WeChatMessageAdapter extends RecyclerViewAdapterBase<WebChatMessageRealm, SendRedPacketItemView> {
 
     static Context mContext;
 
@@ -32,15 +32,15 @@ public class WeChatMessageAdapter extends RecyclerViewAdapterBase<WebChatMessage
 
 
     @Override
-    protected ChatMeRedPacketItemView onCreateItemView(ViewGroup parent, int viewType) {
+    protected SendRedPacketItemView onCreateItemView(ViewGroup parent, int viewType) {
 
-        return ChatMeRedPacketItemView.build(mContext);
+        return SendRedPacketItemView.build(mContext);
     }
 
 
     @Override
-    public void onBindViewHolder(ViewWrapper<ChatMeRedPacketItemView> viewHolder, final int position) {
-        ChatMeRedPacketItemView view = viewHolder.getView();
+    public void onBindViewHolder(ViewWrapper<SendRedPacketItemView> viewHolder, final int position) {
+        SendRedPacketItemView view = viewHolder.getView();
         //view.binder(items.get(position));
 
 

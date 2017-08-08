@@ -40,7 +40,7 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatMeTransferIosItemView extends RelativeLayout {
+public class SendTransferIosItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
@@ -68,13 +68,13 @@ public class ChatMeTransferIosItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatMeTransferIosItemView build(Context context) {
-        ChatMeTransferIosItemView instance = new ChatMeTransferIosItemView(context);
+    public static SendTransferIosItemView build(Context context) {
+        SendTransferIosItemView instance = new SendTransferIosItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatMeTransferIosItemView(Context context) {
+    public SendTransferIosItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -124,10 +124,10 @@ public class ChatMeTransferIosItemView extends RelativeLayout {
             mIvRed.setImageResource(R.mipmap.ic_transfer_we_chat);
         }
 
-        mTvTransferExplain.setText(webChatMessageRealm.getMessage());
 
 
-        mTextTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal
+
+        mTvTransferExplain.setText(String.format("￥%s", MathUtils.toString(new BigDecimal
                 (webChatMessageRealm.getAmount()))));
 
 
@@ -142,9 +142,21 @@ public class ChatMeTransferIosItemView extends RelativeLayout {
 
 
         if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
+
+
+            if (StringUtils.isNotEmpty(mChatMessageRealm.getSourceMessage()))
+            {
+                mTextTransferAmount.setText("已收钱");
+            }
+            else {
+                mTextTransferAmount.setText("已被领取");
+            }
+
+
             layoutTransfer.setBackgroundResource(R.drawable.ic_redpacket_right_default);
         } else {
             layoutTransfer.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+            mTextTransferAmount.setText(webChatMessageRealm.getMessage());
         }
         return lastSendTime;
     }
@@ -160,7 +172,7 @@ public class ChatMeTransferIosItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_transfer_right_we_chat, this);
+            inflate(getContext(), R.layout.row_send_transfer_we_chat_ios, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();

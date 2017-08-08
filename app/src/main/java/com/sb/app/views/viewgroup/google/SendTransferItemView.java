@@ -1,11 +1,10 @@
-package com.sb.app.views.viewgroup.ios;
+package com.sb.app.views.viewgroup.google;
 
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +39,7 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatFriendTransferIosItemView extends RelativeLayout {
+public class SendTransferItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
@@ -49,12 +48,12 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
     AppCompatImageView mHeaderImage;
     @BindView(R.id.ivRed)
     AppCompatImageView mIvRed;
+
+
     @BindView(R.id.tvTransferExplain)
     AppCompatTextView mTvTransferExplain;
     @BindView(R.id.textTransferAmount)
     AppCompatTextView mTextTransferAmount;
-    @BindView(R.id.layoutTransfer)
-    LinearLayout layoutTransfer;
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -65,13 +64,13 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatFriendTransferIosItemView build(Context context) {
-        ChatFriendTransferIosItemView instance = new ChatFriendTransferIosItemView(context);
+    public static SendTransferItemView build(Context context) {
+        SendTransferItemView instance = new SendTransferItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatFriendTransferIosItemView(Context context) {
+    public SendTransferItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -85,8 +84,8 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
         mChatMessageRealm = webChatMessageRealm;
-        mTvChatDateTime.setVisibility(View.GONE);
 
+        mTvChatDateTime.setVisibility(View.GONE);
         /*if (isFirst) {
 
             if (lastSendTime < 1L) {
@@ -104,7 +103,6 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
 
         }
 
-
         if (StringUtils.isEmpty(mTvChatDateTime.getText().toString())) {
             mTvChatDateTime.setVisibility(View.GONE);
         } else {
@@ -113,9 +111,7 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
             lastSendTime = webChatMessageRealm.getSendTime();
         }*/
 
-
-        if (webChatMessageRealm.getAmountStatus() != null && webChatMessageRealm.getAmountStatus() == AppConstant
-                .RECEIVED_ACTION_Y) {
+        if (webChatMessageRealm.getAmountStatus() != null &&  webChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
 
             mIvRed.setImageResource(R.mipmap.ic_transfer_received_we_chat);
 
@@ -123,28 +119,24 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
             mIvRed.setImageResource(R.mipmap.ic_transfer_we_chat);
         }
 
-
-        if (webChatMessageRealm.getContactRealm().isSystem()) {
-            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
-                    .getImageIndex()]);
-        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())) {
-            // 加载本地图片
-            File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
-            Glide.with(mContext).load(file).into(mHeaderImage);
-        }
         mTvTransferExplain.setText(webChatMessageRealm.getMessage());
 
 
         mTextTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal
                 (webChatMessageRealm.getAmount()))));
 
-        if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            layoutTransfer.setBackgroundResource(R.drawable.ic_redpacket_left_default);
-        } else {
-            layoutTransfer.setBackgroundResource(R.drawable.ic_left_red_packet_default);
+
+
+        if (webChatMessageRealm.getContactRealm().isSystem()) {
+            mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
+                    .getImageIndex()]);
+        }
+        else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+            // 加载本地图片
+            File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
+            Glide.with(mContext).load(file).into(mHeaderImage);
         }
         return lastSendTime;
-
     }
 
 
@@ -158,11 +150,12 @@ public class ChatFriendTransferIosItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_transfer_we_chat, this);
+            inflate(getContext(), R.layout.row_send_transfer_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
+
 
     WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout> mMessageClickListener;
 

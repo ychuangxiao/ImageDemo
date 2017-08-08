@@ -2,15 +2,9 @@ package com.sb.app.views.activitys.tencent;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,9 +12,8 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.View;
-import android.view.WindowManager;
 
+import com.banditcat.ui.camera.CropImageIntentBuilder;
 import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
@@ -31,7 +24,7 @@ import com.sb.app.views.widget.ClearEditText;
 import com.sb.data.entitys.realm.ContactRealm;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +34,11 @@ import io.realm.Realm;
 public class EditWeChatActivity extends BaseDaggerActivity {
     private static final int PERMISSIONS_EXTERNAL_STORAGE = 801;
     private static final int REQUEST_CODE_PICK_IMAGE = 100;
+
+    private static int REQUEST_PICTURE = 1;
+    private static int REQUEST_CROP_PICTURE = 2;
+
+
     Realm mRealm;
     ContactRealm mContactRealm;
     @BindView(R.id.headerImage)
@@ -54,6 +52,10 @@ public class EditWeChatActivity extends BaseDaggerActivity {
 
     String imagePath;
 
+
+    File saveImageFile;
+
+
     /**
      * 初始化视图，工具条等信息
      */
@@ -61,6 +63,11 @@ public class EditWeChatActivity extends BaseDaggerActivity {
     public void initView() {
         setToolTitle(getString(R.string.title_activity_edit_we_chat)).setDisplayHome(true)
                 .setHomeOnClickListener();
+
+
+        PictureUtil.setAlbumName("sharkman");
+        saveImageFile = new File(PictureUtil.getAlbumDir(), UUID.randomUUID().toString() + ".jpg");
+
         mRealm = Realm.getDefaultInstance();
 
 
@@ -77,8 +84,7 @@ public class EditWeChatActivity extends BaseDaggerActivity {
         if (mContactRealm.isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm
                     .getImageIndex()]);
-        }
-        else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())){
+        } else if (StringUtils.isNotEmpty(mContactRealm.getImgPath())) {
             // 加载本地图片
             File file = new File(mContactRealm.getImgPath());
             Glide.with(this).load(file).into(mHeaderImage);
@@ -166,12 +172,31 @@ public class EditWeChatActivity extends BaseDaggerActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 setFilePath(getRealPathFromURI(uri));
 
+
             }
+        } else if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == RESULT_OK)) {
+
+
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+
+
+                    mContactRealm.setSystem(false);
+                    mContactRealm.setImgPath(saveImageFile.getPath());
+
+                }
+            });
+
+            Glide.with(this).load(saveImageFile).into(mHeaderImage);
+
         }
     }
 
@@ -191,97 +216,25 @@ public class EditWeChatActivity extends BaseDaggerActivity {
     }
 
 
-    private Matrix matrix = new Matrix();
-    private Bitmap bitmap;
 
 
     public void setFilePath(String path) {
 
-        if (this.bitmap != null && !this.bitmap.isRecycled()) {
-            this.bitmap.recycle();
-        }
-
-        if (path == null) {
-            return;
-        }
-
+        File croppedImageFile = new File(path);
         imagePath = path;
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        Bitmap original = BitmapFactory.decodeFile(path, options);
+        Uri saveImage = Uri.fromFile(saveImageFile);
+        Uri croppedImage = Uri.fromFile(croppedImageFile);
 
-        try {
-            ExifInterface exif = new ExifInterface(path);
-            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            Matrix matrix = new Matrix();
-            int rotationInDegrees = PictureUtil.exifToDegrees(rotation);
-            if (rotation != 0f) {
-                matrix.preRotate(rotationInDegrees);
-            }
+        CropImageIntentBuilder cropImage = new CropImageIntentBuilder(200, 200, saveImage);
+        cropImage.setOutlineColor(getResources().getColor(R.color.silver));
+        cropImage.setSourceImage(croppedImage);
 
-            // 图片太大会导致内存泄露，所以在显示前对图片进行裁剪。
-            int maxPreviewImageSize = 2560;
-
-            int min = Math.min(options.outWidth, options.outHeight);
-            min = Math.min(min, maxPreviewImageSize);
-
-            WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-            Point screenSize = new Point();
-            windowManager.getDefaultDisplay().getSize(screenSize);
-            min = Math.min(min, screenSize.x * 2 / 3);
-
-            options.inSampleSize = PictureUtil.calculateInSampleSize(options, min, min);
-            options.inScaled = true;
-            options.inDensity = options.outWidth;
-            options.inTargetDensity = min * options.inSampleSize;
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-
-            options.inJustDecodeBounds = false;
-            this.bitmap = BitmapFactory.decodeFile(path, options);
-        } catch (IOException e) {
-            e.printStackTrace();
-            this.bitmap = original;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        setBitmap(this.bitmap);
-    }
-
-    private void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-        matrix.reset();
-        centerImage(ViewUtils.dip2px(this, 48), ViewUtils.dip2px(this, 48));
+        startActivityForResult(cropImage.getIntent(this), REQUEST_CROP_PICTURE);
 
 
-        mHeaderImage.setImageBitmap(bitmap);
-
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-
-                mContactRealm.setSystem(false);
-                mContactRealm.setImgPath(imagePath);
-
-            }
-        });
 
     }
 
-    private void centerImage(int width, int height) {
-        if (width <= 0 || height <= 0 || bitmap == null) {
-            return;
-        }
-        float widthRatio = 1.0f * height / this.bitmap.getHeight();
-        float heightRatio = 1.0f * width / this.bitmap.getWidth();
 
-        float ratio = Math.min(widthRatio, heightRatio);
-
-        float dx = (width - this.bitmap.getWidth()) / 2;
-        float dy = (height - this.bitmap.getHeight()) / 2;
-        matrix.setTranslate(0, 0);
-        matrix.setScale(ratio, ratio, bitmap.getWidth() / 2, bitmap.getHeight() / 2);
-        matrix.postTranslate(dx, dy);
-    }
 }

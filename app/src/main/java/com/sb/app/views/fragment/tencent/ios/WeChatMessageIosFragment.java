@@ -47,10 +47,10 @@ import com.sb.app.views.viewgroup.chat.ChatReceivedMessageItemView;
 import com.sb.app.views.viewgroup.chat.ChatSendMessageItemView;
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
 import com.sb.app.views.viewgroup.google.TimeMessageItemView;
-import com.sb.app.views.viewgroup.ios.ChatFriendRedPacketIosItemView;
-import com.sb.app.views.viewgroup.ios.ChatFriendTransferIosItemView;
-import com.sb.app.views.viewgroup.ios.ChatMeRedPacketIosItemView;
-import com.sb.app.views.viewgroup.ios.ChatMeTransferIosItemView;
+import com.sb.app.views.viewgroup.ios.ReceivedRedPacketIosItemView;
+import com.sb.app.views.viewgroup.ios.ReceivedTransferIosItemView;
+import com.sb.app.views.viewgroup.ios.SendRedPacketIosItemView;
+import com.sb.app.views.viewgroup.ios.SendTransferIosItemView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.ChatGroupRealm;
@@ -233,10 +233,10 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
 
     ChatGroupRealm chatGroupRealm = null;
 
-    ChatMeRedPacketIosItemView meRedPacketItemView;
-    ChatFriendRedPacketIosItemView friendRedPacketItemView;
-    ChatMeTransferIosItemView meTransferItemView;
-    ChatFriendTransferIosItemView friendTransferItemView;
+    SendRedPacketIosItemView meRedPacketItemView;
+    ReceivedRedPacketIosItemView friendRedPacketItemView;
+    SendTransferIosItemView meTransferItemView;
+    ReceivedTransferIosItemView friendTransferItemView;
     ChatSendMessageItemView mMeMessageItemView;
     ChatReceivedMessageItemView mFriendMessageItemView;
     ReceiveRedPacketItemView mReceiveRedPacketItemView;
@@ -271,14 +271,14 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
             case AppConstant.MESSAGE_TYPE_RED_PACKED:
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
-                    meRedPacketItemView = ChatMeRedPacketIosItemView.build(getActivity());
+                    meRedPacketItemView = SendRedPacketIosItemView.build(getActivity());
                     lastSendTime = meRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
 
                     meRedPacketItemView.setMessageClickListener(this);
                     weChatLinearLayout.addView(meRedPacketItemView);
 
                 } else {
-                    friendRedPacketItemView = ChatFriendRedPacketIosItemView.build(getActivity());
+                    friendRedPacketItemView = ReceivedRedPacketIosItemView.build(getActivity());
                     lastSendTime = friendRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendRedPacketItemView.setMessageClickListener(this);
                     weChatLinearLayout.addView(friendRedPacketItemView);
@@ -289,13 +289,13 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
             case AppConstant.MESSAGE_TYPE_TRANSFER:
 
                 if (webChatMessageRealm.getContactRealm().isMe()) {
-                    meTransferItemView = ChatMeTransferIosItemView.build(getActivity());
+                    meTransferItemView = SendTransferIosItemView.build(getActivity());
                     lastSendTime = meTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     meTransferItemView.setMessageClickListener(this);
                     weChatLinearLayout.addView(meTransferItemView);
 
                 } else {
-                    friendTransferItemView = ChatFriendTransferIosItemView.build(getActivity());
+                    friendTransferItemView = ReceivedTransferIosItemView.build(getActivity());
                     lastSendTime = friendTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendTransferItemView.setMessageClickListener(this);
                     weChatLinearLayout.addView(friendTransferItemView);

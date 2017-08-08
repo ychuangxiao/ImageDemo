@@ -194,6 +194,7 @@ dependencies {
 
     compile project(':domain')
     compile project(':common')
+    compile project(':ui')
 
     // 大神写的这个库可以支持到rxjava2.X
     compile appDependencies.rxJava2Adapter

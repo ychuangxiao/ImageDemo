@@ -162,6 +162,8 @@
             android:label="@string/title_activity_edit_we_chat"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity android:name="com.banditcat.ui.camera.CropImage"/>
     </application>
 
 </manifest>

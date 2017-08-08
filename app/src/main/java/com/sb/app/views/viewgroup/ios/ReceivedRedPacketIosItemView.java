@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * 文件名称：{@link HomeItemView}
  * <br/>
- * 功能描述：我发的转账
+ * 功能描述：朋友发的红包
  * <br/>
  * 创建作者：administrator
  * <br/>
@@ -38,7 +38,8 @@ import butterknife.OnClick;
  * <br/>
  * 修改备注：
  */
-public class ChatMeRedPacketIosItemView extends RelativeLayout {
+public class ReceivedRedPacketIosItemView extends RelativeLayout {
+
 
     @BindView(R.id.tvChatDateTime)
     AppCompatTextView mTvChatDateTime;
@@ -48,9 +49,11 @@ public class ChatMeRedPacketIosItemView extends RelativeLayout {
     AppCompatImageView mIvRed;
     @BindView(R.id.tvRedPacketsDesc)
     AppCompatTextView tvRedPacketsDesc;
+    @BindView(R.id.tvSubDesc)
+    AppCompatTextView tvSubDesc;
+
     @BindView(R.id.redPackedConstraintLayout)
     ConstraintLayout mRedPackedConstraintLayout;
-
     private boolean alreadyInflated = false;
 
     Context mContext;//上下文
@@ -61,13 +64,13 @@ public class ChatMeRedPacketIosItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatMeRedPacketIosItemView build(Context context) {
-        ChatMeRedPacketIosItemView instance = new ChatMeRedPacketIosItemView(context);
+    public static ReceivedRedPacketIosItemView build(Context context) {
+        ReceivedRedPacketIosItemView instance = new ReceivedRedPacketIosItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatMeRedPacketIosItemView(Context context) {
+    public ReceivedRedPacketIosItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -108,13 +111,13 @@ public class ChatMeRedPacketIosItemView extends RelativeLayout {
             lastSendTime = webChatMessageRealm.getSendTime();
         }*/
 
-        tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
+
+
 
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
-        }
-        else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
             // 加载本地图片
             File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
             Glide.with(mContext).load(file).into(mHeaderImage);
@@ -123,12 +126,16 @@ public class ChatMeRedPacketIosItemView extends RelativeLayout {
         mIvRed.setBackground(null);
         if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y)
         {
-            mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_right_default);
+            tvSubDesc.setText("查看详情");
+            tvRedPacketsDesc.setText("红包已被领完");
+                    mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
+            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_left_default);
         }
         else {
-            mIvRed.setBackgroundResource(R.mipmap.ic_red_packet_small);
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
+            tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
+            tvSubDesc.setText("查看红包");
+            mIvRed.setBackgroundResource(R.mipmap.ic_red_packet);
+            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_left_red_packet_default);
         }
 
         return lastSendTime;
@@ -145,12 +152,11 @@ public class ChatMeRedPacketIosItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_redpacket_right_we_chat, this);
+            inflate(getContext(), R.layout.row_received_redpacket_we_chat_ios, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
-
 
     WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 
