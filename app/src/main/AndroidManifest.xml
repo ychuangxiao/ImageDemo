@@ -163,7 +163,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name="com.banditcat.ui.camera.CropImage"/>
+        <activity android:name="com.sb.ui.camera.CropImage"/>
     </application>
 
 </manifest>

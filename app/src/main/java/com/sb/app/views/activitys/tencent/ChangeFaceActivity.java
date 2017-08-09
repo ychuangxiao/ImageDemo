@@ -14,7 +14,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 
-import com.banditcat.ui.camera.CropImageIntentBuilder;
+import com.sb.ui.camera.CropImageIntentBuilder;
 import com.bumptech.glide.Glide;
 import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
