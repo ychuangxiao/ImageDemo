@@ -17,6 +17,8 @@
     <string name="alert_login">登录中...</string>
     <string name="alert_station_move_success">库存调整成功...</string>
     <string name="title_setting_confirm">您确认退出账号吗?</string>
+
+    <string name="title_delete_confirm">您确认删除吗?</string>
     <string name="title_follow_confirm">银鲨网络</string>
 
     <string name="title_un_login_confirm">

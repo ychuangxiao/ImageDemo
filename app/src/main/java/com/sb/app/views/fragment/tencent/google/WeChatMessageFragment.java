@@ -1,11 +1,13 @@
 package com.sb.app.views.fragment.tencent.google;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -40,6 +42,7 @@ import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.fragment.BottomSheetDateTimeFragment;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
 import com.sb.app.views.listeners.DateClickListener;
+import com.sb.app.views.listeners.MessageClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
 import com.sb.app.views.listeners.WeChatMessageLongClickListener;
@@ -76,7 +79,7 @@ import io.realm.Sort;
  */
 public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>, RecyclerClickListener<ContactRealm>,
-        DateClickListener {
+        DateClickListener, MessageClickListener<WebChatMessageRealm, RelativeLayout> {
 
 
     public WeChatMessageFragment() {
@@ -274,12 +277,14 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                     lastSendTime = meRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
 
                     meRedPacketItemView.setMessageClickListener(this);
+                    meRedPacketItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(meRedPacketItemView);
 
                 } else {
                     friendRedPacketItemView = ReceivedRedPacketItemView.build(getActivity());
                     lastSendTime = friendRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendRedPacketItemView.setMessageClickListener(this);
+                    friendRedPacketItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(friendRedPacketItemView);
                 }
 
@@ -291,12 +296,14 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                     meTransferItemView = SendTransferItemView.build(getActivity());
                     lastSendTime = meTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     meTransferItemView.setMessageClickListener(this);
+                    meTransferItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(meTransferItemView);
 
                 } else {
                     friendTransferItemView = ReceivedTransferItemView.build(getActivity());
                     lastSendTime = friendTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendTransferItemView.setMessageClickListener(this);
+                    friendTransferItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(friendTransferItemView);
                 }
                 break;
@@ -306,13 +313,13 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 if (webChatMessageRealm.getContactRealm().isMe()) {
                     mMeMessageItemView = ChatSendMessageItemView.build(getActivity());
                     lastSendTime = mMeMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
-
+                    mMeMessageItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(mMeMessageItemView);
 
                 } else {
                     mFriendMessageItemView = ChatReceivedMessageItemView.build(getActivity());
                     lastSendTime = mFriendMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
-
+                    mFriendMessageItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(mFriendMessageItemView);
                 }
                 break;
@@ -321,12 +328,14 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 mReceiveRedPacketItemView = ReceiveRedPacketItemView.build(getActivity());
 
                 lastSendTime = mReceiveRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
+                mReceiveRedPacketItemView.setMessageLongClickListener(this);
                 weChatLinearLayout.addView(mReceiveRedPacketItemView);
 
                 break;
             case AppConstant.MESSAGE_TYPE_TIME:
                 mTimeMessageItemView = TimeMessageItemView.build(getActivity());
                 mTimeMessageItemView.binder(webChatMessageRealm, null, false);
+                mTimeMessageItemView.setMessageLongClickListener(this);
                 weChatLinearLayout.addView(mTimeMessageItemView);
                 break;
 
@@ -366,6 +375,7 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
         mBottomNavigationView.setVisibility(View.GONE);
 
+        builder   =  new AlertDialog.Builder(getActivity());
         //获取用户信息
 
         chatGroupRealm = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant
@@ -843,9 +853,120 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         return true;
     }
 
-    @Override
-    public void onItemClickListener(final WebChatMessageRealm model, RelativeLayout relativeLayout) {
 
+    @Override
+    public void onItemClickListener(ContactRealm model) {
+        defaultUserId = model.getUserId();
+        mBottomSheetUserFragment.setOnChooseUserItemClickListener(null);
+        mBottomSheetUserFragment.onDestroy();
+        mBottomSheetUserFragment = null;
+
+    }
+
+
+    MobileChangeListener<WeChatModel> mModelMobileChangeListener;
+
+    public void setMobileChangeListener(MobileChangeListener<WeChatModel>
+                                                modelMobileChangeListener) {
+        this.mModelMobileChangeListener = modelMobileChangeListener;
+    }
+
+
+    /**
+     * 加载数据
+     *
+     * @param model
+     */
+    public void loadViewData(WeChatModel model) {
+        mBottomNavigationView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onItemClickListener(final Long model) {
+        chooseSendTime = model;
+        lastSendTime = model;
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                WebChatMessageRealm webChatMessageRealm;
+
+
+                webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+                webChatMessageRealm.setSendTime(chooseSendTime);
+                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TIME);
+                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
+                createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
+
+                //如果选择了时间，那么后面的时间就要跟着这个时间的 年月日 走
+            }
+        });
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mNestedScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    private Long mergerSendTime(Long time) {
+
+
+        if (chooseSendTime > 0L) {
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(chooseSendTime);
+
+
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTimeInMillis(time);
+
+
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                            .get(Calendar.DAY_OF_MONTH), calendar2.get(Calendar.HOUR_OF_DAY), calendar2.get(Calendar
+                            .MINUTE),
+                    calendar2.get(Calendar.SECOND));
+
+            return calendar.getTimeInMillis();
+
+
+        } else {
+            return time;
+        }
+    }
+
+    AlertDialog.Builder builder;
+
+    @Override
+    public void onItemLongClickListener(final WebChatMessageRealm model, final RelativeLayout relativeLayout) {
+
+
+        builder.setMessage(getResources().getString(R.string.title_delete_confirm)).setPositiveButton
+                (getResources().getString(R.string
+                        .title_setting_confirm_yes), new DialogInterface.OnClickListener() {// 退出按钮
+                    public void onClick(DialogInterface dialog, int i) {
+
+
+                        mRealm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                model.deleteFromRealm();
+                            }
+                        });
+
+                        refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
+
+
+                    }
+                }).setNegativeButton(getResources().getString(R.string.title_setting_confirm_no), null).show
+                ();// 显示对话框
+
+    }
+
+
+    @Override
+    public void onMessageClickListener(final WebChatMessageRealm model, RelativeLayout relativeLayout) {
         Intent intent;
         //如果是转账
         if (model.getMessageType() == AppConstant.MESSAGE_TYPE_TRANSFER) {
@@ -937,16 +1058,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
             } else {
 
 
-                /*mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        model.deleteFromRealm();
-                    }
-                });
-
-                refreshData(relativeLayout.getScrollX(),relativeLayout.getScrollY());
-*/
-
                 //判断发送者是谁
 
                 if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
@@ -977,90 +1088,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 navigateActivity(intent);
             }
 
-        }
-
-    }
-
-
-    @Override
-    public void onItemClickListener(ContactRealm model) {
-        defaultUserId = model.getUserId();
-        mBottomSheetUserFragment.setOnChooseUserItemClickListener(null);
-        mBottomSheetUserFragment.onDestroy();
-        mBottomSheetUserFragment = null;
-
-    }
-
-
-    MobileChangeListener<WeChatModel> mModelMobileChangeListener;
-
-    public void setMobileChangeListener(MobileChangeListener<WeChatModel>
-                                                modelMobileChangeListener) {
-        this.mModelMobileChangeListener = modelMobileChangeListener;
-    }
-
-
-    /**
-     * 加载数据
-     *
-     * @param model
-     */
-    public void loadViewData(WeChatModel model) {
-        mBottomNavigationView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onItemClickListener(final Long model) {
-        chooseSendTime = model;
-        lastSendTime = model;
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-                WebChatMessageRealm webChatMessageRealm;
-
-
-                webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
-                webChatMessageRealm.setSendTime(chooseSendTime);
-                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_TIME);
-                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
-                createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
-
-                //如果选择了时间，那么后面的时间就要跟着这个时间的 年月日 走
-            }
-        });
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                mNestedScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
-    }
-
-    private Long mergerSendTime(Long time) {
-
-
-        if (chooseSendTime > 0L) {
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(chooseSendTime);
-
-
-            Calendar calendar2 = Calendar.getInstance();
-            calendar2.setTimeInMillis(time);
-
-
-            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
-                            .get(Calendar.DAY_OF_MONTH), calendar2.get(Calendar.HOUR_OF_DAY), calendar2.get(Calendar
-                            .MINUTE),
-                    calendar2.get(Calendar.SECOND));
-
-            return calendar.getTimeInMillis();
-
-
-        } else {
-            return time;
         }
     }
 }

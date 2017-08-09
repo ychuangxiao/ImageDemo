@@ -8,11 +8,13 @@ import android.widget.RelativeLayout;
 
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
+import com.sb.app.views.listeners.WeChatMessageLongClickListener;
 import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnLongClick;
 
 /**
  * 文件名称：{@link HomeItemView}
@@ -58,11 +60,14 @@ public class TimeMessageItemView extends RelativeLayout {
     }
 
 
+    WebChatMessageRealm mChatMessageRealm;
+
     /**
      * 绑定消息
      */
     public void binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
+        mChatMessageRealm = webChatMessageRealm;
         mTvMessage.setVisibility(View.GONE);
 
         mTvChatDateTime.setText(TimeUtils.getFirstDateTime(webChatMessageRealm.getSendTime(), System
@@ -87,4 +92,21 @@ public class TimeMessageItemView extends RelativeLayout {
     }
 
 
+    @OnLongClick(R.id.messageContainer)
+            boolean onMessageLongClick()
+    {
+        if(mMessageLongClickListener != null)
+        {
+            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm,this);
+        }
+
+        return  true;
+    }
+
+    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageLongClickListener;
+
+    public void setMessageLongClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
+                                                    messageLongClickListener) {
+        mMessageLongClickListener = messageLongClickListener;
+    }
 }

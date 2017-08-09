@@ -13,6 +13,7 @@ import com.ilogie.android.library.common.util.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.ViewUtils;
+import com.sb.app.views.listeners.MessageClickListener;
 import com.sb.app.views.listeners.WeChatMessageLongClickListener;
 import com.sb.app.views.viewgroup.HomeItemView;
 import com.sb.data.entitys.realm.WebChatMessageRealm;
@@ -22,6 +23,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 /**
  * 文件名称：{@link HomeItemView}
@@ -155,17 +157,37 @@ public class SendRedPacketIosItemView extends RelativeLayout {
     }
 
 
-    WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout> mMessageClickListener;
+    MessageClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
 
-    public void setMessageClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
+    public void setMessageClickListener(MessageClickListener<WebChatMessageRealm, RelativeLayout>
                                                 messageClickListener) {
         mMessageClickListener = messageClickListener;
     }
 
     @OnClick(R.id.redPackedConstraintLayout)
-    void onMessageClick() {
-        if (mMessageClickListener != null) {
-            mMessageClickListener.onItemClickListener(mChatMessageRealm, this);
+    void onMessageClick()
+    {
+        if (mMessageClickListener != null)
+        {
+            mMessageClickListener.onMessageClickListener(mChatMessageRealm,this);
         }
+    }
+
+    @OnLongClick(R.id.redPackedConstraintLayout)
+    boolean onMessageLongClick()
+    {
+        if(mMessageLongClickListener != null)
+        {
+            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm,this);
+        }
+
+        return  true;
+    }
+
+    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageLongClickListener;
+
+    public void setMessageLongClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
+                                                    messageLongClickListener) {
+        mMessageLongClickListener = messageLongClickListener;
     }
 }

@@ -1,11 +1,13 @@
 package com.sb.app.views.fragment.tencent.ios;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -40,6 +42,7 @@ import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.fragment.BottomSheetDateTimeFragment;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
 import com.sb.app.views.listeners.DateClickListener;
+import com.sb.app.views.listeners.MessageClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
 import com.sb.app.views.listeners.WeChatMessageLongClickListener;
@@ -76,7 +79,7 @@ import io.realm.Sort;
  */
 public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity implements
         WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>, RecyclerClickListener<ContactRealm>,
-        DateClickListener {
+        DateClickListener,MessageClickListener<WebChatMessageRealm, RelativeLayout> {
 
 
     public WeChatMessageIosFragment() {
@@ -366,7 +369,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     public void initView() {
 
         mBottomNavigationView.setVisibility(View.GONE);
-
+        builder   =  new AlertDialog.Builder(getActivity());
         //获取用户信息
 
         chatGroupRealm = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant
@@ -844,150 +847,6 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
         return true;
     }
 
-    @Override
-    public void onItemClickListener(final WebChatMessageRealm model, final RelativeLayout relativeLayout) {
-
-        Intent intent;
-        //如果是转账
-        if (model.getMessageType() == AppConstant.MESSAGE_TYPE_TRANSFER) {
-            //判断钱被收了没有
-            if (model.getAmountStatus() != AppConstant.RECEIVED_ACTION_Y) {
-
-
-                //看看当前选中的用户是那个人
-                intent = new Intent(getActivity(), TransferConfirmActivity.class);
-                RedPackedDetailsModel model1 = new RedPackedDetailsModel();
-                model1.setCurrentUserId(defaultUserId);
-
-                //判断是谁发的
-
-                model1.setSendUserId(model.getContactRealm().getUserId());
-                model1.setReceivedUserId(model.getSendContact().getUserId());
-
-
-                model1.setMessageId(model.getId());
-                model1.setGroupId(model.getGroupId());
-                intent.putExtra(AppConstant.EXTRA_NO, model1);
-
-                navigateActivity(intent, AppConstant.REQUEST_CODE);
-
-            } else {
-
-                intent = new Intent(getActivity(), TransferSuccessActivity.class);
-                RedPackedDetailsModel model1 = new RedPackedDetailsModel();
-                model1.setCurrentUserId(defaultUserId);
-                model1.setMessageId(model.getId());
-                model1.setGroupId(model.getGroupId());
-
-                //这里还是要判断下谁转的账单
-
-                //说明是对方收了
-                if(StringUtils.isNotEmpty(model.getSourceMessage())){
-                    model1.setSendUserId(model.getSendContact().getUserId());
-                    model1.setReceivedUserId(model.getContactRealm().getUserId());
-                }
-                else
-                {
-                    model1.setSendUserId(model.getContactRealm().getUserId());
-                    model1.setReceivedUserId(model.getSendContact().getUserId());
-                }
-
-
-
-
-
-
-                intent.putExtra(AppConstant.EXTRA_NO, model1);
-
-                navigateActivity(intent);
-
-            }
-        }
-        if (model.getMessageType() == AppConstant.MESSAGE_TYPE_RED_PACKED) {
-            //如果没有收，那么就收
-
-            if (model.getAmountStatus() != AppConstant.RECEIVED_ACTION_Y) {
-
-                mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        model.setAmountStatus(AppConstant.RECEIVED_ACTION_Y);
-
-
-                        WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID
-                                .randomUUID().toString());
-
-                        //添加一条消息
-                        //说明是我点的
-                        if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
-
-                            model.setSendContact(otherContactRealm);
-                            webChatMessageRealm.setContactRealm(otherContactRealm);
-                        } else {
-                            webChatMessageRealm.setContactRealm(meContactRealm);
-                            model.setSendContact(meContactRealm);//发红包这个记录的接受者是哪个
-
-                        }
-                        webChatMessageRealm.setSendContact(model.getContactRealm());
-                        webChatMessageRealm.setGroupId(mWeChatModel.getGroupId());
-                        webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RECEIVE_RED_PACKET);
-                        webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
-                        webChatMessageRealm.setSourceMessage(model.getId());
-                        webChatMessageRealm.setAmount(model.getAmount());
-                        webChatMessageRealm.setAmountStatus(AppConstant.RECEIVED_ACTION_Y);
-                        createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
-
-                        refreshData(relativeLayout.getScrollX(),relativeLayout.getScrollY());
-
-                    }
-                });
-
-            } else {
-
-
-                /*mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        model.deleteFromRealm();
-                    }
-                });
-
-                refreshData(relativeLayout.getScrollX(),relativeLayout.getScrollY());
-*/
-
-                //判断发送者是谁
-
-                if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
-
-                    intent = new Intent(getActivity(), RedPacketsDetailActivity.class);
-
-                    RedPackedDetailsModel model1 = new RedPackedDetailsModel();
-
-                    model1.setSendUserId(model.getContactRealm().getUserId());
-                    model1.setReceivedUserId(model.getSendContact().getUserId());
-                    model1.setMessageId(model.getId());
-                    model1.setGroupId(model.getGroupId());
-                    intent.putExtra(AppConstant.EXTRA_NO, model1);
-
-                } else {
-                    intent = new Intent(getActivity(), FriendRedPacketsDetailActivity.class);
-
-                    RedPackedDetailsModel model1 = new RedPackedDetailsModel();
-
-                    model1.setSendUserId(model.getContactRealm().getUserId());
-                    model1.setReceivedUserId(model.getSendContact().getUserId());
-                    model1.setMessageId(model.getId());
-                    model1.setGroupId(model.getGroupId());
-                    intent.putExtra(AppConstant.EXTRA_NO, model1);
-
-                }
-
-                navigateActivity(intent);
-            }
-
-        }
-
-    }
 
 
     @Override
@@ -1072,6 +931,161 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
 
         } else {
             return time;
+        }
+    }
+
+    AlertDialog.Builder builder ;
+
+    @Override
+    public void onItemLongClickListener(final WebChatMessageRealm model, final RelativeLayout relativeLayout) {
+
+
+        builder.setMessage(getResources().getString(R.string.title_delete_confirm)).setPositiveButton
+                (getResources().getString(R.string
+                        .title_setting_confirm_yes), new DialogInterface.OnClickListener() {// 退出按钮
+                    public void onClick(DialogInterface dialog, int i) {
+
+
+                        mRealm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                model.deleteFromRealm();
+                            }
+                        });
+
+                        refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
+
+
+                    }
+                }).setNegativeButton(getResources().getString(R.string.title_setting_confirm_no), null).show
+                ();// 显示对话框
+
+    }
+
+
+    @Override
+    public void onMessageClickListener(final WebChatMessageRealm model, RelativeLayout relativeLayout) {
+        Intent intent;
+        //如果是转账
+        if (model.getMessageType() == AppConstant.MESSAGE_TYPE_TRANSFER) {
+            //判断钱被收了没有
+            if (model.getAmountStatus() != AppConstant.RECEIVED_ACTION_Y) {
+
+
+                //当前用户：
+
+                intent = new Intent(getActivity(), TransferConfirmActivity.class);
+                RedPackedDetailsModel model1 = new RedPackedDetailsModel();
+                model1.setCurrentUserId(defaultUserId);
+
+                //判断是谁发的
+
+                model1.setSendUserId(model.getContactRealm().getUserId());
+                model1.setReceivedUserId(model.getSendContact().getUserId());
+
+
+                model1.setMessageId(model.getId());
+                model1.setGroupId(model.getGroupId());
+                intent.putExtra(AppConstant.EXTRA_NO, model1);
+
+                navigateActivity(intent, AppConstant.REQUEST_CODE);
+
+            } else {
+
+                intent = new Intent(getActivity(), TransferSuccessActivity.class);
+                RedPackedDetailsModel model1 = new RedPackedDetailsModel();
+                model1.setCurrentUserId(defaultUserId);
+                model1.setMessageId(model.getId());
+                model1.setGroupId(model.getGroupId());
+
+                //这里还是要判断下谁转的账单
+
+                //说明是对方收了
+                if (StringUtils.isNotEmpty(model.getSourceMessage())) {
+                    model1.setSendUserId(model.getSendContact().getUserId());
+                    model1.setReceivedUserId(model.getContactRealm().getUserId());
+                } else {
+                    model1.setSendUserId(model.getContactRealm().getUserId());
+                    model1.setReceivedUserId(model.getSendContact().getUserId());
+                }
+
+
+                intent.putExtra(AppConstant.EXTRA_NO, model1);
+
+                navigateActivity(intent);
+
+            }
+        }
+        if (model.getMessageType() == AppConstant.MESSAGE_TYPE_RED_PACKED) {
+            //如果没有收，那么就收
+
+            if (model.getAmountStatus() != AppConstant.RECEIVED_ACTION_Y) {
+
+                mRealm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        model.setAmountStatus(AppConstant.RECEIVED_ACTION_Y);
+
+
+                        WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID
+                                .randomUUID().toString());
+
+                        //添加一条消息
+                        //说明是我点的
+                        if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
+
+                            model.setSendContact(otherContactRealm);
+                            webChatMessageRealm.setContactRealm(otherContactRealm);
+                        } else {
+                            webChatMessageRealm.setContactRealm(meContactRealm);
+                            model.setSendContact(meContactRealm);//发红包这个记录的接受者是哪个
+
+                        }
+                        webChatMessageRealm.setSendContact(model.getContactRealm());
+                        webChatMessageRealm.setGroupId(mWeChatModel.getGroupId());
+                        webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RECEIVE_RED_PACKET);
+                        webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
+                        webChatMessageRealm.setSourceMessage(model.getId());
+                        webChatMessageRealm.setAmount(model.getAmount());
+                        webChatMessageRealm.setAmountStatus(AppConstant.RECEIVED_ACTION_Y);
+                        createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
+
+                    }
+                });
+
+            } else {
+
+
+                //判断发送者是谁
+
+                if (model.getContactRealm().getUserId().equals(meContactRealm.getUserId())) {
+
+                    intent = new Intent(getActivity(), RedPacketsDetailActivity.class);
+
+                    RedPackedDetailsModel model1 = new RedPackedDetailsModel();
+
+                    model1.setSendUserId(model.getContactRealm().getUserId());
+                    model1.setReceivedUserId(model.getSendContact().getUserId());
+                    model1.setMessageId(model.getId());
+                    model1.setGroupId(model.getGroupId());
+                    intent.putExtra(AppConstant.EXTRA_NO, model1);
+
+                } else {
+                    intent = new Intent(getActivity(), FriendRedPacketsDetailActivity.class);
+
+                    RedPackedDetailsModel model1 = new RedPackedDetailsModel();
+
+                    model1.setSendUserId(model.getContactRealm().getUserId());
+                    model1.setReceivedUserId(model.getSendContact().getUserId());
+                    model1.setMessageId(model.getId());
+                    model1.setGroupId(model.getGroupId());
+                    intent.putExtra(AppConstant.EXTRA_NO, model1);
+
+                }
+
+                navigateActivity(intent);
+            }
+
         }
     }
 }
