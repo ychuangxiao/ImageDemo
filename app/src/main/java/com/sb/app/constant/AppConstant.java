@@ -56,6 +56,8 @@ public class AppConstant {
     public static final int MESSAGE_TYPE_RECEIVE_RED_PACKET = 40;
     public static final int MESSAGE_TYPE_RECEIVE_TRANSFER = 50;
     public static final int MESSAGE_TYPE_TIME = 60;
+    public static final int MESSAGE_TYPE_RETRACT = 70;
+
 
     public static final int MESSAGE_TYPE_OTHER_SEND_TRANSFER = 3;
     public static final int MESSAGE_TYPE_ME_SEND_TRANSFER = 4;
@@ -93,4 +95,8 @@ public class AppConstant {
     public static final String CARRIER_CHINA_YD = "中国移动";
     public static final String CARRIER_CHINA_LT = "中国联通";
     public static final String CARRIER_CHINA_DX = "中国电信";
+
+
+    public static final int LONG_CLICK_DELETE=1;
+    public static final int LONG_CLICK_CANCEL=2;
 }

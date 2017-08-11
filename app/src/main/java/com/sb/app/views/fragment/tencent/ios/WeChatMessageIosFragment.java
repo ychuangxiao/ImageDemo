@@ -12,9 +12,12 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,6 +52,7 @@ import com.sb.app.views.listeners.WeChatMessageLongClickListener;
 import com.sb.app.views.viewgroup.chat.ChatReceivedMessageItemView;
 import com.sb.app.views.viewgroup.chat.ChatSendMessageItemView;
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
+import com.sb.app.views.viewgroup.google.RetractMessageItemView;
 import com.sb.app.views.viewgroup.google.TimeMessageItemView;
 import com.sb.app.views.viewgroup.ios.ReceivedRedPacketIosItemView;
 import com.sb.app.views.viewgroup.ios.ReceivedTransferIosItemView;
@@ -168,6 +172,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     @BindView(R.id.btnPlus)
     AppCompatImageView btnPlus;
 
+    PopupMenu mLongClickPopupMenu;//长按菜单
 
     BottomSheetUserFragment mBottomSheetUserFragment;
 
@@ -244,7 +249,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     ChatReceivedMessageItemView mFriendMessageItemView;
     ReceiveRedPacketItemView mReceiveRedPacketItemView;
     TimeMessageItemView mTimeMessageItemView;
-
+    RetractMessageItemView mRetractMessageItemView;
     private void refreshData(final int x, final int y) {
 
         weChatLinearLayout.removeAllViews();
@@ -278,12 +283,14 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                     lastSendTime = meRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
 
                     meRedPacketItemView.setMessageClickListener(this);
+                    meRedPacketItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(meRedPacketItemView);
 
                 } else {
                     friendRedPacketItemView = ReceivedRedPacketIosItemView.build(getActivity());
                     lastSendTime = friendRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendRedPacketItemView.setMessageClickListener(this);
+                    friendRedPacketItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(friendRedPacketItemView);
                 }
 
@@ -295,12 +302,14 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                     meTransferItemView = SendTransferIosItemView.build(getActivity());
                     lastSendTime = meTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     meTransferItemView.setMessageClickListener(this);
+                    meTransferItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(meTransferItemView);
 
                 } else {
                     friendTransferItemView = ReceivedTransferIosItemView.build(getActivity());
                     lastSendTime = friendTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendTransferItemView.setMessageClickListener(this);
+                    friendRedPacketItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(friendTransferItemView);
                 }
                 break;
@@ -310,28 +319,40 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                 if (webChatMessageRealm.getContactRealm().isMe()) {
                     mMeMessageItemView = ChatSendMessageItemView.build(getActivity());
                     lastSendTime = mMeMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
-
+                    mMeMessageItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(mMeMessageItemView);
 
                 } else {
                     mFriendMessageItemView = ChatReceivedMessageItemView.build(getActivity());
                     lastSendTime = mFriendMessageItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
-
+                    mFriendMessageItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(mFriendMessageItemView);
                 }
                 break;
             case AppConstant.MESSAGE_TYPE_RECEIVE_RED_PACKET:
 
                 mReceiveRedPacketItemView = ReceiveRedPacketItemView.build(getActivity());
-
+                mReceiveRedPacketItemView.setMessageLongClickListener(this);
                 lastSendTime = mReceiveRedPacketItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
+
                 weChatLinearLayout.addView(mReceiveRedPacketItemView);
 
                 break;
             case AppConstant.MESSAGE_TYPE_TIME:
+
                 mTimeMessageItemView = TimeMessageItemView.build(getActivity());
+                mTimeMessageItemView.setMessageLongClickListener(this);
                 mTimeMessageItemView.binder(webChatMessageRealm, null, false);
                 weChatLinearLayout.addView(mTimeMessageItemView);
+                break;
+            case AppConstant.MESSAGE_TYPE_RETRACT:
+
+                mRetractMessageItemView = RetractMessageItemView.build(getActivity());
+                mRetractMessageItemView.setMessageLongClickListener(this);
+                mRetractMessageItemView.binder(webChatMessageRealm);
+                mRetractMessageItemView.setMessageLongClickListener(this);
+                weChatLinearLayout.addView(mRetractMessageItemView);
+
                 break;
 
         }
@@ -617,6 +638,31 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
         weChatLinearLayout.removeAllViews();
         lastSendTime = 0L;
     }
+
+
+    @OnClick(R.id.relativeLayout8)
+    void onRetractClick()
+    {
+        createRetractMessage();
+    }
+
+    /**
+     * 创建撤回消息
+     */
+    private void createRetractMessage() {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+                webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
+                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RETRACT);
+                webChatMessageRealm.setMessage("你撤回了一条消息");
+                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
+                createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
+            }
+        });
+    }
+
 
 
     @OnClick(R.id.sendTimeRelativeLayout)
@@ -940,11 +986,49 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     public void onItemLongClickListener(final WebChatMessageRealm model, final RelativeLayout relativeLayout) {
 
 
-        builder.setMessage(getResources().getString(R.string.title_delete_confirm)).setPositiveButton
-                (getResources().getString(R.string
-                        .title_setting_confirm_yes), new DialogInterface.OnClickListener() {// 退出按钮
-                    public void onClick(DialogInterface dialog, int i) {
+        mLongClickPopupMenu = new PopupMenu(getActivity(), relativeLayout);
+        mLongClickPopupMenu.getMenu().setGroupCheckable(0, true, true);
 
+
+        mLongClickPopupMenu.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
+        mLongClickPopupMenu.getMenu().add("删除").setTitleCondensed
+                (String.valueOf
+                        (AppConstant.LONG_CLICK_DELETE));
+
+
+
+        if (model.getMessageType() != AppConstant.MESSAGE_TYPE_RETRACT)
+        {
+            mLongClickPopupMenu.getMenu().add("撤回").setTitleCondensed
+                    (String.valueOf
+                            (AppConstant.LONG_CLICK_CANCEL));
+        }
+
+
+
+        mLongClickPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener
+                () {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+
+                switch (Integer.parseInt(item.getTitleCondensed().toString())) {
+                    case AppConstant.LONG_CLICK_DELETE:
+                        mRealm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                model.deleteFromRealm();
+                            }
+                        });
+
+                        refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
+                        break;
+                    case AppConstant.LONG_CLICK_CANCEL:
+
+                        createRetractMessage();
 
                         mRealm.executeTransaction(new Realm.Transaction() {
                             @Override
@@ -956,9 +1040,14 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                         refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
 
 
-                    }
-                }).setNegativeButton(getResources().getString(R.string.title_setting_confirm_no), null).show
-                ();// 显示对话框
+
+                        break;
+                }
+
+                return false;
+            }
+        });
+        mLongClickPopupMenu.show();
 
     }
 

@@ -20,16 +20,16 @@
         />
 
     <android.support.v7.widget.AppCompatTextView
+
+        style="@style/WeChat.Center.Message"
+
         android:id="@+id/tvMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
         android:layout_below="@+id/tvChatDateTime"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="5.0dip"
-        android:background="@drawable/bg_time"
+
         android:text="你已添加了，现在可以开始聊天了。"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_14"
+
 
 
         />

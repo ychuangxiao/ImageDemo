@@ -12,9 +12,12 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,6 +53,7 @@ import com.sb.app.views.viewgroup.chat.ChatReceivedMessageItemView;
 import com.sb.app.views.viewgroup.google.ReceivedRedPacketItemView;
 import com.sb.app.views.viewgroup.google.ReceivedTransferItemView;
 import com.sb.app.views.viewgroup.chat.ChatSendMessageItemView;
+import com.sb.app.views.viewgroup.google.RetractMessageItemView;
 import com.sb.app.views.viewgroup.google.SendRedPacketItemView;
 import com.sb.app.views.viewgroup.google.SendTransferItemView;
 import com.sb.app.views.viewgroup.chat.ReceiveRedPacketItemView;
@@ -73,6 +77,9 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
+
+import static com.sb.app.constant.AppConstant.MOBILE_ANDROID;
+import static com.sb.app.constant.AppConstant.MOBILE_IOS;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -156,19 +163,17 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
     AppCompatTextView mTvRetract;
     @BindView(R.id.relativeLayout8)
     RelativeLayout mRelativeLayout8;
-
     @BindView(R.id.relativeLayout9)
     RelativeLayout relativeLayout9;
-
     @BindView(R.id.tvClear)
     AppCompatTextView tvClear;
-
-
     @BindView(R.id.chatTypeConstraintLayout)
     ConstraintLayout chatTypeConstraintLayout;
     @BindView(R.id.btnPlus)
     AppCompatImageView btnPlus;
 
+
+    PopupMenu mLongClickPopupMenu;//长按菜单
 
     BottomSheetUserFragment mBottomSheetUserFragment;
 
@@ -243,6 +248,7 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
     ChatReceivedMessageItemView mFriendMessageItemView;
     ReceiveRedPacketItemView mReceiveRedPacketItemView;
     TimeMessageItemView mTimeMessageItemView;
+    RetractMessageItemView mRetractMessageItemView;
 
     private void refreshData(final int x, final int y) {
 
@@ -338,6 +344,14 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 mTimeMessageItemView.setMessageLongClickListener(this);
                 weChatLinearLayout.addView(mTimeMessageItemView);
                 break;
+            case AppConstant.MESSAGE_TYPE_RETRACT:
+
+                mRetractMessageItemView = RetractMessageItemView.build(getActivity());
+                mRetractMessageItemView.binder(webChatMessageRealm);
+                mRetractMessageItemView.setMessageLongClickListener(this);
+                weChatLinearLayout.addView(mRetractMessageItemView);
+
+                break;
 
         }
 
@@ -375,7 +389,7 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
         mBottomNavigationView.setVisibility(View.GONE);
 
-        builder   =  new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity());
         //获取用户信息
 
         chatGroupRealm = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant
@@ -624,6 +638,12 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         lastSendTime = 0L;
     }
 
+
+    @OnClick(R.id.relativeLayout8)
+    void onRetractClick()
+    {
+        createRetractMessage();
+    }
 
     @OnClick(R.id.sendTimeRelativeLayout)
     void onSendTimeClick() {
@@ -942,11 +962,49 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
     public void onItemLongClickListener(final WebChatMessageRealm model, final RelativeLayout relativeLayout) {
 
 
-        builder.setMessage(getResources().getString(R.string.title_delete_confirm)).setPositiveButton
-                (getResources().getString(R.string
-                        .title_setting_confirm_yes), new DialogInterface.OnClickListener() {// 退出按钮
-                    public void onClick(DialogInterface dialog, int i) {
+        mLongClickPopupMenu = new PopupMenu(getActivity(), relativeLayout);
+        mLongClickPopupMenu.getMenu().setGroupCheckable(0, true, true);
 
+
+        mLongClickPopupMenu.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
+        mLongClickPopupMenu.getMenu().add("删除").setTitleCondensed
+                (String.valueOf
+                        (AppConstant.LONG_CLICK_DELETE));
+
+
+
+        if (model.getMessageType() != AppConstant.MESSAGE_TYPE_RETRACT)
+        {
+            mLongClickPopupMenu.getMenu().add("撤回").setTitleCondensed
+                    (String.valueOf
+                            (AppConstant.LONG_CLICK_CANCEL));
+        }
+
+
+
+        mLongClickPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener
+                () {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+
+                switch (Integer.parseInt(item.getTitleCondensed().toString())) {
+                    case AppConstant.LONG_CLICK_DELETE:
+                        mRealm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                model.deleteFromRealm();
+                            }
+                        });
+
+                        refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
+                        break;
+                    case AppConstant.LONG_CLICK_CANCEL:
+
+                        createRetractMessage();
 
                         mRealm.executeTransaction(new Realm.Transaction() {
                             @Override
@@ -958,10 +1016,33 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                         refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
 
 
-                    }
-                }).setNegativeButton(getResources().getString(R.string.title_setting_confirm_no), null).show
-                ();// 显示对话框
 
+
+                        break;
+                }
+
+                return false;
+            }
+        });
+        mLongClickPopupMenu.show();
+
+    }
+
+    /**
+     * 创建撤回消息
+     */
+    private void createRetractMessage() {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+                webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
+                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RETRACT);
+                webChatMessageRealm.setMessage("你撤回了一条消息");
+                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
+                createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
+            }
+        });
     }
 
 
