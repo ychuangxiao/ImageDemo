@@ -309,7 +309,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
                     friendTransferItemView = ReceivedTransferIosItemView.build(getActivity());
                     lastSendTime = friendTransferItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
                     friendTransferItemView.setMessageClickListener(this);
-                    friendRedPacketItemView.setMessageLongClickListener(this);
+                    friendTransferItemView.setMessageLongClickListener(this);
                     weChatLinearLayout.addView(friendTransferItemView);
                 }
                 break;

@@ -59,6 +59,7 @@ public class ReceiveRedPacketItemView extends RelativeLayout {
         super(context);
         mContext = context;
     }
+
     WebChatMessageRealm mChatMessageRealm;
 
     /**
@@ -66,7 +67,7 @@ public class ReceiveRedPacketItemView extends RelativeLayout {
      */
     public long binder(WebChatMessageRealm webChatMessageRealm, Long lastSendTime, boolean isFirst) {
 
-
+        mChatMessageRealm = webChatMessageRealm;
         if (isFirst) {
 
             if (lastSendTime < 1L) {
@@ -96,23 +97,18 @@ public class ReceiveRedPacketItemView extends RelativeLayout {
 
         //判断下来源
 
-        if (webChatMessageRealm.getContactRealm().isMe())
-        {
-            if (StringUtils.isEmpty(webChatMessageRealm.getSendContact().getUserNick()))
-            {
+        if (webChatMessageRealm.getContactRealm().isMe()) {
+            if (StringUtils.isEmpty(webChatMessageRealm.getSendContact().getUserNick())) {
                 mTvRedPacketDetails.setText("你领取了的");
-            }
-            else {
-                mTvRedPacketDetails.setText("你领取了"+ webChatMessageRealm.getSendContact().getUserNick() + "的");
+            } else {
+                mTvRedPacketDetails.setText("你领取了" + webChatMessageRealm.getSendContact().getUserNick() + "的");
             }
 
 
-        }
-        else {
+        } else {
             mTvRedPacketDetails.setText(webChatMessageRealm.getContactRealm().getUserNick() + "领取了你的");
 
         }
-
 
 
         return lastSendTime;
@@ -137,17 +133,15 @@ public class ReceiveRedPacketItemView extends RelativeLayout {
     }
 
     @OnLongClick(R.id.messageContainer)
-    boolean onMessageLongClick()
-    {
-        if(mMessageLongClickListener != null)
-        {
-            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm,this);
+    boolean onMessageLongClick() {
+        if (mMessageLongClickListener != null) {
+            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm, this);
         }
 
-        return  true;
+        return true;
     }
 
-    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageLongClickListener;
+    WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout> mMessageLongClickListener;
 
     public void setMessageLongClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
                                                     messageLongClickListener) {
