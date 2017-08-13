@@ -18,7 +18,7 @@ ext {
             javaxAnnotationVersion   : '1.0',
             okHttpVersion            : '3.5.0',
             androidAnnotationsVersion: '21.0.3',
-            supportVersion           : '25.3.1',
+            supportVersion           : '26.0.1',
             swipeToLoadLayoutVersion : '1.0.4',
             rxJava2AdapterVersion    : '1.0.0',
             constraintVersion        : '1.0.2',
@@ -43,7 +43,7 @@ ext {
             assertJVersion          : '1.7.1',
             mockitoVersion          : '2.0.54-beta',
             dexmakerVersion         : '1.0',
-            espressoVersion         : '2.0',
+            espressoVersion         : '3.0.0',
             testingSupportLibVersion: '0.1'
     ]
 
@@ -51,12 +51,12 @@ ext {
     configuration = [
 
             applicationId    : "com.sb.app",
-            buildToolsVersion: "25.0.3",
+            buildToolsVersion: "26.0.0",
             minSdkVersion    : 16,
-            targetSdkVersion : 25,
-            compileSdkVersion: 25,
-            versionCode      : 5,
-            versionName      : "1.0.7"
+            targetSdkVersion : 26,
+            compileSdkVersion: 26,
+            versionCode      : 1,
+            versionName      : "1.0.0"
     ]
 
 
@@ -97,15 +97,14 @@ ext {
             adapterxjava          : "com.squareup.retrofit2:adapter-rxjava:${libraries.retrofitVersion}",
             okhttpLogInterceptor  : "com.squareup.okhttp3:logging-interceptor:${libraries.okHttpVersion}",
             realm                 : "io.realm:realm-android:${libraries.realmVersion}",
-            dbflowCompiler        : "com.github.Raizlabs.DBFlow:dbflow-processor:${libraries.dbflowVersion}",
-            dbflowCore            : "com.github.Raizlabs.DBFlow:dbflow-core:${libraries.dbflowVersion}",
-            dbflow                : "com.github.Raizlabs.DBFlow:dbflow:${libraries.dbflowVersion}",
-            dbflowKotlinextensions: "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${libraries.dbflowVersion}",
-            dbflowSqlcipher       : "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${libraries.dbflowVersion}",
+            roundedImageview      : "com.makeramen:roundedimageview:2.3.0"
     ]
 
     //test
     appTestDependencies = [
+
+
+            runner            : "com.android.support.test:runner:1.0.0",
             junit            : "junit:junit:${tests.jUnitVersion}",
             assertj          : "org.assertj:assertj-core:${tests.assertJVersion}",
             robolectric      : "org.robolectric:robolectric:${tests.robolectricVersion}",

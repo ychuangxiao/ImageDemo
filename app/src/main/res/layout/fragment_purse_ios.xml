@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWeChatBackground"
+    tools:context="com.sb.app.views.fragment.tencent.google.PurseFragment"
+     >
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/moneyConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#ff686f78"
+        android:paddingBottom="35.0dip"
+        android:paddingTop="35.0dip"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv1"
+            style="@style/Purse.TextView.Ios"
+            android:layout_width="0dp"
+
+            android:drawableTop="@mipmap/ic_wallet_pay"
+            android:text="收付款"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvPocketMoney"
+            app:layout_constraintRight_toRightOf="parent"
+
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvPocketMoney"
+            style="@style/Purse.TextView.Ios"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_wallet_small_charge"
+            android:text="零钱"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tv1"
+            app:layout_constraintRight_toLeftOf="@+id/tv3"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv3"
+            style="@style/Purse.TextView.Ios"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/ic_wallet_bankcard"
+            android:text="银行卡"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/tvPocketMoney"
+
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥999,999,999.00"
+            android:textColor="#ffb7bdc6"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPocketMoney"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTencentServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+
+        android:paddingLeft="12.0dip"
+        android:paddingTop="7dip"
+        android:paddingBottom="7.0dip"
+        android:text="腾讯服务"
+        android:textColor="@color/wechat_color_ff666666"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintTop_toBottomOf="@+id/moneyConstraintLayout"
+        />
+
+
+    <View
+        android:id="@+id/topHorizontalLine"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTencentServer"/>
+
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topHorizontalLine">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout2"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_7"
+                android:text="信用卡还款"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout2"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout1"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout3"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_10"
+                android:text="微粒贷借钱"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout3"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_2"
+                android:text="手机充值"
+
+
+                />
+        </RelativeLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine1"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout1"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine1">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout5"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_3"
+                android:text="理财通"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout5"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout5"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout4"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout6"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_5"
+                android:text="生活缴费"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout6"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout6"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_4"
+                android:text="Q币充值"
+
+
+                />
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine2"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout2"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine2">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout7"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="150dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout8"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_6"
+                android:text="城市服务"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout8"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout8"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout7"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout9"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_8"
+                android:text="腾讯公益"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout9"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout9"
+            style="@style/Purse.RelativeLayout.Server"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout8"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/horizontalLine3"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout3"/>
+
+    <TextView
+        android:id="@+id/tvTencentServer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+
+        android:paddingLeft="12.0dip"
+        android:paddingTop="7dip"
+        android:paddingBottom="7.0dip"
+        android:text="限时推广"
+        android:textColor="@color/wechat_color_ff666666"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine3"
+        />
+
+    <View
+        android:id="@+id/horizontalLine4"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTencentServer2"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine4">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout10"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout11"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_9"
+                android:text="摩拜单车"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout11"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:clickable="false"
+            android:id="@+id/relativeLayout11"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout10"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout12"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:clickable="false"
+            android:id="@+id/relativeLayout12"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout11"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine5"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout4"/>
+
+
+    <TextView
+        android:id="@+id/tvTencentServer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="7dip"
+        android:paddingBottom="7.0dip"
+        android:paddingLeft="12.0dip"
+
+        android:text="第三方服务"
+        android:textColor="@color/wechat_color_ff666666"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine5"
+        />
+
+    <View
+        android:id="@+id/horizontalLine6"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTencentServer3"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine6">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout13"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout14"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_11"
+                android:text="火车票机票"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout14"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout14"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout13"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout15"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_12"
+                android:text="滴滴出行"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout15"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout15"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout14"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_13"
+                android:text="京东优选"
+
+
+                />
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/horizontalLine7"
+        style="@style/Purse.Horizontal.Line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverConstraintLayout5"/>
+
+    <android.support.constraint.ConstraintLayout
+
+
+        android:id="@+id/serverConstraintLayout6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine7">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout16"
+            style="@style/Purse.RelativeLayout.Server"
+            android:layout_height="50dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout17"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_14"
+                android:text="美团外卖"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout17"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout17"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout16"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout18"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_15"
+                android:text="电影演出赛事"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+
+            style="@style/Purse.Vertical.Line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/relativeLayout18"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout18"
+            style="@style/Purse.RelativeLayout.Server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/relativeLayout17"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+
+                style="@style/Purse.TextView.Server.Ios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/ic_purse_16"
+                android:text="吃喝玩乐"
+
+
+                />
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

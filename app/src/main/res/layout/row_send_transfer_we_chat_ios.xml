@@ -10,6 +10,7 @@
               android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
+        android:fontFamily="@font/apple"
         android:id="@+id/tvChatDateTime"
         style="@style/WeChat.DateTime"
         android:layout_width="wrap_content"
@@ -65,6 +66,7 @@
                     android:paddingLeft="6.0dip">
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:fontFamily="@font/apple"
                         android:paddingRight="3.0dip"
                         android:id="@+id/tvTransferExplain"
                         android:layout_width="wrap_content"
@@ -81,6 +83,7 @@
                        />
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:fontFamily="@font/apple"
                         android:id="@+id/textTransferAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,6 +104,7 @@
                 android:layout_alignParentBottom="true">
 
                 <android.support.v7.widget.AppCompatTextView
+                    android:fontFamily="@font/apple"
                     android:layout_width="match_parent"
                     android:layout_height="20.0dip"
                     android:layout_centerVertical="true"

@@ -24,6 +24,9 @@ import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.PurseFragment;
+import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
+import com.sb.app.views.fragment.tencent.ios.PurseIosFragment;
+import com.sb.app.views.fragment.tencent.ios.WeChatMessageIosFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
@@ -75,6 +78,9 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
     PurseFragment mPurseFragment;
     String mPurseFragmentTag = "PurseFragment";
 
+
+    PurseIosFragment mPurseIosFragment;
+    String mPurseIosFragmentTag = "PurseIosFragment";
 
 
     BizComponent mBizComponent;
@@ -217,21 +223,52 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
 
                             navigation.setVisibility(View.GONE);
 
-                            if (mPurseFragment != null) {
 
-                                showFragment(mPurseFragment);
+                            switch (mMobileStyleRealm.getMobileVersion()) {
+                                case TextConstant.MOBILE_VERSION_IOS:
 
 
-                            } else {
+                                    if (mPurseIosFragment != null) {
 
-                                mPurseFragment = PurseFragment
-                                        .newInstance(navigation);
-                                addFragment(R.id.content, mPurseFragment,
-                                        mPurseFragmentTag);
+                                        showFragment(mPurseIosFragment);
 
-                                mPurseFragment.setMobileChangeListener
-                                        (PurseActivity.this);
+
+                                    } else {
+
+                                        mPurseIosFragment = PurseIosFragment
+                                                .newInstance(navigation);
+                                        addFragment(R.id.content, mPurseIosFragment,
+                                                mPurseIosFragmentTag);
+
+                                        mPurseIosFragment.setMobileChangeListener
+                                                (PurseActivity.this);
+                                    }
+
+                                    break;
+                                case TextConstant.MOBILE_VERSION_ANDROID_4:
+
+                                    if (mPurseFragment != null) {
+
+                                        showFragment(mPurseFragment);
+
+
+                                    } else {
+
+                                        mPurseFragment = PurseFragment
+                                                .newInstance(navigation);
+                                        addFragment(R.id.content, mPurseFragment,
+                                                mPurseFragmentTag);
+
+                                        mPurseFragment.setMobileChangeListener
+                                                (PurseActivity.this);
+                                    }
+
+                                    break;
                             }
+
+
+
+
 
 
                             return true;
@@ -360,6 +397,13 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
             hideFragment(mMobileStyleForDatabaseFragment);
         }
 
+        fragment = getSupportFragmentManager().findFragmentByTag(mPurseIosFragmentTag);
+
+        if (fragment != null) {
+            mPurseIosFragment = (PurseIosFragment) fragment;
+
+            hideFragment(mPurseIosFragment);
+        }
 
 
     }

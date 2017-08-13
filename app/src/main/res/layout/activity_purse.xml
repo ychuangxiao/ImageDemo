@@ -18,16 +18,21 @@
         >
 
 
-        <FrameLayout
-            android:id="@+id/content"
-
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+            <FrameLayout
+                android:id="@+id/content"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
 
 
-        </FrameLayout>
+            </FrameLayout>
+        </android.support.v4.widget.NestedScrollView>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"

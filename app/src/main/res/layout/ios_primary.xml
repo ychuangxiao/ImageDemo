@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="2dp"
         android:text="返回"
+        style="@style/TextView.Ios"
         android:textColor="@color/colorHandleLine"
         android:textSize="@dimen/top_title_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +36,7 @@
         android:id="@+id/topTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        style="@style/TextView.Ios"
         android:text="账单详情"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"

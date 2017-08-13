@@ -110,7 +110,7 @@ public class PocketMoneyIosFragment extends BaseFragment implements ContactClick
      */
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_pocket_money;
+        return R.layout.fragment_pocket_money_ios;
     }
 
     MobileChangeListener<MobileStyleRealm> mModelMobileChangeListener;

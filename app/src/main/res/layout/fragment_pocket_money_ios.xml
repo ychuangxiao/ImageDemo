@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context="com.sb.app.views.fragment.tencent.google.PocketMoneyFragment"
+    >
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/topPayImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_pay_diamond"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvMoney"
+        style="@style/TextView.Ios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:text="我的零钱"
+        android:textColor="#ff000000"
+        android:textSize="14.0sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topPayImage"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvPocketMoney"
+        style="@style/TextView.Ios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:text="￥0.00"
+        android:textColor="#ff333333"
+        android:textSize="42.0sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMoney"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnHandle"
+        style="@style/TextView.Ios"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:background="@drawable/btn_bg_pocket_money"
+        android:text="充值"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_size_14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPocketMoney"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnHandleOut"
+        style="@style/TextView.Ios"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:background="@drawable/btn_bg_pocket_money_out"
+        android:text="提现"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_size_14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHandle"/>
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv1"
+        android:layout_width="16.0dip"
+        android:layout_height="16.0dip"
+        android:layout_gravity="center_vertical"
+
+        android:src="@mipmap/ic_purse_3"
+        app:layout_constraintRight_toLeftOf="@+id/tv2"
+        app:layout_constraintTop_toTopOf="@+id/tv2"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv2"
+        style="@style/TextView.Ios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        android:paddingTop="2dip"
+        android:paddingLeft="@dimen/padding_tiny"
+        android:text="零钱理财，让零钱安稳赚收益"
+        android:textColor="#ff4e70ad"
+        android:textSize="@dimen/font_size_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHandleOut"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/TextView.Ios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:layout_marginTop="4.0dip"
+        android:text="常见问题"
+        android:textColor="#ff6881c1"
+        android:textSize="@dimen/font_size_10"
+        app:layout_constraintBottom_toTopOf="@+id/tvServerInfo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvServerInfo"
+        style="@style/TextView.Ios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:layout_marginTop="4.0dip"
+        android:text="本服务由财付通提供"
+        android:textColor="#ff9e9e9e"
+        android:textSize="@dimen/font_size_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+</android.support.constraint.ConstraintLayout>

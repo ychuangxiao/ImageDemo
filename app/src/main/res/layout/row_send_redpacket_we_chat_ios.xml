@@ -16,6 +16,7 @@
 
 
         <android.support.v7.widget.AppCompatTextView
+            android:fontFamily="@font/apple"
             android:id="@+id/tvChatDateTime"
             style="@style/WeChat.DateTime"
             android:background="@drawable/bg_date_time_we_chat"
@@ -73,7 +74,8 @@ android:id="@+id/redPackedConstraintLayout"
                    app:layout_constraintLeft_toRightOf="@+id/ivRed"
                    app:layout_constraintTop_toTopOf="parent">
 
-                   <TextView
+                   <android.support.v7.widget.AppCompatTextView
+                       android:fontFamily="@font/apple"
                        app:layout_constraintRight_toRightOf="parent"
                        app:layout_constraintLeft_toLeftOf="parent"
                        android:id="@+id/tvRedPacketsDesc"
@@ -89,7 +91,8 @@ android:id="@+id/redPackedConstraintLayout"
                        android:textColor="#ffffffff"
                        android:textSize="14.0sp"/>
 
-                   <TextView
+                   <android.support.v7.widget.AppCompatTextView
+                       android:fontFamily="@font/apple"
                        android:id="@+id/tvSubDesc"
                        app:layout_constraintTop_toBottomOf="@+id/tvRedPacketsDesc"
                        android:layout_width="wrap_content"
@@ -102,6 +105,7 @@ android:id="@+id/redPackedConstraintLayout"
            </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.AppCompatTextView
+                android:fontFamily="@font/apple"
                 android:paddingLeft="10.599976dip"
                 style="@style/WeChat.RedPacket.Source"
                 android:text="微信红包"

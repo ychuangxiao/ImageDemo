@@ -3,21 +3,23 @@ apply from: 'buildsystem/system.gradle'//引用系统配置
 
 buildscript {
 
-    def currentVersion = '3.4.0'
+
+    def currentVersion = '3.5.0'
 
 
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha8'
         classpath "io.realm:realm-gradle-plugin:${currentVersion}"
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven { url "https://jitpack.io" }
         flatDir {

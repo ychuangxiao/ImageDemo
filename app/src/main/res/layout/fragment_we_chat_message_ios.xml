@@ -183,7 +183,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvPhoto"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="图片"
@@ -203,7 +203,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvCamera"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="拍摄"
@@ -223,7 +223,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvVideoChat"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="视频聊天"
@@ -244,7 +244,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvRedPacket"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="红包"
@@ -267,7 +267,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvTransfer"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -302,7 +302,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvChatDateTime"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -323,7 +323,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvVoice"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -343,7 +343,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tvRetract"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -362,8 +362,9 @@
                     >
 
                     <android.support.v7.widget.AppCompatTextView
+                        
                         android:id="@+id/tvClear"
-                        style="@style/Purse.TextView.Server"
+                        style="@style/Purse.TextView.Server.Ios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 

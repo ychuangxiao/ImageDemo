@@ -37,61 +37,62 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
 
 
     buildTypes {
-        release {
-            signingConfig signingConfigs.rf_release_config
-            minifyEnabled true
-            zipAlignEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
+        applicationVariants.all { variant ->
 
-                if (variant.buildType.name.equals('release')) {
-                    variant.outputs.each { output ->
-                        def outputFile = output.outputFile
-                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+            if (variant.buildType.name.equals('release')) {
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
 
-                            def fileName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
-                                    "(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
-                            output.outputFile = new File(outputFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}", fileName)
-                        }
-                        if (variant.getBuildType().isMinifyEnabled()) {
-                            variant.assemble.doLast {
-                                copy {
-                                    from variant.mappingFile
-                                    into output.outputFile.parent + "/mapping"
-                                    rename { String fileName ->
-                                        "mapping-${variant.name}.txt"
-                                    }
+                        def apkName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
+                                "_(${releaseTime()})_(${defaultConfig.versionName})_${defaultConfig.versionCode}.apk"
+
+                        println "路径=" + outputFile.parentFile.parent
+                        variant.assemble.doLast {
+
+
+                            def outApkFilePath = outputFile.parentFile.parentFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}"
+
+                            def outMappingFilePath = outApkFilePath + "/mapping"
+
+                            copy {
+
+                                from(output.outputFile)
+                                into(new File(outApkFilePath))
+                                rename {
+                                    String fileName ->
+                                        apkName
+                                }
+                            }
+
+                            copy {
+                                from(variant.mappingFile)
+                                into(new File(outMappingFilePath))
+                                rename { String fileName ->
+                                    "mapping-${variant.name.replaceAll("Release","_release")}.txt"
                                 }
                             }
                         }
-                    }
-                }
 
+                    }
+
+                }
             }
+
         }
 
         debug {
 
             signingConfig signingConfigs.rf_release_config
-            applicationVariants.all { variant ->
-                if (variant.buildType.name.equals('debug')) {
-                    variant.outputs.each { output ->
-                        def outputFile = output.outputFile
-                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
-
-
-                            def fileName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("debug", "")}(v${defaultConfig.versionName})(${releaseTime()}).${globalConfiguration.configuration.versionCode}.apk"
-
-                            output.outputFile = new File(outputFile.parent, fileName)
-                        }
-                    }
-                }
-            }
         }
 
 
@@ -134,11 +135,14 @@ android {
         abortOnError false
     }
 
+
+    flavorDimensions "appFlavors"
     productFlavors {
 
 
         sharkman
                 {
+                    dimension "appFlavors"
                     resValue "string", "app_name", "银鲨截图"//我要截图
                     manifestPlaceholders = [
                             icon: "@mipmap/ic_launcher"
@@ -151,62 +155,44 @@ android {
 
 
     }
+
 }
 dependencies {
     def appDependencies = rootProject.ext.appDependencies
     def appTestDependencies = rootProject.ext.appTestDependencies
-
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(name: 'ilogie-android-library-release', ext: 'aar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor appDependencies.guava
     annotationProcessor appDependencies.daggerCompiler
     annotationProcessor fileTree(dir: 'compile-libs', include: ['*.jar'])
-    testCompile appTestDependencies.junit
-    compile(name: 'ilogie-android-library-release', ext: 'aar')
-    //ilogie library
-    compile appDependencies.appcompat
-    //
-    compile appDependencies.design
-    compile appDependencies.vectorDrawable
+    //系统
+    implementation appDependencies.appcompat
+    implementation appDependencies.design
+    implementation appDependencies.vectorDrawable
+    implementation appDependencies.supportv4
+    implementation appDependencies.constraint
+    implementation appDependencies.rxAndroid2
+    implementation appDependencies.rxJava2Adapter
+    implementation appDependencies.rxJava2
+    implementation appDependencies.dagger
+    implementation appDependencies.retrofit
+    implementation appDependencies.converterGson
+    implementation appDependencies.butterKnife
+    implementation appDependencies.annotationProcessor
+    implementation appDependencies.materialdatetimepicker
+    //第三方
+    implementation appDependencies.swipeToLoadLayout
+    implementation appDependencies.roundedImageview
+    implementation appDependencies.glide
+    testImplementation appTestDependencies.junit
+    androidTestImplementation appTestDependencies.runner
+    androidTestImplementation appTestDependencies.espresso
 
-    //
-    compile appDependencies.cardview
-    //
-    compile appDependencies.rxAndroid2
-    //
-    compile appDependencies.rxJava2
-    //
-    compile appDependencies.dagger
-    //
-    compile appDependencies.retrofit
-    //
-    compile appDependencies.converterGson
-
-    //
-    compile appDependencies.butterKnife
-    //视图注解
-    compile appDependencies.annotationProcessor
-    //butterKnife注解处理器
-
-    compile appDependencies.materialdatetimepicker
-
-    compile project(':domain')
+    compile 'javax.inject:javax.inject:1'
     compile project(':common')
+    compile project(':domain')
     compile project(':ui')
-
-    // 大神写的这个库可以支持到rxjava2.X
-    compile appDependencies.rxJava2Adapter
-    compile appDependencies.supportv4
-    compile appDependencies.constraint
-    compile appDependencies.swipeToLoadLayout
-
-    compile 'com.makeramen:roundedimageview:2.3.0'
-
-
-    compile appDependencies.glide
-
-
-
 }

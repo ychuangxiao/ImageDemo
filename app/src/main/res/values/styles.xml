@@ -423,6 +423,9 @@
     </style>
 
 
+
+
+
     <style name="Purse.RelativeLayout.Server" parent="">
 
         <item name="android:layout_width">0dp</item>
@@ -666,5 +669,79 @@
         <item name="android:layout_marginRight">@dimen/margin_tiny</item>
 
     </style>
+
+    <!--ios 样式-->
+
+
+
+    <style name="Purse.TextView.Ios" parent="TextView.Ios">
+
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_12</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">6.0dip</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+
+    <style name="Purse.TextView.Server.Ios" parent="TextView.Ios">
+        <item name="android:paddingLeft">@dimen/padding_small</item>
+        <item name="android:paddingRight">@dimen/padding_small</item>
+
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_10</item>
+
+        <item name="android:textColor">@color/wechat_color_ff666666</item>
+        <item name="android:clickable">false</item>
+        <item name="android:drawablePadding">12.0dip</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+    <style name="TextView.Ios">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:fontFamily">@font/apple</item>
+    </style>
+
+    <style name="TextView.Left.Ios" parent="TextView.Ios">
+        <item name="android:textSize">@dimen/font_size_15</item>
+        <item name="android:textColor">@color/colorLeftTitle</item>
+    </style>
+
+
+    <style name="WeChatTextView.Ios" parent="TextView.Ios">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:background">@drawable/bg_item_selected</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">12.0dip</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:paddingLeft">16.0dip</item>
+        <item name="android:paddingTop">8.0dip</item>
+        <item name="android:paddingRight">16.0dip</item>
+        <item name="android:paddingBottom">8.0dip</item>
+    </style>
+
+    <style name="TextView.Right.Black.Ios" parent="TextView.Right.Ios">
+
+        <item name="android:textColor">@color/colorBlack</item>
+
+    </style>
+
+    <style name="TextView.Right.Ios" parent="TextView.Ios">
+        <item name="android:textSize">@dimen/font_size_15</item>
+        <item name="android:textColor">@color/colorRightTitle</item>
+
+
+    </style>
+
 
 </resources>
