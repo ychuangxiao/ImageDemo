@@ -44,12 +44,16 @@ import com.sb.app.views.activitys.tencent.transfer.TransferSuccessActivity;
 import com.sb.app.views.base.BaseFragmentDaggerActivity;
 import com.sb.app.views.fragment.BottomSheetDateTimeFragment;
 import com.sb.app.views.fragment.BottomSheetUserFragment;
+import com.sb.app.views.fragment.BottomSheetVoiceFragment;
 import com.sb.app.views.listeners.DateClickListener;
 import com.sb.app.views.listeners.MessageClickListener;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.listeners.RecyclerClickListener;
+import com.sb.app.views.listeners.VoiceClickListener;
 import com.sb.app.views.listeners.WeChatMessageLongClickListener;
 import com.sb.app.views.viewgroup.chat.ChatReceivedMessageItemView;
+import com.sb.app.views.viewgroup.google.ChatReceiveVoiceItemView;
+import com.sb.app.views.viewgroup.google.ChatSendVoiceItemView;
 import com.sb.app.views.viewgroup.google.ReceivedRedPacketItemView;
 import com.sb.app.views.viewgroup.google.ReceivedTransferItemView;
 import com.sb.app.views.viewgroup.chat.ChatSendMessageItemView;
@@ -86,7 +90,7 @@ import static com.sb.app.constant.AppConstant.MOBILE_IOS;
  */
 public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>, RecyclerClickListener<ContactRealm>,
-        DateClickListener, MessageClickListener<WebChatMessageRealm, RelativeLayout> {
+        DateClickListener, MessageClickListener<WebChatMessageRealm, RelativeLayout>, VoiceClickListener {
 
 
     public WeChatMessageFragment() {
@@ -179,6 +183,8 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
     BottomSheetDateTimeFragment mBottomSheetDateTimeFragment;
 
+    BottomSheetVoiceFragment mBottomSheetVoiceFragment;
+
     String mFragmentTag = "BottomSheetUserFragment";
 
 
@@ -249,6 +255,8 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
     ReceiveRedPacketItemView mReceiveRedPacketItemView;
     TimeMessageItemView mTimeMessageItemView;
     RetractMessageItemView mRetractMessageItemView;
+    ChatSendVoiceItemView mChatSendVoiceItemView;
+    ChatReceiveVoiceItemView mChatReceiveVoiceItemView;
 
     private void refreshData(final int x, final int y) {
 
@@ -351,6 +359,23 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                 mRetractMessageItemView.setMessageLongClickListener(this);
                 weChatLinearLayout.addView(mRetractMessageItemView);
 
+                break;
+            case AppConstant.MESSAGE_TYPE_VOICE:
+
+                if (webChatMessageRealm.getContactRealm().isMe()) {
+                    mChatSendVoiceItemView = ChatSendVoiceItemView.build(getActivity());
+                    mChatSendVoiceItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
+                    mChatSendVoiceItemView.setMessageLongClickListener(this);
+                    weChatLinearLayout.addView(mChatSendVoiceItemView);
+                }
+                else {
+
+                    mChatReceiveVoiceItemView = ChatReceiveVoiceItemView.build(getActivity());
+                    mChatReceiveVoiceItemView.binder(webChatMessageRealm, lastSendTime, isFirst);
+                    mChatReceiveVoiceItemView.setMessageLongClickListener(this);
+                    weChatLinearLayout.addView(mChatReceiveVoiceItemView);
+
+                }
                 break;
 
         }
@@ -640,9 +665,18 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
 
 
     @OnClick(R.id.relativeLayout8)
-    void onRetractClick()
-    {
+    void onRetractClick() {
         createRetractMessage();
+    }
+
+    @OnClick(R.id.relativeLayout7)
+    void onVoiceClick() {
+        if (mBottomSheetVoiceFragment == null) {
+            mBottomSheetVoiceFragment = BottomSheetVoiceFragment.newInstance();
+            mBottomSheetVoiceFragment.setVoiceClickListener(this);
+        }
+
+        mBottomSheetVoiceFragment.show(getActivity().getSupportFragmentManager(), "BottomSheetVoiceFragment");
     }
 
     @OnClick(R.id.sendTimeRelativeLayout)
@@ -974,14 +1008,11 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                         (AppConstant.LONG_CLICK_DELETE));
 
 
-
-        if (model.getMessageType() != AppConstant.MESSAGE_TYPE_RETRACT)
-        {
+        if (model.getMessageType() != AppConstant.MESSAGE_TYPE_RETRACT) {
             mLongClickPopupMenu.getMenu().add("撤回").setTitleCondensed
                     (String.valueOf
                             (AppConstant.LONG_CLICK_CANCEL));
         }
-
 
 
         mLongClickPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener
@@ -1016,8 +1047,6 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
                         refreshData(relativeLayout.getScrollX(), relativeLayout.getScrollY());
 
 
-
-
                         break;
                 }
 
@@ -1035,7 +1064,8 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID.randomUUID().toString());
+                WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID
+                        .randomUUID().toString());
                 webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
                 webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_RETRACT);
                 webChatMessageRealm.setMessage("你撤回了一条消息");
@@ -1170,5 +1200,31 @@ public class WeChatMessageFragment extends BaseFragmentDaggerActivity implements
             }
 
         }
+    }
+
+    @Override
+    public void onVoiceClickListener(final Integer time) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                WebChatMessageRealm webChatMessageRealm = realm.createObject(WebChatMessageRealm.class, UUID
+                        .randomUUID().toString());
+
+
+                if (defaultUserId.equals(meContactRealm.getUserId()))
+                {
+                    webChatMessageRealm.setContactRealm(meContactRealm);
+                }
+                else {
+                    webChatMessageRealm.setContactRealm(otherContactRealm);
+                }
+
+                webChatMessageRealm.setSendTime(mergerSendTime(System.currentTimeMillis()));
+                webChatMessageRealm.setMessageType(AppConstant.MESSAGE_TYPE_VOICE);
+                webChatMessageRealm.setMessage(time.toString());
+                webChatMessageRealm.setGroupId(chatGroupRealm.getId());
+                createMessageLayout(webChatMessageRealm, (lastSendTime == 0L));
+            }
+        });
     }
 }

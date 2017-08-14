@@ -1,10 +1,11 @@
-package com.sb.app.views.viewgroup.chat;
+package com.sb.app.views.viewgroup.google;
 
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ import butterknife.OnLongClick;
  * <br/>
  * 修改备注：
  */
-public class ChatSendVoiceItemView extends RelativeLayout {
+public class ChatReceiveVoiceItemView extends RelativeLayout {
 
 
     @BindView(R.id.tvChatDateTime)
@@ -45,10 +46,11 @@ public class ChatSendVoiceItemView extends RelativeLayout {
     @BindView(R.id.headerImage)
     AppCompatImageView mHeaderImage;
 
-    @BindView(R.id.topRedContent)
-    AppCompatTextView mTopRedContent;
+
     @BindView(R.id.tvVoiceLength)
     TextView mTvVoiceLength;
+    @BindView(R.id.topRedContent)
+    AppCompatImageView mTopRedContent;
 
 
     private boolean alreadyInflated = false;
@@ -61,13 +63,13 @@ public class ChatSendVoiceItemView extends RelativeLayout {
      * @param context 上下文
      * @return
      */
-    public static ChatSendVoiceItemView build(Context context) {
-        ChatSendVoiceItemView instance = new ChatSendVoiceItemView(context);
+    public static ChatReceiveVoiceItemView build(Context context) {
+        ChatReceiveVoiceItemView instance = new ChatReceiveVoiceItemView(context);
         instance.onFinishInflate();
         return instance;
     }
 
-    public ChatSendVoiceItemView(Context context) {
+    public ChatReceiveVoiceItemView(Context context) {
         super(context);
         mContext = context;
     }
@@ -117,7 +119,12 @@ public class ChatSendVoiceItemView extends RelativeLayout {
             File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
             Glide.with(mContext).load(file).into(mHeaderImage);
         }
-        mTopRedContent.setText(webChatMessageRealm.getMessage());
+        mTvVoiceLength.setText(webChatMessageRealm.getMessage() + "''");
+
+        ViewGroup.LayoutParams params = mTopRedContent.getLayoutParams();
+
+        params.width =  (params.width + ( ViewUtils.dip2px(mContext,Integer.parseInt(webChatMessageRealm.getMessage()))));
+        mTopRedContent.setLayoutParams(params);
 
         return lastSendTime;
 
@@ -134,24 +141,22 @@ public class ChatSendVoiceItemView extends RelativeLayout {
     public void onFinishInflate() {
         if (!alreadyInflated) {
             alreadyInflated = true;
-            inflate(getContext(), R.layout.row_send_voice_we_chat, this);
+            inflate(getContext(), R.layout.row_received_voice_we_chat, this);
             ButterKnife.bind(this);
         }
         super.onFinishInflate();
     }
 
     @OnLongClick(R.id.messageContainer)
-    boolean onMessageLongClick()
-    {
-        if(mMessageLongClickListener != null)
-        {
-            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm,this);
+    boolean onMessageLongClick() {
+        if (mMessageLongClickListener != null) {
+            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm, this);
         }
 
-        return  true;
+        return true;
     }
 
-    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageLongClickListener;
+    WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout> mMessageLongClickListener;
 
     public void setMessageLongClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
                                                     messageLongClickListener) {

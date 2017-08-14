@@ -40,18 +40,18 @@
             android:textSize="15.199982sp"
             android:textStyle="bold"
             android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/topRedContent"
             app:layout_constraintRight_toLeftOf="@+id/topRedContent"
-            app:layout_constraintTop_toTopOf="@+id/headerImage"/>
+           />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/topRedContent"
             style="@style/WeChat.Voice"
             android:layout_marginRight="6.0dip"
             android:background="@drawable/ic_we_chat_right"
-            android:gravity="left|center"
+
             android:src="@mipmap/ic_send_voice"
-            android:text="银鲨你好"
+
 
             app:layout_constraintRight_toLeftOf="@+id/headerImage"
             app:layout_constraintTop_toTopOf="@+id/headerImage"

@@ -57,6 +57,7 @@ public class AppConstant {
     public static final int MESSAGE_TYPE_RECEIVE_TRANSFER = 50;
     public static final int MESSAGE_TYPE_TIME = 60;
     public static final int MESSAGE_TYPE_RETRACT = 70;
+    public static final int MESSAGE_TYPE_VOICE = 80;
 
 
     public static final int MESSAGE_TYPE_OTHER_SEND_TRANSFER = 3;

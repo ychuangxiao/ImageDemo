@@ -41,10 +41,12 @@
             style="@style/WeChat.Voice"
             android:layout_marginLeft="6.0dip"
             android:background="@drawable/ic_we_chat_left"
-            android:gravity="left|center"
-            android:paddingLeft="13dip"
-            android:paddingRight="10dip"
-            android:text="银鲨你好"
+            android:gravity="center"
+            android:paddingBottom="10.0dip"
+            android:paddingLeft="10.0dip"
+            android:paddingTop="10.0dip"
+            android:scaleType="fitStart"
+            android:src="@mipmap/ic_received_voice"
             app:layout_constraintLeft_toRightOf="@+id/headerImage"
             app:layout_constraintTop_toTopOf="@+id/headerImage"
             />
@@ -62,9 +64,9 @@
             android:textSize="15.199982sp"
             android:textStyle="bold"
             android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/topRedContent"
             app:layout_constraintLeft_toRightOf="@+id/topRedContent"
-            app:layout_constraintTop_toTopOf="@+id/headerImage"/>
+             />
 
 
     </android.support.constraint.ConstraintLayout>
