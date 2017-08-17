@@ -75,24 +75,25 @@
                         android:lines="1"
                         android:maxEms="10"
                         android:minEms="10"
+                        android:textStyle="bold"
                         android:text="恭喜发财，大吉大利2323232323"
-                        android:textColor="#ffffffff"
-                        android:textSize="14.0sp"
+                        android:textColor="@color/white"
+                        android:textSize="12.0sp"
                        />
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:fontFamily="@font/apple"
+                        android:fontFamily="@font/apple_xi"
                         android:id="@+id/textTransferAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0.0dip"
+                        android:layout_marginTop="7.0dip"
                         android:text="￥0.01"
                         android:lines="1"
                         android:maxEms="10"
                         android:minEms="10"
                         android:ellipsize="end"
-                        android:textColor="@color/whiteSmoke"
-                        android:textSize="12sp"/>
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_10"/>
                 </LinearLayout>
             </LinearLayout>
 

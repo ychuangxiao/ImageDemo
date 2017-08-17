@@ -90,18 +90,18 @@
                         android:minEms="10"
                         android:text="恭喜发财，大吉大利!44444222"
                         android:textColor="@color/white"
-                        android:textSize="14.0sp"/>
+                        android:textSize="@dimen/font_size_12"/>
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:fontFamily="@font/apple"
+                        android:fontFamily="@font/apple_xi"
                         android:id="@+id/tvSubDesc"
                         app:layout_constraintTop_toBottomOf="@+id/tvRedPacketsDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2.0dip"
+                        android:layout_marginTop="8.0dip"
                         android:text="查看红包"
-                        android:textColor="#fcfbfb"
-                        android:textSize="12sp"/>
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_10"/>
                 </android.support.constraint.ConstraintLayout>
             </android.support.constraint.ConstraintLayout>
 

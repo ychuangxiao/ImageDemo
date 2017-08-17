@@ -124,7 +124,7 @@ public class RedPacketsDetailIosFragment extends BaseFragmentDaggerActivity {
         mContactRealm = mRealm.where(ContactRealm.class).equalTo(TextConstant.COLUMN_NAME_FOR_USERID_CONTACTREALM,
                 mRedPackedDetailsModel.getSendUserId()).findFirst();
 
-        mTvSendUserName.setText(mContactRealm.getUserNick());
+        mTvSendUserName.setText(mContactRealm.getUserNick()+"的红包");
 
 
         mOtherContactRealm = mRealm.where(ContactRealm.class).equalTo(TextConstant.COLUMN_NAME_FOR_USERID_CONTACTREALM,
@@ -146,7 +146,7 @@ public class RedPacketsDetailIosFragment extends BaseFragmentDaggerActivity {
                 mRedPackedDetailsModel.getMessageId()).findFirst();
 
         mTvSendDesc.setText(messageRealm.getMessage());
-        mTvAmount.setText(String.format("%s 元", MathUtils.toString(new BigDecimal(messageRealm.getAmount().toString()
+        mTvAmount.setText(String.format("%s元", MathUtils.toString(new BigDecimal(messageRealm.getAmount().toString()
         ))));
 
         mTvRedPacketsInfo.setText(String.format("1个红包共%s元",MathUtils.toString(new BigDecimal(messageRealm.getAmount().toString()

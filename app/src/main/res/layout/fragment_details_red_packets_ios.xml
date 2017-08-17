@@ -18,6 +18,8 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/apple"
             android:id="@+id/tvSendUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,21 +29,23 @@
             android:ellipsize="end"
             android:text="小李飞刀"
             android:textColor="#ff000000"
-
+android:textStyle="bold"
             android:textSize="10.0sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
 
         <TextView
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/apple"
             android:id="@+id/tvSendDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="2.0dip"
+            android:layout_marginTop="4.0dip"
             android:paddingBottom="8.0dip"
             android:text="恭喜发财，大吉大利"
-            android:textColor="#ffa6a5a5"
+            android:textColor="#ff000000"
             android:textSize="10.0sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -60,15 +64,17 @@
 
 
     <TextView
+        android:letterSpacing="0.08"
+        android:fontFamily="@font/apple"
         android:id="@+id/tvRedPacketsInfo"
         android:layout_width="wrap_content"
-        android:layout_height="25dip"
+        android:layout_height="30dip"
         android:gravity="center"
 
         android:paddingLeft="16.0dip"
 
         android:text="1个红包共40.00元"
-        android:textColor="#ffa6a5a5"
+        android:textColor="#7b7a7a"
         android:textSize="10.0sp"
         app:layout_constraintTop_toBottomOf="@+id/topConstraintLayout"/>
 
@@ -85,11 +91,12 @@
     <com.makeramen.roundedimageview.RoundedImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/otherAvatarImage"
-        android:layout_width="42.0dip"
-        android:layout_height="42.0dip"
+        android:layout_width="32.0dip"
+        android:layout_height="32.0dip"
 
         android:layout_marginLeft="16dip"
         android:layout_marginTop="10dip"
+
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_default_nor_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -103,32 +110,40 @@
 
 
     <android.support.v7.widget.AppCompatTextView
+android:textStyle="bold"
+        android:fontFamily="@font/apple"
         android:id="@+id/tvReceiveUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8.0dip"
-        android:layout_marginTop="5dip"
-        android:text="@string/app_name"
+        android:layout_marginTop="0dip"
+        android:text="Honey娜宝"
+
+        android:letterSpacing="0.08"
         android:textColor="#ff000000"
         android:textSize="12.0sp"
         app:layout_constraintLeft_toRightOf="@+id/otherAvatarImage"
         app:layout_constraintTop_toTopOf="@+id/otherAvatarImage"/>
 
     <TextView
+
+        android:fontFamily="@font/apple"
         android:id="@+id/tvReceiveTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dip"
-
+        android:layout_marginTop="5dip"
+        android:letterSpacing="0.1"
         android:paddingRight="14.0sp"
         android:text="08-02 20:12"
         android:textColor="#ffa6a5a5"
         android:textSize="10.0sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgReceiveUser"
+
         app:layout_constraintLeft_toLeftOf="@+id/tvReceiveUserName"
         app:layout_constraintTop_toBottomOf="@+id/tvReceiveUserName"/>
 
     <TextView
+        android:letterSpacing="0.04"
+        android:fontFamily="@font/apple"
         android:id="@+id/tvAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,21 +151,34 @@
         android:paddingLeft="14.0dip"
         android:paddingRight="14.0dip"
         android:text="40.00元"
+        android:textStyle="bold"
         android:textColor="#ff000000"
         android:textSize="12.0sp"
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvReceiveUserName"/>
 
+    <View
+        android:layout_marginTop="10dip"
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="0.5dip"
+        android:background="#ffe1e1e1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherAvatarImage"/>
+
     <TextView
+        android:letterSpacing="0.1"
+        android:fontFamily="@font/apple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dip"
         android:layout_marginTop="28.0dip"
         android:text="查看我的红包记录"
-        android:textColor="#ff5171b0"
-        android:textSize="10.0sp"
+        android:textColor="#3c6ac3"
+        android:textSize="12.0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

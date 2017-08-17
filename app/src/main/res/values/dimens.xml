@@ -75,6 +75,7 @@
     <dimen name="font_size_XXlarge">40.0sp</dimen>
     <dimen name="font_size_XXXlarge">55.0sp</dimen>
 
+    <dimen name="font_size_8">8.0sp</dimen>
     <dimen name="font_size_10">10.0sp</dimen>
     <dimen name="font_size_11">11.0sp</dimen>
     <dimen name="font_size_12">12.0sp</dimen>
