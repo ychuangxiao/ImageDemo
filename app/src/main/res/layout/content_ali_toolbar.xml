@@ -100,7 +100,7 @@ android:visibility="gone"
                 android:lines="1"
                 android:maxEms="10"
                 android:minEms="10"
-
+android:textStyle="bold"
                 android:text="@string/app_name"
                 android:textColor="#272727"
                 android:textSize="16.0sp"/>

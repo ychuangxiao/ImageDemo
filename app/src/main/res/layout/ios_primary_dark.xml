@@ -14,8 +14,8 @@
 
         android:id="@+id/signal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dip"
+        android:layout_height="5dip"
+
         android:src="@mipmap/ic_ios_top_signal1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

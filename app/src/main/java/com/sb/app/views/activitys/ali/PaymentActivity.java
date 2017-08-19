@@ -1,10 +1,12 @@
 package com.sb.app.views.activitys.ali;
 
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.Menu;
@@ -468,9 +470,10 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(16F);
                 setToolTitle("账单详情");
-
+                mTitleView.getPaint().setFakeBoldText(false);
                 mTitleView.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
                 mTitleView.setPadding(0,0,0,0);
+                mTitleView.setTypeface(null);
                 break;
             case AppConstant.ACTION_20:
                 params.height = ViewUtils.dip2px(this, 48);
@@ -478,9 +481,12 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                 setToolTitle("账单详情");
                 iosBackContainer.setVisibility(View.GONE);
                 androidBackContainer.setVisibility(View.VISIBLE);
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.apple);
 
-                mTitleView.setTextSize(16F);
+                mTitleView.setTypeface(typeface);
 
+                mTitleView.setTextSize(14F);
+                mTitleView.getPaint().setFakeBoldText(true);
                 mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
                 mTitleView.setPadding(ViewUtils.sp2px(this,55F),0,0,0);
                 break;

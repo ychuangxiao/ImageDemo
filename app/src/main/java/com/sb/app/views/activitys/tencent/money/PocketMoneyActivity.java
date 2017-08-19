@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,13 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
-import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.PocketMoneyFragment;
@@ -36,6 +35,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
@@ -69,11 +69,9 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
 
 
     @BindView(R.id.iosBackContainer)
-    LinearLayout iosBackContainer;
+    RelativeLayout iosBackContainer;
     @BindView(R.id.androidBackContainer)
-    LinearLayout androidBackContainer;
-
-
+    RelativeLayout androidBackContainer;
 
 
     @BindView(R.id.watermarkImageView)
@@ -99,6 +97,8 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
     Realm mRealm;
 
     MobileStyleRealm mMobileStyleRealm;
+    @BindView(R.id.topTitleIos)
+    TextView mTopTitleIos;
 
     /**
      * 初始化参数
@@ -115,8 +115,6 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
             finish();
             return;
         }
-
-
 
 
     }
@@ -140,11 +138,7 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
         mRealm = Realm.getDefaultInstance();
 
 
-
         setToolTitle(getString(R.string.title_activity_friend_red_packets_detail));
-
-
-
 
 
         // 必须得加上否则显示不出效果 可以通过这个在以后设置显示或隐藏
@@ -251,7 +245,7 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
                                     } else {
 
                                         mPocketMoneyIosFragment = PocketMoneyIosFragment
-                                                .newInstance( navigation);
+                                                .newInstance(navigation);
                                         addFragment(R.id.content, mPocketMoneyIosFragment,
                                                 mPocketMoneyIosTag);
 
@@ -269,7 +263,7 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
                                     } else {
 
                                         mPocketMoneyFragment = PocketMoneyFragment
-                                                .newInstance( navigation);
+                                                .newInstance(navigation);
                                         addFragment(R.id.content, mPocketMoneyFragment,
                                                 mPocketMoneyTag);
 
@@ -345,24 +339,18 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
 
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
-                setToolTitle("零钱");
-                mTitleView.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(0,0,0,0);
+                mTopTitleIos.setText("零钱");
+
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
                 setToolTitle("零钱");
                 iosBackContainer.setVisibility(View.GONE);
                 androidBackContainer.setVisibility(View.VISIBLE);
-
-                mTitleView.setTextSize(18F);
-
-                mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(ViewUtils.sp2px(this,55F),0,0,0);
                 break;
         }
 
@@ -502,5 +490,6 @@ public class PocketMoneyActivity extends BaseDaggerActivity implements HasCompon
             finish();
         }
     }
+
 
 }

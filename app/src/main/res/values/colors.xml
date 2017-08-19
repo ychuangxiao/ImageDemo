@@ -452,4 +452,8 @@
 
     <color name="wechat_color_group_default">#ff353535</color>
     <color name="wechat_color_group_pay">#5a6d97</color>
+
+    <!--ios-->
+
+    <color name="colorLeftTitleIos">@color/md_grey_500</color>
 </resources>

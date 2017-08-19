@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
@@ -24,9 +25,7 @@ import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.PurseFragment;
-import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
 import com.sb.app.views.fragment.tencent.ios.PurseIosFragment;
-import com.sb.app.views.fragment.tencent.ios.WeChatMessageIosFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
@@ -38,6 +37,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
@@ -55,7 +55,7 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
 
 
     @BindView(R.id.iosBackContainer)
-    LinearLayout iosBackContainer;
+    RelativeLayout iosBackContainer;
     @BindView(R.id.androidBackContainer)
     LinearLayout androidBackContainer;
 
@@ -88,6 +88,8 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
     Realm mRealm;
 
     MobileStyleRealm mMobileStyleRealm;
+    @BindView(R.id.topTitleIos)
+    TextView mTopTitleIos;
 
     /**
      * 初始化参数
@@ -267,10 +269,6 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
                             }
 
 
-
-
-
-
                             return true;
                     }
 
@@ -334,16 +332,10 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
             case TextConstant.MOBILE_VERSION_IOS:
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
-                ivIosMore.setVisibility(View.VISIBLE);
-                ivMore.setVisibility(View.GONE);
 
                 params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
-                mTitleView.setTextSize(14F);
-                setToolTitle("钱包");
-
-                mTitleView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(0, 0, 0, 0);
+                mTopTitleIos.setText("钱包");
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
                 params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar);
@@ -351,14 +343,7 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
                 setToolTitle("我的钱包");
                 iosBackContainer.setVisibility(View.GONE);
                 androidBackContainer.setVisibility(View.VISIBLE);
-                ivIosMore.setVisibility(View.GONE);
-                ivMore.setVisibility(View.VISIBLE);
 
-
-                mTitleView.setTextSize(18F);
-
-                mTitleView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                mTitleView.setPadding(ViewUtils.sp2px(this, 55F), 0, 0, 0);
                 break;
         }
 
@@ -498,4 +483,6 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
             finish();
         }
     }
+
+
 }

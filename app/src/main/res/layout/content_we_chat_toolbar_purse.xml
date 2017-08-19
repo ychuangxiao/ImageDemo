@@ -35,15 +35,16 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/iosBackContainer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ImageView
+                    android:id="@+id/ivBackIos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -56,12 +57,45 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:text="返回"
+                    android:layout_toRightOf="@+id/ivBackIos"
+                    android:fontFamily="@font/apple"
+                    android:text="我"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/font_size_12"/>
+                    android:textSize="@dimen/font_size_14"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/topTitleIos"
+                    style="@style/TextView.White.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center|center_horizontal"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/apple"
+                    android:gravity="center_horizontal"
+                    android:lines="1"
+                    android:maxEms="10"
+                    android:minEms="10"
+                    android:text="钱包"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16.0sp"
+                    android:textStyle="bold"/>
+
+
+                <ImageView
+                    android:id="@+id/ivIosMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:contentDescription="@string/app_name"
+
+                    android:paddingRight="10.0dip"
+                    android:src="@mipmap/ic_title_bar_right_more_ios"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/androidBackContainer"
@@ -70,7 +104,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="4dip"
                 android:orientation="horizontal"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -91,47 +125,34 @@
 
                     android:background="@color/black"/>
 
+                <TextView
+                    android:id="@+id/topTitle"
+                    style="@style/TextView.White.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|left"
+                    android:lines="1"
+                    android:maxEms="10"
+                    android:minEms="10"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18.0sp"/>
+
+                <ImageView
+                    android:id="@+id/ivMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:contentDescription="@string/app_name"
+                    android:paddingLeft="20.0dip"
+                    android:paddingRight="10.0dip"
+                    android:src="@mipmap/ic_title_bar_right_more"/>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/topTitle"
-                style="@style/TextView.White.Large"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-
-                android:ellipsize="end"
-                android:gravity="center_vertical|center"
-                android:lines="1"
-                android:maxEms="10"
-                android:minEms="10"
-                android:text="@string/app_name"
-                android:textColor="@color/colorWhite"
-                android:textSize="18.0sp"/>
-
-
-            <ImageView
-                android:id="@+id/ivMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="2.0dip"
-                android:contentDescription="@string/app_name"
-                android:paddingLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@mipmap/ic_title_bar_right_more"/>
-            <ImageView
-                android:id="@+id/ivIosMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="2.0dip"
-                android:contentDescription="@string/app_name"
-                android:paddingLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@mipmap/ic_title_bar_right_more_ios"/>
 
 
         </RelativeLayout>

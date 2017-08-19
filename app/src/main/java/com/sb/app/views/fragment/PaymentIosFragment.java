@@ -69,6 +69,16 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
     @BindView(R.id.tv3)
     AppCompatTextView tv3;
+
+
+    @BindView(R.id.tv6)
+    AppCompatTextView tv6;
+
+
+    @BindView(R.id.tv7)
+    AppCompatTextView tv7;
+
+
     @BindView(R.id.primaryDarkConstraintLayout)
     ConstraintLayout primaryDarkConstraintLayout;
 
@@ -199,11 +209,20 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
 
         ViewUtils.setCompoundRightDrawables(getContext(), tv2, BaseFontAwesome.Icon
                 .icon_right, getResources().getColor(R.color
-                .colorRightTitle), 4f);
+                .colorRightTitle), 5f);
 
         ViewUtils.setCompoundRightDrawables(getContext(), tv3, BaseFontAwesome.Icon
                 .icon_right, getResources().getColor(R.color
-                .colorRightTitle), 4f);
+                .colorRightTitle), 5f);
+
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tv6, BaseFontAwesome.Icon
+                .icon_right, getResources().getColor(R.color
+                .colorRightTitle), 5f);
+
+        ViewUtils.setCompoundRightDrawables(getContext(), tv7, BaseFontAwesome.Icon
+                .icon_right, getResources().getColor(R.color
+                .colorRightTitle), 5f);
 
 
         loadViewData((AliPaymentModel) getArguments().getSerializable(ARG_PARAM1));
@@ -568,7 +587,7 @@ public class PaymentIosFragment extends BaseFragment implements DatePickerDialog
         //处理页面逻辑
         tvHandleType.setTag("1");
         //文本改为交易完成
-        tvHandleType.setText("交易完成");
+        tvHandleType.setText("交易成功");
         tvHandleType.setTextColor(getResources().getColor(R.color.colorHandle));
         tvUnHandleLine2.setBackgroundColor(getResources().getColor(R.color.colorHandleLine));
         tvBankHandleOverDot.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_bank_ok));

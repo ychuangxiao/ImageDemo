@@ -122,7 +122,7 @@
 
 
     <TextView
-        android:fontFamily="@font/apple_xi"
+        android:fontFamily="@font/apple_mid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
