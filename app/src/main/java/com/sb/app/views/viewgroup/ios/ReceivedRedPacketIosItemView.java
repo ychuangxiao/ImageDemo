@@ -114,28 +114,24 @@ public class ReceivedRedPacketIosItemView extends RelativeLayout {
         }*/
 
 
-
-
         if (webChatMessageRealm.getContactRealm().isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[webChatMessageRealm.getContactRealm()
                     .getImageIndex()]);
-        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())){
+        } else if (StringUtils.isNotEmpty(webChatMessageRealm.getContactRealm().getImgPath())) {
             // 加载本地图片
             File file = new File(webChatMessageRealm.getContactRealm().getImgPath());
             Glide.with(mContext).load(file).into(mHeaderImage);
         }
 
         mIvRed.setBackground(null);
-        if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y)
-        {
-            tvSubDesc.setText("查看详情");
-            tvRedPacketsDesc.setText("红包已被领完");
-                    mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
-            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_left_default);
-        }
-        else {
+        if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
             tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
-            tvSubDesc.setText("查看红包");
+            tvSubDesc.setText("红包已被领完");
+            mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
+            mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_left_default);
+        } else {
+            tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
+            tvSubDesc.setText("领取红包");
             mIvRed.setBackgroundResource(R.mipmap.ic_red_packet);
             mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_left_red_packet_default);
         }
@@ -160,37 +156,33 @@ public class ReceivedRedPacketIosItemView extends RelativeLayout {
         super.onFinishInflate();
     }
 
-    MessageClickListener<WebChatMessageRealm,RelativeLayout> mMessageClickListener;
+    MessageClickListener<WebChatMessageRealm, RelativeLayout> mMessageClickListener;
 
     public void setMessageClickListener(MessageClickListener<WebChatMessageRealm, RelativeLayout>
-                                                messageClickListener) {
+            messageClickListener) {
         mMessageClickListener = messageClickListener;
     }
 
     @OnClick(R.id.redPackedConstraintLayout)
-    void onMessageClick()
-    {
-        if (mMessageClickListener != null)
-        {
-            mMessageClickListener.onMessageClickListener(mChatMessageRealm,this);
+    void onMessageClick() {
+        if (mMessageClickListener != null) {
+            mMessageClickListener.onMessageClickListener(mChatMessageRealm, this);
         }
     }
 
     @OnLongClick(R.id.redPackedConstraintLayout)
-    boolean onMessageLongClick()
-    {
-        if(mMessageLongClickListener != null)
-        {
-            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm,this);
+    boolean onMessageLongClick() {
+        if (mMessageLongClickListener != null) {
+            mMessageLongClickListener.onItemLongClickListener(this.mChatMessageRealm, this);
         }
 
-        return  true;
+        return true;
     }
 
-    WeChatMessageLongClickListener<WebChatMessageRealm,RelativeLayout> mMessageLongClickListener;
+    WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout> mMessageLongClickListener;
 
     public void setMessageLongClickListener(WeChatMessageLongClickListener<WebChatMessageRealm, RelativeLayout>
-                                                    messageLongClickListener) {
+            messageLongClickListener) {
         mMessageLongClickListener = messageLongClickListener;
     }
 }

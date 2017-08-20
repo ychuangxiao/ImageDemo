@@ -2,15 +2,14 @@
 <LinearLayout
     android:id="@+id/messageContainer"
     xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center_horizontal"
-              android:padding="@dimen/padding_small"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_small">
 
     <android.support.v7.widget.AppCompatTextView
-        android:fontFamily="@font/apple"
         android:id="@+id/tvChatDateTime"
         style="@style/WeChat.DateTime"
         android:layout_width="wrap_content"
@@ -18,6 +17,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="15.0dip"
         android:background="@drawable/bg_date_time_we_chat"
+        android:fontFamily="@font/apple"
         android:text=""/>
 
     <RelativeLayout
@@ -29,7 +29,7 @@
         <android.support.v7.widget.AppCompatImageView
 
             android:id="@+id/headerImage"
-            style="@style/WeChat.HeaderImage"
+            style="@style/WeChat.HeaderImage.Ios"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
 
@@ -66,34 +66,34 @@
                     android:paddingLeft="6.0dip">
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:fontFamily="@font/apple"
-                        android:paddingRight="3.0dip"
                         android:id="@+id/tvTransferExplain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/apple_mid"
 
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxEms="10"
                         android:minEms="10"
-                        android:ellipsize="end"
+                        android:paddingRight="3.0dip"
                         android:text="￥8.00"
-                        android:textStyle="bold"
+
                         android:textColor="@color/white"
-                        android:textSize="12.0sp"
-                       />
+                        android:textSize="@dimen/font_size_14"
+                        />
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:fontFamily="@font/apple_mid"
                         android:id="@+id/textTransferAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7.0dip"
-                        android:text="已收钱"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/apple"
                         android:lines="1"
                         android:maxEms="10"
                         android:minEms="10"
-                        android:ellipsize="end"
+                        android:text="已收钱"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_10"/>
                 </LinearLayout>
@@ -105,10 +105,10 @@
                 android:layout_alignParentBottom="true">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:fontFamily="@font/apple"
                     android:layout_width="match_parent"
                     android:layout_height="20.0dip"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/apple_mid"
                     android:gravity="center_vertical"
                     android:paddingLeft="10.599976dip"
                     android:paddingTop="1.0px"

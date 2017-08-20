@@ -97,7 +97,7 @@
 
 
     <dimen name="size_avatar">40.0dip</dimen>
-
+    <dimen name="size_avatar_ios">35.0dip</dimen>
 
     <dimen name="width_50">50.0dip</dimen>
     <dimen name="width_35">35.0dip</dimen>

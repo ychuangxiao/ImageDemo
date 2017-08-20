@@ -46,49 +46,56 @@ android {
 
 
     buildTypes {
-        applicationVariants.all { variant ->
 
-            if (variant.buildType.name.equals('release')) {
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
 
-                        def apkName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
-                                "_(${releaseTime()})_(${defaultConfig.versionName})_${defaultConfig.versionCode}.apk"
+                if (variant.buildType.name.equals('release')) {
+                    variant.outputs.each { output ->
+                        def outputFile = output.outputFile
+                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
 
-                        println "路径=" + outputFile.parentFile.parent
-                        variant.assemble.doLast {
+                            def apkName = "${outputFile.name.replace("-", "").replace(".apk", "").replace("app", "").replace("release", "")}" +
+                                    "_(${releaseTime()})_(${defaultConfig.versionName})_${defaultConfig.versionCode}.apk"
+
+                            println "路径=" + outputFile.parentFile.parent
+                            variant.assemble.doLast {
 
 
-                            def outApkFilePath = outputFile.parentFile.parentFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}"
+                                def outApkFilePath = outputFile.parentFile.parentFile.parent + "/v${defaultConfig.versionName}/${releaseTime()}"
 
-                            def outMappingFilePath = outApkFilePath + "/mapping"
+                                def outMappingFilePath = outApkFilePath + "/mapping"
 
-                            copy {
+                                copy {
 
-                                from(output.outputFile)
-                                into(new File(outApkFilePath))
-                                rename {
-                                    String fileName ->
-                                        apkName
+                                    from(output.outputFile)
+                                    into(new File(outApkFilePath))
+                                    rename {
+                                        String fileName ->
+                                            apkName
+                                    }
+                                }
+
+                                copy {
+                                    from(variant.mappingFile)
+                                    into(new File(outMappingFilePath))
+                                    rename { String fileName ->
+                                        "mapping-${variant.name.replaceAll("Release","_release")}.txt"
+                                    }
                                 }
                             }
 
-                            copy {
-                                from(variant.mappingFile)
-                                into(new File(outMappingFilePath))
-                                rename { String fileName ->
-                                    "mapping-${variant.name.replaceAll("Release","_release")}.txt"
-                                }
-                            }
                         }
 
                     }
-
                 }
-            }
 
+            }
         }
+
+
 
         debug {
 

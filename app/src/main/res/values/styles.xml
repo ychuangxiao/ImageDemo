@@ -472,14 +472,11 @@
     </style>
 
     <style name="WeChat.HeaderImage" parent="">
-
         <item name="android:clickable">false</item>
         <item name="android:scaleType">fitXY</item>
         <item name="android:src">@mipmap/ic_banditcats</item>
         <item name="android:layout_width">@dimen/size_avatar</item>
         <item name="android:layout_height">@dimen/size_avatar</item>
-
-
     </style>
 
     <style name="WeChat.Transfer" parent="">
@@ -741,5 +738,18 @@
 
     </style>
 
+    <style name="WeChat.HeaderImage.Ios" parent="">
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@mipmap/ic_launcher</item>
+        <item name="android:layout_width">@dimen/size_avatar_ios</item>
+        <item name="android:layout_height">@dimen/size_avatar_ios</item>
+    </style>
 
+    <style name="WeChat.RedPacket.Container.Right.Ios" parent="WeChat.Container">
+
+        <item name="android:background">@drawable/ic_right_red_packet_default</item>
+        <item name="android:layout_marginRight">8dip</item>
+
+    </style>
 </resources>

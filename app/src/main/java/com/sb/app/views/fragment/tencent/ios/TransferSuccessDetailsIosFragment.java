@@ -157,8 +157,8 @@ public class TransferSuccessDetailsIosFragment extends BaseFragmentDaggerActivit
         } else if (!currentContactRealm.getUserId().equals(sendUserRealm.getUserId()) ) {
             //判断 当前用户是自己，同时发送者不是自己，那么现实为确认
 
-            mTvOtherMessage.setText("零钱");
-            mTvConfirmMessage.setText("已存入你的");
+            mTvOtherMessage.setText("查看零钱");
+            mTvConfirmMessage.setText("");/*mTvConfirmMessage.setText("已存入你的");*/
             mTvUserNick.setText("");
         }
 
@@ -167,8 +167,8 @@ public class TransferSuccessDetailsIosFragment extends BaseFragmentDaggerActivit
                 mRedPackedDetailsModel.getMessageId()).findFirst();
 
         mTvReceiveTime.setText(TimeUtils.millis2String(mChatMessageRealm.getReceiveTransferTime(), TimeUtils
-                .DEFAULT_PATTERN_2));
-        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN_2));
+                .DEFAULT_PATTERN));
+        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTransferTime(), TimeUtils.DEFAULT_PATTERN));
         mTvTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mChatMessageRealm.getAmount()
                 .toString()
         ))));
@@ -176,7 +176,7 @@ public class TransferSuccessDetailsIosFragment extends BaseFragmentDaggerActivit
 
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_transfer_success;
+        return R.layout.fragment_transfer_success_ios;
     }
 
     MobileChangeListener<MobileStyleRealm> mModelMobileChangeListener;

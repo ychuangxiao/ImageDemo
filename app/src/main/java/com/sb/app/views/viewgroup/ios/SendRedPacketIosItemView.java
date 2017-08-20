@@ -125,13 +125,14 @@ public class SendRedPacketIosItemView extends RelativeLayout {
 
         mIvRed.setBackground(null);
         if (mChatMessageRealm.getAmountStatus() == AppConstant.RECEIVED_ACTION_Y) {
-            tvRedPacketsDesc.setText("红包已被领完");
-            tvSubDesc.setText("查看详情");
+
+            tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
+            tvSubDesc.setText("红包已被领完");
             mIvRed.setBackgroundResource(R.mipmap.ic_redpacket_we_chat);
             mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_redpacket_right_default);
         } else {
             tvRedPacketsDesc.setText(webChatMessageRealm.getMessage());
-            tvSubDesc.setText("查看红包");
+            tvSubDesc.setText("领取红包");
             mIvRed.setBackgroundResource(R.mipmap.ic_red_packet);
             mRedPackedConstraintLayout.setBackgroundResource(R.drawable.ic_right_red_packet_default);
         }

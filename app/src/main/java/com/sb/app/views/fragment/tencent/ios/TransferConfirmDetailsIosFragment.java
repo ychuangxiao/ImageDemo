@@ -158,7 +158,7 @@ public class TransferConfirmDetailsIosFragment extends BaseFragmentDaggerActivit
             mBtnHandle.setVisibility(View.VISIBLE);
             mTvOtherMessage.setText("立即退还");
             mTvConfirmMessage.setText("1天内未确认，将退还给对方。");
-            mTvConfirmTopMessage.setText("确认收钱");
+            mTvConfirmTopMessage.setText("待确认收钱");
 
         }
 
@@ -167,7 +167,7 @@ public class TransferConfirmDetailsIosFragment extends BaseFragmentDaggerActivit
                         .COLUMN_NAME_FOR_ID,
                 mRedPackedDetailsModel.getMessageId()).findFirst();
 
-        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTime(), TimeUtils.DEFAULT_PATTERN_2));
+        mTvTransferTime.setText(TimeUtils.millis2String(mChatMessageRealm.getSendTime(), TimeUtils.DEFAULT_PATTERN));
         mTvTransferAmount.setText(String.format("￥%s", MathUtils.toString(new BigDecimal(mChatMessageRealm.getAmount()
                 .toString()
         ))));
@@ -175,7 +175,7 @@ public class TransferConfirmDetailsIosFragment extends BaseFragmentDaggerActivit
 
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_transfer_confirm;
+        return R.layout.fragment_transfer_confirm_ios;
     }
 
     MobileChangeListener<MobileStyleRealm> mModelMobileChangeListener;
