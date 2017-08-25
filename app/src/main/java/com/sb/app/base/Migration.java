@@ -33,6 +33,54 @@ public class Migration implements RealmMigration {
     public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
         RealmSchema schema = realm.getSchema();
 
+
+        if (oldVersion <= 0) {
+
+            schema.create("ContactRealm")
+                    .addField("userId", String.class)
+                    .addField("imageIndex", int.class)
+                    .addField("isSystem", boolean.class)
+                    .addField("isMe", boolean.class)
+                    .addField("userNick", String.class)
+                    .addField("imgPath", String.class)
+                    .addPrimaryKey("userId");
+
+            schema.create("ChatGroupRealm")
+                    .addField("id", String.class)
+                    .addField("groupName", String.class)
+                    .addField("topFlag", int.class)
+                    .addField("isPay", boolean.class)
+                    .addField("isGroupChat", boolean.class)
+                    .addField("groupChatCount", int.class)
+                    .addField("lastTime", long.class)
+                    .addField("lastMessage", String.class)
+                    .addRealmListField("mContactRealms",schema.get("ContactRealm"))
+                    .addPrimaryKey("id");
+
+
+
+            schema.create("WebChatMessageRealm")
+                    .addField("id", String.class)
+                    .addField("groupId", String.class)
+                    .addField("messageType", Integer.class)
+                    .addField("message", String.class)
+                    .addField("subMessage", String.class)
+                    .addField("amount", Double.class)
+                    .addField("amountStatus", Integer.class)
+                    .addField("sourceMessage", String.class)
+                    .addRealmObjectField("mContactRealm",schema.get("ContactRealm"))
+                    .addField("sendTime", long.class)
+                    .setNullable("sendTime",true)
+                    .addPrimaryKey("id");
+
+
+
+
+
+            oldVersion++;
+
+        }
+
         if (oldVersion == 1) {
 
 

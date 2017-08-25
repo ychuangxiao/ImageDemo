@@ -48,6 +48,7 @@ android {
     buildTypes {
 
         release {
+            signingConfig signingConfigs.rf_release_config
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
