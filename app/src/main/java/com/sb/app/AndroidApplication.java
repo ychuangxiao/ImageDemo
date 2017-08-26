@@ -3,8 +3,8 @@ package com.sb.app;
 import android.app.Activity;
 import android.app.Application;
 
-import com.ilogie.android.library.common.util.ArrayUtils;
-import com.ilogie.android.library.common.util.LogUtils;
+import com.sb.app.utils.LogUtils;
+import com.sb.common.utils.ArrayUtils;
 import com.sb.app.base.Migration;
 import com.sb.app.di.components.ApplicationComponent;
 import com.sb.app.di.components.DaggerApplicationComponent;

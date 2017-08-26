@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ViewUtils;

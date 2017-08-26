@@ -8,7 +8,7 @@ import com.sb.app.mvp.views.AutoLoginHandleView;
 import com.sb.data.constant.TextConstant;
 import com.sb.data.entitys.realm.UserRealm;
 import com.sb.domain.interactor.AutoLoginUseCase;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 
 import javax.inject.Inject;
 

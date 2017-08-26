@@ -54,10 +54,12 @@
                     android:src="@mipmap/ic_white_ios_back"/>
 
                 <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvTopMessageCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="微信(1000)"
+
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/font_size_13"/>
 

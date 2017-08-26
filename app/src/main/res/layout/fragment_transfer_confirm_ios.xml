@@ -14,14 +14,14 @@
         android:layout_width="70.0dip"
         android:layout_height="70.0dip"
         android:layout_marginTop="46.0dip"
-        android:src="@mipmap/ic_we_chat_transfer_confirm"
+        android:src="@mipmap/ic_we_chat_transfer_confirm_ios"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
     <android.support.v7.widget.AppCompatTextView
-        android:fontFamily="@font/apple_mid"
+        android:fontFamily="@font/apple"
         android:id="@+id/tvConfirmTopMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topLogoImage"></android.support.v7.widget.AppCompatTextView>
 
     <android.support.v7.widget.AppCompatTextView
-        android:fontFamily="@font/ali_num"
+        android:fontFamily="@font/apple"
         android:id="@+id/tvTransferAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:fontFamily="@font/apple_mid"
+        android:fontFamily="@font/apple"
         android:id="@+id/btnHandle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         app:layout_goneMarginTop="@dimen/margin_medium">
 
         <android.support.v7.widget.AppCompatTextView
-            android:fontFamily="@font/apple_mid"
+            android:fontFamily="@font/apple"
             android:id="@+id/tvConfirmMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:textSize="@dimen/font_size_12"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:fontFamily="@font/apple_mid"
+            android:fontFamily="@font/apple"
             android:id="@+id/tvOtherMessage"
             android:layout_width="wrap_content"
 
@@ -119,7 +119,7 @@
         >
 
         <TextView
-            android:fontFamily="@font/apple_mid"
+            android:fontFamily="@font/apple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="转账时间： "
@@ -127,7 +127,7 @@
             android:textSize="@dimen/font_size_12"/>
 
         <TextView
-            android:fontFamily="@font/apple_mid"
+            android:fontFamily="@font/apple"
             android:id="@+id/tvTransferTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

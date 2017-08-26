@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.DaggerBizComponent;

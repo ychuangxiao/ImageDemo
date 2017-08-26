@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.model.EditModel;
 import com.sb.app.utils.ToastUtils;

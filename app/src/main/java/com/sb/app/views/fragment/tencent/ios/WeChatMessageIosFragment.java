@@ -23,11 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.ilogie.android.library.common.util.ArrayUtils;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.ArrayUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.BizComponent;
+import com.sb.app.model.EditModel;
 import com.sb.app.model.RedPackedDetailsModel;
 import com.sb.app.model.RedPackedModel;
 import com.sb.app.model.WeChatModel;
@@ -669,7 +670,7 @@ public class WeChatMessageIosFragment extends BaseFragmentDaggerActivity impleme
     void onSendTimeClick() {
 
 
-        mBottomSheetDateTimeFragment = BottomSheetDateTimeFragment.newInstance();
+        mBottomSheetDateTimeFragment = BottomSheetDateTimeFragment.newInstance(new EditModel("设置发送时间"));
         mBottomSheetDateTimeFragment.setDateClickListener(this);
         mBottomSheetDateTimeFragment.show(getActivity().getSupportFragmentManager(), "BottomSheetDateTimeFragment");
         //mBottomSheetDateTimeFragment.setState(BottomSheetBehavior.STATE_EXPANDED);

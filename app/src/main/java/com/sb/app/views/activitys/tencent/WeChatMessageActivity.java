@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ilogie.android.library.common.util.ArrayUtils;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.ArrayUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.HasComponent;
@@ -26,6 +27,7 @@ import com.sb.app.model.WeChatModel;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
+import com.sb.app.views.fragment.tencent.google.SetMessageContentFragment;
 import com.sb.app.views.fragment.tencent.google.WeChatMessageFragment;
 import com.sb.app.views.fragment.tencent.ios.WeChatMessageIosFragment;
 import com.sb.app.views.listeners.MobileChangeListener;
@@ -66,10 +68,12 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     @BindView(R.id.ivSetting)
     AppCompatImageView ivSetting;
 
+    @BindView(R.id.tvTopMessageCount)
+    AppCompatTextView tvTopMessageCount;
+
 
     @BindView(R.id.watermarkImageView)
     AppCompatImageView watermarkImageView;
-
 
 
     BizComponent mBizComponent;
@@ -85,9 +89,11 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
     String mWeChatMessageIosFragmentTag = "WeChatMessageIosFragment";
 
     MobileStyleForDatabaseFragment mMobileStyleForDatabaseFragment;
-
-
     String mobileStyleTag = "MobileStyleForDatabaseFragment";
+
+
+    SetMessageContentFragment mSetMessageContentFragment;//内容设置
+    String setMessageContentFragmentTag = "SetMessageContentFragment";
 
 
     PrimaryDarkView mPrimaryDarkView;
@@ -150,11 +156,11 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         mRealm = Realm.getDefaultInstance();
         mWeChatModel = new WeChatModel();
         mWeChatModel.setGroupId(groupId);
-
+        setLeftMenu();
 
         // 必须得加上否则显示不出效果 可以通过这个在以后设置显示或隐藏
         setProgressBarIndeterminateVisibility(true);
-        ChatGroupRealm chatGroupRealm = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant
+        chatGroupRealm = mRealm.where(ChatGroupRealm.class).equalTo(TextConstant
                 .COLUMN_NAME_FOR_ID, groupId).findFirst();
 
         if (chatGroupRealm == null || ArrayUtils.isEmpty(chatGroupRealm.getContactRealms())) {
@@ -162,9 +168,6 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             return;
         }
         mMobileStyleRealm = mRealm.where(MobileStyleRealm.class).findFirst();
-
-
-
 
 
         otherContactRealm = chatGroupRealm.getContactRealms().where().equalTo("isMe", false).findFirst();
@@ -178,9 +181,9 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             public void onClick(View v) {
 
 
-                if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+                if (navigation.getSelectedItemId() == R.id.navigation_preview) {
 
-                    navigation.setSelectedItemId(R.id.navigation_home);
+                    navigation.setSelectedItemId(R.id.navigation_mobile_style);
                     navigation.setVisibility(View.VISIBLE);
                     getWindow().clearFlags(
                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -190,9 +193,11 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             }
         });
 
-        navigation.setSelectedItemId(R.id.navigation_home);
-        setLeftMenu();
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
+
     }
+
+    MenuItem mMenuItem;
 
 
     /**
@@ -204,15 +209,19 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
         int color = getResources().getColor(R.color.white);
 
         //用户
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
-        setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
+        mMenuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
+        setMenu(mMenuItem, BaseFontAwesome.Icon.icon_mobile, size);
+
 
 
         //资金账户
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
-        setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
+        mMenuItem = navigation.getMenu().findItem(R.id.navigation_preview);
+        setMenu(mMenuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 
+        //业务管理
+        mMenuItem = navigation.getMenu().findItem(R.id.navigation_content);
+        setMenu(mMenuItem, BaseFontAwesome.Icon.icon_content, size);
     }
 
 
@@ -265,7 +274,7 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                     mergerTopStatus();
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
 
                             watermarkImageView.setVisibility(View.GONE);
                             if (mMobileStyleForDatabaseFragment != null) {
@@ -285,7 +294,29 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                             }
                             return true;
 
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_content:
+
+                            watermarkImageView.setVisibility(View.GONE);
+
+
+                            if (mSetMessageContentFragment != null) {
+
+                                showFragment(mSetMessageContentFragment);
+                                mSetMessageContentFragment.loadViewData(groupId);
+                            } else {
+
+                                mSetMessageContentFragment = SetMessageContentFragment
+                                        .newInstance(groupId);
+
+
+                                addFragment(R.id.content, mSetMessageContentFragment,
+                                        setMessageContentFragmentTag);
+
+                            }
+
+                            return true;
+
+                        case R.id.navigation_preview:
 
 
                             if (getApplicationComponent().context()
@@ -305,8 +336,6 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
                                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
                             }
-
-
 
 
                             navigation.setVisibility(View.GONE);
@@ -408,32 +437,45 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        int padding ;
+        int padding;
 
         switch (mMobileStyleRealm.getMobileVersion()) {
             case TextConstant.MOBILE_VERSION_IOS:
+
+                mMenuItem.setVisible(true);
+
+                if (chatGroupRealm.getGroupChatCount()>0) {
+
+                    tvTopMessageCount.setText("微信(" + chatGroupRealm.getGroupChatCount() + ")");
+                } else {
+                    tvTopMessageCount.setText("微信");
+                }
+
+
                 iosBackContainer.setVisibility(View.VISIBLE);
                 androidBackContainer.setVisibility(View.GONE);
 
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar_ios);
                 mToolbar.setLayoutParams(params);
                 mTitleView.setTextSize(14F);
                 padding = ViewUtils.sp2px(this, 6.5F);
-                ivSetting.setPadding(padding,padding,padding,padding);
+                ivSetting.setPadding(padding, padding, padding, padding);
 
                 mTitleView.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                 mTitleView.setPadding(0, 0, 0, 0);
                 break;
             case TextConstant.MOBILE_VERSION_ANDROID_4:
-                params.height =getResources().getDimensionPixelSize(R.dimen.height_top_bar);
+
+                mMenuItem.setVisible(false);
+                params.height = getResources().getDimensionPixelSize(R.dimen.height_top_bar);
                 mToolbar.setLayoutParams(params);
 
                 iosBackContainer.setVisibility(View.GONE);
                 androidBackContainer.setVisibility(View.VISIBLE);
 
                 mTitleView.setTextSize(18F);
-                  padding = ViewUtils.sp2px(this, 8.5F);
-                ivSetting.setPadding(padding,padding,padding,padding);
+                padding = ViewUtils.sp2px(this, 8.5F);
+                ivSetting.setPadding(padding, padding, padding, padding);
                 mTitleView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                 mTitleView.setPadding(ViewUtils.sp2px(this, 55F), 0, 0, 0);
                 break;
@@ -466,6 +508,14 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
             mWeChatMessageIosFragment = (WeChatMessageIosFragment) fragment;
 
             hideFragment(mWeChatMessageIosFragment);
+        }
+
+        fragment = getSupportFragmentManager().findFragmentByTag(setMessageContentFragmentTag);
+
+        if (fragment != null) {
+            mSetMessageContentFragment = (SetMessageContentFragment) fragment;
+
+            hideFragment(mSetMessageContentFragment);
         }
 
 
@@ -518,9 +568,9 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
 
     @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
     void onIosBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+        if (navigation.getSelectedItemId() == R.id.navigation_preview) {
 
-            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setSelectedItemId(R.id.navigation_mobile_style);
             navigation.setVisibility(View.VISIBLE);
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -531,8 +581,7 @@ public class WeChatMessageActivity extends BaseDaggerActivity implements HasComp
 
 
     @OnClick(R.id.ivSetting)
-    void onSettingClick()
-    {
+    void onSettingClick() {
         Intent intent = new Intent(this, ContactDetailActivity.class);
 
 

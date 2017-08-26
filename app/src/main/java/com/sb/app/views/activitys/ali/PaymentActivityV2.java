@@ -67,7 +67,7 @@ public class PaymentActivityV2 extends BaseActivity implements MobileChangeListe
 
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
 
 
                             if (mPaymentMobileStyleFragment != null) {
@@ -103,7 +103,7 @@ public class PaymentActivityV2 extends BaseActivity implements MobileChangeListe
 
                             }
                             return true;
-                        case R.id.navigation_dashboard:
+                        case R.id.navigation_content:
 
 
                             if (mPaymentMenuFragment != null) {
@@ -119,7 +119,7 @@ public class PaymentActivityV2 extends BaseActivity implements MobileChangeListe
                             }
 
                             return true;
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_preview:
 
 
                             switch (aliPaymentModel.getMobileType()) {
@@ -251,7 +251,7 @@ public class PaymentActivityV2 extends BaseActivity implements MobileChangeListe
         aliPaymentModel.setDir(true);
         aliPaymentModel.setBatteryNumBar(40);
 
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
 
 
         setLeftMenu();
@@ -268,16 +268,16 @@ public class PaymentActivityV2 extends BaseActivity implements MobileChangeListe
         int color = getResources().getColor(R.color.white);
 
         //用户
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
 
 
         //业务管理
-        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_content);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_content, size);
 
         //资金账户
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_preview);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 

@@ -6,7 +6,7 @@ import android.webkit.WebView;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.views.base.BaseActivity;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 
 import butterknife.BindView;
 

@@ -1,6 +1,6 @@
 package com.sb.app.utils.convert;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.ilogie.android.transformer.parser.AbstractParser;
 
 /**

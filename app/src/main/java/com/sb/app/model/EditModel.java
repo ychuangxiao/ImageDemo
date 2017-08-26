@@ -76,6 +76,10 @@ public class EditModel implements Parcelable {
     public EditModel() {
     }
 
+    public EditModel(String title) {
+        this.title = title;
+    }
+
     @Override
     public int describeContents() {
         return 0;

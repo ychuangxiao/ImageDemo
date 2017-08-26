@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
@@ -171,7 +171,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
         setLeftMenu();
     }
 
@@ -184,11 +184,11 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
         Float size = 10F;
 
 
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
 
 
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_preview);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 
@@ -205,7 +205,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                     mergerTopStatus();
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
 
                             watermarkImageView.setVisibility(View.GONE);
                             if (mMobileStyleForDatabaseFragment != null) {
@@ -226,7 +226,7 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
                             }
                             return true;
 
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_preview:
                             if (getApplicationComponent().context()
                                     .sharedpreferences.Watermark().get()) {
 
@@ -499,9 +499,9 @@ public class FriendRedPacketsDetailActivity extends BaseDaggerActivity implement
 
     @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
     void onIosBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+        if (navigation.getSelectedItemId() == R.id.navigation_preview) {
 
-            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setSelectedItemId(R.id.navigation_mobile_style);
             navigation.setVisibility(View.VISIBLE);
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);

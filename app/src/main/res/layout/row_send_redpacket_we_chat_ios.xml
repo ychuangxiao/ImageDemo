@@ -90,7 +90,7 @@ android:id="@+id/redPackedConstraintLayout"
                        android:minEms="10"
                        android:text="恭喜发财，大吉大利!"
                        android:textColor="@color/white"
-                       android:textSize="@dimen/font_size_14"/>
+                       android:textSize="@dimen/font_size_12"/>
 
                    <android.support.v7.widget.AppCompatTextView
 

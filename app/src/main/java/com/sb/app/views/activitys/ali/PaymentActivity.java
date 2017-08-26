@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.sb.app.views.listeners.MobileChangeListener;
 import com.sb.app.views.viewgroup.PrimaryDarkIosView;
 import com.sb.app.views.viewgroup.PrimaryDarkView;
 import com.sb.common.fontawesom.typeface.BaseFontAwesome;
-import com.sb.data.constant.TextConstant;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.math.BigDecimal;
@@ -101,7 +99,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                     mergerTopStatus();
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
 
                             watermarkImageView.setVisibility(View.GONE);
                             if (mPaymentMobileStyleFragment != null) {
@@ -138,7 +136,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
                             }
                             return true;
-                        case R.id.navigation_dashboard:
+                        case R.id.navigation_content:
 
                             watermarkImageView.setVisibility(View.GONE);
                             if (mPaymentMenuFragment != null) {
@@ -154,7 +152,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
                             }
 
                             return true;
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_preview:
 
 
                             if (getApplicationComponent().context()
@@ -305,7 +303,7 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         aliPaymentModel.setDir(true);
         aliPaymentModel.setBatteryNumBar(40);
 
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
 
 
         setLeftMenu();
@@ -322,16 +320,16 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
         int color = getResources().getColor(R.color.white);
 
         //用户
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
 
 
         //业务管理
-        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_content);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_content, size);
 
         //资金账户
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_preview);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 
@@ -529,9 +527,9 @@ public class PaymentActivity extends BaseActivity implements MobileChangeListene
 
     @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
     void onIosBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+        if (navigation.getSelectedItemId() == R.id.navigation_preview) {
 
-            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setSelectedItemId(R.id.navigation_mobile_style);
             navigation.setVisibility(View.VISIBLE);
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);

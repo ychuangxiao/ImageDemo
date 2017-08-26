@@ -171,7 +171,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation(name: 'ilogie-android-library-release', ext: 'aar')
+    /*implementation(name: '', ext: 'aar')*/
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor appDependencies.guava
     annotationProcessor appDependencies.daggerCompiler

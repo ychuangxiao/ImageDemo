@@ -15,7 +15,7 @@ import android.support.v7.widget.AppCompatImageView;
 
 import com.sb.ui.camera.CropImageIntentBuilder;
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.utils.PictureUtil;
 import com.sb.app.utils.ViewUtils;

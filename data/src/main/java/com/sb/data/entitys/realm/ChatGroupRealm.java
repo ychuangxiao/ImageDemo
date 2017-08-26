@@ -29,6 +29,8 @@ public class ChatGroupRealm extends RealmObject {
 
     private String lastMessage;
 
+
+
     public String getId() {
         return id;
     }
@@ -100,4 +102,6 @@ public class ChatGroupRealm extends RealmObject {
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
     }
+
+
 }

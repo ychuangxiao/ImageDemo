@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ilogie.android.library.common.util.ArrayUtils;
+import com.sb.common.utils.ArrayUtils;
 import com.sb.app.R;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.mvp.presenters.user.AutoLoginPresenter;

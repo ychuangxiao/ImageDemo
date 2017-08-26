@@ -5,18 +5,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
+import com.sb.app.model.EditModel;
 import com.sb.app.utils.TimeUtils;
 import com.sb.app.utils.ToastUtils;
 import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.listeners.DateClickListener;
-import com.sb.app.views.listeners.RecyclerClickListener;
-import com.sb.data.entitys.realm.ContactRealm;
+import com.sb.common.fontawesom.typeface.BaseFontAwesome;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -44,17 +45,22 @@ public class BottomSheetDateTimeFragment extends BottomSheetDialogFragment imple
     DatePickerDialog mDatePickerDialog;
 
     TimePickerDialog mTimePickerDialog;
-
-
+    @BindView(R.id.tvTitle)
+    AppCompatTextView mTvTitle;
+    EditModel mEditModel;
+    private static final String ARG_PARAM1 = "param1";
     public BottomSheetDateTimeFragment() {
 
     }
 
 
-    public static BottomSheetDateTimeFragment newInstance() {
+    public static BottomSheetDateTimeFragment newInstance(EditModel model) {
         BottomSheetDateTimeFragment fragment = new BottomSheetDateTimeFragment();
 
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_PARAM1, model);
 
+        fragment.setArguments(args);
         return fragment;
 
 
@@ -65,11 +71,24 @@ public class BottomSheetDateTimeFragment extends BottomSheetDialogFragment imple
         super.onCreate(savedInstanceState);
 
 
+        if (getArguments() != null) {
+            mEditModel = getArguments().getParcelable(ARG_PARAM1);
+
+        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
+
+
+    public void refreshData(EditModel editModel) {
+
+        mTvTitle.setText(editModel.getTitle());
 
 
     }
@@ -90,6 +109,16 @@ public class BottomSheetDateTimeFragment extends BottomSheetDialogFragment imple
         ButterKnife.bind(this, mRootView);//绑定framgent
 
 
+        ViewUtils.setCompoundRightDrawables(getContext(), mTvDate, BaseFontAwesome.Icon.icon_date, getResources()
+                .getColor(R.color
+                        .colorAccent), 8f);
+
+        ViewUtils.setCompoundRightDrawables(getContext(), mTvTime, BaseFontAwesome.Icon.icon_time, getResources()
+                .getColor(R.color
+                        .colorAccent), 8f);
+
+
+        refreshData(mEditModel);
         return mRootView;
     }
 
@@ -146,7 +175,7 @@ public class BottomSheetDateTimeFragment extends BottomSheetDialogFragment imple
 
         if (mDateClickListener != null) {
             mDateClickListener.onItemClickListener(TimeUtils.string2Millis(String.format("%s %s", mTvDate.getText()
-                    .toString(), mTvTime.getText().toString()),TimeUtils.DEFAULT_PATTERN_2));
+                    .toString(), mTvTime.getText().toString()), TimeUtils.DEFAULT_PATTERN_2));
             this.dismiss();
         }
 
@@ -196,4 +225,6 @@ public class BottomSheetDateTimeFragment extends BottomSheetDialogFragment imple
     public void setDateClickListener(DateClickListener dateClickListener) {
         mDateClickListener = dateClickListener;
     }
+
+
 }

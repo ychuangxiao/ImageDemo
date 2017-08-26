@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.sb.app.R;
 import com.sb.app.model.RedPackedDetailsModel;

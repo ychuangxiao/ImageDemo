@@ -29,7 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.AndroidApplication;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
@@ -250,7 +250,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void navigateActivity(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+        //overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     /**
@@ -260,7 +260,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void navigateActivity(Intent intent) {
         startActivity(intent);
-        overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
+        //overridePendingTransition(R.anim.animation_down_in, R.anim.animation_top_out);
     }
 
     /**

@@ -170,7 +170,7 @@ public class BaseFontAwesome implements ITypeface {
 
         icon_duihao('\ue61c'),
 
-        icon_time('\ue674'),
+        icon_time('\ue698'),
 
         icon_camera('\ue666'),
 

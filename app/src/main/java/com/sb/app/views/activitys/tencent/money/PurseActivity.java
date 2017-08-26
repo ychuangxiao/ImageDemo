@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.sb.app.constant.AppConstant;
 import com.sb.app.di.HasComponent;
 import com.sb.app.di.components.BizComponent;
 import com.sb.app.di.components.DaggerBizComponent;
-import com.sb.app.utils.ViewUtils;
 import com.sb.app.views.base.BaseDaggerActivity;
 import com.sb.app.views.fragment.MobileStyleForDatabaseFragment;
 import com.sb.app.views.fragment.tencent.google.PurseFragment;
@@ -37,7 +35,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
@@ -148,7 +145,7 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
         setLeftMenu();
     }
 
@@ -161,11 +158,11 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
         Float size = 10F;
 
 
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_mobile, size);
 
 
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_preview);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_brow, size);
 
 
@@ -182,7 +179,7 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
                     mergerTopStatus();
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
                             watermarkImageView.setVisibility(View.GONE);
 
                             if (mMobileStyleForDatabaseFragment != null) {
@@ -203,7 +200,7 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
                             }
                             return true;
 
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_preview:
                             if (getApplicationComponent().context()
                                     .sharedpreferences.Watermark().get()) {
 
@@ -471,9 +468,9 @@ public class PurseActivity extends BaseDaggerActivity implements HasComponent<Bi
 
     @OnClick({R.id.iosBackContainer, R.id.androidBackContainer})
     void onIosBackClick() {
-        if (navigation.getSelectedItemId() == R.id.navigation_notifications) {
+        if (navigation.getSelectedItemId() == R.id.navigation_preview) {
 
-            navigation.setSelectedItemId(R.id.navigation_home);
+            navigation.setSelectedItemId(R.id.navigation_mobile_style);
             navigation.setVisibility(View.VISIBLE);
             getWindow().clearFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);

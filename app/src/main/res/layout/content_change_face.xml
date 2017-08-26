@@ -68,6 +68,7 @@
 
 
         <com.sb.app.views.widget.ClearEditText
+            android:drawablePadding="@dimen/padding_medium"
             android:padding="@dimen/padding_tiny"
             android:id="@+id/etFriendName"
             android:layout_width="wrap_content"

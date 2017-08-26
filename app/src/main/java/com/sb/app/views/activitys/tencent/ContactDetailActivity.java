@@ -6,8 +6,8 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.ArrayUtils;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.ArrayUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.LogUtils;

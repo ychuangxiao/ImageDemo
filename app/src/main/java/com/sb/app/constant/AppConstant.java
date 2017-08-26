@@ -66,7 +66,7 @@ public class AppConstant {
     //手机类型
 
     public static final String MOBILE_IOS = "苹果(iPhone)";
-    public static final String MOBILE_ANDROID = "谷歌(Android)";
+    public static final String MOBILE_ANDROID = "安卓(Android)";
 
 
     //网络信号

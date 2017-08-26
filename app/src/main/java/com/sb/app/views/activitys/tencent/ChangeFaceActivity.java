@@ -16,7 +16,7 @@ import android.support.v7.widget.AppCompatImageView;
 
 import com.sb.ui.camera.CropImageIntentBuilder;
 import com.bumptech.glide.Glide;
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.utils.PictureUtil;
@@ -74,6 +74,8 @@ public class ChangeFaceActivity extends BaseActivity {
                 userId).findFirst();
 
         etFriendName.setText(mContactRealm.getUserNick());
+
+
 
         if (mContactRealm.isSystem()) {
             mHeaderImage.setImageResource(ViewUtils.getDefaultFace()[mContactRealm

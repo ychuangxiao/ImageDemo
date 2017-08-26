@@ -293,3 +293,6 @@
 
 -dontwarn com.github.bumptech.**
 -keep class com.github.bumptech.**  {*;}
+
+
+-keep class io.realm.internal.OsObject { *; }

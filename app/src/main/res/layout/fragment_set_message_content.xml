@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_selected_underline"
+            android:padding="@dimen/padding_small">
+
+            <android.support.v7.widget.AppCompatTextView
+
+                android:id="@+id/tvMessageCount"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:drawablePadding="@dimen/padding_medium"
+                android:duplicateParentState="false"
+                android:padding="@dimen/padding_small"
+                android:text="消息数目"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/google_font_size"
+                />
+
+            <com.sb.app.views.widget.ClearEditText
+                android:drawablePadding="@dimen/padding_medium"
+                android:id="@+id/etCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tvMoney"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="输入消息数目"
+                android:inputType="numberSigned"
+                android:maxLength="6"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/google_font_size"/>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

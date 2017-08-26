@@ -8,7 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.ilogie.android.library.common.util.ArrayUtils;
+import com.sb.common.utils.ArrayUtils;
 import com.sb.app.R;
 import com.sb.app.constant.AppConstant;
 import com.sb.app.di.components.BizComponent;
@@ -169,6 +169,7 @@ public class WeChatFragment extends BaseFragmentDaggerActivity implements Recycl
                         chatGroupRealm.getContactRealms().add(contactRealm.where().equalTo("isMe", true).findFirst());
                         chatGroupRealm.setGroupName(contactRealm.where().equalTo("isMe", false).findFirst()
                                 .getUserNick());
+                        chatGroupRealm.setGroupChatCount(100);
 
                     }
                 }

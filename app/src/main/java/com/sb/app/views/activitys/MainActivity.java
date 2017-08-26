@@ -12,7 +12,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.BuildConfig;
 import com.sb.app.R;
 import com.sb.app.di.HasComponent;
@@ -100,7 +100,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
         setLeftMenu();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        navigation.setSelectedItemId(R.id.navigation_home);
+        navigation.setSelectedItemId(R.id.navigation_mobile_style);
 
     }
 
@@ -113,15 +113,15 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
         Float size = 10F;
 
 
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_home);
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.navigation_mobile_style);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_home, size);
 
 
-        menuItem = navigation.getMenu().findItem(R.id.navigation_dashboard);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_content);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nva_me, size);
 
 
-        menuItem = navigation.getMenu().findItem(R.id.navigation_notifications);
+        menuItem = navigation.getMenu().findItem(R.id.navigation_preview);
         setMenu(menuItem, BaseFontAwesome.Icon.icon_nav_more, size);
 
 
@@ -179,7 +179,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
 
                     hideFragment();
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_mobile_style:
 
 
                             if (mMainFragment != null) {
@@ -194,7 +194,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
                             }
 
                             return true;
-                        case R.id.navigation_dashboard:
+                        case R.id.navigation_content:
 
 
                             if (mLoginFragment != null) {
@@ -208,7 +208,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
                             }
 
                             return true;
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_preview:
 
 
                             if (mMoreFragment != null) {
@@ -373,7 +373,7 @@ public class MainActivity extends BaseDaggerActivity implements HasComponent<Biz
                 (getResources().getString(R.string
                         .title_confirm_login), new DialogInterface.OnClickListener() {// 退出按钮
                     public void onClick(DialogInterface dialog, int i) {
-                        navigation.setSelectedItemId(R.id.navigation_dashboard);
+                        navigation.setSelectedItemId(R.id.navigation_content);
                     }
                 }).setNegativeButton(getResources().getString(R.string.title_setting_confirm_no), null).show();// 显示对话框
     }

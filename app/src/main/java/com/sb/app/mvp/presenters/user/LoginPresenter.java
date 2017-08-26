@@ -1,7 +1,7 @@
 package com.sb.app.mvp.presenters.user;
 
 
-import com.ilogie.android.library.common.util.StringUtils;
+import com.sb.common.utils.StringUtils;
 import com.sb.app.AndroidApplication;
 import com.sb.app.di.PerActivity;
 import com.sb.app.mvp.presenters.base.Presenter;

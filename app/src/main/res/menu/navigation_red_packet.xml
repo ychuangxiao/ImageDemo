@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_mobile_style"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="外观设置"/>
 
 
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_preview"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="预览效果"/>
 
